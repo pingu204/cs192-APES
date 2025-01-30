@@ -1,0 +1,8 @@
+# Local Django Packages
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# Python Cache
+src/*/__pycache__/
