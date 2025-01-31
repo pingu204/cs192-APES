@@ -1,0 +1,19 @@
+body {
+    font-family: "Onest";
+    margin:0;
+}
+
+.nav-container {
+    height: 8vh;
+    background-color: red;
+}
+
+.body-container {
+    height: 86vh;
+    background-color: blue;
+}
+
+.footer-container {
+    height: 6vh;
+    background-color: black;
+}
