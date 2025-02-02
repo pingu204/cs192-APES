@@ -13,13 +13,18 @@ body {
     border-bottom: 1px solid black;
 }
 
+.landing {
+    border: none;
+    height: 12vh;
+}
+
 .nav-container div {
     margin: 5px;
     display:flex;
     align-items: center;
 }
 
-.nav-container button {
+.nav-container button, button.dark-button:hover {
     background: none;
     color: black;
     border: 1px solid black;
@@ -27,10 +32,13 @@ body {
     padding: 5px 10px 5px 10px;
 }
 
-.nav-container button:hover {
+.nav-container button:hover, button.dark-button {
     background: black;
-    border-color: white;
     color: white;
+}
+
+div.landing-buttons button {
+    margin-right: 15px;
 }
 
 .filler {
