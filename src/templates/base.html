@@ -20,14 +20,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    {% include 'nav_sessions.html' %}
+    {% block nav %}{% endblock %}
 
-    <div class="body-container sessions">
-        {% block content %}
+    {% block content %}{% endblock %}
+
     
-        {% endblock %}
-    </div>
 
     <div class="nav-container footer-container">
         <div>

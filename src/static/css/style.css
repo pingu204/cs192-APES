@@ -69,6 +69,10 @@ hr {
     overflow: hidden;
 }
 
+.body-container.landing {
+    min-height: 79vh;
+}
+
 .footer-container {
     height: 6vh;
     background-color: black;

@@ -1,70 +1,79 @@
 {% extends 'base.html' %}
 
+{% block nav %}
+
+    {% include 'nav_sessions.html' %}
+
+{% endblock %}
+
 {% block content %}
-<div class="form-body">
-    <h1>Create Account</h1>
-    <h6>Already a member? <a href="#">Log in.</a></h6>
-    <form method="POST"> {% csrf_token %}
-        <div class="form-row">
-            <div class="col">
-                {{ form.username.label_tag }}
-                {{ form.username }} 
-            </div>
-            <div class="col">
-                {{ form.email.label_tag }}
-                {{ form.email }} 
-            </div>
-        </div>
 
-        <div class="form-row">
-            <div class="col">
-                {{ form.password1.label_tag }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                {{ form.password1 }}
-                <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i> 
-            </div>
-            <div class="col">
-                <ul class="password-strength-checker">
-                    <li id="passwordLength">Contains at least 8 alphanumeric characters</li>
-                    <li id="passwordNumeric">Contains at least one number</li>
-                    <li id="passwordCasing">Contains both capital and small letters</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col">
-                {{ form.password2.label_tag }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                {{ form.password2 }}
-                <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i>  
-            </div>
-            <div class="col">
-                <ul class="password-strength-checker">
-                    <li id="passwordConsistency">Must match previously entered password</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="form-check">
-            {{ form.agreement }} 
-            <label class="form-check-label" for="agreement">
-                I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a> of the application.
-            </label>
-        </div>
-        
-        <!-- {{ form.as_p }} -->
-        <div class="submit-area">
-            <button class="btn btn-primary submit-button" type="submit">Create Account</button>
-        </div>
-        
-    </form>
-</div>
+    <div class="body-container sessions">
+        <div class="form-body">
+            <h1>Create Account</h1>
+            <h6>Already a member? <a href="#">Log in.</a></h6>
+            <form method="POST"> {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.username.label_tag }}
+                        {{ form.username }} 
+                    </div>
+                    <div class="col">
+                        {{ form.email.label_tag }}
+                        {{ form.email }} 
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.password1.label_tag }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.password1 }}
+                        <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i> 
+                    </div>
+                    <div class="col">
+                        <ul class="password-strength-checker">
+                            <li id="passwordLength">Contains at least 8 alphanumeric characters</li>
+                            <li id="passwordNumeric">Contains at least one number</li>
+                            <li id="passwordCasing">Contains both capital and small letters</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.password2.label_tag }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        {{ form.password2 }}
+                        <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i>  
+                    </div>
+                    <div class="col">
+                        <ul class="password-strength-checker">
+                            <li id="passwordConsistency">Must match previously entered password</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="form-check">
+                    {{ form.agreement }} 
+                    <label class="form-check-label" for="agreement">
+                        I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a> of the application.
+                    </label>
+                </div>
+                
+                <!-- {{ form.as_p }} -->
+                <div class="submit-area">
+                    <button class="btn btn-primary submit-button" type="submit">Create Account</button>
+                </div>
+                
+            </form>
+        </div>     
+    </div>
 
 {% endblock %}
