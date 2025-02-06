@@ -25,5 +25,5 @@ from session.views import register_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
-    path('session/register', register_view),
+    path('register/', register_view),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
