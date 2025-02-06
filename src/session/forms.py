@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import BaseUserCreationForm
 from django.contrib.auth.models import User
 
-class UserRegisterForm(BaseUserCreationForm):
+""" class UserRegisterForm(BaseUserCreationForm):
     username = forms.CharField()
     email = forms.EmailField()
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
@@ -30,3 +30,4 @@ class UserRegisterForm(BaseUserCreationForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Must match previously-typed password")
         return password2
+ """

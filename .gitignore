@@ -6,3 +6,4 @@ pyvenv.cfg
 
 # Python Cache
 src/*/__pycache__/
+src/**/__pycache__/
