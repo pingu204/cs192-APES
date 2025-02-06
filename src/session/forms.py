@@ -4,11 +4,51 @@ from django.contrib.auth.models import User
 from session.models import Student
 
 class UserRegisterForm(BaseUserCreationForm):
-    username = forms.CharField(max_length=20)
-    email = forms.EmailField()
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Re-type Password",widget=forms.PasswordInput)
-    agreement = forms.BooleanField()
+    username = forms.CharField(
+        max_length = 20,
+        widget = forms.TextInput(
+            attrs = {
+                "placeholder" : "Username",
+                "class" : "form-control"
+            }
+        ))
+
+    email = forms.EmailField(
+        widget = forms.EmailInput(
+            attrs = {
+                "placeholder" : "juandelacruz@gmail.com",
+                "class" : "form-control"
+            }
+        )
+    )
+
+    password1 = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs = {
+                "placeholder" : "Password",
+                "class" : "form-control"
+            }
+        )
+    )
+    password2 = forms.CharField(
+        label="Re-type Password",
+        widget=forms.PasswordInput(
+            attrs = {
+                "placeholder" : "Re-enter Password",
+                "class" : "form-control"
+            }
+        )
+    )
+    
+    agreement = forms.BooleanField(
+        widget = forms.CheckboxInput(
+            attrs = {
+                "class" : "form-check-input",
+                "id" : "agreement"
+            }
+        )
+    )
 
     class Meta:
         model = Student
