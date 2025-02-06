@@ -15,8 +15,12 @@ class StudentManager(BaseUserManager):
         if not email:
             raise ValueError(_("The Email must be set"))
 
-        email = self.normalize_email(email)                 # for case insensitivity
-        user = self.model(email=email, username=username)
+        email = self.normalize_email(email) # for case insensitivity
+        user = self.model(
+            email=email,
+            username=username,
+            **extra_fields, # exists if called by `create_superuser`
+        )
         user.set_password(password)
         user.save()
         return user
