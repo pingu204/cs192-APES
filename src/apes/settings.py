@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # User Apps
     'pages',
+    'session',
 ]
 
 MIDDLEWARE = [
