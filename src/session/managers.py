@@ -38,8 +38,8 @@ class StudentManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
 
-        print(extra_fields.get("is_staff"))
-        print(extra_fields.get("is_active"))
-        print(extra_fields.get("is_superuser"))
-        print("hello?")
+        # print(extra_fields.get("is_staff"))
+        # print(extra_fields.get("is_active"))
+        # print(extra_fields.get("is_superuser"))
+        # print("hello?")
         return self.create_user(email, username, password, **extra_fields)
