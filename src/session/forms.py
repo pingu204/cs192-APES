@@ -8,6 +8,7 @@ class UserRegisterForm(BaseUserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Re-type Password",widget=forms.PasswordInput)
+    agreement = forms.BooleanField()
 
     class Meta:
         model = Student
@@ -16,6 +17,7 @@ class UserRegisterForm(BaseUserCreationForm):
             'email',
             'password1',
             'password2',
+            'agreement',
         ]
     # not needed bc set email as unique
     # def clean_email(self):
