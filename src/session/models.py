@@ -11,8 +11,6 @@ class Student(AbstractUser):
     username = models.CharField(max_length=20)
     email = models.EmailField(_("email address"), unique=True)
 
-    agreement = models.BooleanField()
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", "password"]
 

@@ -19,7 +19,6 @@ class StudentManager(BaseUserManager):
         user = self.model(
             email=email,
             username=username,
-            agreement=True,
             **extra_fields, # exists if called by `create_superuser`
         )
         user.set_password(password)
