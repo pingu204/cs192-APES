@@ -1,5 +1,7 @@
 /* Sign-up Components */
 
+let signUpForm = document.getElementById("signUpForm");
+
 let usernameField = document.getElementById("id_username");
 let emailField = document.getElementById("id_email");
 let checkboxField = document.getElementById("agreement");
@@ -8,6 +10,7 @@ let passwordInputOne = document.getElementById("id_password1")
 let passwordInputTwo = document.getElementById("id_password2")
 let togglePasswordOne = document.getElementById("togglePasswordOne");
 let togglePasswordTwo = document.getElementById("togglePasswordTwo");
+let submitButton = document.getElementById("submitButton");
 
 /* Dynamically updates if entered password satisfies the conditions */
 function updatePasswordStrength() {
@@ -16,7 +19,7 @@ function updatePasswordStrength() {
     let passwordCasing = document.getElementById("passwordCasing");
     let password = passwordInputOne.value;
 
-    if (password.length > 8 && isAlphaNumeric(password)) {
+    if (password.length >= 8 && isAlphaNumeric(password)) {
         passwordLength.style.color = "#007bff";
     }
     else {
@@ -92,4 +95,22 @@ function togglePassword(n){
 togglePasswordOne.addEventListener("click", function(){togglePassword(1);});
 togglePasswordTwo.addEventListener("click", function(){togglePassword(2);});
 
+function allFieldsFilledOut() {
+    console.log(checkboxField.value);
+    if (
+        usernameField.value != '' &&
+        emailField.value != '' &&
+        checkboxField.checked &&
+        passwordInputOne.value != '' &&
+        passwordInputTwo.value != ''
+    ) {
+        console.log("yes!");
+        submitButton.disabled = false;
+    }
+    else {
+        console.log("no!");
+        submitButton.disabled = true;
+    }
+}
 
+signUpForm.addEventListener('change', allFieldsFilledOut);

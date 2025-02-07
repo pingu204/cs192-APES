@@ -13,7 +13,7 @@
             <h5 class="back-button"><a href="/"><i class="bi bi-caret-left-square"></i></a></h5>
             <h1>Create Account</h1>
             <h6>Already a member? <a href="#">Log in.</a></h6>
-            <form method="POST"> {% csrf_token %}
+            <form method="POST" id="signUpForm"> {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
                         <label for="id_username">{{ form.username.label | upper }}</label>
@@ -71,7 +71,7 @@
                 
                 <!-- {{ form.as_p }} -->
                 <div class="submit-area">
-                    <button class="btn btn-primary submit-button" type="submit">Create Account</button>
+                    <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Create Account</button>
                 </div>
                 
             </form>
