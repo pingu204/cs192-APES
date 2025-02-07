@@ -1,8 +1,15 @@
-let passwordInputOne = document.getElementById("id_password1")
-passwordInputOne.addEventListener('input', updatePasswordStrength)
-let passwordInputTwo = document.getElementById("id_password2")
-passwordInputTwo.addEventListener('input', checkPassword);
+/* Sign-up Components */
 
+let usernameField = document.getElementById("id_username");
+let emailField = document.getElementById("id_email");
+let checkboxField = document.getElementById("agreement");
+
+let passwordInputOne = document.getElementById("id_password1")
+let passwordInputTwo = document.getElementById("id_password2")
+let togglePasswordOne = document.getElementById("togglePasswordOne");
+let togglePasswordTwo = document.getElementById("togglePasswordTwo");
+
+/* Dynamically updates if entered password satisfies the conditions */
 function updatePasswordStrength() {
     let passwordLength = document.getElementById("passwordLength");
     let passwordNumeric = document.getElementById("passwordNumeric");
@@ -10,21 +17,21 @@ function updatePasswordStrength() {
     let password = passwordInputOne.value;
 
     if (password.length > 8 && isAlphaNumeric(password)) {
-        passwordLength.style.color = "blue";
+        passwordLength.style.color = "#007bff";
     }
     else {
         passwordLength.style.color = "rgba(0,0,0,0.3)";
     }
 
     if (/\d/.test(password)) {
-        passwordNumeric.style.color = "blue";
+        passwordNumeric.style.color = "#007bff";
     }
     else {
         passwordNumeric.style.color = "rgba(0,0,0,0.3)";
     }
 
     if (hasUpperCase(password) && hasLowerCase(password)){
-        passwordCasing.style.color = "blue";
+        passwordCasing.style.color = "#007bff";
     }
     else {
         passwordCasing.style.color = "rgba(0,0,0,0.3)";
@@ -43,22 +50,22 @@ function hasLowerCase(str) {
     return str !== str.toUpperCase();
 }
 
+passwordInputOne.addEventListener('input', updatePasswordStrength);
+
+/* Checks if entered passwords are equal to each other */
 function checkPassword() {
     let passwordConsistency = document.getElementById("passwordConsistency");
     if (passwordInputOne.value == passwordInputTwo.value) {
-        passwordConsistency.style.color = "blue";
+        passwordConsistency.style.color = "#007bff";
     }
     else {
         passwordConsistency.style.color = "rgba(0,0,0,0.3)";
     }
 }
 
-let togglePasswordOne = document.getElementById("togglePasswordOne");
-let togglePasswordTwo = document.getElementById("togglePasswordTwo");
+passwordInputTwo.addEventListener('input', checkPassword);
 
-togglePasswordOne.addEventListener("click", function(){togglePassword(1);});
-togglePasswordTwo.addEventListener("click", function(){togglePassword(2);});
-
+/* Checks if user chose to reveal/hide their password */
 function togglePassword(n){
     if (n==1) {
         if (passwordInputOne.type == "password"){
@@ -80,5 +87,9 @@ function togglePassword(n){
             togglePasswordTwo.className = "bi-eye-slash eye-icon";
         }
     }
-    
 }
+
+togglePasswordOne.addEventListener("click", function(){togglePassword(1);});
+togglePasswordTwo.addEventListener("click", function(){togglePassword(2);});
+
+
