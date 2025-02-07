@@ -1,2 +1,10 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-*
+pyvenv.cfg
+
+# Python Cache
+src/**/__pycache__/
+
+# venv
+Include/
+Lib/
+Scripts/
