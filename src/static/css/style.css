@@ -65,8 +65,11 @@ hr {
 }
 
 .body-container.sessions {
-    height: 79vh;
+    /* height: 79vh; */
     overflow: hidden;
+    /* background-color: rgb(0,0,0,0.025); */
+    display: flex;
+    align-items: center;
 }
 
 .body-container.landing {
@@ -99,11 +102,12 @@ hr {
 }
 
 .form-body {
-    /* background: yellow; */
     width: 50vw;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    padding: 50px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
 }
 
 .form-body h1 {
@@ -114,11 +118,27 @@ hr {
 
 .form-body h6 {
     display: inline;
+    margin-left: 10px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+label.form-check-label {
+    font-weight: normal;
+    margin: 0;
+}
+
+.form-check {
+    margin-top: 20px;
 }
 
 .submit-area {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .form-control {
@@ -128,8 +148,18 @@ hr {
 
 .eye-icon {
     margin-left: -30px;
+    cursor: pointer;
 }
 
+ul.password-strength-checker {
+    list-style: none;
+    margin-left: -30px;
+}
+
+ul.password-strength-checker i {
+    margin-right: 5px;
+}
+  
 /* Icons from Iconify */
 
 .icomoon-free--html-five {

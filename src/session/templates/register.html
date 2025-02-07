@@ -2,7 +2,7 @@
 
 {% block nav %}
 
-    {% include 'nav_sessions.html' %}
+    {% include 'nav_main.html' %}
 
 {% endblock %}
 
@@ -15,47 +15,47 @@
             <form method="POST"> {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
-                        {{ form.username.label_tag }}
+                        <label for="id_username">{{ form.username.label | upper }}</label>
                         {{ form.username }} 
                     </div>
                     <div class="col">
-                        {{ form.email.label_tag }}
+                        <label for="id_email">{{ form.email.label | upper }}</label>
                         {{ form.email }} 
                     </div>
                 </div>
     
                 <div class="form-row">
                     <div class="col">
-                        {{ form.password1.label_tag }}
+                        <label for="id_password1">{{ form.password1.label | upper }}</label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col">
                         {{ form.password1 }}
-                        <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i> 
+                        <i class="bi-eye-slash eye-icon" id="togglePasswordOne"></i> 
                     </div>
                     <div class="col">
                         <ul class="password-strength-checker">
-                            <li id="passwordLength">Contains at least 8 alphanumeric characters</li>
-                            <li id="passwordNumeric">Contains at least one number</li>
-                            <li id="passwordCasing">Contains both capital and small letters</li>
+                            <li id="passwordLength"><i class="bi bi-check-circle-fill"></i> Contains at least 8 alphanumeric characters</li>
+                            <li id="passwordNumeric"><i class="bi bi-check-circle-fill"></i> Contains at least one number</li>
+                            <li id="passwordCasing"><i class="bi bi-check-circle-fill"></i> Contains both capital and small letters</li>
                         </ul>
                     </div>
                 </div>
     
                 <div class="form-row">
                     <div class="col">
-                        {{ form.password2.label_tag }}
+                        <label for="id_password2">{{ form.password2.label | upper }}</label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col">
                         {{ form.password2 }}
-                        <i class="bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword()"></i>  
+                        <i class="bi-eye-slash eye-icon" id="togglePasswordTwo"></i>  
                     </div>
                     <div class="col">
                         <ul class="password-strength-checker">
-                            <li id="passwordConsistency">Must match previously entered password</li>
+                            <li id="passwordConsistency"><i class="bi bi-check-circle-fill"></i> Must match previously entered password</li>
                         </ul>
                     </div>
                 </div>
