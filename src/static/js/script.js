@@ -1,6 +1,7 @@
 let passwordInputOne = document.getElementById("id_password1")
 passwordInputOne.addEventListener('input', updatePasswordStrength)
 let passwordInputTwo = document.getElementById("id_password2")
+passwordInputTwo.addEventListener('input', checkPassword);
 
 function updatePasswordStrength() {
     let passwordLength = document.getElementById("passwordLength");
@@ -40,6 +41,16 @@ function hasUpperCase(str) {
 
 function hasLowerCase(str) {
     return str !== str.toUpperCase();
+}
+
+function checkPassword() {
+    let passwordConsistency = document.getElementById("passwordConsistency");
+    if (passwordInputOne.value == passwordInputTwo.value) {
+        passwordConsistency.style.color = "blue";
+    }
+    else {
+        passwordConsistency.style.color = "rgba(0,0,0,0.3)";
+    }
 }
 
 let togglePasswordOne = document.getElementById("togglePasswordOne");
