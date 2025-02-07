@@ -8,7 +8,7 @@ class Student(AbstractUser):
     first_name = None
     last_name = None
 
-    username = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True)
     email = models.EmailField(_("email address"), unique=True)
 
     USERNAME_FIELD = "email"
