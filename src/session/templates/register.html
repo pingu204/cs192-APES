@@ -10,7 +10,7 @@
 
     <div class="body-container sessions">
         <div class="form-body">
-            <h5 class="back-button"><a href="/"><i class="bi bi-caret-left-square"></i></a></h5>
+            <h5 class="back-button"><a href="/"><i class="bi bi-caret-left-square"></i> Go Back</a></h5>
             <h1>Create Account</h1>
             <h6>Already a member? <a href="#">Log in.</a></h6>
             <form method="POST" id="signUpForm"> {% csrf_token %}
@@ -75,10 +75,10 @@
                 </div>
                 {% if form.errors %}
                 <div class="errors">
-                    <ul>
+                    <ul class="errors-list">
                         {% for field, errors in form.errors.items %}
                         {% for error in errors %}
-                            <li>{{ error|escape }}</li>
+                            <li><i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}</li>
                         {% endfor %}
                         {% endfor %}
                     </ul>

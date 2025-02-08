@@ -32,7 +32,7 @@ class UserRegisterForm(BaseUserCreationForm):
         )
     )
     password2 = forms.CharField(
-        label="Re-type Password",
+        label="Confirm Password",
         widget=forms.PasswordInput(
             attrs = {
                 "placeholder" : "Re-enter Password",
