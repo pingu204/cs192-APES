@@ -69,17 +69,17 @@ class UserRegisterForm(BaseUserCreationForm):
     # # Antheiz. Stack Overflow.
     # # Last accessed: 02/06/2025
     # # https://stackoverflow.com/questions/60110304/how-to-raise-validationerror-in-django-model-if-email-exist
-
-    def clean_password1(self, *args, **kwargs):
-        password1 = self.cleaned_data.get('password1')
-        if len(password1) < 8:
-            raise forms.ValidationError("Must contain at least 8 alphanumeric characters")
-        return password1
+    # commented out bc ff errors shown by javascript eventlisteners
+    # def clean_password1(self, *args, **kwargs):
+    #     password1 = self.cleaned_data.get('password1')
+    #     if len(password1) < 8:
+    #         raise forms.ValidationError("Must contain at least 8 alphanumeric characters")
+    #     return password1
     
-    def clean_password2(self, *args, **kwargs):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
+    # def clean_password2(self, *args, **kwargs):
+    #     password1 = self.cleaned_data.get('password1')
+    #     password2 = self.cleaned_data.get('password2')
 
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Must match previously entered password")
-        return password2
+    #     if password1 and password2 and password1 != password2:
+    #         raise forms.ValidationError("Must match previously entered password")
+    #     return password2
