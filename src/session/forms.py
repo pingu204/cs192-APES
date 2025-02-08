@@ -81,5 +81,5 @@ class UserRegisterForm(BaseUserCreationForm):
         password2 = self.cleaned_data.get('password2')
 
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Must match previously-typed password")
+            raise forms.ValidationError("Must match previously entered password")
         return password2

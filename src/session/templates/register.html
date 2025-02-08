@@ -73,7 +73,17 @@
                 <div class="submit-area">
                     <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Create Account</button>
                 </div>
-                
+                {% if form.errors %}
+                <div class="errors">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </form>
         </div>     
     </div>
