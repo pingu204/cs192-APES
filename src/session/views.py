@@ -29,7 +29,7 @@ def login_view(request):
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("https://www.google.com") # FIX: redirect; placeholder = #
+            return redirect("../home/") # FIX: redirect; placeholder = #
         
             # change redirect of register_view() as well // OPTIONAL
             # in the meantime, set "/homepage" or "/home" as target?
