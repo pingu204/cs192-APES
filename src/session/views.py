@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import BaseUserCreationForm
 from .forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import login
+from django.contrib import messages
 
 """ Displays the Sign Up page """
 def register_view(request):
@@ -33,13 +34,13 @@ def login_view(request):
         
             # change redirect of register_view() as well // OPTIONAL
             # in the meantime, set "/homepage" or "/home" as target?
-            #
-
-        # clear data fields when login is invalid    
+            
+              
         else:
-            form.data = form.data.copy()  
-            form.data["username"] = "" 
-
+            # error accumulator
+            for error in form.errors.get("__all__", []):  
+                messages.error(request, error)
+    
     else:
         form = UserAuthenticationForm()
 
