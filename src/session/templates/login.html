@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+    {% include 'nav_main.html' %}
+
+{% endblock %}
+
+
+{% block content %}
+    <!--insert Login HTML stuff here-->
+    <div class="body-container sessions">
+        <div class="form-body">
+            <form class="form-body" method="post" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
+            
+                {{ form }}
+
+                <div class="submit-area">
+                    <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Sign In</button>
+                    <!-- <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Continue as Guest</button> -->
+                </div>
+
+            </form>  
+        </div>
+    </div>
+{% endblock %}

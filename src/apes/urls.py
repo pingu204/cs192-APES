@@ -20,11 +20,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from pages.views import home_view
-from session.views import register_view, successful_account_creation_view
+from session.views import register_view, successful_account_creation_view, login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
     path('register/', register_view),
     path('register/success/', successful_account_creation_view),
+    path('login/', login_view),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
