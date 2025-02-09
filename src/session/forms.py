@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import BaseUserCreationForm
+from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from session.models import Student
 
 class UserRegisterForm(BaseUserCreationForm):
@@ -83,3 +84,17 @@ class UserRegisterForm(BaseUserCreationForm):
     #     if password1 and password2 and password1 != password2:
     #         raise forms.ValidationError("Must match previously entered password")
     #     return password2
+
+
+
+class UserAuthenticationForm(AuthenticationForm):
+    def clean(self):
+        User = get_user_model()
+        username_or_email = self.cleaned_data.get("username")
+        
+        if username_or_email:
+            user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
+            if user:
+                self.cleaned_data["username"] = user.email # replace input with actual user email
+        
+        return super().clean()

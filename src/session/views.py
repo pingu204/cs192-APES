@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm
-from .forms import UserRegisterForm
+from django.contrib.auth.forms import BaseUserCreationForm
+from .forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import login
 
 """ Displays the Sign Up page """
@@ -26,16 +26,22 @@ def successful_account_creation_view(request):
 """ Displays the Log In page """
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
+        form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("#") # FIX: redirect; placeholder = #
+            return redirect("https://www.google.com") # FIX: redirect; placeholder = #
         
             # change redirect of register_view() as well // OPTIONAL
             # in the meantime, set "/homepage" or "/home" as target?
             #
+
+        # clear data fields when login is invalid    
+        else:
+            form.data = form.data.copy()  
+            form.data["username"] = "" 
+
     else:
-        form = AuthenticationForm()
+        form = UserAuthenticationForm()
 
     context = {
         'form' : form,
