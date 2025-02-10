@@ -36,15 +36,15 @@ def login_view(request):
             # in the meantime, set "/homepage" or "/home" as target?
             # Check if Django's login system recognizes the user
             if request.user.is_authenticated:
-                print("DEBUG: Login successful! Redirecting...")  # 🛠 Debugging
-                return redirect("../home/")  # ✅ FIXED: Ensure correct redirect URL
+                print("DEBUG: Login successful! Redirecting...")  # debugger; breakpoint here
+                return redirect("../home/") 
 
             else:
-                print("DEBUG: Login failed unexpectedly!")  # 🛠 Debugging
+                print("DEBUG: Login failed unexpectedly!")  # debubgger; breakpoint here
 
         else:
             # Collect and display all form errors
-            print("DEBUG: Form errors:", form.errors)  # 🛠 Debugging
+            print("DEBUG: Form errors:", form.errors)  # debugger; breakpoint here
             for error in form.errors.get("__all__", []):
                 messages.error(request, error)
     # 
