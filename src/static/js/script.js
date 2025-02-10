@@ -19,7 +19,7 @@ function updatePasswordStrength() {
     let passwordCasing = document.getElementById("passwordCasing");
     let password = passwordInputOne.value;
 
-    if (password.length >= 8 && isAlphaNumeric(password)) {
+    if (password.length >= 8) {
         passwordLength.style.color = "#007bff";
     }
     else {
@@ -41,9 +41,9 @@ function updatePasswordStrength() {
     }
 }
 
-function isAlphaNumeric(str) {
-    return /^[a-z0-9]+$/i.test(str);
-}
+// function isAlphaNumeric(str) {
+//     return /^[a-z0-9]+$/i.test(str);
+// }
 
 function hasUpperCase(str) {
     return str !== str.toLowerCase();
