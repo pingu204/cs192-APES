@@ -30,17 +30,24 @@ def login_view(request):
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("../home/") # FIX: redirect; placeholder = #
+            # return redirect("../home/") # FIX: redirect; placeholder = #
         
             # change redirect of register_view() as well // OPTIONAL
             # in the meantime, set "/homepage" or "/home" as target?
-            
-              
+            # Check if Django's login system recognizes the user
+            if request.user.is_authenticated:
+                print("DEBUG: Login successful! Redirecting...")  # 🛠 Debugging
+                return redirect("../home/")  # ✅ FIXED: Ensure correct redirect URL
+
+            else:
+                print("DEBUG: Login failed unexpectedly!")  # 🛠 Debugging
+
         else:
-            # error accumulator
-            for error in form.errors.get("__all__", []):  
+            # Collect and display all form errors
+            print("DEBUG: Form errors:", form.errors)  # 🛠 Debugging
+            for error in form.errors.get("__all__", []):
                 messages.error(request, error)
-    
+
     else:
         form = UserAuthenticationForm()
 
