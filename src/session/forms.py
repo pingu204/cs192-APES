@@ -89,6 +89,8 @@ class UserRegisterForm(BaseUserCreationForm):
 
 # UserAuthenticationForm class to override AuthenticationForm since logins are allowed for BOTH username and email
 # not just username/email alone (which is already supported by AuthenticationForm)
+# UserAuthenticationForm class to override AuthenticationForm since logins are allowed for BOTH username and email
+# not just username/email alone (which is already supported by AuthenticationForm)
 class UserAuthenticationForm(AuthenticationForm):
     def clean(self):
         User = get_user_model() # since we have a custom User model set (Student)
@@ -99,8 +101,9 @@ class UserAuthenticationForm(AuthenticationForm):
             # filter tries to find the user by email first then by username; first() makes sure that we only get ONE user instance
             # no duplicates == no errors
             user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
+            print(user, user.username)
             if user:
-                print(user, user.username)
+                print(user.email, user.username)
                 self.cleaned_data["username"] = user.email # not user.username since we set USERNAME_FIELD = "email" in models.py
         
         return super().clean()
