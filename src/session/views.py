@@ -27,19 +27,13 @@ def successful_account_creation_view(request):
 
 """ Displays the Log In page """
 def login_view(request):
-    if request.method == 'POST':
-        form = UserAuthenticationForm(data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect(reverse("homepage_view"))
-        else: # error stuff....
-            form = UserAuthenticationForm() 
-            # create blank form to remove all inputs AND raise the error here...?
-    else:
-        form = UserAuthenticationForm()
+    form = UserAuthenticationForm(request, data=request.POST or None)
 
-    context = {
-        'form' : form,
-    }
+    if request.method == 'POST' and form.is_valid():
+        login(request, form.get_user())
+        return redirect(reverse("homepage_view"))
 
-    return render(request, "login.html", context)
+    for error in form.non_field_errors():
+        messages.error(request, error)
+
+    return render(request, "login.html", {"form": form})
