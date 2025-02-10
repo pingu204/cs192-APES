@@ -38,7 +38,7 @@ def login_view(request):
             
               
         else:
-            print("naw");
+            print("naw")
             # error accumulator
             for error in form.errors.get("__all__", []):  
                 messages.error(request, error)
