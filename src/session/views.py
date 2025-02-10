@@ -3,6 +3,7 @@ from django.contrib.auth.forms import BaseUserCreationForm
 from .forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import login
 from django.contrib import messages
+from django.urls import reverse
 
 """ Displays the Sign Up page """
 def register_view(request):
@@ -11,7 +12,7 @@ def register_view(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('success/')
+            return redirect(reverse("successful_account_creation"))
     else:
         form = UserRegisterForm()
 
