@@ -13,8 +13,9 @@ class TestForms(SimpleTestCase):
             'email': 'test@example.com',
             'password1': 'password123',
             'password2': 'password123',
-            'agreement' : 'True'
+            'agreement' : True
         })
+        print(form.errors)
         print(form.is_valid())
         self.assertTrue(form.is_valid())
 
