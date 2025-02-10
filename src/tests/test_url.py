@@ -5,7 +5,7 @@ from django.urls import reverse, resolve
 from apes.urls import homepage_view, landing_view, register_view, successful_account_creation_view, login_view
 
 class TestUrls(SimpleTestCase):
-    def test_homepage_url_is_resolved(self):
+    def test_homepage_url_is_resolved(self): 
         url = reverse('homepage_view')
         self.assertEqual(resolve(url).func, homepage_view)
 
@@ -24,3 +24,41 @@ class TestUrls(SimpleTestCase):
     def test_login_url_is_resolved(self):
         url = reverse('login_view')
         self.assertEqual(resolve(url).func, login_view)
+
+
+# jay addition
+
+    def test_invalid_url(self):
+        url = '/invalid-url/'
+        with self.assertRaises(Exception):
+            resolve(url)
+
+    def test_empty_url(self):
+        url = ''
+        with self.assertRaises(Exception):
+            resolve(url)
+
+    def test_url_with_invalid_characters(self):
+        url = '/invalid-url-@#$/'
+        with self.assertRaises(Exception):
+            resolve(url)
+
+    def test_homepage_url_with_extra_parameters(self): 
+        url = reverse('homepage_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, homepage_view)
+
+    def test_landing_url_with_extra_parameters(self):
+        url = reverse('landing_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, landing_view)
+
+    def test_register_url_with_extra_parameters(self):
+        url = reverse('register_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, register_view)
+
+    def test_successful_account_creation_url_with_extra_parameters(self):
+        url = reverse('suc_acc_creation') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, successful_account_creation_view)
+
+    def test_login_url_with_extra_parameters(self):
+        url = reverse('login_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, login_view)

@@ -3,7 +3,6 @@ from django.test import TestCase
 
 
 class UsersManagersTests(TestCase):
-    ## errro
     def test_create_user(self):
         User = get_user_model()
         user = User.objects.create_user(email="normal@user.com", username="imnormal", password="foo")
@@ -18,7 +17,6 @@ class UsersManagersTests(TestCase):
 
         with self.assertRaises(ValueError):
             User.objects.create_user(email="", username="imnormal", password="foo")
-    ##error
     def test_create_superuser(self):
         User = get_user_model()
         admin_user = User.objects.create_superuser(email="super@user.com",username="imadmin", password="foo")

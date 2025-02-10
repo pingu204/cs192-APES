@@ -7,7 +7,7 @@ from session.models import Student
 from django import forms
 
 class TestForms(SimpleTestCase):
-    def test_user_regis_form_valid(self):
+    def test_user_regis_form_valid(self): #FAIL
         form = UserRegisterForm(data={
             'username': 'testuser',
             'email': 'test@example.com',
@@ -23,7 +23,7 @@ class TestForms(SimpleTestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 5)  # Assuming 4 required fields: username, email, password1, password2
 
-    def test_user_auth_form_valid(self):
+    def test_user_auth_form_valid(self): #FAIL
         form = UserAuthenticationForm(data={
             'username': 'testuser',
             'password': 'password123'
