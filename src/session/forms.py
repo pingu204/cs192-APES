@@ -1,11 +1,11 @@
 from django import forms
-from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from session.models import Student
 
-class UserRegisterForm(BaseUserCreationForm):
+class UserRegisterForm(UserCreationForm):
     username = forms.CharField(
         max_length = 20,
         widget = forms.TextInput(
@@ -89,6 +89,7 @@ class UserRegisterForm(BaseUserCreationForm):
 
 
 class UserAuthenticationForm(AuthenticationForm):
+
     def clean(self):
         User = get_user_model()
         username_or_email = self.cleaned_data.get("username")

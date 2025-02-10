@@ -18,7 +18,7 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve(url).func, register_view)
         
     def test_successful_account_cretion_url_is_resolved(self):
-        url = reverse('suc_acc_creation')
+        url = reverse('successful_account_creation')
         self.assertEqual(resolve(url).func, successful_account_creation_view)
         
     def test_login_url_is_resolved(self):

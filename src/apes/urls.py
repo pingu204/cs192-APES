@@ -23,10 +23,10 @@ from pages.views import landing_view, homepage_view
 from session.views import register_view, successful_account_creation_view, login_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', landing_view),
-    path('home/', homepage_view),
-    path('register/', register_view),
-    path('register/success/', successful_account_creation_view),
-    path('login/', login_view),
+    path('admin/', admin.site.urls, name = 'admin_view'),
+    path('', landing_view, name = 'landing_view'),
+    path('home/', homepage_view, name = 'homepage_view'),
+    path('register/', register_view, name = 'register_view'),
+    path('register/success/', successful_account_creation_view, name = 'successful_account_creation'),
+    path('login/', login_view, name = 'login_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
