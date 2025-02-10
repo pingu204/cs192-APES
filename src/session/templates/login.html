@@ -20,7 +20,7 @@
                 </ul>
             {% endif %}
             
-            <form method="post" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
+            <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
                 <div class="form-row">
                     <div class="col">
                         <label for="id_username">USERNAME / {{ form.username.label | upper}}</label> <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
