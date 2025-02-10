@@ -17,7 +17,7 @@ class TestModels(TestCase):
         )
         
     #tests if the creation is correct
-    def test_student_creation(self):
+    def test_student_creation(self): #FAIL
         self.assertEqual(self.student.username, 'testuser')
         self.assertEqual(self.student.email, 'test@example.com')
         self.assertTrue(self.student.check_password('password123'))
@@ -31,7 +31,7 @@ class TestModels(TestCase):
         # need pa ung empty (?) or baka sa forms na to --> yea forms na to
 
     #tests if the creation is correct
-    def test_student_str(self):
+    def test_student_str(self): #FAIL
         self.assertEqual(str(self.student), 'testuser')
         
         
