@@ -25,9 +25,6 @@ class TestUrls(SimpleTestCase):
         url = reverse('login_view')
         self.assertEqual(resolve(url).func, login_view)
 
-
-# jay addition
-
     def test_invalid_url(self):
         url = '/invalid-url/'
         with self.assertRaises(Exception):
@@ -56,7 +53,7 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve(url.split('?')[0]).func, register_view)
 
     def test_successful_account_creation_url_with_extra_parameters(self):
-        url = reverse('suc_acc_creation') + '?param=value'
+        url = reverse('successful_account_creation') + '?param=value'
         self.assertEqual(resolve(url.split('?')[0]).func, successful_account_creation_view)
 
     def test_login_url_with_extra_parameters(self):
