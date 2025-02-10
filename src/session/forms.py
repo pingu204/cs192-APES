@@ -95,22 +95,29 @@ class UserAuthenticationForm(AuthenticationForm):
         username_or_email = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
 
-        if username_or_email and password:
-            # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)
-            user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
+        # if user either fails to fill up username/email field or password field, error is raised    
+        if not username_or_email or not password:
+            raise ValidationError("Both fields are required.") 
             
-            if user:
-                #print(user, user.username)
-                self.cleaned_data["username"] = user.email # not user.username since we set USERNAME_FIELD = "email" in models.py
+        # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)    
+        user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
+        
+        # if invalid inputted email/username
+        if not user:
+            # TEST: print("The account does not exist. Please sign up.")
+            raise ValidationError("The account does not exist. Please sign up.")
+        
+        # TEST: print(user, user.username)
 
-                authenticated_user = authenticate(username=user.email, password=password)
 
-                if not authenticated_user:
-                    #print("The password you've entered is incorrect. Please try again.")
-                    raise ValidationError("The password you've entered is incorrect. Please try again.")
+        # authenticate using user.email since we set USERNAME_FIELD = "email" in models.py
+        authenticated_user = authenticate(username=user.email, password=password)
+
+        # if valid user email/username but password is wrong, raise error
+        if not authenticated_user:
+            # TEST: print("The password you've entered is incorrect. Please try again.")
+            raise ValidationError("The password you've entered is incorrect. Please try again.")
                     
-            else:
-                #print("The account does not exist. Please sign up.")
-                raise ValidationError("The account does not exist. Please sign up.")
+        self.cleaned_data["username"] = user.email
 
-        return super().clean()
+        return self.cleaned_data

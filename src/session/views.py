@@ -32,8 +32,9 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect(reverse("homepage_view"))
-        else:
-            form = UserAuthenticationForm()
+        else: # error stuff....
+            form = UserAuthenticationForm() 
+            # create blank form to remove all inputs AND raise the error here...?
     else:
         form = UserAuthenticationForm()
 
