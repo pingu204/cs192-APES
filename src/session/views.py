@@ -47,7 +47,7 @@ def login_view(request):
             print("DEBUG: Form errors:", form.errors)  # 🛠 Debugging
             for error in form.errors.get("__all__", []):
                 messages.error(request, error)
-
+    # 
     else:
         form = UserAuthenticationForm()
 
