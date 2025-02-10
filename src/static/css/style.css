@@ -2,6 +2,7 @@ body {
     font-family: "Onest";
     margin:0;
     font-size: 10pt;
+    overflow-x: hidden;
 }
 
 .nav-container {
@@ -33,7 +34,7 @@ body {
     background: none;
     color: black;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 5px 10px 5px 10px;
 }
 
@@ -61,6 +62,7 @@ hr {
 
 .body-container {
     height: 86vh;
+    width: 100%;
     /* background-color: rgb(0,0,0, 0.1); */
 }
  
@@ -74,7 +76,6 @@ hr {
 
 .body-container.landing {
     min-height: 79vh;
-}
 
 .footer-container {
     height: 6vh;
@@ -215,6 +216,120 @@ ul.errors-list {
     color: white;
     margin-top: 50px;
 }
+
+div.title-page {
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    height: 88vh;
+}
+
+img.apes-tabs {
+    height: 600px;
+    margin-left: 150px;
+    animation: animateTabs 4s ease infinite;
+    z-index: -1;
+}
+
+div.apes-tabs {
+    z-index: -1;
+}
+
+@keyframes animateTabs {
+    0% {transform: scale(1.0) translateY(0px);}
+    50% {transform: scale(1.1) translateY(0px);}
+    100% {transform: scale(1.0) translateY(0px);}
+}
+
+div.right {
+    margin-left: -40px;
+    display: flex;
+    align-items: center;
+}
+
+div.right h1 {
+    font-size: 80px;
+    font-weight: bolder;
+    line-height: 90%;
+    margin-bottom: 30px;
+}
+
+div.description {
+    width: 450px;
+    line-height: 200%;
+    font-size: 9pt;
+}
+
+button.btn-landing-filled {
+    background: black;
+    color: white;
+}
+
+button.btn-landing-filled:hover {
+    opacity: 0.5;
+}
+
+button.btn-landing {
+    border: 1px solid black;
+    color: black;
+}
+
+button.btn-landing:hover {
+    opacity: 0.5
+}
+
+div.buttons {
+    margin-top: 30px;
+}
+
+div.buttons button, div.buttons h6 {
+    display: inline;
+}
+
+div.buttons span {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+div.buttons a {
+    color: inherit;
+}
+
+div.landing-container {
+    width: 50vw;/* 
+    background: blue; */
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+}
+
+div.landing-container h1, div.landing-container h6 {
+    text-align: center;
+    font-weight: bold;
+}
+
+div.landing-container h6 {
+    letter-spacing: 10px;
+    color: rgba(0,0,0,0.5);
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+div.landing-container span {
+    color: #FC706C;
+}
+
+div.landing-container hr {
+    width: 20%;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin: 50px auto 20px auto;
+}
+
+div.apes-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10%;
+}
+
    
 /* Icons from Iconify */
 

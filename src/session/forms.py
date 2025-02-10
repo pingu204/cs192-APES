@@ -97,13 +97,13 @@ class UserAuthenticationForm(AuthenticationForm):
         if username_or_email and password:
             # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)
             user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
-
+            print(user, user.username)
             # case i.) username/email is invalid
             if not user:
                 raise ValidationError("The account does not exist. Please sign up.")
 
             # case ii.) username/email is valid but password is invalid
-            user = authenticate(username=user.username, password=password)
+            user = authenticate(request=self.data, username=user.username, password=password)
             if user is None:
                 raise ValidationError("The password you've entered is incorrect. Please try again.")
 

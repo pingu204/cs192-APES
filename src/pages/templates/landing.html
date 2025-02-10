@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block nav %}
 
     {% include 'nav_landing.html' %}
@@ -9,6 +9,45 @@
 {% block content %}
 
     <div class="body-container landing">
+        <div class="title-page">
+            <div class="apes-tabs">
+                <img class="apes-tabs" src="{% static 'images/apes_tabs.png' %}">
+            </div>
+            <div class="right">
+                <div class="apes-description">
+                    <h1>Stress-Free<br>Scheduling.</h1>
+                    <div class="description">
+                        <p>APES is a web-based schedule planner software that allows the students of the University of the Philippines—Diliman (UPD) to curate efficient timetables that suit their needs and preferences.</p>
+
+                        <div class="buttons">
+                            <button class="btn btn-landing-filled"><a href="login/">Login</a></button>
+                            <button class="btn btn-landing"><a href="register/">Sign Up</a></button>
+                            <span>OR</span>
+                            <h6><a class="guest-login" href="#">Continue as Guest</a></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-container">
+            <hr>
+            <h6>TERMS OF SERVICE</h6>
+            <h1>Plan your semester <span>with ease</span></h1>
+            <div class="apes-features">
+                <div>h</div>
+                <div>h</div>
+                <div>h</div>
+            </div>
+        </div>
+        <div class="landing-container apes-tos">
+            h
+        </div>
+        <div class="landing-container apes-privacy">
+            h
+        </div>
+        <div class="landing-container apes-devs">
+            h
+        </div>
     </div>
 
 {% endblock %}

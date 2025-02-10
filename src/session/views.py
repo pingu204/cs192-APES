@@ -29,6 +29,7 @@ def login_view(request):
     if request.method == 'POST':
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
+            print(form.get_user())
             login(request, form.get_user())
             return redirect("../home/") # FIX: redirect; placeholder = #
         
@@ -37,6 +38,7 @@ def login_view(request):
             
               
         else:
+            print("naw");
             # error accumulator
             for error in form.errors.get("__all__", []):  
                 messages.error(request, error)
