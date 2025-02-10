@@ -8,9 +8,17 @@
 
 
 {% block content %}
-    <!--insert Login HTML stuff here-->
+
+{% load static %}
+
     <div class="body-container sessions">
         <div class="form-body">
+            <div class="logo-container">
+                <img src="{% static 'images/apes_logo.png' %}" alt="APES Logo">
+            </div>
+
+            <br>
+
             <h1>Welcome</h1>
             {% if messages %}
                 <ul class="messages">
@@ -41,6 +49,8 @@
                 </div>
 
             </form>  
+
         </div>
     </div>
+
 {% endblock %}
