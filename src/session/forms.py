@@ -98,8 +98,19 @@ class UserAuthenticationForm(AuthenticationForm):
         if username_or_email and password:
             # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)
             user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
+            
             if user:
-                print(user.email, user.username)
+                #print(user, user.username)
                 self.cleaned_data["username"] = user.email # not user.username since we set USERNAME_FIELD = "email" in models.py
-        
+
+                authenticated_user = authenticate(username=user.email, password=password)
+
+                if not authenticated_user:
+                    #print("The password you've entered is incorrect. Please try again.")
+                    raise ValidationError("The password you've entered is incorrect. Please try again.")
+                    
+            else:
+                #print("The account does not exist. Please sign up.")
+                raise ValidationError("The account does not exist. Please sign up.")
+
         return super().clean()
