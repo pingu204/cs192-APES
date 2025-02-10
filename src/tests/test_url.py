@@ -25,9 +25,6 @@ class TestUrls(SimpleTestCase):
         url = reverse('login_view')
         self.assertEqual(resolve(url).func, login_view)
 
-
-# jay addition
-
     def test_invalid_url(self):
         url = '/invalid-url/'
         with self.assertRaises(Exception):

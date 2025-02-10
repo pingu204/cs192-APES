@@ -17,6 +17,7 @@ class UsersManagersTests(TestCase):
 
         with self.assertRaises(ValueError):
             User.objects.create_user(email="", username="imnormal", password="foo")
+
     def test_create_superuser(self):
         User = get_user_model()
         admin_user = User.objects.create_superuser(email="super@user.com",username="imadmin", password="foo")
@@ -25,4 +26,13 @@ class UsersManagersTests(TestCase):
         self.assertTrue(admin_user.is_active)
         self.assertTrue(admin_user.is_staff)
         self.assertTrue(admin_user.is_superuser)
-        
+
+    def test_create_superuser_without_is_staff(self):
+        User = get_user_model()
+        with self.assertRaises(ValueError):
+            User.objects.create_superuser(email="super@user.com", username="imadmin", password="foo", is_staff=False)
+
+    def test_create_superuser_without_is_superuser(self):
+        User = get_user_model()
+        with self.assertRaises(ValueError):
+            User.objects.create_superuser(email="super@user.com", username="imadmin", password="foo", is_superuser=False)
