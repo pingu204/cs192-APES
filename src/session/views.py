@@ -71,6 +71,11 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect(reverse("homepage_view"))
+        
+        # clear form if invalid form
+        else:
+            form = UserAuthenticationForm()
+
     else:
         form = UserAuthenticationForm()
 

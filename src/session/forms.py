@@ -100,7 +100,7 @@ class UserAuthenticationForm(AuthenticationForm):
             # no duplicates == no errors
             user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
             if user:
-                print(user.email, user.username)
+                print(user, user.username)
                 self.cleaned_data["username"] = user.email # not user.username since we set USERNAME_FIELD = "email" in models.py
         
         return super().clean()
