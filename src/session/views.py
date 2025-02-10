@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import BaseUserCreationForm
 from .forms import UserRegisterForm, UserAuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login
 from django.contrib import messages
 from django.urls import reverse
 
@@ -27,10 +27,11 @@ def successful_account_creation_view(request):
 
 """ Displays the Log In page """
 def login_view(request):
+
     """if request.method == 'POST':
         form = UserAuthenticationForm(data=request.POST)
         if form.is_valid():
-            print(form.get_user())
+            # print(form.get_user())
             login(request, form.get_user())
             return redirect("../home/") # FIX: redirect; placeholder = #
         
@@ -41,11 +42,13 @@ def login_view(request):
     else:
         form = UserAuthenticationForm()
     """
+
     """    
     if request.method == "POST":
         username = request.POST['username'] #name='username'
         password = request.POST['password'] #name='password  (in login.html)
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
             return redirect(reverse("homepage_view"))
@@ -62,14 +65,11 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect(reverse("homepage_view"))
-        else:
-            form=
-
     else:
         form = UserAuthenticationForm()
 
     context = {
-        'form' : form
+        'form' : form,
     }
 
-    return render(request, 'login.html', context)
+    return render(request, "login.html", context)

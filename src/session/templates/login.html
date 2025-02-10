@@ -12,6 +12,14 @@
     <div class="body-container sessions">
         <div class="form-body">
             <h1>Welcome</h1>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
             <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
                 <div class="form-row">
                     <div class="col">
