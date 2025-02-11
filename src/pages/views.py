@@ -7,5 +7,14 @@ def landing_view(request, *args, **kwargs):
 
 
 def homepage_view(request, *args, **kwargs):
-    context = {"user" : request.user.username}
+    context = {
+        "user" : request.user
+    }
+    return render(request, "homepage.html", context)
+
+def guest_view(request, *args, **kwargs):
+    context = {
+        "user" : None
+    }
+
     return render(request, "homepage.html", context)
