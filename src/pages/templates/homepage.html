@@ -9,7 +9,16 @@
 {% block content %}
 
     <div class="body-container homepage">
-        <h1>welcome, <span>{{user}}</span></h1>
+        <div class="user-header">
+            <h1>Welcome, <span>{{ user }}</span>! <span class="fluent-emoji--waving-hand"></span></h1>
+        </div>
+        
     </div>
+
+{% endblock %}
+
+{% block footer %}
+
+    {% include 'footer.html' %}
 
 {% endblock %}
