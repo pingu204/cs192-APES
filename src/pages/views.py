@@ -9,5 +9,14 @@ def landing_view(request, *args, **kwargs):
 
 @login_required(login_url=reverse_lazy("login_view"))
 def homepage_view(request, *args, **kwargs):
-    context = {"user" : request.user.username}
+    context = {
+        "user" : request.user
+    }
+    return render(request, "homepage.html", context)
+
+def guest_view(request, *args, **kwargs):
+    context = {
+        "user" : None
+    }
+
     return render(request, "homepage.html", context)

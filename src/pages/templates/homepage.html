@@ -10,7 +10,29 @@
 
     <div class="body-container homepage">
         <div class="user-header">
-            <h1>Welcome, <span>{{ user }}</span>! <span class="fluent-emoji--waving-hand"></span></h1>
+            <h1>
+                Welcome, 
+                <span>
+                    {% if user %} {{user.username}}
+                    {% else %} Guest
+                    {% endif %}
+                </span>! 
+                
+            </h1>
+            <span class="sign-out fluent-emoji--waving-hand"></span>
+            {% if user %}
+                <button class="sign-out btn-outline">
+                    Sign Out
+                </button>
+            {% else %} 
+                <button class="sign-out btn-outline">
+                    <a href="{% url 'login_view' %}">Sign In</a>
+                </button>
+            {% endif%}
+            
+            <div class="filler"></div>
+
+            <h6>1st Semester, A.Y. 2024-2025</h6>
         </div>
         
     </div>
