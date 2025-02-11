@@ -104,10 +104,10 @@ class UserAuthenticationForm(AuthenticationForm):
         
         # if invalid inputted email/username
         if not user:
-            print("The account does not exist. Please sign up.")
+            # TEST: print("The account does not exist. Please sign up.")
             raise ValidationError("The account does not exist. Please sign up.")
         
-        print(user, user.username)
+        # TEST: print(user, user.username)
 
 
         # authenticate using user.email since we set USERNAME_FIELD = "email" in models.py
@@ -115,9 +115,12 @@ class UserAuthenticationForm(AuthenticationForm):
 
         # if valid user email/username but password is wrong, raise error
         if not authenticated_user:
-            print("The password you've entered is incorrect. Please try again.")
+            # TEST: print("The password you've entered is incorrect. Please try again.")
             raise ValidationError("The password you've entered is incorrect. Please try again.")
                     
         self.cleaned_data["username"] = user.email
 
         return self.cleaned_data
+    
+    def get_user(self):
+        return self.user_cache

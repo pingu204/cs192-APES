@@ -47,8 +47,27 @@ INSTALLED_APPS = [
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
+# for login authentication; default authentication backend
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', 
+]
+
+# URL for login, internal user pages are redirected to this if user is not logged in
+# used via @login_required decorator in restricted user views (e.g., homepage_view, etc.)
+LOGIN_URL = "/login/"
+
+# user cookies reset
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 0
+# SESSION_COOKIE_AGE = <someValue>
+"""if we want user cookies to be saved definitely (time-bound), just set SESSION_COOKIE_AGE to some value in seconds
+however, as SESSION_COOKIE_AGE is not set to any value, this means that Django keeps the actively tracks the session
+UNTIL the browser is ultimately closed (as in-the entire browser (all tabs!)); closing the entire browser -> terminates session
+"""
+
+
+# AUTHENTICATION_BACKENDS = [
+#     "django.contrib.auth.backends.ModelBackend",  # Default authentication
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

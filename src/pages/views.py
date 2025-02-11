@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 def landing_view(request, *args, **kwargs):
     return render(request, "landing.html", {})
 
-@login_required(login_url=reverse_lazy("login_view"))
+@login_required()
 def homepage_view(request, *args, **kwargs):
     context = {
         "user" : request.user

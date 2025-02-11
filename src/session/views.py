@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import BaseUserCreationForm
+from django.contrib.auth.forms import BaseUserCreationForm, AuthenticationForm
 from .forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -8,7 +8,7 @@ from django.urls import reverse
 """ Displays the Sign Up page """
 def register_view(request):
     # form = UserCreationForm()
-    print("logged in", request.session['username'])
+    # print("logged in", request.session['username'])
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -39,7 +39,13 @@ def login_view(request):
         if user is not None:
             login(request, user)
             request.session['username'] = request.user.username
-            return redirect(reverse("homepage_view"))
+
+            
+            next_url = request.GET.get("next") or reverse("homepage_view")
+
+            # print(next_url)
+ 
+            return redirect(next_url)
 
     for error in form.non_field_errors():
         messages.error(request, error)
