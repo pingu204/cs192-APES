@@ -13,6 +13,7 @@ def register_view(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Registration successful!")
             return redirect(reverse("successful_account_creation"))
     else:
         form = UserRegisterForm()
@@ -24,6 +25,9 @@ def register_view(request):
 
 """ Displays message for successful account creation """
 def successful_account_creation_view(request):
+    if not messages.get_messages(request):
+        return redirect(reverse("register_view"))
+
     return render(request, "success_create.html", {})
 
 """ Displays the Log In page """
