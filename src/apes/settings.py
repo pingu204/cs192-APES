@@ -112,7 +112,7 @@ DATABASES = {
 
 # orig: BASE_DIR / 'db.sqlite3'
 
-# tester: 'hahaha_db.sqlite3'
+# tester: 'test_db.sqlite3'
 # NOTE: can have any name ^ since merely a tester (don't migrate since migrating creates a new database/table which would hence allow database operations)
 
 # Password validation
