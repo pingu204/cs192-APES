@@ -47,6 +47,9 @@ INSTALLED_APPS = [
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 0
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

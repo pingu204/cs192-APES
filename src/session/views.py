@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import BaseUserCreationForm
 from .forms import UserRegisterForm, UserAuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.urls import reverse
 
@@ -44,4 +44,9 @@ def login_view(request):
     for error in form.non_field_errors():
         messages.error(request, error)
 
-    return render(request, "login.html", {"form": form})
+
+    context = {
+        'form' : form,
+    }
+
+    return render(request, "login.html", context)
