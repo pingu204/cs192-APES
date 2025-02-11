@@ -7,5 +7,5 @@ def landing_view(request, *args, **kwargs):
 
 
 def homepage_view(request, *args, **kwargs):
-    context = {}
+    context = {"user" : request.user.username}
     return render(request, "homepage.html", context)
