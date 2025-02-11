@@ -35,4 +35,7 @@ def logout_view(request, *args, **kwargs):
         # messages.success(request, ("Successfully Logged Out.")) # optional (if we want to display an error message to the users, then just add here)
         return redirect(reverse("landing_view"))
     
-    return redirect(reverse("homepage_view"))
+    if request.user.is_authenticated:
+        return redirect(reverse("homepage_view"))
+    else:
+        return redirect(reverse("landing_view"))
