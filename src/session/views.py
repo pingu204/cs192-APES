@@ -4,8 +4,10 @@ from .forms import UserRegisterForm, UserAuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.urls import reverse
+from apes.utils import redirect_authenticated_users
 
 """ Displays the Sign Up page """
+@redirect_authenticated_users
 def register_view(request):
     # form = UserCreationForm()
     # print("logged in", request.session['username'])
@@ -24,6 +26,7 @@ def register_view(request):
     return render(request, "register.html", context)
 
 """ Displays message for successful account creation """
+@redirect_authenticated_users # not necessary since fixed already in function; added for consistency purposes
 def successful_account_creation_view(request):
     if not messages.get_messages(request):
         return redirect(reverse("register_view"))
@@ -31,6 +34,7 @@ def successful_account_creation_view(request):
     return render(request, "success_create.html", {})
 
 """ Displays the Log In page """
+@redirect_authenticated_users   
 def login_view(request):
     form = UserAuthenticationForm(request, data=request.POST or None)
 
