@@ -39,3 +39,8 @@ def logout_view(request, *args, **kwargs):
         return redirect(reverse("homepage_view"))
     else:
         return redirect(reverse("landing_view"))
+    
+
+def database_error_view(request):
+    error_message = request.session.pop('database_error', "Database connection failed. Please try again later.")
+    return render(request, 'database_error.html', {'error': error_message}, status=500)

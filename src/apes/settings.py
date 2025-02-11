@@ -69,16 +69,6 @@ UNTIL the browser is ultimately closed (as in-the entire browser (all tabs!)); c
 #     "django.contrib.auth.backends.ModelBackend",  # Default authentication
 # ]
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
 ROOT_URLCONF = 'apes.urls'
 
 TEMPLATES = [
@@ -99,6 +89,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apes.wsgi.application'
 
+MIDDLEWARE = [
+    'apes.middleware.DatabaseErrorMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -106,10 +106,14 @@ WSGI_APPLICATION = 'apes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', 
     }
 }
 
+# orig: BASE_DIR / 'db.sqlite3'
+
+# tester: 'hahaha_db.sqlite3'
+# NOTE: can have any name ^ since merely a tester (don't migrate since migrating creates a new database/table which would hence allow database operations)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
