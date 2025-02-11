@@ -20,10 +20,13 @@
                 
             </h1>
             <span class="sign-out fluent-emoji--waving-hand"></span>
-            {% if user %}
-                <button class="sign-out btn-outline">
-                    Sign Out
-                </button>
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'logout_view' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="sign-out btn-outline">
+                        Sign Out
+                    </button>
+                </form>
             {% else %} 
                 <button class="sign-out btn-outline">
                     <a href="{% url 'login_view' %}">Sign In</a>
