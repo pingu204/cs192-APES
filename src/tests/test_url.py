@@ -1,10 +1,11 @@
 # This Test is to test the URL/Link to the pages work
 #-------------------------------------------------------------------------------
-from django.test import SimpleTestCase
+from django.test import TestCase
 from django.urls import reverse, resolve
-from apes.urls import homepage_view, landing_view, register_view, successful_account_creation_view, login_view
+from apes.urls import homepage_view, landing_view, register_view, successful_account_creation_view, login_view, guest_view, logout_view, database_error_view
 
-class TestUrls(SimpleTestCase):
+
+class TestUrls(TestCase):
     def test_homepage_url_is_resolved(self): 
         url = reverse('homepage_view')
         self.assertEqual(resolve(url).func, homepage_view)
@@ -24,6 +25,20 @@ class TestUrls(SimpleTestCase):
     def test_login_url_is_resolved(self):
         url = reverse('login_view')
         self.assertEqual(resolve(url).func, login_view)
+        
+    def test_guest_url_is_resolved(self):
+        url = reverse('guest_view')
+        self.assertEqual(resolve(url).func, guest_view)
+        
+    def test_logout_url_is_resolved(self):
+        url = reverse('logout_view')
+        self.assertEqual(resolve(url).func, logout_view)
+        
+    def test_database_error_view_url_is_resolved(self):
+        url = reverse('database_error_view')
+        self.assertEqual(resolve(url).func, database_error_view)
+        
+        
 
     def test_invalid_url(self):
         url = '/invalid-url/'
@@ -59,3 +74,15 @@ class TestUrls(SimpleTestCase):
     def test_login_url_with_extra_parameters(self):
         url = reverse('login_view') + '?param=value'
         self.assertEqual(resolve(url.split('?')[0]).func, login_view)
+        
+    def test_guest_url_with_extra_parameters(self):
+        url = reverse('guest_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, guest_view)
+        
+    def test_logout_url_with_extra_parameters(self):
+        url = reverse('logout_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, logout_view)
+        
+    def test_database_error_view_url_with_extra_parameters(self):
+        url = reverse('database_error_view') + '?param=value'
+        self.assertEqual(resolve(url.split('?')[0]).func, database_error_view)
