@@ -12,7 +12,7 @@ def landing_view(request, *args, **kwargs):
     return render(request, "landing.html", {})
 
 @guest_or_authenticated
-def homepage_view(request, *args, **kwargs):
+def homepage_view(request, *args, **kwargs): 
     context = {
         "user" : request.user
     }
