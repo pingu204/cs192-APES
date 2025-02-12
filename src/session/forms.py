@@ -90,6 +90,26 @@ class UserRegisterForm(BaseUserCreationForm):
 # UserAuthenticationForm class to override AuthenticationForm since logins are allowed for BOTH username and email
 # not just username/email alone (which is already supported by AuthenticationForm)
 class UserAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length = 20,
+        label = "Username | Email Address",
+        widget = forms.TextInput(
+            attrs = {
+                "placeholder" : "Username or Email Address",
+                "class" : "form-control"
+            }
+        ))
+
+    password = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs = {
+                "placeholder" : "Password",
+                "class" : "form-control"
+            }
+        )
+    )
+
     def clean(self):
         User = get_user_model()
         username_or_email = self.cleaned_data.get("username")

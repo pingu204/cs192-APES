@@ -2,7 +2,7 @@
 
 {% block nav %}
 
-    {% include 'nav_main.html' %}
+    {% include 'nav_sessions.html' %}
 
 {% endblock %}
 
@@ -10,7 +10,7 @@
 
     <div class="body-container sessions">
         <div class="form-body">
-            <h5 class="back-button"><a href="/"><i class="bi bi-caret-left-square"></i> Go Back</a></h5>
+            <!-- <h5 class="back-button"><a href="/"><i class="bi bi-caret-left-square"></i> Go Back</a></h5> -->
             <h1>Create Account</h1>
             <h6>Already a member? <a href="../login/">Log in.</a></h6>
             <form method="POST" id="signUpForm"> {% csrf_token %}
@@ -70,9 +70,6 @@
                 </div>
                 
                 <!-- {{ form.as_p }} -->
-                <div class="submit-area">
-                    <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Create Account</button>
-                </div>
                 {% if form.errors %}
                 <div class="errors">
                     <ul class="errors-list">
@@ -84,6 +81,11 @@
                     </ul>
                 </div>
                 {% endif %}
+
+                <div class="submit-area">
+                    <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Create Account</button>
+                </div>
+                
             </form>
         </div>     
     </div>
