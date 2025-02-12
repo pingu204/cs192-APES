@@ -97,16 +97,21 @@ togglePasswordTwo.addEventListener("click", function(){togglePassword(2);});
 
 function allFieldsFilledOut() {
     console.log(checkboxField.value);
+    const password = passwordInputOne.value;
+    const hasCapitalLetter = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
     if (
         usernameField.value != '' &&
         emailField.value != '' &&
         checkboxField.checked &&
-        passwordInputOne.value == passwordInputTwo.value
+        passwordInputOne.value == passwordInputTwo.value &&
+        hasCapitalLetter &&
+        hasNumber
     ) {
         console.log("yes!");
         submitButton.disabled = false;
-    }
-    else {
+    } else {
         console.log("no!");
         submitButton.disabled = true;
     }

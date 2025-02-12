@@ -1,11 +1,11 @@
 # This Test is to test the URL/Link to the pages work
 #-------------------------------------------------------------------------------
-from django.test import SimpleTestCase
+from django.test import TestCase
 from django.urls import reverse, resolve
 from apes.urls import homepage_view, landing_view, register_view, successful_account_creation_view, login_view, guest_view, logout_view, database_error_view
 
 
-class TestUrls(SimpleTestCase):
+class TestUrls(TestCase):
     def test_homepage_url_is_resolved(self): 
         url = reverse('homepage_view')
         self.assertEqual(resolve(url).func, homepage_view)

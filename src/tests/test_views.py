@@ -15,8 +15,8 @@ class TestViews(TestCase):
     def test_register_POST(self): 
         response = self.client.post(self.register_url, {
             'username': 'testuser',
-            'password1': 'firsttimewelinkiwasaplayer',
-            'password2': 'firsttimewelinkiwasaplayer',
+            'password1': 'Firsttimewelinkiwasaplayer123',
+            'password2': 'Firsttimewelinkiwasaplayer123',
             'email': 'posttest@gmail.com',
             'agreement': True
         })
@@ -25,11 +25,11 @@ class TestViews(TestCase):
 
     def test_login_POST(self): 
         # First, create a user to log in
-        Student.objects.create_user(username='testuser', password='password123', email='test@example.com')
+        Student.objects.create_user(username='testuser', password='LastnightIwaswithyou123', email='test@example.com')
         
         response = self.client.post(self.login_url, {
             'username': 'testuser',
-            'password': 'password123'
+            'password': 'LastnightIwaswithyou123'
         })
         self.assertEqual(response.status_code, 302)  # Assuming a redirect on successful login
         self.assertTrue(response.wsgi_request.user.is_authenticated) # Assuming User is successfully logged in
