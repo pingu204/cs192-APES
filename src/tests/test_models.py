@@ -13,7 +13,7 @@ class TestModels(TestCase):
         self.student = Student.objects.create_user(
             username='testuser',
             email='test@gmail.com',
-            password='password123'
+            password='Iwillfinishthis123'
         )
         
     #tests if the creation is correct
@@ -21,15 +21,15 @@ class TestModels(TestCase):
         #check for correct
         self.assertEqual(self.student.username, 'testuser')
         self.assertEqual(self.student.email, 'test@gmail.com')
-        self.assertTrue(self.student.check_password('password123'))
+        self.assertTrue(self.student.check_password('Iwillfinishthis123'))
         
         #check for wrong
         self.assertNotEqual(self.student.username, 'raaah')
         self.assertNotEqual(self.student.email, 'raaah@example.com')
-        self.assertFalse(self.student.check_password('raaahtaah123'))
+        self.assertFalse(self.student.check_password('Raaahtaah123'))
         
         
-        # need pa ung empty (?) or baka sa forms na to --> yea forms na to
+       
 
     #tests if the creation is correct
     def test_student_str(self): 

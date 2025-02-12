@@ -1,6 +1,2 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-Lib/
-Scripts/
-Include/
-
-src/*/__pycache__/
+*

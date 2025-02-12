@@ -4,8 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from session.models import Student
+import re
 
 class UserRegisterForm(UserCreationForm):
+    error_messages = {
+        'password_mismatch': "The two password fields didn't match.",
+        'length_error': "Must contain at least 8 alphanumeric characters",
+        'capital_error': "Must contain at least one capital letter",
+        'number_error': "Must contain at least one number",
+        'no_input': "Both fields are required."
+    }
     username = forms.CharField(
         max_length = 20,
         widget = forms.TextInput(
@@ -61,6 +69,40 @@ class UserRegisterForm(UserCreationForm):
             'password2',
             'agreement',
         ]
+    
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        
+        if password1 == '' or password2 == '' or password1 == None or password2 == None:
+            raise forms.ValidationError(
+                self.error_messages['no_input'],
+                code='no_input',
+            )
+        elif password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        
+        elif len(password1) < 8:
+            raise forms.ValidationError(
+                self.error_messages['length_error'],
+                code='length_error',
+            )
+        elif not re.search(r'[A-Z]', password1):
+            raise forms.ValidationError(
+                self.error_messages['capital_error'],
+                code='capital_error',
+            )
+        elif not re.search(r'\d', password1):
+            raise forms.ValidationError(
+                self.error_messages['number_error'],
+                code='number_error',
+            )
+        else:
+            return password2
+        
     # not needed bc set email as unique
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')
