@@ -101,10 +101,7 @@ function allFieldsFilledOut() {
         usernameField.value != '' &&
         emailField.value != '' &&
         checkboxField.checked &&
-        passwordInputOne.value == passwordInputTwo.value &&
-        passwordInputOne.value.length >= 8 &&
-        /\d/.test(passwordInputOne.value) &&
-        hasUpperCase(passwordInputOne.value) && hasLowerCase(passwordInputOne.value)
+        passwordInputOne.value == passwordInputTwo.value
     ) {
         console.log("yes!");
         submitButton.disabled = false;
