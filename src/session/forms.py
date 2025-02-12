@@ -91,7 +91,7 @@ class UserRegisterForm(UserCreationForm):
 # not just username/email alone (which is already supported by AuthenticationForm)
 class UserAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
-        max_length = 20,
+        max_length = 40,
         label = "Username | Email Address",
         widget = forms.TextInput(
             attrs = {

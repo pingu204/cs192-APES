@@ -12,3 +12,4 @@ class DatabaseErrorMiddleware(MiddlewareMixin):
     def process_exception(self, request, exception):
         if isinstance(exception, (OperationalError, DatabaseError)):
             return render(request, 'database_error.html', {'error': "Timeout: Database connection failed."}, status=500)
+        return None
