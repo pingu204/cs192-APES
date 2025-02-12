@@ -24,7 +24,6 @@ from pages.views import (
     homepage_view,
     guest_view,
     logout_view,
-    database_error_view,
 )
 
 from session.views import (
@@ -42,5 +41,4 @@ urlpatterns = [
     path('login/', login_view, name="login_view"),
     path('guest/', guest_view, name="guest_view"),
     path('logout/', logout_view, name="logout_view"),
-    path('database_error/', database_error_view, name="database_error_view")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

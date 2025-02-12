@@ -2,7 +2,7 @@
 
 {% block nav %}
 
-    {% include 'nav_main.html' %}
+    {% include 'nav_sessions.html' %}
 
 {% endblock %}
 
@@ -12,26 +12,14 @@
 {% load static %}
 
     <div class="body-container sessions">
-        <div class="form-body">
-            <div class="logo-container">
-                <img src="{% static 'images/apes_logo.png' %}" alt="APES Logo">
-            </div>
-
-            <br>
-
+        <div class="form-body login">
             <h1>Welcome</h1>
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li class="{{ message.tags }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
             
             <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
                 <div class="form-row">
                     <div class="col">
-                        <label for="id_username">USERNAME / {{ form.username.label | upper}}</label> <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
+                        <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
+                        <label for="id_username">{{ form.username.label | upper}}</label> 
                         {{ form.username }}
                     </div>
                 </div>
@@ -43,13 +31,31 @@
                     </div>
                 </div>
 
-                <div class="submit-area">
+                <div class="submit-area login">
                     <button class="btn btn-primary submit-button" type="submit" id="submitButton">Sign In</button>
-                    <!-- <button class="btn btn-primary submit-button" type="submit" id="submitButton" disabled>Continue as Guest</button> -->
+                    <button class="btn btn-primary btn-outline"><a href="/guest/">Continue as Guest</a></button>
                 </div>
 
             </form>  
 
+            <div class="center">
+                <h6>New user? <a href="/register/">Create a New Account.</a></h6>
+            </div>
+
+            {% if messages %}
+                <div class="errors">
+                    <ul class="errors-list">
+                        {% for message in messages %}
+                            <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="center agreement">
+                By continuing, you agree to APES' Terms of Service and acknowledge that you have read our Privacy Policy.
+            </div>
+            
         </div>
     </div>
 
