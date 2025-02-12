@@ -33,15 +33,20 @@
 
                 <div class="submit-area login">
                     <button class="btn btn-primary submit-button" type="submit" id="submitButton">Sign In</button>
+                    <button class="btn btn-primary btn-outline">
+                        <a class="guest-login" onclick="document.getElementById('guest-login-form').submit(); return false;">
+                            Continue as Guest
+                        </a>
+                    </button>
                 </div>
 
             </form>  
 
-            <form action="{% url 'guest_login_view' %}" method="POST">
-                {% csrf_token %}
+            <form id="guest-login-form" action="{% url 'guest_login_view' %}" method="POST">
+                {% csrf_token %}<!-- 
                 <div class="submit-area login">
-                    <button class="btn btn-primary btn-outline">Continue as Guest</button>
-                </div>
+                    
+                </div> -->
             </form>
 
             <div class="center">
@@ -52,7 +57,11 @@
                 <div class="errors">
                     <ul class="errors-list">
                         {% for message in messages %}
-                            <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                            {% else %}
+                                <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
