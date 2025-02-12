@@ -28,7 +28,7 @@
                     <div class="col">
                         <label for="id_password">{{ form.password.label | upper }}</label>
                         {{ form.password }}
-                        <i class="bi-eye-slash eye-icon" id="togglePasswordTwo"></i>  
+                        <i class="bi-eye-slash eye-icon" id="toggleLoginPassword"></i>  
                     </div>
                 </div>
 
@@ -74,5 +74,11 @@
             
         </div>
     </div>
+
+{% endblock %}
+
+{% block addtl_scripts %}
+
+<script type="text/javascript" src="{% static 'js/login.js' %}" type="module"></script>
 
 {% endblock %}

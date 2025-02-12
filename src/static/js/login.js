@@ -1,4 +1,7 @@
+/* Login Components */
 
+let passwordLogin = document.getElementById("id_password");
+let toggleLoginPassword = document.getElementById("toggleLoginPassword");
 
 /* Checks if user chose to reveal/hide their password */
 function togglePassword(passwordField, toggleIcon){
@@ -12,5 +15,4 @@ function togglePassword(passwordField, toggleIcon){
     }
 }
 
-
-/* console.log(toggleLoginPassword.className); */
+toggleLoginPassword.addEventListener("click", function(){togglePassword(passwordLogin, toggleLoginPassword);});

@@ -6,6 +6,8 @@
 
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
 
     <div class="body-container sessions">
@@ -89,5 +91,11 @@
             </form>
         </div>     
     </div>
+
+{% endblock %}
+
+{% block addtl_scripts %}
+
+<script type="text/javascript" src="{% static 'js/register.js' %}" type="module"></script>
 
 {% endblock %}
