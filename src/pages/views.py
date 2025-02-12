@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
-from apes.utils import redirect_authenticated_users
+# from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from apes.utils import redirect_authenticated_users, guest_or_authenticated
 
 # Create your views here.
 
@@ -11,21 +11,33 @@ from apes.utils import redirect_authenticated_users
 def landing_view(request, *args, **kwargs):
     return render(request, "landing.html", {})
 
-@login_required
-def homepage_view(request, *args, **kwargs):
+@guest_or_authenticated
+def homepage_view(request, *args, **kwargs): 
     context = {
         "user" : request.user
     }
+    # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
+    # DEBUGGER: print(context['user'].username)
     return render(request, "homepage.html", context)
 
 
-# insert decorator delimiter (access permissions?)
-def guest_view(request, *args, **kwargs):
-    context = {
-        "user" : None
-    }
 
-    return render(request, "homepage.html", context)
+@require_POST # POST since user data gets saved during session; after session termination, flush user data
+@redirect_authenticated_users
+def guest_login_view(request, *args, **kwargs):
+    """
+    
+    Ensure that only POST methods bypass; 
+    if a guest login happens, an is_guest key in request.sessions.items() is added which has the value True
+    so that, when the homepage is accessed, it defaults to the guest BUT this only happens when the user opted to sign in already as guest via the buttons in /login/ or /landing_view/
+    however, if the user opts to login authentically via an existing account, the is_guest key gets popped and hence, the active user account takes over
+    
+    """
+    # DEBUGGER: print("GUEST AUTHENTICATED")
+    request.session['is_guest'] = True # might be useful if we choose to separate guest from user dashboards// if guest -> save session, else flush after
+    # DEBUGGER: print(request.session.keys())
+    # DEBUGGER: print(request.session['is_guest'])
+    return redirect(reverse('homepage_view'))
 
 
 def logout_view(request, *args, **kwargs):
