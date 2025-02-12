@@ -33,10 +33,16 @@
 
                 <div class="submit-area login">
                     <button class="btn btn-primary submit-button" type="submit" id="submitButton">Sign In</button>
-                    <button class="btn btn-primary btn-outline"><a href="/guest/">Continue as Guest</a></button>
                 </div>
 
             </form>  
+
+            <form action="{% url 'guest_login_view' %}" method="POST">
+                {% csrf_token %}
+                <div class="submit-area login">
+                    <button class="btn btn-primary btn-outline">Continue as Guest</button>
+                </div>
+            </form>
 
             <div class="center">
                 <h6>New user? <a href="/register/">Create a New Account.</a></h6>

@@ -22,8 +22,19 @@
                         <div class="buttons">
                             <button class="btn btn-landing-filled"><a href="login/">Login</a></button>
                             <button class="btn btn-landing"><a href="register/">Sign Up</a></button>
-                            <span>OR</span>
-                            <h6><a class="guest-login" href="/guest/">Continue as Guest</a></h6>
+                            <span>OR</span> 
+                            <!--Guest log-ins are treated as POST methods since user data is saved per session; data flushed upon session termination-->
+                            <h6>
+                                <a class="guest-login" href="#" onclick="document.getElementById('guest-login-form').submit(); return false;">
+                                    Continue as Guest
+                                </a>
+                            </h6>
+                            
+                            <!-- Hidden Form for POST -->
+                            <form id="guest-login-form" action="{% url 'guest_login_view' %}" method="POST">
+                                {% csrf_token %}  <!-- CSRF token to prevent security errors -->
+                            </form>
+
                         </div>
                     </div>
                 </div>

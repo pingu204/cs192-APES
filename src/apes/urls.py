@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 from pages.views import (
     landing_view,
     homepage_view,
-    guest_view,
+    guest_login_view,
     logout_view,
+    guest_login_view,
 )
 
 from session.views import (
@@ -39,6 +40,6 @@ urlpatterns = [
     path('register/', register_view, name="register_view"),
     path('register/success/', successful_account_creation_view, name="successful_account_creation"),
     path('login/', login_view, name="login_view"),
-    path('guest/', guest_view, name="guest_view"),
+    path('guest_home/', guest_login_view, name="guest_login_view"),
     path('logout/', logout_view, name="logout_view"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
