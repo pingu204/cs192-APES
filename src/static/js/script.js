@@ -100,6 +100,7 @@ function allFieldsFilledOut() {
     const password = passwordInputOne.value;
     const hasCapitalLetter = /[A-Z]/.test(password);
     const hasNumber = /\d/.test(password);
+    const isLongEnough = password.length >= 8;
 
     if (
         usernameField.value != '' &&
@@ -107,7 +108,8 @@ function allFieldsFilledOut() {
         checkboxField.checked &&
         passwordInputOne.value == passwordInputTwo.value &&
         hasCapitalLetter &&
-        hasNumber
+        hasNumber &&
+        isLongEnough
     ) {
         console.log("yes!");
         submitButton.disabled = false;
