@@ -45,14 +45,9 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            # DEBUGGER: print(request.session.keys())
-            request.session.pop('is_guest', None) # when a user logs in, pop the is_guest since no longer a guest
-
-            # DEBUGGER: print(request.session.pop('is_guest', None))
-            # DEBUGGER: print(request.session.keys())
-
             request.session['username'] = request.user.username
 
+            
             next_url = request.GET.get("next") or reverse("homepage_view")
 
             # print(next_url)

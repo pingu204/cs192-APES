@@ -4,8 +4,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from session.models import Student
+import re
 
 class UserRegisterForm(UserCreationForm):
+    error_messages = {
+        'password_mismatch': ("The two password fields didn't match."),
+        'no_value': ("No inputted password."),
+        'no_number': ("Password must contain at least one number."),
+        'no_capital': ("Password must contain at least one capital letter."),
+    }
     username = forms.CharField(
         max_length = 20,
         widget = forms.TextInput(
@@ -61,6 +68,30 @@ class UserRegisterForm(UserCreationForm):
             'password2',
             'agreement',
         ]
+    
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+            
+        elif password1 is None or password2 is None:
+            raise forms.ValidationError(self.error_messages['no_value'], code= 'no_value')
+        
+        elif not re.search(r'\d', password1):
+            raise forms.ValidationError('no_number', code="no_number")
+
+        # Check for both capital and small letters
+        elif not re.search(r'[A-Z]', password1) or not re.search(r'[a-z]', password1):
+            raise forms.ValidationError('no_capital', code='no_capital')
+        
+        else:
+            return password2
+
+        
     # not needed bc set email as unique
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')

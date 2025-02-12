@@ -10,10 +10,10 @@
 
     <div class="body-container homepage">
         <div class="user-header">
-            <h1> 
+            <h1>
                 Welcome, 
                 <span>
-                    {% if user.is_authenticated %} {{user.username}}
+                    {% if user %} {{user.username}}
                     {% else %} Guest
                     {% endif %}
                 </span>! 
@@ -26,7 +26,7 @@
                     <button type="submit" class="sign-out btn-outline">
                         Sign Out
                     </button>
-                </form> 
+                </form>
             {% else %} 
                 <button class="sign-out btn-outline">
                     <a href="{% url 'login_view' %}">Sign In</a>
