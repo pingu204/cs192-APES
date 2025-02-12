@@ -4,13 +4,12 @@
 from django.test import SimpleTestCase, TestCase
 from session.forms import UserRegisterForm, UserAuthenticationForm
 from session.models import Student
+from django import forms
 
 
-
-class TestForms(TestCase):
-    
-    
+class TestForms(SimpleTestCase):
     def test_user_regis_form_valid(self):
+        
         form = UserRegisterForm(data={
             'username': 'testuser',
             'email': 'test@gmail.com',
@@ -27,7 +26,7 @@ class TestForms(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors), 5)  
 
-    def test_user_auth_form_valid(self):
+    def test_user_auth_form_valid(self): #FAIL
         form = UserAuthenticationForm(data={
             'username_or_email': 'testinguser',
             'password': 'authenticateme123'
