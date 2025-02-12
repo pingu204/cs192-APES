@@ -10,16 +10,17 @@ from session.models import Student
 class TestModels(TestCase):
     #creates a student object
     def setUp(self):
-        self.student = Student.objects.create(
+        self.student = Student.objects.create_user(
             username='testuser',
-            email='test@example.com',
+            email='test@gmail.com',
             password='password123'
         )
         
     #tests if the creation is correct
-    def test_student_creation(self): #FAIL
+    def test_student_creation(self):
+        #check for correct
         self.assertEqual(self.student.username, 'testuser')
-        self.assertEqual(self.student.email, 'test@example.com')
+        self.assertEqual(self.student.email, 'test@gmail.com')
         self.assertTrue(self.student.check_password('password123'))
         
         #check for wrong
@@ -31,8 +32,8 @@ class TestModels(TestCase):
         # need pa ung empty (?) or baka sa forms na to --> yea forms na to
 
     #tests if the creation is correct
-    def test_student_str(self): #FAIL
-        self.assertEqual(str(self.student), 'testuser')
+    def test_student_str(self): 
+        self.assertEqual(str(self.student.username), 'testuser')
         
         
   
