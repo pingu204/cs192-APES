@@ -20,6 +20,7 @@ def homepage_view(request, *args, **kwargs):
 
 
 # insert decorator delimiter (access permissions?)
+@redirect_authenticated_users
 def guest_view(request, *args, **kwargs):
     context = {
         "user" : None
@@ -33,14 +34,9 @@ def logout_view(request, *args, **kwargs):
     if request.method == 'POST':
         logout(request)
         # messages.success(request, ("Successfully Logged Out.")) # optional (if we want to display an error message to the users, then just add here)
-        return redirect(reverse("landing_view"))
+        return redirect(reverse('landing_view'))
     
     if request.user.is_authenticated:
-        return redirect(reverse("homepage_view"))
+        return redirect(reverse('homepage_view'))
     else:
-        return redirect(reverse("landing_view"))
-    
-
-def database_error_view(request):
-    error_message = request.session.pop('database_error', "Database connection failed. Please try again later.")
-    return render(request, 'database_error.html', {'error': error_message}, status=500)
+        return redirect(reverse('landing_view'))    
