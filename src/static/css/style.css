@@ -446,6 +446,8 @@ button a, button a:hover {
 img.apes-logo {
     height: 60px;
     width: auto;
+    margin-right: -50px;
+    margin-left: -60px;
 }
 /* Icons from Iconify */
 
