@@ -4,10 +4,10 @@
 from django.test import SimpleTestCase, TestCase
 from session.forms import UserRegisterForm, UserAuthenticationForm
 from session.models import Student
-from django import forms
 
 
-class TestForms(SimpleTestCase):
+
+class TestForms(TestCase):
     def test_user_regis_form_valid(self):
         
         form = UserRegisterForm(data={
