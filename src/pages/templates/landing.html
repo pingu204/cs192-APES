@@ -22,6 +22,7 @@
                         <div class="buttons">
                             <button class="btn btn-landing-filled"><a href="login/">Login</a></button>
                             <button class="btn btn-landing"><a href="register/">Sign Up</a></button>
+
                             <span>OR</span> 
                             <!--Guest log-ins are treated as POST methods since user data is saved per session; data flushed upon session termination-->
                             <h6>
@@ -29,10 +30,8 @@
                                     Continue as Guest
                                 </a>
                             </h6>
-                            
-                            <!-- Hidden Form for POST -->
                             <form id="guest-login-form" action="{% url 'guest_login_view' %}" method="POST">
-                                {% csrf_token %}  <!-- CSRF token to prevent security errors -->
+                                {% csrf_token %}
                             </form>
 
                         </div>

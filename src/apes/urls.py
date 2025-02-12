@@ -24,7 +24,6 @@ from pages.views import (
     homepage_view,
     guest_login_view,
     logout_view,
-    guest_login_view,
 )
 
 from session.views import (

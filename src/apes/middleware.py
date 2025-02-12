@@ -11,4 +11,5 @@ from django.utils.deprecation import MiddlewareMixin
 class DatabaseErrorMiddleware(MiddlewareMixin):
     def process_exception(self, request, exception):
         if isinstance(exception, (OperationalError, DatabaseError)):
-            return render(request, 'database_error.html', {'error': f"Timeout: Database connection failed.\n Error found:{exception}"}, status=500)
+            return render(request, 'database_error.html', {'error': "Timeout: Database connection failed."}, status=500)
+        return None
