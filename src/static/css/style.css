@@ -303,6 +303,31 @@ div.right h1 {
     margin-bottom: 30px;
 }
 
+span.swoosh-text {
+    background: linear-gradient(to right, black, #FC706C, #FC706C, black);
+    background-size: 1000%;
+    background-position: right;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: swoosh 5s ease infinite;
+    transition: 1s ease;
+}
+
+span.swoosh-text:hover {
+    background: #FC706C;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: none;
+}
+
+@keyframes swoosh {
+    0% {background-position: 100%;}
+    25% {background-position: center;}
+    50% {background-position: 0%;}
+    75% {background-position: center;}
+    100% {background-position: 100%;}
+}
+
 div.description {
     width: 450px;
     line-height: 200%;
