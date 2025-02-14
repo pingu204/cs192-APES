@@ -22,7 +22,7 @@ body {
 
 .nav-container.landing {
     border: none;
-    height: 12vh;
+    height: 10vh;
 }
 
 .nav-container div {
@@ -83,15 +83,17 @@ hr {
 }
  
 .body-container.sessions {
-    height: 79vh;
+    height: 85vh;
     /* overflow: hidden; */
     /* background-color: rgb(0,0,0,0.025); */
     display: flex;
     justify-content: center;
+    background: linear-gradient(to top, rgb(0,0,0,0.1), rgb(0,0,0,0) 50%);
 }
 
 .body-container.landing {
-    min-height: 79vh;
+    height: 90vh;
+    background: linear-gradient(to top, rgb(0,0,0,0.1), rgb(0,0,0,0) 50%);
 }
 
 .footer-container {
@@ -274,19 +276,23 @@ div.title-page {
 }
 
 img.apes-tabs {
-    height: 600px;
+    height: 90vh;
     margin-left: 150px;
-    animation: animateTabs 4s ease infinite;
+    animation: animateTabs 3s linear infinite;
     z-index: -1;
 }
 
 div.apes-tabs {
     z-index: -1;
+    display: flex;
+    align-items: center;
 }
 
 @keyframes animateTabs {
     0% {transform: scale(1.0) translateY(0px);}
-    50% {transform: scale(1.1) translateY(0px);}
+    25% {transform: scale(1.0) translateY(-20px);}
+    50% {transform: scale(1.0) translateY(0px);}
+    75% {transform: scale(1.0) translateY(20px);}
     100% {transform: scale(1.0) translateY(0px);}
 }
 
@@ -304,28 +310,26 @@ div.right h1 {
 }
 
 span.swoosh-text {
-    background: linear-gradient(to right, black, #FC706C, #FC706C, black);
-    background-size: 1000%;
+    background: linear-gradient(to right, black 30%, #FC706C 50%, black 70%);
+    background-size: 500%;
     background-position: right;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
-    animation: swoosh 5s ease infinite;
-    transition: 1s ease;
+    animation: swoosh 2s linear infinite;
+    /* transition: 1s linear; */
 }
 
-span.swoosh-text:hover {
+/* span.swoosh-text:hover {
     background: #FC706C;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     animation: none;
-}
+} */
 
 @keyframes swoosh {
     0% {background-position: 100%;}
-    25% {background-position: center;}
-    50% {background-position: 0%;}
-    75% {background-position: center;}
-    100% {background-position: 100%;}
+    50% {background-position: center;}
+    100% {background-position: 0%;}
 }
 
 div.description {
