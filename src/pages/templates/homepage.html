@@ -10,7 +10,7 @@
 
     <div class="body-container homepage">
         <div class="user-header">
-            <h1> 
+            <h2> 
                 Welcome, 
                 <span>
                     {% if user.is_authenticated %} {{user.username}}
@@ -18,7 +18,7 @@
                     {% endif %}
                 </span>! 
                 
-            </h1>
+            </h2>
             <span class="sign-out fluent-emoji--waving-hand"></span>
             {% if user.is_authenticated %}
                 <form method="POST" action="{% url 'logout_view' %}">
@@ -38,6 +38,121 @@
             <h6>1st Semester, A.Y. 2024-2025</h6>
         </div>
         
+        <div class="main">
+            <div class="dcp-container">
+                <div class="dcp-header">
+                    <h1>Desired Classes</h1>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn-sm">CLEAR</button>
+                        <button class="btn-sm">+</button>
+                    </div>
+                </div>
+                <h5>0 UNITS<i class="bi bi-dot"></i><span class="light-text">0 CLASSES</span></h5>
+
+                <div class="courses-container">
+                    <!-- For empty DCP
+                    
+                    <div class="course-card blank"></div>
+                    <div class="course-card blank"></div>
+                    <div class="course-card blank"></div>
+                    <p class="dcp-description">Your desired classes will appear here! These classes will be processed by the system to create schedules where none of them would overlap with each other.<br><br>Click on the <i class="bi bi-plus-circle"></i> button to get started!</p>
+                    
+                    -->
+
+                    <!-- Template for class card
+                    
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+                    
+                    -->
+                    
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                            <div class="filler"></div>
+                            <h6><i class="bi bi-x-circle"></i></h6>
+                        </div>
+                        <h4>Course Title Course Title Course Title Course Title</h4>
+                    </div> 
+                </div>
+                <div></div>
+            </div>
+            <div class="vr"></div> <!-- Divider -->
+            <div class="sched-container">
+                <div class="dcp-header">
+                    <h1>Schedules</h1>
+                    <button class="btn-sm generate">GENERATE</button>
+                    <div class="filler">
+                        <p>
+                            The generated schedules will appear here once your desired classses have been processed. Try clicking the 'Generate' button once you've added classes!
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

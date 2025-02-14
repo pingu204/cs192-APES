@@ -444,6 +444,7 @@ div.apes-tos {
 
 .homepage {
     padding: 30px 70px 30px 70px;
+    overflow: hidden;
 
 }
    
@@ -453,12 +454,12 @@ div.user-header {
     align-items: center;
 }
 
-div.user-header h1 {
+div.user-header h2 {
     font-size: 20pt;
     display: inline;
     margin: 0;
     padding: 0;
-    font-weight: bold;
+    font-weight: light;
 }
 
 button.sign-out {
@@ -478,6 +479,102 @@ img.apes-logo {
     margin-right: -50px;
     margin-left: -60px;
 }
+
+div.main {
+    display: grid;
+    grid-template-columns: 30% auto auto;
+    height: 90%;
+    margin-top: 20px;
+}
+
+div.vr {
+    width: 15px;
+    height: 100%;
+    border-left: 1px solid black;
+    margin-left: 15px;
+}
+
+div.dcp-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.sched-container {
+    height: 100%;
+}
+
+div.dcp-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dcp-container h6 {
+    font-weight: 600;
+}
+
+.dcp-container h5 {
+    font-size: 11pt;
+    margin-bottom: 20px;
+}
+
+.dcp-header p {
+    line-height: 100%;
+    margin-bottom: 0;
+}
+
+span.light-text {
+    color: rgb(0,0,0,0.5);
+}
+
+div.courses-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    height: 1px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+div.course-card {
+    padding: 15px;
+    border: 1px solid rgb(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+div.course-card.blank {
+    height: 100px;
+    border: none;
+    background: rgb(0,0,0,0.1);
+}
+
+p.dcp-description {
+    text-align: center;
+    color: rgb(0,0,0,0.7);
+}
+
+div.course-header {
+    display: flex;
+    align-items: center;
+}
+
+.dcp-header h1 {
+    font-weight: bold;
+    font-size: 20pt;
+    margin-bottom: 0;
+}
+
+button.btn-sm {
+    border-radius: 10px;
+    font-weight:700;
+    border: 3px solid black;
+    background: none;
+    padding: 2px 5px 2px 5px;
+    font-size: 10pt;
+}
+
 /* Icons from Iconify */
 
 .icomoon-free--html-five {
