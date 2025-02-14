@@ -1,5 +1,5 @@
 from django.test import TestCase, RequestFactory, override_settings
-from django.db.utils import OperationalError
+from django.db.utils import OperationalError, ImproperlyConfigured
 from django.http import HttpResponse
 from apes.middleware import DatabaseErrorMiddleware
 from django.db import connections
@@ -29,6 +29,21 @@ class DatabaseErrorTest(TestCase):
     
     
     def test_database_error_handling(self):
+        request = self.factory.get('/some-url/')
+        
+        # Simulate a database error
+        exception = OperationalError("Simulated database connection error")
+        
+        response = self.middleware.process_exception(request, exception)
+        
+        # Check if the middleware returns the correct response
+        self.assertIsInstance(response, HttpResponse)
+        self.assertEqual(response.status_code, 500)
+        self.assertIn("Timeout: Database connection failed", response.content.decode())
+
+    @override_settings (DATABASES = {})
+
+    def test_empty_database_error(self):
         request = self.factory.get('/some-url/')
         
         # Simulate a database error
