@@ -13,9 +13,13 @@ def landing_view(request, *args, **kwargs):
 
 @guest_or_authenticated
 def homepage_view(request, *args, **kwargs): 
+
     context = {
-        "user" : request.user
+        "user" : request.user,
     }
+
+    print(request.user == "AnonymousUser", request.user)
+
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
     return render(request, "homepage.html", context)
@@ -35,6 +39,7 @@ def guest_login_view(request, *args, **kwargs):
     """
     # DEBUGGER: print("GUEST AUTHENTICATED")
     request.session['is_guest'] = True # might be useful if we choose to separate guest from user dashboards// if guest -> save session, else flush after
+    request.session['dcp'] = [] # for Desired Classes Pool
     # DEBUGGER: print(request.session.keys())
     # DEBUGGER: print(request.session['is_guest'])
     return redirect(reverse('homepage_view'))

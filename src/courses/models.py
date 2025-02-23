@@ -4,5 +4,9 @@ from django.db import models
 
 """ Model for saved courses in a user's Desired Classes Pool """
 class DesiredCourse(models.Model):
-    student_id =    models.IntegerField(unique=True)
-    course_code =   models.TextField(unique=True)
+    student_id =    models.IntegerField()
+    course_code =   models.TextField()
+
+    # Ensures unique combination of `student_id` and `course_code`
+    class Meta():
+        unique_together = ('student_id', 'course_code')

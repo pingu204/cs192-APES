@@ -1,7 +1,7 @@
 course_code,course_title,offering_unit,units
-AI 201,Artificial Intelligence,AIP,
-AI 211,Computational Linear Algebra for AI,AIP,
-AI 212,Probability and Statistics for AI,AIP,
+AI 201,Artificial Intelligence,AIP,3.0
+AI 211,Computational Linear Algebra for AI,AIP,3.0
+AI 212,Probability and Statistics for AI,AIP,3.0
 AI 221,Classical Machine Learning,AIP,
 AI 222,Advanced Machine Learning,AIP,
 AI 231,Machine Learning Operations (MLOps),AIP,
