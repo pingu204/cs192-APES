@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # User Apps
     'pages',
     'session',
+    'courses',
 ]
 
 SESSION_COOKIE_SECURE = False
