@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+    {% include 'nav_main.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+    <div class="body-container homepage">
+        <div class="form-body login">
+            <h1>Add a Class</h1>
+            <h6>Desired Classes</h6>
+            <div class="form-row">
+                <div class="col">
+                    <label for="id_course_code">
+                        {{ form.course_code.label | upper }}
+                    </label>
+                    {{ form.course_code }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}

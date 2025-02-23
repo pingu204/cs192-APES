@@ -51,11 +51,25 @@
                 <h5>0 UNITS<i class="bi bi-dot"></i><span class="light-text">0 CLASSES</span></h5>
 
                 <div class="courses-container">
-                    
-                    <div class="course-card blank"></div>
-                    <div class="course-card blank"></div>
-                    <div class="course-card blank"></div>
-                    <p class="dcp-description">Your desired classes will appear here! These classes will be processed by the system to create schedules where none of them would overlap with each other.<br><br>Click on the <i class="bi bi-plus-circle"></i> button to get started!</p>
+                    {% if not dcp %}
+
+                        <div class="course-card blank"></div>
+                        <div class="course-card blank"></div>
+                        <div class="course-card blank"></div>
+                        <p class="dcp-description">Your desired classes will appear here! These classes will be processed by the system to create schedules where none of them would overlap with each other.<br><br>Click on the <i class="bi bi-plus-circle"></i> button to get started!</p>
+
+                    {% else %}
+
+                        <div class="course-card">
+                            <div class="course-header">
+                                <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
+                                <div class="filler"></div>
+                                <h6><i class="bi bi-x-circle"></i></h6>
+                            </div>
+                            <h4>Course Title Course Title Course Title Course Title</h4>
+                        </div> 
+
+                    {% endif %}
                     
                    
 

@@ -8,5 +8,6 @@ class DesiredCourse(models.Model):
     course_code =   models.TextField()
 
     # Ensures unique combination of `student_id` and `course_code`
+    # Obtained from https://www.geeksforgeeks.org/how-to-define-two-fields-unique-as-couple-in-django/
     class Meta():
         unique_together = ('student_id', 'course_code')

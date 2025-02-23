@@ -32,6 +32,10 @@ from session.views import (
     login_view,
 )
 
+from courses.views import (
+    dcp_add_view,
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin_view"),
     path('', landing_view, name="landing_view"),
@@ -41,4 +45,5 @@ urlpatterns = [
     path('login/', login_view, name="login_view"),
     path('guest_home/', guest_login_view, name="guest_login_view"),
     path('logout/', logout_view, name="logout_view"),
+    path('home/add/', dcp_add_view, name="dcp_add_view"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

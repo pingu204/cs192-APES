@@ -5,6 +5,8 @@ from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated
 
+
+from courses.models import DesiredCourse
 # Create your views here.
 
 @redirect_authenticated_users
@@ -13,12 +15,16 @@ def landing_view(request, *args, **kwargs):
 
 @guest_or_authenticated
 def homepage_view(request, *args, **kwargs): 
+    if request.user.id == None: # Guest
+        dcp = request.session['dcp']
+
+    else: # Not a Guest
+        dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
 
     context = {
         "user" : request.user,
+        "dcp" : dcp,
     }
-
-    print(request.user == "AnonymousUser", request.user)
 
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
