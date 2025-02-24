@@ -115,14 +115,14 @@ if __name__ == "__main__":
     print(course_list)
 
     units_list = get_units(
-        start_year =    2024,
+        start_year =    2011,
         end_year =      2024, 
-        course_codes =  list(set(course_list["course_code"].tolist()))[:10],
+        course_codes =  list(set(course_list["course_code"].tolist()))[:],
     )
     print(units_list)
 
     course_list_with_units = course_list.merge(units_list, on="course_code", how="left")
     print(course_list_with_units)
-
+    course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False)
 
