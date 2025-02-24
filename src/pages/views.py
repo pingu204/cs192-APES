@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated
 
 
-from courses.models import DesiredCourse
+from courses.models import DesiredCourse, Course
 # Create your views here.
 
 @redirect_authenticated_users
@@ -19,13 +19,39 @@ def homepage_view(request, *args, **kwargs):
         dcp = request.session['dcp']
 
     else: # Not a Guest
-        dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
+        # dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
+        dcp = [
+            Course(
+                course_code = "CS 20",
+                course_title = "Digital Electronics",
+                offering_unit = "DCS",
+                units = 4.0,
+            ),
+            Course(
+                course_code = "CS 30",
+                course_title = "Discrete Mathematics I",
+                offering_unit = "DCS",
+                units = 3.0,
+            ),
+            Course(
+                course_code = "CS 11",
+                course_title = "Basic Programming I",
+                offering_unit = "DCS",
+                units = 3.0,
+            ),
+        ]
 
     context = {
         "user" : request.user,
         "dcp" : dcp,
+        "dcp_units" : sum([course.units for course in dcp]),
+        "dcp_length" : len(dcp),
     }
 
+    print(request.user, request.user.id)
+    print(
+        
+    )
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
     return render(request, "homepage.html", context)

@@ -48,7 +48,7 @@
                         <button class="btn-sm">+</button>
                     </div>
                 </div>
-                <h5>0 UNITS<i class="bi bi-dot"></i><span class="light-text">0 CLASSES</span></h5>
+                <h5>{{ dcp_units }} UNITS<i class="bi bi-dot"></i><span class="light-text">{{ dcp_length }} CLASSES</span></h5>
 
                 <div class="courses-container">
                     {% if not dcp %}
@@ -60,14 +60,17 @@
 
                     {% else %}
 
-                        <div class="course-card">
-                            <div class="course-header">
-                                <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                                <div class="filler"></div>
-                                <h6><i class="bi bi-x-circle"></i></h6>
-                            </div>
-                            <h4>Course Title Course Title Course Title Course Title</h4>
-                        </div> 
+                        {% for course in dcp %}
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <h6><b>{{ course.course_code }}</b><i class="bi bi-dot"></i><span class="light-text">{{ course.units }} Units</span></h6>
+                                    <div class="filler"></div>
+                                    <h6><i class="bi bi-x-circle"></i></h6>
+                                </div>
+                                <h4>{{ course.course_title }}</h4>
+                            </div> 
+                        {% endfor %}
+                        
 
                     {% endif %}
                     

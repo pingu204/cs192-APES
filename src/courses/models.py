@@ -1,5 +1,7 @@
 from django.db import models
 
+from dataclasses import dataclass
+
 # Create your models here.
 
 """ Model for saved courses in a user's Desired Classes Pool """
@@ -11,3 +13,10 @@ class DesiredCourse(models.Model):
     # Obtained from https://www.geeksforgeeks.org/how-to-define-two-fields-unique-as-couple-in-django/
     class Meta():
         unique_together = ('student_id', 'course_code')
+
+@dataclass
+class Course():
+    course_code: str
+    course_title: str
+    offering_unit: str
+    units: float
