@@ -16,18 +16,27 @@
                 <div class="filler"></div>
                 <span class="bold-text small"><i class="bi bi-caret-left-fill"></i> Go Back</span>
             </div>
-            
-            <div class="form-row">
-                <div class="col">
-                    <label for="id_course_code">
-                        {{ form.course_code.label | upper }}
-                    </label>
-                    {{ form.course_code }}
-                    <span class="form-text">
-                        For PE 2, include the code associated with the sport you want. Example: 'PE 2 STD' for Basic Street Dance.
-                    </span>
+            <form method="GET">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="id_course_code">
+                            {{ form.course_code.label | upper }}
+                        </label>
+                        <div class="input-wrapper">
+                            {{ form.course_code }}
+                            <button type="submit" class="search-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="form-text">
+                            For PE 2, include the code associated with the sport you want. Example: 'PE 2 STD' for Basic Street Dance.
+                        </span>
+                    </div>
                 </div>
-            </div>
+            </form>
             <h6>0 RESULTS</h6>
             <div class="filler result-container">
                 <div  class="result-card">
@@ -91,7 +100,6 @@
                     </div>
                 </div>       
             </div>
-        </div>
     </div>
 
 {% endblock %}

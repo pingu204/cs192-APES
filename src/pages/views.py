@@ -49,6 +49,7 @@ def homepage_view(request, *args, **kwargs):
     }
 
     print(request.user, request.user.id)
+    print(request.session.items())
     print(
         
     )
@@ -72,6 +73,7 @@ def guest_login_view(request, *args, **kwargs):
     # DEBUGGER: print("GUEST AUTHENTICATED")
     request.session['is_guest'] = True # might be useful if we choose to separate guest from user dashboards// if guest -> save session, else flush after
     request.session['dcp'] = [] # for Desired Classes Pool
+    print(request.session.items())
     # DEBUGGER: print(request.session.keys())
     # DEBUGGER: print(request.session['is_guest'])
     return redirect(reverse('homepage_view'))
