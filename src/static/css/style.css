@@ -127,7 +127,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    padding: 50px 50px 10px 50px;
+    padding: 50px 50px 50px 50px;
     border: 1px solid #ced4da;
     border-radius: 20px;
     font-size: 9pt;
@@ -136,6 +136,14 @@ hr {
 
 .form-body.login {
     width: 30vw;
+}
+
+.form-body.login.dcp {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .form-body.login h1 {
@@ -148,10 +156,35 @@ hr {
     display: inline;
 }
 
-.form-body h6 {
+.form-body.login h6 {
     font-size: 10pt;
     display: inline;
     margin-left: 10px;
+}
+
+.form-body.login.dcp h6 {
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    color: rgb(0,0,0,0.5);
+}
+
+div.result-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+
+div.result-card h5 {
+    margin: 0;
+}
+
+div.result-container {
+    overflow-y: auto;
 }
 
 div.center {
@@ -522,6 +555,22 @@ div.dcp-header {
 .dcp-header p {
     line-height: 100%;
     margin-bottom: 0;
+}
+
+span.small {
+    font-size: 10pt;
+}
+
+span.medium {
+    font-size: 16pt;
+}
+
+span.large {
+    font-size: 24pt;
+}
+
+span.bold-text {
+    font-weight: bold;
 }
 
 span.light-text {

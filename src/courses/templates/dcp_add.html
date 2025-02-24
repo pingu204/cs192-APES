@@ -10,16 +10,86 @@
 
 {% load static %}
     <div class="body-container homepage">
-        <div class="form-body login">
-            <h1>Add a Class</h1>
-            <h6>Desired Classes</h6>
+        <div class="form-body login dcp">
+            <div class="dcp-header">
+                <h1>Add a Class</h1>
+                <div class="filler"></div>
+                <span class="bold-text small"><i class="bi bi-caret-left-fill"></i> Go Back</span>
+            </div>
+            
             <div class="form-row">
                 <div class="col">
                     <label for="id_course_code">
                         {{ form.course_code.label | upper }}
                     </label>
                     {{ form.course_code }}
+                    <span class="form-text">
+                        For PE 2, include the code associated with the sport you want. Example: 'PE 2 STD' for Basic Street Dance.
+                    </span>
                 </div>
+            </div>
+            <h6>0 RESULTS</h6>
+            <div class="filler result-container">
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div  class="result-card">
+                    <div>
+                        <h5>Course Title</h5>
+                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <div>
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>       
             </div>
         </div>
     </div>
