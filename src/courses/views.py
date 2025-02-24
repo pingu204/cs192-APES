@@ -12,7 +12,7 @@ def dcp_add_view(request):
         # get the raw query search placed by the user
         raw_search_query = request.GET["course_code"]
         # clean the raw search query such that spaces are resolved;
-        cleaned_search_query = ' '.join(raw_search_query.split())
+        cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
  
         # DEBUGGING: purely for testing only; omit or comment when unneeded
