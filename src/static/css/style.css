@@ -670,3 +670,39 @@ button.btn-sm {
     height: auto;
 }
 
+
+
+
+/* Searching a Class templates */
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Adjust max width as needed */
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.input-wrapper input {
+    flex: 1;
+    width: 100%;
+    padding-right: 40px; /* Ensure space for the button */
+    height: 40px; /* Adjust height to match design */
+}
+
+.search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    height: 100%;
+}

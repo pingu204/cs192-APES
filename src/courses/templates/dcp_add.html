@@ -13,14 +13,22 @@
         <div class="form-body login">
             <h1>Add a Class</h1>
             <h6>Desired Classes</h6>
-            <div class="form-row">
-                <div class="col">
+            <form method="GET">
+                <div class="form-row">
                     <label for="id_course_code">
                         {{ form.course_code.label | upper }}
                     </label>
-                    {{ form.course_code }}
+                    <div class="input-wrapper">
+                        {{ form.course_code }}
+                        <button type="submit" class="search-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
