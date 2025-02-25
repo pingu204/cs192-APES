@@ -14,22 +14,14 @@ class DesiredClassesForm(forms.Form):
     )
 
     def clean_course_code(self):
-        print("hello!")
         raw_course_code = self.cleaned_data.get("course_code")
-        course_code = (' '.join(raw_course_code.split())).upper()
-        cwd = os.path.dirname(__file__)
-    
-        # Navigate up one directory level
-        relative_path = os.path.join(cwd, '..', 'scraper', 'csv', 'courses.csv')
-        
-        # Resolve the relative path to an absolute path
-        absolute_path = os.path.abspath(relative_path)
-        courses = pd.read_csv(absolute_path)
-        # print(courses)
+        course_code = (' '.join(raw_course_code.split()))
+        path = '../src/scraper/csv/courses.csv'
+        courses = pd.read_csv(path)
         courselist = (courses["course_code"].tolist())
-        print("HEY")
-        if course_code not in courselist: # UC3-S4 
+
+        # UC3-S4
+        if (course_code.upper() not in courselist and course_code.capitalize() not in courselist) and (not any(course.startswith(course_code.upper()) for course in courselist) and not any(course.startswith(course_code.capitalize()) for course in courselist)):
             raise forms.ValidationError("Class does not exist. Try checking if the entered class code is correct.")
-            # print(messages.error(request, "Class does not exist. Try checking if the entered class code is correct."))
-            # form.error(request, "Class does not exist. Try checking if the entered class code is correct.")
+
         return course_code
