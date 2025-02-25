@@ -8,7 +8,7 @@ import os
 
 def dcp_add_view(request):
     search_results = []
-    form = DesiredClassesForm()
+    form = DesiredClassesForm(request.GET)
     # from copilot:
     # Get the current working directory (CWD)
     cwd = os.path.dirname(__file__)
@@ -23,7 +23,12 @@ def dcp_add_view(request):
 
     if request.GET.get("course_code"):
         # get the raw query search placed by the user
-        raw_search_query = request.GET["course_code"]
+        if form.is_valid():
+            print("well yes!")
+        else:
+            print("help")
+        """ raw_search_query = request.GET["course_code"]
+        print("got: " + raw_search_query)
         # clean the raw search query such that spaces are resolved;
         cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
@@ -36,7 +41,7 @@ def dcp_add_view(request):
         # pwede rin check muna if wala, i.e., cleaned_search_query in [course_code1, course_code2, ...]
         if cleaned_search_query.upper() not in courselist and cleaned_search_query.capitalize() not in courselist: # UC3-S4 
             # print("class does not exist")
-            messages.error(request, "Class does not exist. Try checking if the entered class code is correct.")
+            messages.error(request, "Class does not exist. Try checking if the entered class code is correct.") """
         # Now, we use this cleaned_search_query to match a course code! only EXACT MATCHING COURSE CODES
         # i.e. .startswith("course_code") can be used?
         ...
