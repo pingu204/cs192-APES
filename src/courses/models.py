@@ -20,3 +20,6 @@ class Course():
     course_title: str
     offering_unit: str
     units: float
+    timeslot: str
+    venue: str
+    instructor: str

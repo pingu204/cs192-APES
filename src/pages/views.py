@@ -16,7 +16,7 @@ def landing_view(request, *args, **kwargs):
 @guest_or_authenticated
 def homepage_view(request, *args, **kwargs): 
     if request.user.id == None: # Guest
-        dcp = request.session['dcp']
+        dcp = request.session['dcp'] 
 
     else: # Not a Guest
         # dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
