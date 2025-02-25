@@ -59,8 +59,13 @@
                 </ul>
                 {% endif %} -->
             </form>
-            <h6>0 RESULTS</h6>
+            <!-- <h6>0 RESULTS</h6> -->
+            {% if search_results|length == 1 %}
+            <h6>{{ search_results|length }} RESULT</h6>
+            {% else %}
             <h6>{{ search_results|length }} RESULTS</h6>
+            {% endif %}
+
             <div class="filler result-container">
                 {% for result in search_results %}
                 <div class="result-card">
