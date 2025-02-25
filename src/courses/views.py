@@ -47,6 +47,7 @@ def dcp_add_view(request):
         return redirect('homepage_view')
     
     if request.GET.get("course_code"):
+        form = DesiredClassesForm(request.GET)
         print("searched")
         # get the raw query search placed by the user
         raw_search_query = request.GET["course_code"]
@@ -64,7 +65,8 @@ def dcp_add_view(request):
             csvreader = csv.DictReader(csvfile)
             for row in csvreader:
                 # if it matches a class, then appends the whole description to search_results
-                if cleaned_search_query == row['course_code'].upper():
+                # if cleaned_search_query == row['course_code'].upper():
+                if (row['course_code'].upper()).startswith(cleaned_search_query):
                     search_results.append(row)
                     print(search_results)
                 # wala pang no class found dito
