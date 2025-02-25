@@ -29,6 +29,7 @@ def get_courses() -> list[dict[str,str]]:
 
         for row in soup[4:]: # Actual entries of the table start at index 4
             tr = row.find_all("td")
+            # print(tr)
 
             # Check if there are no classes
             if (tr[0].text != "No courses to display"):
@@ -40,6 +41,7 @@ def get_courses() -> list[dict[str,str]]:
                     }
                 )
         print(f"+ '{letter.capitalize()}' courses DONE")
+        # print(courses)
     
     return pd.DataFrame(courses)
 
@@ -57,13 +59,17 @@ def get_course_code(raw_code: str):
     return course_code.rstrip()
 
 """ Obtain units of all courses in `course_codes` from A.Y. `start` to `end` """
-def get_units(start_year:int, end_year:int, course_codes:list[str]):
+def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str]):
     # Note: start_year must be <= end_year
     # -- e.g. start_year = 2016, end_year = 2022 scrapes data from A.Y. 2016-2017 to A.Y. 2022-2023
     BASE_URL = "https://crs.upd.edu.ph/schedule/120"
 
     # Container for values
     units: dict[str, float] = {}
+    timeslot: dict[str, str] = {}
+    venue: dict[str, str] = {}
+    instructor: dict[str, str] = {}
+
     len_courses = len(course_codes)
 
     # Get the last two digits of the years
@@ -71,7 +77,8 @@ def get_units(start_year:int, end_year:int, course_codes:list[str]):
     end_year %= 100
 
     for year in range(end_year, start_year-1, -1):
-        for sem in [1, 2, 4]: # Semester Number (4 = Midyear)
+        #for sem in [1, 2, 4]: # Semester Number (4 = Midyear)
+        for sem in [2]:
             # Marker
             print(f"\n-- A.Y. {year}-{year+1}, " + (f"Sem {sem}" if sem != 4 else "Midyear") + " --")
             
@@ -94,6 +101,20 @@ def get_units(start_year:int, end_year:int, course_codes:list[str]):
                         else:
                             print(f"+ {course_code}")
                             units[course_code] = float(tr[2].text)
+
+                            # instruction, timeslot, and venue processing
+                            raw_sched_remarks = (tr[3].text)
+                            split_a = (raw_sched_remarks.split("\n"))[:-1]
+                            # DEBUGGING: print(split_a)
+
+                            raw_timeslot = (" ".join((split_a[1].split(" "))[:2]).rstrip()).replace("\t", "")
+                            raw_venue = (" ".join((split_a[1].split(" "))[3:]).rstrip()).replace("\t","")
+                            raw_instructor = (split_a[2]).replace("\t", "")
+
+                            timeslot[course_code] = raw_timeslot
+                            venue[course_code] = raw_venue
+                            instructor[course_code] = raw_instructor
+
                             course_codes.remove(course_code)
 
             if course_codes == []:
@@ -108,14 +129,17 @@ def get_units(start_year:int, end_year:int, course_codes:list[str]):
     return pd.DataFrame({
         "course_code" : list(units.keys()), 
         "units" :       list(units.values()),
+        "timeslot" : list(timeslot.values()),
+        "venue" : list(venue.values()),
+        "instructor" : list(instructor.values()),
     })
 
 if __name__ == "__main__":
     course_list = get_courses()
     print(course_list)
 
-    units_list = get_units(
-        start_year =    2011,
+    units_list = get_units_and_timeslot(
+        start_year =    2024,
         end_year =      2024, 
         course_codes =  list(set(course_list["course_code"].tolist()))[:],
     )
