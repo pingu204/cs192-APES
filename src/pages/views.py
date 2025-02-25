@@ -26,18 +26,27 @@ def homepage_view(request, *args, **kwargs):
                 course_title = "Digital Electronics",
                 offering_unit = "DCS",
                 units = 4.0,
+                timeslot = "TTh 11:30AM-1PM",
+                venue = "DCS", 
+                instructor = "TAN, WILSON",
             ),
             Course(
                 course_code = "CS 30",
                 course_title = "Discrete Mathematics I",
                 offering_unit = "DCS",
                 units = 3.0,
+                timeslot = "F 9-10AM",
+                venue = "DCS", 
+                instructor = "BUNO, KELVIN",
             ),
             Course(
                 course_code = "CS 11",
                 course_title = "Basic Programming I",
                 offering_unit = "DCS",
                 units = 3.0,
+                timeslot = "WF 1-2:30PM",
+                venue = "DCS", 
+                instructor = "ZUNIGA, NATHAN",
             ),
         ]
 

@@ -18,6 +18,10 @@ def dcp_add_view(request):
         # DEBUGGING: purely for testing only; omit or comment when unneeded
         print(f"User's cleaned query: {cleaned_search_query}")
 
+        # Primary Logic (?): if cleaned_search_query == row['course_code'] then append to search_results
+
+        # pwede rin check muna if wala, i.e., cleaned_search_query in [course_code1, course_code2, ...]
+
         # Now, we use this cleaned_search_query to match a course code! only EXACT MATCHING COURSE CODES
         # i.e. .startswith("course_code") can be used?
         ...
