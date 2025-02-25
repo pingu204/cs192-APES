@@ -134,6 +134,8 @@ def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str])
         "instructor" : list(instructor.values()),
     })
 
+
+# *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":
     course_list = get_courses()
     print(course_list)
