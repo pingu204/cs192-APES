@@ -37,6 +37,27 @@
                         </span>
                     </div>
                 </div>
+                {% if form.errors %}
+                <div class="errors">
+                    <ul class="errors-list">
+                        {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li><i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <!-- {% if messages %}
+                <ul class="errors-list">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            <i class="bi bi-exclamation-circle"></i>
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %} -->
             </form>
             <h6>0 RESULTS</h6>
             <div class="filler result-container">
