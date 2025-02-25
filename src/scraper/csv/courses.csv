@@ -3,12 +3,12 @@ AI 201,Artificial Intelligence,AIP,3.0,W 6-9PM,AECH-ERDT Rm,"NAVAL, PROSPERO; GA
 AI 211,Computational Linear Algebra for AI,AIP,3.0,F 6-9PM,AECH-CLR2,"REGONIA, PAUL ROSSENER"
 AI 212,Probability and Statistics for AI,AIP,3.0,F 6-9PM,AECH-CLR3,"VALDEZ, ADRIAN ROY; SORIANO, JAYMAR"
 AI 221,Classical Machine Learning,AIP,3.0,M 6-9PM,TBA,"DALISAY, JON DEWITT"
-AI 222,Advanced Machine Learning,AIP,3.0,S 2-3:30PM,TBA; Th 5-6:30PM lec TBA,"ATIENZA, ROWEL"
+AI 222,Advanced Machine Learning,AIP,3.0,S 2-3:30PM; Th 5-6:30PM,TBA; TBA,"ATIENZA, ROWEL"
 AI 231,Machine Learning Operations (MLOps),AIP,3.0,F 6-9PM,TBA,"REMOLONA, MIGUEL FRANCISCO"
 AI 296,Graduate Seminar,AIP,1.0,S 9-10AM,TBA,"JALAO, EUGENE REX"
 AI 299,Capstone Project in AI,AIP,3.0,T 6-9PM,TBA,"CAJOTE, RHANDLEY"
 AI 322,Reinforcement Learning,AIP,3.0,Th 6-9PM,AECH-ERDT Rm,"NAVAL, PROSPERO"
-AI 361,Autonomous Robots,AIP,3.0,S 3:30-5PM,TBA; T 5-6:30PM lec TBA,"ATIENZA, ROWEL"
+AI 361,Autonomous Robots,AIP,3.0,S 3:30-5PM; T 5-6:30PM,TBA; TBA,"ATIENZA, ROWEL"
 AI 399,Quantitative Research Methods in Al,AIP,1.0,S 10-11AM,TBA,"JALAO, EUGENE REX"
 AI 400,PhD Dissertation,AIP,3.0,F 8-11AM,TBA,"ATIENZA, ROWEL; CAJOTE, RHANDLEY; JALAO, EUGENE REX; NAVAL, PROSPERO; RAMOS, MANUEL; VALDEZ, ADRIAN ROY; REGONIA, PAUL ROSSENER; SORIANO, JAYMAR; PILARIO, KARL EZRA; DALISAY, JON DEWITT"
 ARM 211,Collection Management of Archives and Records I,SLIS,3.0,T 4-7PM,SOLAIR 6,"ISIP, JONATHAN"
@@ -76,27 +76,27 @@ Anthro 297,Seminar in Research Design and Methods,DAnthro,3.0,Th 4-7PM,TBA,"DALI
 Anthro 298,Research Methods in Physical Anthropology,DAnthro,3.0,F 4-7PM,TBA,"TAN, MICHAEL"
 Anthro 300,Master's Thesis,DAnthro,3.0,M 9AM-12PM,TBA,TBA
 Anthro 400,PhD Dissertation,DAnthro,3.0,M 9AM-12PM,TBA,TBA
-App Physics 157,Computational Analysis and Modeling in Physics,NIP,4.0,T 1-4PM,NIP R210; TTh 4-5:30PM lec NIP R211,"NIP, NIP; LIM, MAY"
-App Physics 171,Introductory Crystallography,NIP,3.0,TTh 8:30-10AM,NIP R201; TTh 5:30-6:30PM lab TBA,"MACAM, GENNEVIEVE"
-App Physics 181,Physical Electronics I,NIP,4.0,F 1-4PM,NIP R208; WF 4-5:30PM lec NIP R210,"ESTACIO, ELMER; JOQUIÑO, LORENZO GABRIEL"
+App Physics 157,Computational Analysis and Modeling in Physics,NIP,4.0,T 1-4PM; TTh 4-5:30PM,NIP R210; NIP R211,"NIP, NIP; LIM, MAY"
+App Physics 171,Introductory Crystallography,NIP,3.0,TTh 8:30-10AM; TTh 5:30-6:30PM,NIP R201; TBA,"MACAM, GENNEVIEVE"
+App Physics 181,Physical Electronics I,NIP,4.0,F 1-4PM; WF 4-5:30PM,NIP R208; NIP R210,"ESTACIO, ELMER; JOQUIÑO, LORENZO GABRIEL"
 App Physics 199,Undergraduate Research,NIP,3.0,TBA,,"BANZON, RONALD"
 App Physics 200,Undergraduate Thesis,NIP,3.0,TBA,,"BANTANG, JOHNROB"
 Arch 3,Architectural Communication III: Architectural Presentation Techniques,Arch,3.0,TTh 8AM-12:30PM,B1-Studio Lab 3,"GOZON, PATRICK ANDREW"
 Arch 5,Architectural Communication V: Digital Visualization in Architecture,Arch,2.0,S 9AM-3:30PM,B2-107 CAD Lab,"MANALANG, RINGER"
 Arch 16,"History, Theory and Criticism I: Introduction to Architecture",Arch,2.0,F 10AM-12PM,B2-106A,"GINES, LEONIDO"
 Arch 18,"History, Theory and Criticism III: Architecture of Asia and the Pacific",Arch,2.0,W 10AM-12PM,B2-106A,"LUNA, MARKEL CESAR"
-Arch 20,Architectural Design II:  Design and Intra-personal Spaces,Arch,2.0,Th 4:30-6:30PM,B1-Studio Lab 1; T 4:30-6:30PM lab B2-101,"ARANETA, MAUREEN ANNE"
-Arch 22,Architectural Design IV: Design and Social Space,Arch,3.0,W 4:30-9PM,B2-103A; F 4:30-9PM lab TBA,"BULAONG, CARMEN BETTINA"
+Arch 20,Architectural Design II:  Design and Intra-personal Spaces,Arch,2.0,Th 4:30-6:30PM; T 4:30-6:30PM,B1-Studio Lab 1; B2-101,"ARANETA, MAUREEN ANNE"
+Arch 22,Architectural Design IV: Design and Social Space,Arch,3.0,W 4:30-9PM; F 4:30-9PM,B2-103A; TBA,"BULAONG, CARMEN BETTINA"
 Arch 23,Building Construction I: Materials of Building Technology,Arch,3.0,TTh 1:30-4PM,B2-101,"DE LEON, RUBY TERESA"
-Arch 32,"Architectural Design VI: Architecture, Technology and the Environment",Arch,3.0,T 4:30-9PM,B2-102; Th 4:30-9PM lab TBA,"BALANE, RONALD"
-Arch 33,Building Construction III: Heavy Frame Construction,Arch,3.0,F 1-5:30PM,B1-Studio Lab 2; W 1-5:30PM lec B2-106,"BELGA, MARIE EDRALINE"
+Arch 32,"Architectural Design VI: Architecture, Technology and the Environment",Arch,3.0,T 4:30-9PM; Th 4:30-9PM,B2-102; TBA,"BALANE, RONALD"
+Arch 33,Building Construction III: Heavy Frame Construction,Arch,3.0,F 1-5:30PM; W 1-5:30PM,B1-Studio Lab 2; B2-106,"BELGA, MARIE EDRALINE"
 Arch 35,Utilities I: Plumbing and Sanitary Services in Buildings,Arch,3.0,S 9AM-12PM,B2-105,"MEONADA, JOSE MARI"
 Arch 55,Design with Nature: Tropical Design,Arch,2.0,T 10AM-12PM,B2-105A,"CHUA, JOHANNES VINCENT"
 Arch 75,Architectural Research: Basic Research Methods in Architecture,Arch,2.0,W 10AM-12PM,B2-104,"DUQUE, DUCHESS ALEKSEI"
 Arch 105,Architectural Communication VII: Theory of Color,Arch,3.0,TTh 10:30AM-12PM,B2-101,"DE LEON, RUBY TERESA"
 Arch 134,Building Construction IV: Building Systems and Technology,Arch,3.0,TTh 1:30-4PM,B2-106,"SANTOS, FREDERICK"
 Arch 140,Utilities VI: Utilities for Building Interiors,Arch,3.0,TTh 10:30AM-12PM,B2-106A,"MANALOTO, JOHN ARVIN"
-Arch 142,Architectural Design VIII: Integrative Design Project II,Arch,4.0,Th 4:30-9PM,B2-102; T 4:30-9PM lab TBA,"DEL CASTILLO, NICOLO PRECIOSO"
+Arch 142,Architectural Design VIII: Integrative Design Project II,Arch,4.0,Th 4:30-9PM; T 4:30-9PM,B2-102; TBA,"DEL CASTILLO, NICOLO PRECIOSO"
 Arch 147,Utilities IV: Architectural Acoustics,Arch,3.0,TTh 10AM-12:30PM,B2-104,"RINEN, RICHARD MARTIN"
 Arch 149,Utilities VIII: Environmental Acoustics,Arch,3.0,TTh 10:30AM-12PM,B2-102,"ABAYA, ERNESTO"
 Arch 162,Planning and Urban Design III: Introduction to Urban and Regional Planning,Arch,3.0,WF 1-2:30PM,B2-104,"BARIA, RICHELLE RHEA"
@@ -107,7 +107,7 @@ Archi 201,Architecture and Landscape Architecture Theories,Arch,3.0,Th 6-9PM,TBA
 Archi 202,Foundations of Qualitative Research in the Designed and Built Environment,Arch,3.0,Th 6:30-9:30PM,B2-101,"BULAONG, CARMEN BETTINA"
 Archi 203,Foundations of Quantitative Research in the Designed and Built Environment,Arch,3.0,Th 6-9PM,BSP Auditorium,"ABAYA, ERNESTO"
 Archi 210,Writings and Precedents in Architecture and Landscape Architecture,Arch,3.0,S 1-4PM,B2-106,"ARANETA, MAUREEN ANNE"
-Archi 211,Studio Topic ,Arch,4.0,M 6-9PM,B2-106A; T 6-9PM lab TBA,"GINES, LEONIDO"
+Archi 211,Studio Topic ,Arch,4.0,M 6-9PM; T 6-9PM,B2-106A; TBA,"GINES, LEONIDO"
 Archi 231,Urban Design Principles,Arch,3.0,S 9AM-12PM,B2-106,"ARANETA, MAUREEN ANNE"
 Archi 232,Environmental Issues in Urban Design,Arch,3.0,W 6-9PM,B2-102,"DE LEON, RUBY TERESA; MANALANG, JO JERICO"
 Archi 233,Housing and Real Estate Development Issues in Urban Design,Arch,3.0,W 6-9PM,B2-101,"INTALAN, LAWRENCE"
@@ -258,15 +258,15 @@ BIO 191,Systematics and Evolution  ,IB,3.0,WF 3-4PM,IB 345,"LUCZON, ADRIAN; UY-Y
 BIO 193,Evolutionary Ecology,IB,3.0,WF 8:30-10AM,IB 2000B,"RODRIGUEZ, LILLIAN JENNIFER; MATIAS, AMBROCIO MELVIN"
 BIO 196,Undergraduate Seminar,IB,1.0,T 6-7PM,IB 2000A,"VELARDE, MICHAEL"
 BIO 200,Undergraduate Thesis,IB,1.0,TBA,,"MATIAS, AMBROCIO MELVIN"
-BIO 220,Chemical Physiology,IB,3.0,Th 11:30AM-2:30PM,IB 321; T 12-2PM lec IB 321,"BUHIAN, WILLIAM PATRICK; OROZCO, ZENITH GAYE"
-BIO 224,Stress Physiology,IB,3.0,Th 8:30-11:30AM,IB 321; T 9-11AM lec IB 321,"CATAP, ELENA; DELFIN, JAY"
+BIO 220,Chemical Physiology,IB,3.0,Th 11:30AM-2:30PM; T 12-2PM,IB 321; IB 321,"BUHIAN, WILLIAM PATRICK; OROZCO, ZENITH GAYE"
+BIO 224,Stress Physiology,IB,3.0,Th 8:30-11:30AM; T 9-11AM,IB 321; IB 321,"CATAP, ELENA; DELFIN, JAY"
 BIO 230,Differentiation in Embryonic Systems,"IB, IB",3.0,WF 11:30AM-1PM,IB 2000A,"ACEBEDO, ALVIN; BASCOS, ERIKA MARIE"
-BIO 240,Advanced Genetics,IB,3.0,W 2:30-5:30PM,IB 155; F 3-5PM lec IB 155,"QUILANG, JONAS; SANTOS, NICK RAINIER"
-BIO 241,Advanced Molecular Genetics,IB,3.0,Th 2:30-5:30PM,IB 345; T 3-5PM lec IB 2000B,"SANTOS, NICK RAINIER; SANCHEZ, LIBERTINE ROSE"
+BIO 240,Advanced Genetics,IB,3.0,W 2:30-5:30PM; F 3-5PM,IB 155; IB 155,"QUILANG, JONAS; SANTOS, NICK RAINIER"
+BIO 241,Advanced Molecular Genetics,IB,3.0,Th 2:30-5:30PM; T 3-5PM,IB 345; IB 2000B,"SANTOS, NICK RAINIER; SANCHEZ, LIBERTINE ROSE"
 BIO 243,Population Genetics,IB,3.0,WF 1-2:30PM,IB 155,"MATIAS, AMBROCIO MELVIN"
 BIO 250,Advanced Cell and Molecular Biology,IB,3.0,T 2:30-5:30PM,IB 155,"IBANA, JOYCE; VELARDE, MICHAEL; LOZANO, JAVIER"
-BIO 260,Advanced Ecology,IB,3.0,F 8:30-11:30AM,IB 118; W 9-11AM lec IB 118,"SALMO, SEVERINO"
-BIO 262,Freshwater Ecology,IB,3.0,S 7-10AM,IB 155; S 10AM-12PM lec IB 155,"MAGBANUA, FRANCIS"
+BIO 260,Advanced Ecology,IB,3.0,F 8:30-11:30AM; W 9-11AM,IB 118; IB 118,"SALMO, SEVERINO"
+BIO 262,Freshwater Ecology,IB,3.0,S 7-10AM; S 10AM-12PM,IB 155; IB 155,"MAGBANUA, FRANCIS"
 BIO 265,Advanced Biogeography,IB,3.0,TTh 2:30-4PM,IB 119,"DUYA, MARIANO ROY"
 BIO 281,Experimental Design and Statistical Analysis,IB,3.0,W 2:30-5:30PM,IB 2000B,"RODRIGUEZ, LILLIAN JENNIFER; MATIAS, AMBROCIO MELVIN"
 BIO 296,Seminar,IB,1.0,T 9-10AM,IB 155,"IBANA, JOYCE"
@@ -340,8 +340,8 @@ CE 25,Mathematical Methods in Civil Engineering II,ICE,0.0,F 8-10AM,TBA,CONCEALE
 CE 29,Probability and Statistics for Engineering,ICE,3.0,TTh 11:30AM-1PM,TBA,CONCEALED
 CE 31,Construction Materials,ICE,0.0,F 8-10AM,TBA,CONCEALED
 CE 41,Construction Plans,ICE,2.0,F 1-3PM,TBA,CONCEALED
-CE 115,Water Resources and Coastal Engineering I,ICE,4.0,Th 11:30AM-2:30PM,TBA; T 11:30AM-2:30PM lec TBA,CONCEALED
-CE 116,Water Resources and Coastal Engineering II,ICE,3.0,S 7-9AM,TBA; S 9AM-12PM lab TBA,CONCEALED
+CE 115,Water Resources and Coastal Engineering I,ICE,4.0,Th 11:30AM-2:30PM; T 11:30AM-2:30PM,TBA; TBA,CONCEALED
+CE 116,Water Resources and Coastal Engineering II,ICE,3.0,S 7-9AM; S 9AM-12PM,TBA; TBA,CONCEALED
 CE 123,Construction Engineering and Management I ,ICE,3.0,M 4-7PM,TBA,CONCEALED
 CE 124,Construction Engineering and Management II,ICE,3.0,F 7-9AM,TBA,CONCEALED
 CE 130,Elements of Environmental and Energy Engineering,ICE,3.0,TTh 8:30-10AM,TBA,CONCEALED
@@ -355,10 +355,10 @@ CE 162,Geotechnical Engineering I ,ICE,0.0,T 8-10AM,TBA,CONCEALED
 CE 163,Geotechnical Engineering II,ICE,3.0,S 9AM-12PM,TBA,CONCEALED
 CE 164,Geotechnical Engineering III,ICE,3.0,WF 4-5:30PM,TBA,CONCEALED
 CE 190,Seminar and Research Methods in Civil Engineering,ICE,1.0,F 1-4PM,TBA,CONCEALED
-CE 196,Civil Engineering Design Project,ICE,3.0,S 7AM-1PM,TBA; M 12-1PM lec TBA,CONCEALED
+CE 196,Civil Engineering Design Project,ICE,3.0,S 7AM-1PM; M 12-1PM,TBA; TBA,CONCEALED
 CE 197,Special Topics,ICE,3.0,M 1-4PM,TBA,CONCEALED
 CE 198,Special Problems,ICE,3.0,TTh 1-2:30PM,TBA,CONCEALED
-CE 199,Undergraduate Research Project,ICE,3.0,F 1-2PM,TBA; WF 2:30-5:30PM lab TBA,CONCEALED
+CE 199,Undergraduate Research Project,ICE,3.0,F 1-2PM; WF 2:30-5:30PM,TBA; TBA,CONCEALED
 CE 201,Matrix Theory of Structures,ICE,3.0,T 6-9PM,TBA,CONCEALED
 CE 211,Free Surface Flow,ICE,3.0,Th 4-7PM,TBA,CONCEALED
 CE 213,Advanced Hydrology,ICE,3.0,T 1-4PM,TBA,CONCEALED
@@ -370,7 +370,7 @@ CE 249,Planning and Design of Transportation Facilities,ICE,3.0,Th 6-9PM,TBA,CON
 CE 250,Pre-Stressed Concrete,ICE,3.0,Th 6-9PM,TBA,CONCEALED
 CE 252,Design of Metal Structures,ICE,3.0,W 6-9PM,TBA,CONCEALED
 CE 255,Theory of Plates and Shells,ICE,3.0,Th 4-7PM,TBA,CONCEALED
-CE 260,Soil and Rock Testing,ICE,3.0,S 9-10AM,TBA; S 10AM-4PM lab TBA,CONCEALED
+CE 260,Soil and Rock Testing,ICE,3.0,S 9-10AM; S 10AM-4PM,TBA; TBA,CONCEALED
 CE 261,Soil and Rock Mechanics,ICE,3.0,F 6-9PM,TBA,CONCEALED
 CE 266,Earth Structures,ICE,3.0,M 6-9PM,TBA,CONCEALED
 CE 269,Ground Improvement Techniques,ICE,3.0,T 6-9PM,TBA,CONCEALED
@@ -425,7 +425,7 @@ CRes 197,Special Topics in Communication Research,DCRes,3.0,Th 9AM-12PM,A 201,"R
 CRes 200,Undergraduate Thesis,DCRes,3.0,M 4-7PM,TBA,"PARAGAS, FERNANDO"
 CS 10,Introduction to Computing,DCS,3.0,TTh 10-11:30AM,AECH-Seminar Room,"FERIA, ROMMEL"
 CS 11,Computer Programming I,"DCS, EEEI",3.0,Th 8-10AM,AECH-Accenture Rm,"BELTRAN, JEROME CARY"
-CS 12,Computer Programming II,"DCS, EEEI",3.0,T 10-11AM,AECH-Accenture Rm; M 1-2PM lec AECH-Accenture Rm,"CORONEL, JUAN FELIPE"
+CS 12,Computer Programming II,"DCS, EEEI",3.0,T 10-11AM; M 1-2PM,AECH-Accenture Rm; AECH-Accenture Rm,"CORONEL, JUAN FELIPE"
 CS 20,Digital Electronics and Circuits,DCS,3.0,M 8-10AM,AECH-Accenture Rm,"ADDAWE, JOZELLE"
 CS 21,Computer Organization and Architecture,DCS,4.0,WF 11:30AM-1PM,AECH-Accenture Rm,"CORONEL, JUAN FELIPE"
 CS 30,Discrete Mathematics for Computer Science I,DCS,3.0,TTh 2:30-4PM,AECH-CLR1,"JUAYONG, RICHELLE ANN"
@@ -442,7 +442,7 @@ CS 173,Topics in Software Technology,DCS,3.0,TTh 1-2:30PM,AECH-Seminar Room,"TAN
 CS 175,Topics in Computational Science,DCS,3.0,TTh 5:30-7PM,AECH-CLR3,"CAPULONG, RIZALDY"
 CS 176,Topics in Intelligent Systems,DCS,3.0,TTh 8:30-10AM,AECH-CLR4,"RAQUEL, CARLO"
 CS 180,Artificial Intelligence,DCS,3.0,TTh 8:30-10AM,AECH-CLR3,"GABUD, ROSELYN"
-CS 192,Software Engineering II,DCS,3.0,Th 7-10AM,AECH-CLR1; T 8-10AM lec AECH-CLR1,"FIGUEROA, LIGAYA LEAH"
+CS 192,Software Engineering II,DCS,3.0,Th 7-10AM; T 8-10AM,AECH-CLR1; AECH-CLR1,"FIGUEROA, LIGAYA LEAH"
 CS 194,Undergraduate Research Seminar,DCS,1.0,M 5-6PM,AECH-Accenture Rm,"VILLAR, JOHN JUSTINE"
 CS 196,Seminar on Ethical and Professional Issues in Computing,DCS,1.0,Th 9-10AM,AECH-ERDT Rm,"FERIA, ROMMEL"
 CS 197,Special Topics,DCS,3.0,F 6-9PM,AECH-ERDT Rm,"FESTIN, CEDRIC ANGELO"
@@ -459,22 +459,22 @@ CS 297,Special Topics,DCS,3.0,S 7-10AM,TBA,"FERIA, ROMMEL; FIGUEROA, LIGAYA LEAH
 CS 298,Special Problem,DCS,3.0,S 4-7PM,TBA,"ADORNA, HENRY; NAVAL, PROSPERO; PANCHO, SUSAN"
 CS 300,Thesis,DCS,3.0,S 10AM-1PM,TBA,"FESTIN, CEDRIC ANGELO"
 CS 400,Dissertation,DCS,3.0,S 7-10AM,TBA,TBA
-CT 108.1,Management in the Garment Industry II,CTID,4.0,WF 1-2PM,CIDL 135; WF 2-5PM lab CIDL 135,"MARISTELA, CANDY MAE"
-CT 109,Quality Control in Textiles and Apparel,CTID,3.0,WF 9:30-10:30AM,CIDL 135; WF 10:30AM-12PM lab CIDL 135,"MALVAR, ASTRUD"
-CT 117.1,Pattern Drafting and Grading II,CTID,4.0,TTh 8-8:30AM,CIDL 135; TTh 8:30AM-1PM lab CIDL 135,"RAYALA, MARIA MONICA"
+CT 108.1,Management in the Garment Industry II,CTID,4.0,WF 1-2PM; WF 2-5PM,CIDL 135; CIDL 135,"MARISTELA, CANDY MAE"
+CT 109,Quality Control in Textiles and Apparel,CTID,3.0,WF 9:30-10:30AM; WF 10:30AM-12PM,CIDL 135; CIDL 135,"MALVAR, ASTRUD"
+CT 117.1,Pattern Drafting and Grading II,CTID,4.0,TTh 8-8:30AM; TTh 8:30AM-1PM,CIDL 135; CIDL 135,"RAYALA, MARIA MONICA"
 CT 118,Clothing Merchandising I,CTID,3.0,TTh 2:30-4PM,CIDL 132,"CAPUCHINO, JESSON PERCIVAL"
 CT 171.1,Practicum II,CTID,6.0,S 7AM-5PM,TBA,"MARISTELA, CANDY MAE"
 CT 171.2,Practicum III,CTID,3.0,M 7-10AM,TBA,"RAYALA, MARIA MONICA; QUIÑOLA, KIM AGATHA"
 CT 197,Special Topics in Textiles,CTID,3.0,M 1-4PM,CHE MB 202,"CARAGAY, KRISTYN"
 CT 200,Undergraduate Thesis,CTID,3.0,TBA,,"MARISTELA, CANDY MAE"
-CTRA 13,Art in Daily Living,CTID,3.0,TTh 9:30-10:30AM,CIDL 132; TTh 10:30AM-12PM lab CIDL 132,"CAPUCHINO, JESSON PERCIVAL"
-CTRA 17,Fundamentals of Clothing Construction,CTID,3.0,TTh 8:30-9AM,CIDL 131; TTh 9AM-12PM lab CIDL 131,"MARTINEZ, JAN PAUL"
-CTech 12,Textile Fibers to Fabrics,CTID,3.0,WF 9-10AM,CIDL 132; WF 10-11:30AM lab CIDL Basement,"AURELIO, PATRICIA SYBIL"
-CTech 13,Basic Clothing Production,CTID,3.0,TTh 1:30-2PM,CIDL 135; TTh 2-5PM lab CIDL 135,"MARTINEZ, JAN PAUL"
+CTRA 13,Art in Daily Living,CTID,3.0,TTh 9:30-10:30AM; TTh 10:30AM-12PM,CIDL 132; CIDL 132,"CAPUCHINO, JESSON PERCIVAL"
+CTRA 17,Fundamentals of Clothing Construction,CTID,3.0,TTh 8:30-9AM; TTh 9AM-12PM,CIDL 131; CIDL 131,"MARTINEZ, JAN PAUL"
+CTech 12,Textile Fibers to Fabrics,CTID,3.0,WF 9-10AM; WF 10-11:30AM,CIDL 132; CIDL Basement,"AURELIO, PATRICIA SYBIL"
+CTech 13,Basic Clothing Production,CTID,3.0,TTh 1:30-2PM; TTh 2-5PM,CIDL 135; CIDL 135,"MARTINEZ, JAN PAUL"
 CTech 21,European and North American Clothing,CTID,3.0,WF 1-2:30PM,CIDL 132,"AURELIO, PATRICIA SYBIL"
-CTech 41,Philippine Clothing and Textiles,CTID,3.0,TTh 2:30-3:30PM,CIDL 131; TTh 3:30-5PM lab CIDL 131,"QUIÑOLA, KIM AGATHA"
-CTech 104,Fashion Design,CTID,3.0,WF 1-2PM,CHE MB 202; WF 2-3:30PM lab CHE MB 203,"CARAGAY, KRISTYN"
-CTech 114,Technical Apparel Design,CTID,3.0,WF 9-10AM,CIDL 133; WF 10-11:30AM lab CIDL 133,"QUIÑOLA, KIM AGATHA"
+CTech 41,Philippine Clothing and Textiles,CTID,3.0,TTh 2:30-3:30PM; TTh 3:30-5PM,CIDL 131; CIDL 131,"QUIÑOLA, KIM AGATHA"
+CTech 104,Fashion Design,CTID,3.0,WF 1-2PM; WF 2-3:30PM,CHE MB 202; CHE MB 203,"CARAGAY, KRISTYN"
+CTech 114,Technical Apparel Design,CTID,3.0,WF 9-10AM; WF 10-11:30AM,CIDL 133; CIDL 133,"QUIÑOLA, KIM AGATHA"
 CW 10,Creative Writing for Beginners,DECL,3.0,TTh 10-11:30AM,CAL 311,"CARDOSO, ALEXANDRA MAY"
 CW 100,Introduction to Creative Writing,DECL,3.0,TTh 8:30-10AM,PAV 1214,"FLORES, EMIL FRANCIS"
 CW 101,Creative Writing and Criticism,DECL,3.0,TTh 2:30-4PM,PAV 1214,"MANALO, PAOLO MARKO"
@@ -562,7 +562,7 @@ Chem 154,Physical Chemistry of Real Systems,IC,3.0,TTh 11:30AM-1PM,IC 307-308,"N
 Chem 200,Undergraduate Thesis,IC,2.0,TBA,,"YAGO, ALLAN CHRISTOPHER"
 Chem 203,Environmental Chemistry,IC,3.0,WF 4-5:30PM,IC 305-306,"VALERA, FLORENDA"
 Chem 211,Systematic Inorganic Chemistry,IC,3.0,TTh 4-5:30PM,IC 305-306,"CONATO, MARLON"
-Chem 214,Inorganic Synthesis,IC,4.0,M 10AM-4PM,IC 324-325; M 5-7PM lec IC 305-306,"SOROLLA, MAURICE"
+Chem 214,Inorganic Synthesis,IC,4.0,M 10AM-4PM; M 5-7PM,IC 324-325; IC 305-306,"SOROLLA, MAURICE"
 Chem 220,Instrumental Methods of Analysis,IC,3.0,TTh 4-5:30PM,TBA,TBA
 Chem 223,Theoretical Analytical Chemistry,IC,3.0,WF 4-5:30PM,TBA,TBA
 Chem 224,Aquatic Chemistry,IC,3.0,WF 4-5:30PM,TBA,TBA
@@ -586,11 +586,11 @@ Chem 394,Research Seminar in Biochemistry,IC,1.0,M 4-5PM,IC 205-206,"TAN, ROGER"
 Chem 395,Research Seminar in Physical Chemistry,IC,1.0,M 4-5PM,IC 205-206,"NUESCA, GUILLERMO"
 Chem 400,Ph.D. Dissertation,IC,3.0,TBA,,"LAMORENA, RHEO"
 ChemE 2,Elementary Chemical Engineering ,DChE,3.0,TTh 7-8:30AM,MH 317,CONCEALED
-ChemE 102,Chemical Engineering Process Analysis II ,DChE,3.0,Th 7-10AM,MH 321; T 8-10AM lec MH 321,CONCEALED
-ChemE 105,Mathematical Methods in Chemical Engineering I,DChE,3.0,Th 7-10AM,MH 511-513; T 8-10AM lab MH 511-513,CONCEALED
+ChemE 102,Chemical Engineering Process Analysis II ,DChE,3.0,Th 7-10AM; T 8-10AM,MH 321; MH 321,CONCEALED
+ChemE 105,Mathematical Methods in Chemical Engineering I,DChE,3.0,Th 7-10AM; T 8-10AM,MH 511-513; MH 511-513,CONCEALED
 ChemE 122,Chemical Engineering Thermodynamics I ,DChE,3.0,WF 10-11:30AM,ICE 402,CONCEALED
 ChemE 123,Chemical Engineering Thermodynamics II ,DChE,3.0,TTh 7-8:30AM,TBA,CONCEALED
-ChemE 130,Process Fluid Systems ,DChE,3.0,Th 11:30AM-2:30PM,MH 317; T 12-2PM lec MH 317,CONCEALED
+ChemE 130,Process Fluid Systems ,DChE,3.0,Th 11:30AM-2:30PM; T 12-2PM,MH 317; MH 317,CONCEALED
 ChemE 131,Thermal Systems ,DChE,3.0,TTh 11:30AM-1PM,MH 309-311,CONCEALED
 ChemE 133,Separation Processes II ,DChE,3.0,TTh 7-8:30AM,MH 313-315,CONCEALED
 ChemE 136,Special Projects Laboratory ,DChE,2.0,F 7AM-1PM,ChE Lab,"MUNOZ, JOSE; ROXAS, RICARDO"
@@ -599,7 +599,7 @@ ChemE 145,Chemical Plant and Process Economics ,DChE,2.0,TTh 10AM-12PM,P&G,CONCE
 ChemE 147,Chemical Engineering Plant Design ,DChE,0.0,M 11AM-1PM,P&G,"TOMACRUZ, JAN GORAN"
 ChemE 170,Introduction to Bioprocess Engineering,DChE,3.0,TTh 1-2:30PM,MH 301-303,CONCEALED
 ChemE 191,Chemical Process Industries,DChE,2.0,Th 10AM-4PM,TBA,CONCEALED
-CoE 111,Advanced Digital Design,EEEI,3.0,W 4-6PM,EEEI 307; F 4-7PM lab EEEI 428,"GALAPON, FREDRICK ANGELO"
+CoE 111,Advanced Digital Design,EEEI,3.0,W 4-6PM; F 4-7PM,EEEI 307; EEEI 428,"GALAPON, FREDRICK ANGELO"
 CoE 161,Introduction to Information and Complexity,EEEI,3.0,W 7-10AM,EEEI 120,"ALARCON, LOUIS"
 CoE 163,Computing Architectures and Algorithms,EEEI,3.0,WF 11:30AM-1PM,EEEI LC1,"AUSTRIA, ISABEL"
 CoE 164,Computing Platforms,EEEI,1.0,F 2:30-5:30PM,EEEI 308,"DIZON, CARL"
@@ -643,7 +643,7 @@ D 196,Design Management ,VC,3.0,WF 11:30AM-2:30PM,TBA,"CONSTANTINO, NINA ELISA"
 D 197,Special Topics in Industrial Design ,VC,3.0,TTh 2:30-5:30PM,TBA,"BITANTES, REDEMPTOR"
 D 200,Industrial Design Thesis,VC,3.0,TTh 10-11:30AM,TBA,"CONSTANTINO, NINA ELISA"
 DBE 303,Advanced Quantitative Research in the Designed and Built Environment,Arch,3.0,W 6-9PM,B2-IGP,"ABAYA, ERNESTO"
-DBE 311,Advanced Studio Topic ,Arch,4.0,S 9AM-12PM,B2-103; M 6-9PM lab B2-103,"DE VIANA, LORELEI"
+DBE 311,Advanced Studio Topic ,Arch,4.0,S 9AM-12PM; M 6-9PM,B2-103; B2-103,"DE VIANA, LORELEI"
 DBE 397,Advanced Special Topics ,Arch,3.0,M 6-9PM,B2-104,"BULAONG, CARMEN BETTINA"
 DBE 400,Dissertation,Arch,6.0,TBA,,TBA
 DE 202,Economic Analysis II,SE,3.0,WF 4-5:30PM,TBA,"MAGNO, MARIA CIELO"
@@ -652,7 +652,7 @@ DE 253,Project Analysis and Evaluation,SE,3.0,F 1-4PM,TBA,"MONSOD, TOBY MELISSA"
 DE 291,"Growth, Poverty and Institutions",SE,3.0,M 1-4PM,TBA,"ESTUDILLO, JONNA"
 DE 292,Program Evaluation,SE,3.0,W 8-11AM,TBA,"KING, ELIZABETH; OVER, ARTHUR"
 DE 298,Special Problems in Development Economics,SE,3.0,M 5-8PM,TBA,"RAMOS, VINCENT JERALD"
-DRMAPS,"Disaster Risk Mitigation, Adaptation, and Preparedness Strategies",ICE,3.0,TTh 10-11:30AM,TBA; TTh 11:30AM-1PM lec TBA,"ZARCO, MARK ALBERT"
+DRMAPS,"Disaster Risk Mitigation, Adaptation, and Preparedness Strategies",ICE,3.0,TTh 10-11:30AM; TTh 11:30AM-1PM,TBA; TBA,"ZARCO, MARK ALBERT"
 DS 301,Foundations of Data Science,"DSP-Engg, Stat-BGC, DSP-CS, Stat",3.0,TTh 5:30-7PM,Dean's Conf Room,"TAPANG, GIOVANNI"
 DS 396,Graduate Seminar,"Stat, Stat-BGC, DSP-Engg, DSP-CS",1.0,M 5-6PM,Dean's Conf Room,"TAPANG, GIOVANNI"
 DS 397,Special Topics in Data Science,"DSP-Engg, Stat, Stat-BGC, DSP-CS",3.0,F 5-8PM,CSRC Lab 4,"TAPANG, GIOVANNI"
@@ -667,7 +667,7 @@ Demo 297.2,Seminar in Population and Development II,PopIns,3.0,M 4-7PM,PH 230,"I
 Demo 298,Applied Population Research,PopIns,3.0,Th 4-7PM,PH 330,"CRUZ, GRACE; IGNACIO, JOSE ANDRES"
 Demo 299,Research Methods in Demography,PopIns,3.0,M 5-8PM,PH 330,"LAGUNA, ELMA"
 Demo 300,Master's Thesis,PopIns,6.0,M 9AM-12PM,TBA,TBA
-ECE 117,Instrumentation Electronics,EEEI,3.0,S 11:30AM-1:30PM,EEEI 422; S 2:30-5:30PM lab EEEI 228,"MARTINEZ, PHILIP"
+ECE 117,Instrumentation Electronics,EEEI,3.0,S 11:30AM-1:30PM; S 2:30-5:30PM,EEEI 422; EEEI 228,"MARTINEZ, PHILIP"
 ECE 161,Digital Signal Processing,EEEI,3.0,TTh 8:30-10AM,EEEI LC2,"CAJOTE, RHANDLEY"
 ECE 163,Communication Electronics,EEEI,3.0,TTh 1-2:30PM,EEEI LC2,"CO, PAUL JASON"
 ECE 164,Communication Circuits and Signal Processing Laboratory,EEEI,1.0,F 1-4PM,EEEI 305,"DECENA, BERNALYN"
@@ -843,7 +843,7 @@ EDUC 111,Play in the Learning Process,DCI,3.0,WF 8:30-10AM,ED 206A,"ALIPUSTAIN, 
 EDUC 180,Student Teaching,DCI,8.0,MTWThF 7AM-12PM,TBA,"VIDAL, LUTZE-SOL"
 EDUC 181,Senior Seminar,DCI,2.0,F 3-5PM,TBA,"VIDAL, LUTZE-SOL"
 EDUC 186,Approaches to Values Education,DCI,3.0,TTh 11:30AM-1PM,TBA,"MUEGA, MICHAEL ARTHUS"
-EDUC 190,Computers in Education,"DCI, DELPS",3.0,S 12:30-4:30PM,TBA; S 5-8PM lec TBA,TBA
+EDUC 190,Computers in Education,"DCI, DELPS",3.0,S 12:30-4:30PM; S 5-8PM,TBA; TBA,TBA
 EDUC 193,Action Research in the Classroom,DCI,3.0,WF 1-2:30PM,ED FLOUNGE,TBA
 EDUC 280,Practicum in Teaching,DCI,3.0,W 5:30-8:30PM,TBA,"CALINGASAN, LORINA"
 EDUC 293,Research Designs and Techniques Applied to Education,"DELPS, DCI",3.0,F 5:30-8:30PM,TBA,"JOAQUIN, MA. NYMPHA"
@@ -858,16 +858,16 @@ EE 164,Power Electronics and Electric Machines Laboratory,EEEI,1.0,F 1-4PM,EEEI 
 EE 197,Special Topics in Electrical Engineering,EEEI,3.0,WF 8:30-10AM,EEEI 420,"TRIA, LEW ANDREW"
 EE 198,Special Problems in Electrical Engineering,EEEI,5.0,S 10AM-1PM,TBA,CONCEALED
 EE 199,Special Projects in Electrical Engineering,EEEI,3.0,M 5:30-8:30PM,TBA,CONCEALED
-EE 212,Linear System Theory,EEEI,3.0,M 6-8PM,EEEI 420; W 6-9PM lab EEEI 305,"RAMOS, MANUEL"
-EE 227,Modern VLSI Design,EEEI,3.0,T 6-8PM,EEEI 307; F 6-9PM lab EEEI 308,"BALLESIL-ALVAREZ, ANASTACIA"
+EE 212,Linear System Theory,EEEI,3.0,M 6-8PM; W 6-9PM,EEEI 420; EEEI 305,"RAMOS, MANUEL"
+EE 227,Modern VLSI Design,EEEI,3.0,T 6-8PM; F 6-9PM,EEEI 307; EEEI 308,"BALLESIL-ALVAREZ, ANASTACIA"
 EE 229,RF Integrated Circuit Design,EEEI,3.0,T 7-10AM,EEEI 120,"ALARCON, LOUIS"
-EE 233,Digital Control Systems Design,EEEI,3.0,T 6-8PM,EEEI 420; Th 6-9PM lab EEEI 305,"RAMOS, MANUEL"
+EE 233,Digital Control Systems Design,EEEI,3.0,T 6-8PM; Th 6-9PM,EEEI 420; EEEI 305,"RAMOS, MANUEL"
 EE 245,Advanced Theory of Electrical Machines,EEEI,3.0,M 6-9PM,EEEI 307,"GALLANO, RUSSEL JOHN"
-EE 256,Power System Protection,EEEI,3.0,S 11:30AM-2:30PM,EEEI 329; M 6-8PM lec EEEI 429,"MALQUISTO, BIENVENIDO"
-EE 256,Power System Protection,EEEI,3.0,S 11:30AM-2:30PM,EEEI 329; M 6-8PM lec EEEI 429,"MALQUISTO, BIENVENIDO"
+EE 256,Power System Protection,EEEI,3.0,S 11:30AM-2:30PM; M 6-8PM,EEEI 329; EEEI 429,"MALQUISTO, BIENVENIDO"
+EE 256,Power System Protection,EEEI,3.0,S 11:30AM-2:30PM; M 6-8PM,EEEI 329; EEEI 429,"MALQUISTO, BIENVENIDO"
 EE 265,Advanced Computer Architecture,EEEI,3.0,W 6-9PM,EEEI 307,"CHUA, ADELSON"
 EE 269,Digital Systems Testing,EEEI,3.0,Th 6-9PM,EEEI 307,"BALLESIL-ALVAREZ, ANASTACIA"
-EE 283,DIGITAL  IMAGE  PROCESSING,EEEI,3.0,W 6-8PM,EEEI 422; Th 6-9PM lab EEEI 301,"CAJOTE, RHANDLEY"
+EE 283,DIGITAL  IMAGE  PROCESSING,EEEI,3.0,W 6-8PM; Th 6-9PM,EEEI 422; EEEI 301,"CAJOTE, RHANDLEY"
 EE 290,Seminar,EEEI,3.0,W 1-4PM,EEEI 205,"AUSTRIA, ISABEL"
 EE 290,Directed Studies,EEEI,3.0,W 1-4PM,EEEI 205,"AUSTRIA, ISABEL"
 EE 296,Seminar,EEEI,1.0,Th 6-7PM,EEEI 205,"OCAMPO, ROEL"
@@ -879,13 +879,13 @@ EE 398,Special Problems,EEEI,3.0,S 1-4PM,EEEI 123,"CAJOTE, RHANDLEY; DE LEON, FR
 EE 400,Dissertation,EEEI,3.0,TBA,,"CAJOTE, RHANDLEY; ODULIO, CARL MICHAEL; PEDRASA, MICHAEL ANGELO"
 EEE 1,Essentials of Electrical and Electronics Engineering,EEEI,4.0,MW 2:30-4PM,EEEI 420,"BONITEZ, ADRIAN"
 EEE 3,Elementary Electrical Engineering,EEEI,3.0,S 2-5PM,EEEI 420,"DASTAS, MARK BRIAN"
-EEE 121,Data Structures and Algorithms for Electrical and Electronics Engineering,EEEI,3.0,M 10AM-12PM,EEEI 204; M 1-4PM lab EEEI 204,"BENITEZ, HERLAN KESTER"
+EEE 121,Data Structures and Algorithms for Electrical and Electronics Engineering,EEEI,3.0,M 10AM-12PM; M 1-4PM,EEEI 204; EEEI 204,"BENITEZ, HERLAN KESTER"
 EEE 123,Circuits and Electronics I,EEEI,3.0,S 8-11AM,EEEI 420,"DASTAS, MARK BRIAN"
 EEE 128,Electrical and Electronics Engineering Laboratory II,EEEI,1.0,F 8:30-11:30AM,EEEI 228,"TAN, ALLEN JASON"
 EEE 141,Electronic Circuits and Systems,EEEI,3.0,TTh 8:30-10AM,EEEI 229,"HIZON, JOHN RICHARD"
 EEE 143,Switching Theory and Digital Logic Design,EEEI,3.0,WF 8:30-10AM,EEEI LC1,"AUSTRIA, ISABEL"
-EEE 145,Electromechanical Energy Converters,EEEI,3.0,TTh 10-11AM,EEEI LC2; TTh 11-11:30AM disc EEEI LC2,"TIO, ADONIS EMMANUEL"
-EEE 147,Signals and Systems,EEEI,3.0,TTh 10-11AM,EEEI VLC; TTh 11-11:30AM lec EEEI VLC,CONCEALED
+EEE 145,Electromechanical Energy Converters,EEEI,3.0,TTh 10-11AM; TTh 11-11:30AM,EEEI LC2; EEEI LC2,"TIO, ADONIS EMMANUEL"
+EEE 147,Signals and Systems,EEEI,3.0,TTh 10-11AM; TTh 11-11:30AM,EEEI VLC; EEEI VLC,CONCEALED
 EEE 148,Electrical and Electronics Engineering Laboratory IV,EEEI,1.0,F 10AM-1PM,EEEI 127,CONCEALED
 EEE 190,"Project Proposals, Inspection Trips, and Seminars",EEEI,2.0,M 7-8:30AM,TBA,CONCEALED
 EEE 192,Electrical and Electronics Engineering Laboratory VI,EEEI,1.0,F 8:30-11:30AM,EEEI 428,"DECENA, BERNALYN"
@@ -905,12 +905,12 @@ EM 141,Mining Systems,DMMM,5.0,TTh 1-2:30PM,MMM 305,CONCEALED
 EM 156,Mine Plant Design,DMMM,3.0,F 2:30-5:30PM,MMM 308,CONCEALED
 EM 161,Resource Estimation and Project Evaluation,DMMM,3.0,WF 1-2:30PM,MMM 307,CONCEALED
 EM 162,Mine Ventilation and Air Conditioning,DMMM,5.0,TTh 1-2:30PM,MMM 306,CONCEALED
-EM 181,Mine Design and Feasibility,DMMM,3.0,F 2:30-4PM,MMM 307; W 2:30-5:30PM lab MMM 307,CONCEALED
+EM 181,Mine Design and Feasibility,DMMM,3.0,F 2:30-4PM; W 2:30-5:30PM,MMM 307; MMM 307,CONCEALED
 EM 197,Special Topics,DMMM,3.0,M 9AM-12PM,MMM 203-204,CONCEALED
-EM 199,Mining Research Project II,DMMM,3.0,M 9-10AM,TBA; M 10AM-12PM lab TBA; M 1-5PM lab TBA,CONCEALED
-ES 1,Engineering Drawing,DES,2.0,M 7-10AM,MH 301-303; M 1-4PM lab MH 301-303,CONCEALED
+EM 199,Mining Research Project II,DMMM,3.0,M 9-10AM; M 10AM-12PM,TBA; TBA,CONCEALED
+ES 1,Engineering Drawing,DES,2.0,M 7-10AM; M 1-4PM,MH 301-303; MH 301-303,CONCEALED
 ES 15,Mechanics of Fluids,DES,3.0,TTh 8:30-10AM,TBA,CONCEALED
-ES 26,Introduction to Computer Programming,DES,3.0,F 10AM-12PM,AECH CLR1; W 10AM-1PM lab AECH TL3,CONCEALED
+ES 26,Introduction to Computer Programming,DES,3.0,F 10AM-12PM; W 10AM-1PM,AECH CLR1; AECH TL3,CONCEALED
 ES 101,Mechanics of Particles and Rigid Bodies,DES,0.0,WF 7-8:30AM,TBA,CONCEALED
 ES 102,Mechanics of Deformable Bodies,DES,3.0,TTh 7-8:30AM,TBA,CONCEALED
 ES 201,Advanced Mathematical Methods in Engineering I,DES,3.0,F 6-9PM,Ostrea Room,CONCEALED
@@ -1117,9 +1117,9 @@ FS 197,Internship in the Food Industries,DFSN,3.0,Th 1-4PM,ALON 101-A(Conf. Rm),
 FS 199,Research Methods in Food Science and Technology,DFSN,3.0,T 1-3PM,ALON 106,"VILLARINO, CASIANA BLANCA"
 FS 200,Undergraduate Thesis,DFSN,3.0,TBA,,"BASINANG, AIRISSE RAE"
 FS 200,Bachelor's Thesis,DFSN,3.0,TBA,,"BASINANG, AIRISSE RAE"
-FS 217,Sterilization Processes,DFSN,3.0,TTh 9AM-12PM,TBA; W 4-5PM lec TBA,"FRANCISCO, MARIA LEONORA"
-FS 218,Dehydration and Freezing,DFSN,3.0,W 9-10AM,TBA; WF 1-4PM lab TBA,TBA
-FS 231,Sensory Evaluation Methods,DFSN,2.0,Th 1-2PM,PFP; Th 2-5PM lab PFP,"VILLARINO, CASIANA BLANCA"
+FS 217,Sterilization Processes,DFSN,3.0,TTh 9AM-12PM; W 4-5PM,TBA; TBA,"FRANCISCO, MARIA LEONORA"
+FS 218,Dehydration and Freezing,DFSN,3.0,W 9-10AM; WF 1-4PM,TBA; TBA,TBA
+FS 231,Sensory Evaluation Methods,DFSN,2.0,Th 1-2PM; Th 2-5PM,PFP; PFP,"VILLARINO, CASIANA BLANCA"
 FS 236,Industrial Food Fermentation,DFSN,3.0,M 9-10AM,FNL 115,"AZANZA, MA. PATRICIA"
 FS 238,Development of Protein-Rich Products,DFSN,2.0,S 8-9AM,TBA,"SANCHEZ, ROWENA GRACE"
 Fil 3,Pakikipag-usap sa Filipino,DFPP,3.0,WF 10-11:30AM,CAL 209,"ENRIQUEZ, MA. ALTHEA"
@@ -1225,7 +1225,7 @@ Geog 105,Economic Geography,DGeog,3.0,TTh 11:30AM-1PM,PAV2 2248,"SAGUIN, KRISTIA
 Geog 109,Quantitative Methods in Geographic Analysis,DGeog,3.0,TTh 8:30-10AM,PAV2 2130,"HERMIDA, MARIA CELESTE"
 Geog 111,Resource Management and Conservation,DGeog,3.0,TTh 8:30-10AM,PH 204,"QUIRAY, ANDRE"
 Geog 119,Geography of Movement,DGeog,3.0,WF 1-2:30PM,PH 410,"GARCIA, EMMANUEL"
-Geog 121,Landform Analysis,DGeog,4.0,M 8-11AM,PAV2 2130; M 12-3PM lab PAV2 2130,"LACSON-DY, MA. IONA KATRINA"
+Geog 121,Landform Analysis,DGeog,4.0,M 8-11AM; M 12-3PM,PAV2 2130; PAV2 2130,"LACSON-DY, MA. IONA KATRINA"
 Geog 124,Geographic Information Systems for Human Geographic Research,DGeog,3.0,WF 8:30-11AM,PAV2 2130,"MARTINEZ, MA. SIMEONA"
 Geog 135,Rural and Urban Geography,DGeog,3.0,WF 4-5:30PM,PAV2 2248,"CADAG, JAKE ROM"
 Geog 143,Geography of Asia,DGeog,3.0,WF 2:30-4PM,PAV2 2248,"GUTIERREZ, DARLENE"
@@ -1271,7 +1271,7 @@ Geol 213,Photogeology and Remote Sensing,NIGS,2.0,S 11:30AM-12:30PM,NIGS 127,"AU
 Geol 217,Hydrogeology,NIGS,3.0,W 5:30-7:30PM,NIGS 127,"DI FILIPPO, ROBERT MICHAEL"
 Geol 241,X-Ray Crystallography and Spectrography,NIGS,4.0,TTh 5:30-7PM,NIGS 215,"PASCUA, CHELO"
 Geol 250,Igneous Petrology,NIGS,4.0,Th 5:30-7:30PM,NIGS 125,"PAYOT, BETCHAIDA"
-Geol 271,Mining Geology,NIGS,3.0,S 9AM-12PM,NIGS 128; W 5:30-7:30PM lec NIGS 128,"CLAVERIA, RENE JUNA"
+Geol 271,Mining Geology,NIGS,3.0,S 9AM-12PM; W 5:30-7:30PM,NIGS 128; NIGS 128,"CLAVERIA, RENE JUNA"
 Geol 290,Fundamental Problems in Geology,NIGS,3.0,F 5:30-8:30PM,NIGS 125,"FERNANDO, ALLAN GIL"
 Geol 296,Seminar,NIGS,2.0,W 8:30-10:30AM,NIGS 128,"LAGMAY, ALFREDO MAHAR FRANCISCO"
 Geol 300,Master's Thesis,NIGS,6.0,TBA,,"FERNANDO, ALLAN GIL"
@@ -1289,16 +1289,16 @@ German 101,Contemporary German Culture and Civilization,DEL,3.0,WF 10-11:30AM,TB
 German 130,German Linguistics I,DEL,3.0,TTh 7-8:30AM,TBA,"AGCAOILI, NINA RACHEL"
 German 140,Technical German,"DEL, DEL",3.0,WF 2:30-4PM,TBA,"MANARPAAC, DANILO VICTORINO"
 German 150,Masterpieces of German Literature,DEL,3.0,WF 8:30-10AM,TBA,"FROHLICH, MONICA"
-GmE 202,Principles of Remote Sensing,DGE,3.0,T 6-8PM,MH 210; Th 6-9PM lab MH 210,"TUPAS, MARK EDWIN; TAMONDONG, AYIN"
-GmE 203,Principles of Geographic Information Systems,DGE,3.0,W 6-8PM,MH 210; F 6-9PM lab MH 210,"CLARIDADES, ALEXIS RICHARD"
-GmE 205,Object-Oriented Programming for Geomatic Applications,DGE,3.0,S 1-3PM,MH 210; S 3-6PM lab MH 210,"TUPAS, MARK EDWIN"
-GmE 211,Satellite Geodesy,DGE,3.0,T 6-8PM,MH 214; Th 6-9PM lab MH 214,"REYES, ROSALIE"
-GmE 216,Field Techniques in Applied Geodesy and Remote Sensing,DGE,3.0,S 7-8AM,MH 214; S 8AM-2PM lab MH 214,"SARMIENTO, CZAR JAKIRI"
-GmE 217,Cadastral Data Management,DGE,3.0,S 1-3PM,MH 214; S 3-6PM lab MH 214,"MACAPINLAC, OLIVER"
-GmE 221,Spatial Analysis,DGE,3.0,W 6-8PM,MH 214; F 6-9PM lab MH 214,"MACAPINLAC, OLIVER"
-GmE 231,Lidar Remote Sensing,DGE,3.0,W 6-8PM,MH 318-320; F 6-9PM lab MH 318-320,"TUPAS, MARK EDWIN; TAMONDONG, AYIN"
-GmE 241,Mathematical Geodesy and Adjustments of Geodetic Observations,DGE,3.0,S 7-9AM,MH 214; S 9AM-12PM lab MH 214,"SARMIENTO, CZAR JAKIRI"
-GmE 242,"Satellite Positioning, Signal Processing and Numerical Methods",DGE,3.0,T 6-8PM,MH 310; Th 6-9PM lab MH 310,"SARMIENTO, CZAR JAKIRI"
+GmE 202,Principles of Remote Sensing,DGE,3.0,T 6-8PM; Th 6-9PM,MH 210; MH 210,"TUPAS, MARK EDWIN; TAMONDONG, AYIN"
+GmE 203,Principles of Geographic Information Systems,DGE,3.0,W 6-8PM; F 6-9PM,MH 210; MH 210,"CLARIDADES, ALEXIS RICHARD"
+GmE 205,Object-Oriented Programming for Geomatic Applications,DGE,3.0,S 1-3PM; S 3-6PM,MH 210; MH 210,"TUPAS, MARK EDWIN"
+GmE 211,Satellite Geodesy,DGE,3.0,T 6-8PM; Th 6-9PM,MH 214; MH 214,"REYES, ROSALIE"
+GmE 216,Field Techniques in Applied Geodesy and Remote Sensing,DGE,3.0,S 7-8AM; S 8AM-2PM,MH 214; MH 214,"SARMIENTO, CZAR JAKIRI"
+GmE 217,Cadastral Data Management,DGE,3.0,S 1-3PM; S 3-6PM,MH 214; MH 214,"MACAPINLAC, OLIVER"
+GmE 221,Spatial Analysis,DGE,3.0,W 6-8PM; F 6-9PM,MH 214; MH 214,"MACAPINLAC, OLIVER"
+GmE 231,Lidar Remote Sensing,DGE,3.0,W 6-8PM; F 6-9PM,MH 318-320; MH 318-320,"TUPAS, MARK EDWIN; TAMONDONG, AYIN"
+GmE 241,Mathematical Geodesy and Adjustments of Geodetic Observations,DGE,3.0,S 7-9AM; S 9AM-12PM,MH 214; MH 214,"SARMIENTO, CZAR JAKIRI"
+GmE 242,"Satellite Positioning, Signal Processing and Numerical Methods",DGE,3.0,T 6-8PM; Th 6-9PM,MH 310; MH 310,"SARMIENTO, CZAR JAKIRI"
 HE 100,Family Life and Societal Development,OCS,3.0,TTh 10-11:30AM,CDC Room 305,"METRIO, ALEXA KARMEL"
 HE 101,Ethics and Values in Family and Society,OCS,3.0,S 9AM-12PM,CHE MB 203,"YATCO, KATTLEYA MARIE REINE"
 HE 102,Introduction to Management of Family Resources,OCS,2.0,M 10AM-12PM,CDC Room 307,"UGADDAN, MIRIAM"
@@ -1309,7 +1309,7 @@ HEEd 131,Consumer Education,HEED,3.0,TTh 2:30-4PM,CHE MB 105,"BANTANG, JOANNE"
 HEEd 133,Entrepreneurship and Livelihood Education,HEED,3.0,S 1-4PM,IDS 118,"CATAPAT, KRISTINE ALAINE"
 HEEd 134,Practicum I Entrepreneurship Education,HEED,3.0,TTh 8:30AM-1:30PM,IDS 120,"CHUA, CONSUELO"
 HEEd 137,Evaluation in Home Economics Education,HEED,3.0,WF 2:30-4PM,CHE MB 105,"BANTANG, JOANNE"
-HEEd 138,Information and Communications Technology in Home Economics,HEED,3.0,M 8-9AM,ALON 202; M 9AM-3PM lab ALON 202,"BARTOLOME, JOSE MARTI"
+HEEd 138,Information and Communications Technology in Home Economics,HEED,3.0,M 8-9AM; M 9AM-3PM,ALON 202; ALON 202,"BARTOLOME, JOSE MARTI"
 HEEd 139,Curriculum Planning in Home Economics Education,HEED,3.0,TTh 2:30-4PM,CDC Room 305,"LLIGE, AURORA"
 HEEd 148,Adult and Out-of-School Youth Programs in Home Economics,HEED,3.0,S 10AM-5PM,IDS 120,"TRINIDAD, MARY JUSTINE CLARISE"
 HEEd 149,Practicum III Management of School Food Service Centers,HEED,3.0,WF 8AM-1PM,IDS 120,"TRINIDAD, MARY JUSTINE CLARISE"
@@ -1382,11 +1382,11 @@ ID 21,Interior Design Drafting and Perspective Drawing,CTID,3.0,WF 1-1:30PM,CIDL
 ID 24,Philippine and Asian Historical Styles ,CTID,3.0,WF 10:30AM-12PM,CHE MB 202,"DE LEON, LUNA LIEZL"
 ID 34,Historical Styles II,CTID,3.0,TTh 10:30AM-12PM,CHE MB 202,"SAYSON, GABRIELLE GAY"
 ID 107,Professional Practice I,CTID,2.0,WF 8-9AM,CHE MB 102,"TALUBAN, JOSEPH"
-ID 116,Furniture Design and Construction,CTID,3.0,WF 1-1:30PM,IDS 122B; WF 1:30-4:30PM studio IDS 122B,"QUEVEDO, MA.TERESA"
+ID 116,Furniture Design and Construction,CTID,3.0,WF 1-1:30PM; WF 1:30-4:30PM,IDS 122B; IDS 122B,"QUEVEDO, MA.TERESA"
 ID 117,Professional Practice II,CTID,2.0,F 10AM-12PM,CHE MB 102,"TALUBAN, JOSEPH"
-ID 121,Interior Design I,CTID,3.0,TTh 1-1:30PM,CIDL 133; TTh 1:30-4:30PM studio CIDL 133,"BUYAWE, DIVINE"
-ID 141,Interior Design III,CTID,3.0,TTh 1-1:30PM,IDS 122A; TTh 1:30-4:30PM studio IDS 122A,"DE LEON, LUNA LIEZL"
-ID 153,Interior Construction II,"CTID, CTID",3.0,TTh 9-10AM,IDS 122A; TTh 10-11:30AM studio IDS 122A,"TALUBAN, JOSEPH"
+ID 121,Interior Design I,CTID,3.0,TTh 1-1:30PM; TTh 1:30-4:30PM,CIDL 133; CIDL 133,"BUYAWE, DIVINE"
+ID 141,Interior Design III,CTID,3.0,TTh 1-1:30PM; TTh 1:30-4:30PM,IDS 122A; IDS 122A,"DE LEON, LUNA LIEZL"
+ID 153,Interior Construction II,"CTID, CTID",3.0,TTh 9-10AM; TTh 10-11:30AM,IDS 122A; IDS 122A,"TALUBAN, JOSEPH"
 ID 161,Interior Design V,CTID,3.0,TTh 8:30-9AM,CIDL 133,"MEDINA, RACHELLE"
 ID 199,Research Methods in Interior Design,CTID,3.0,W 9AM-12PM,CHE MB 102,"MAYO, ADELAIDA"
 ID 200,Undergraduate Thesis,CTID,3.0,TBA,,"MAYO, ADELAIDA"
@@ -1397,15 +1397,15 @@ ID 300,Thesis,CTID,6.0,TBA,,"TALUBAN, JOSEPH"
 IE 3,Introduction to Industrial Engineering,DIE/OR,3.0,S 2-5PM,TBA,CONCEALED
 IE 28,Statistical Analysis for Industrial Engineering,DIE/OR,3.0,TTh 8:30-10AM,IE-ME KIM,CONCEALED
 IE 31,Industrial Organization and Management,DIE/OR,3.0,S 9AM-12PM,MH 413,CONCEALED
-IE 32,Work Study and Measurement,DIE/OR,3.0,M 12-2PM,MH ERGO; M 2-5PM lab MH ERGO,CONCEALED
+IE 32,Work Study and Measurement,DIE/OR,3.0,M 12-2PM; M 2-5PM,MH ERGO; MH ERGO,CONCEALED
 IE 33,Systems and Procedures,"DIE/OR, DIE/OR",2.0,F 3-5PM,IE-ME 113,CONCEALED
 IE 41,Operations Research I,DIE/OR,3.0,TTh 10-11:30AM,TBA,CONCEALED
 IE 50,Engineering Economics for Industrial Engineering,DIE/OR,3.0,TTh 1-2:30PM,IE-ME 111,CONCEALED
-IE 144,Systems Simulation,DIE/OR,3.0,M 1-3PM,IE-ME KIM; F 1-4PM lab IE-ME KIM,CONCEALED
-IE 151,Production and Service Systems,DIE/OR,3.0,TTh 1-2PM,IE-ME SCAL; TTh 2-3:30PM lab IE-ME SCAL,CONCEALED
-IE 163,Ergonomics II,DIE/OR,2.0,M 8-9AM,TBA; T 8:30-11:30AM lab TBA,CONCEALED
+IE 144,Systems Simulation,DIE/OR,3.0,M 1-3PM; F 1-4PM,IE-ME KIM; IE-ME KIM,CONCEALED
+IE 151,Production and Service Systems,DIE/OR,3.0,TTh 1-2PM; TTh 2-3:30PM,IE-ME SCAL; IE-ME SCAL,CONCEALED
+IE 163,Ergonomics II,DIE/OR,2.0,M 8-9AM; T 8:30-11:30AM,TBA; TBA,CONCEALED
 IE 171,Information Systems I,DIE/OR,3.0,TTh 10-11:30AM,IE Comp Lab,CONCEALED
-IE 195,Industrial Engineering Capstone Project II,DIE/OR,3.0,M 11AM-12PM,TBA; S 11AM-5PM lab TBA,"CUSTODIO, BENETTE"
+IE 195,Industrial Engineering Capstone Project II,DIE/OR,3.0,M 11AM-12PM; S 11AM-5PM,TBA; TBA,"CUSTODIO, BENETTE"
 IE 197,Special Topics,DIE/OR,3.0,S 9AM-12PM,IE-ME 113,CONCEALED
 IE 198,Special Problems,DIE/OR,3.0,TTh 11:30AM-1PM,IE-ME IPDD,CONCEALED
 IE 211,Quantitative Methods in Industrial Engineering,DIE/OR,3.0,W 6-9PM,IE-ME 113,CONCEALED
@@ -1455,7 +1455,7 @@ IS 291,Seminar: Topics in Islamic Studies,IIS,3.0,F 9AM-12PM,TBA,"SADAIN, MEHOL"
 IS 293,"Seminar: Islamic Economics of Banking, Trade and Investment",IIS,3.0,T 4-7PM,TBA,"ALONTO, MAHARLIKA"
 IS 298,Special Problem ,IIS,3.0,S 9AM-12PM,TBA,"ARSAD, NEFERTARI"
 IS 299,Materials and Methods for Islamic Studies,IIS,3.0,S 9AM-12PM,TBA,"OROZCO, CHEERY"
-Int Jap A,Elementary Japanese,"AC, AC-ASP",0.0,S 1-4PM,TBA; M 5-8PM lab TBA,"CHENG CHUA, KARL IAN"
+Int Jap A,Elementary Japanese,"AC, AC-ASP",0.0,S 1-4PM; M 5-8PM,TBA; TBA,"CHENG CHUA, KARL IAN"
 Intl Stud 299,Research Methods,PolSci,3.0,W 5:30-8:30PM,Seminar Room,"ARUGAY, ARIES"
 Intsik 10,Elementaring Intsik I (Elementary Chinese I),Lingg,3.0,TTh 8:30-11:30AM,CSSP Faculty Lounge,"TECSON, MARIA JOANNA"
 Intsik 11,Elementaring Intsik II (Elementary Chinese II),Lingg,3.0,TTh 7-8:30AM,CSSP Faculty Lounge,"TECSON, MARIA JOANNA"
@@ -1481,7 +1481,7 @@ Italian 130,Italian Linguistics I,DEL,3.0,TTh 2:30-4PM,TBA,"BAUTISTA, NAIDYL ISI
 Japan Studies 101,Japanese Culture and Society I,CIS,3.0,TTh 1-2:30PM,CIS - Classroom C,TBA
 J 100,History of the Press,DJourn,3.0,T 9AM-12PM,RM 205,"TANGI, LUCIA"
 J 101,Introduction to Journalism,DJourn,3.0,F 1-4PM,ADBOARD,"PAPA, ALCUIN BRENDAN"
-J102,Researching and Reporting the News,DJourn,5.0,T 10AM-1PM,PStar1; Th 10AM-2PM lab PStar1,"MATEO, JAN VICTOR"
+J102,Researching and Reporting the News,DJourn,5.0,T 10AM-1PM; Th 10AM-2PM,PStar1; PStar1,"MATEO, JAN VICTOR"
 J 103,Interpretative Writing,DJourn,3.0,F 1-4PM,RM 205,"CHUA, ADELLE LIEZL"
 J104,Pag-uulat sa Filipino,DJourn,3.0,W 4-7PM,RM 207,"DAVID, KARA PATRIA"
 J 105,Investigative Reporting,DJourn,3.0,W 9AM-12PM,RM 205,"ILAGAN, KAROL ANNE"
@@ -1585,7 +1585,7 @@ LIS 141,Introduction to Methods in Medical Information Research,SLIS,3.0,F 4-7PM
 LIS 151,Library Management I,SLIS,3.0,WF 8:30-10AM,SOLAIR 202,CONCEALED
 LIS 161,Information and Communications Technology in LIS II,SLIS,3.0,TTh 8:30-10AM,SOLAIR 201,"TINAO, MARIA MAURA"
 LIS 170,Introduction to Archives and Records Management,SLIS,3.0,TTh 10-11:30AM,IB 250,"OLGADO, BENEDICT"
-LIS 173,Archives Preservation ,SLIS,3.0,T 1-3PM,SOLAIR 6; Th 1-4PM lab SOLAIR 6,"REY, EMMA"
+LIS 173,Archives Preservation ,SLIS,3.0,T 1-3PM; Th 1-4PM,SOLAIR 6; SOLAIR 6,"REY, EMMA"
 LIS 181,Field Assignment,SLIS,3.0,M 1-4PM,SOLAIR 203,"DAR JUAN, ELIJAH JOHN"
 LIS 192,Quantitative Research Methods in LIS,SLIS,3.0,TTh 2:30-4PM,SOLAIR 201,"TINAO, MARIA MAURA; DORADO, DAN ANTHONY"
 LIS 195,Information Ethics,SLIS,3.0,TTh 11:30AM-1PM,SOLAIR 202,"DAR JUAN, ELIJAH JOHN"
@@ -1604,16 +1604,16 @@ LIS 299,Foundations of Information Research,SLIS,3.0,Th 5:30-8:30PM,TBA,"BUENROS
 LIS 300,Thesis,"SLIS, SLIS",3.0,M 9AM-12PM,TBA,"APOLINARIO, RHEA ROWENA"
 LStud 204,Site Utilities for Landscape Developments and Recreational Spaces,Arch,3.0,TTh 6-9:30PM,B1-MOFA,"FONTANOZA, FRANKLIN"
 LStud 205,Application of Hardscape Materials and Technologies in the Landscape,Arch,3.0,WF 6-9:30PM,B1-Studio Lab 5,"BRITO, NORMAN JUNE"
-LStud 206,Landscape Project Management ,Arch,3.0,S 8:30AM-12PM,B2-104; S 1-4:30PM studio B2-104,"DUL-LOOG, VIC"
+LStud 206,Landscape Project Management ,Arch,3.0,S 8:30AM-12PM; S 1-4:30PM,B2-104; B2-104,"DUL-LOOG, VIC"
 LTS 2 CS,LTS 2,"DAS, DFPP, DCI, Educ, Socio, Socio, DGeog, DGeog, Socio, DAnthro, DAS, AIT, PopIns, CSSP, DAnthro, DELPS, DELPS, DGeog, Philo, Kas, DELPS, GRADUATE, GRADUATE, GRADUATE, AIT, AIT, PopIns, PolSci, PolSci, CSSP, Kas, Lingg, Lingg, DCI, IB, PolSci, DSCTA, CSSP, MATH, MATH, MATH, Kas, PopIns, Philo, Philo, IB, Psych, Psych, DFPP, DFPP, Educ, Educ, DSCTA, DSCTA, IB, Lingg, DAnthro, DCI, DAS, NIGS, NIGS, NIGS, Psych",3.0,M 9AM-12PM,NIGS 230,"ABUDA, JAMILA"
 LTS 2 CAL,LTS 2,"DAnthro, DFPP, CSSP, DGeog, DGeog, DCI, DCI, DAS, DAS, DSCTA, DSCTA, DAS, Kas, Kas, GRADUATE, GRADUATE, Socio, IB, IB, IB, GRADUATE, CSSP, Educ, PolSci, Lingg, MATH, MATH, MATH, PolSci, PolSci, Lingg, Lingg, NIGS, NIGS, NIGS, Educ, Educ, PopIns, Psych, PopIns, DCI, AIT, AIT, AIT, DGeog, DSCTA, Kas, PopIns, DELPS, Psych, Psych, Philo, DELPS, Philo, Philo, DELPS, CSSP, DAnthro, DFPP, DFPP, Socio, Socio, DAnthro",3.0,M 11AM-2PM,CAL 203,"BELDIA, ERIKA YASMIN"
 LTS 2 Educ,LTS 2,"Philo, Philo, Philo, CSSP, Educ, Educ, DGeog, DGeog, PopIns, PopIns, PopIns, DELPS, DELPS, DCI, Lingg, Lingg, Lingg, NIGS, NIGS, NIGS, MATH, MATH, MATH, IB, DCI, DCI, DAnthro, PolSci, PolSci, PolSci, DFPP, DFPP, DFPP, DAS, DAS, Socio, Socio, Socio, IB, IB, CSSP, CSSP, DSCTA, DSCTA, DSCTA, DAS, DELPS, DAnthro, DGeog, Kas, Kas, Kas, DAnthro, GRADUATE, GRADUATE, GRADUATE, Psych, Psych, Psych, AIT, AIT, AIT, Educ",3.0,M 1-4PM,TBA,"ORTEGA, KATRINA PAULA"
 Latin 10,Elementary Latin,DEL,3.0,TTh 4-5:30PM,TBA,CONCEALED
 Law 101,Obligations and Contracts,Law,5.0,TTh 9:30AM-12PM,TBA,"SAN BUENAVENTURA, MICHELLE"
 Law 103,Sales,Law,2.0,S 1-3PM,TBA,"MANICAD, MACARIO"
-Law 104,Torts and Damages,Law,3.0,S 4-5PM,TBA; W 6-8PM lec TBA,"VIÑAS, LAARNI VICTORIA"
-Law 106,Corporation Law and Securities Act,Law,5.0,S 12-2:30PM,TBA; W 6-8:30PM lec TBA,"VIRAY, VIRGINIA"
-Law 107,Credit Transactions,Law,3.0,T 8:30-9:30AM,TBA; S 10AM-12PM lec LAW 127,"REYES, ROCKY"
+Law 104,Torts and Damages,Law,3.0,S 4-5PM; W 6-8PM,TBA; TBA,"VIÑAS, LAARNI VICTORIA"
+Law 106,Corporation Law and Securities Act,Law,5.0,S 12-2:30PM; W 6-8:30PM,TBA; TBA,"VIRAY, VIRGINIA"
+Law 107,Credit Transactions,Law,3.0,T 8:30-9:30AM; S 10AM-12PM,TBA; LAW 127,"REYES, ROCKY"
 Law 108,"Bills, Notes and Commercial Papers",Law,3.0,S 9AM-12PM,TBA,"DAYAG, FLORIAN KIM"
 Law 110,Criminal Law 2,Law,4.0,MW 10:30AM-12:30PM,TBA,"GUTIERREZ, IBARRA"
 Law 111,Public International Law,Law,3.0,TTh 7:30-9PM,TBA,"DE VENECIA, JOAN"
@@ -1634,7 +1634,7 @@ Law 130,Civil Law Review,Law,5.0,TTh 6:30-9PM,TBA,"URIBE, CRISOSTOMO"
 Law 132,Philippine Indigenous Law,Law,3.0,Th 6-9PM,LAW 127,"BAGUILAT, RAYMOND MARVIC"
 Law 133,Land Titles and Deeds,Law,2.0,T 6-8PM,TBA,"CASANOVA, ARNEL PACIANO"
 Law 134,Intellectual Property Law,Law,2.0,M 6-8PM,TBA,"PEDRON, DIVINA GRACIA"
-Law 136,Commercial Law Review,"Law, Law",5.0,W 9:30AM-12PM,TBA; S 1-3:30PM lec TBA,"DIVINA, NILO"
+Law 136,Commercial Law Review,"Law, Law",5.0,W 9:30AM-12PM; S 1-3:30PM,TBA; TBA,"DIVINA, NILO"
 Law 139,Insurance,Law,2.0,F 6-8PM,TBA,"PILARES, MA. PILAR"
 Law 143,Contemporary Developments in International Law,Law,2.0,M 3-5PM,TBA,"TUGADE, RUBY ROSSELLE"
 Law 150,Comparative Law,Law,2.0,S 10AM-12PM,TBA,"TAMASE, PAOLO EMMANUEL"
@@ -1675,12 +1675,12 @@ LinggPil 380,Dayalektoloji sa Pilipinas,Lingg,3.0,S 10AM-1PM,TBA,"PENEYRA, IRMA"
 MBB 1,Biotechnology and You,MBBP,3.0,TTh 8:30-10AM,NIMBB 112,"MBBP, MBBP"
 MBB 10,Introduction to Molecular Biology,MBBP,3.0,TTh 2:30-4PM,NIMBB 107,"BASCOS, NEIL ANDREW; LAZARO, JOSE ENRICO"
 MBB 100,Introduction to Scientific Writing in Molecular Biology and Biotechnology,MBBP,3.0,TTh 10-11:30AM,NIMBB 110,"MIRANO-BASCOS, DENISE NOELLE"
-MBB 110,Fundamentals of Molecular Microbiology,MBBP,5.0,TTh 8:30-10AM,NIMBB 110; M 11:30AM-5:30PM lab NIMBB 202,"DY, RON LEONARD; SUMERA, ALESSA JANE"
+MBB 110,Fundamentals of Molecular Microbiology,MBBP,5.0,TTh 8:30-10AM; M 11:30AM-5:30PM,NIMBB 110; NIMBB 202,"DY, RON LEONARD; SUMERA, ALESSA JANE"
 MBB 127,Molecular Physiology of Plant Cells,MBBP,3.0,TTh 10-11:30AM,NIMBB 105,"PLANTA, JOSE RAMON"
 MBB 127.1,Molecular Physiology of Plant Cells Laboratory,MBBP,2.0,F 11:30AM-5:30PM,NIMBB 203,"KOH, RHOSENER BHEA"
-MBB 141,Principles of Gene Manipulation,MBBP,5.0,TTh 8:30-10AM,NIMBB 107; W 10AM-4PM lab NIMBB 200,"GARCIA, REYNALDO; BUENAFE, CARLOS LUIS"
+MBB 141,Principles of Gene Manipulation,MBBP,5.0,TTh 8:30-10AM; W 10AM-4PM,NIMBB 107; NIMBB 200,"GARCIA, REYNALDO; BUENAFE, CARLOS LUIS"
 MBB 150,Cellular and Molecular Immunology,MBBP,3.0,TTh 8:30-10AM,NIMBB 105,"MIRANO-BASCOS, DENISE NOELLE; ESPAÑO, ERICA"
-MBB 190,Introduction to Bioinformatics and Systems Biology,MBBP,4.0,Th 10AM-4PM,NIMBB 112; W 1-3PM lec NIMBB 110,"LEE, ISAIAH PAOLO; FELICIANO, AARON JAMES"
+MBB 190,Introduction to Bioinformatics and Systems Biology,MBBP,4.0,Th 10AM-4PM; W 1-3PM,NIMBB 112; NIMBB 110,"LEE, ISAIAH PAOLO; FELICIANO, AARON JAMES"
 MBB 194,Ethics in Scientific Research,MBBP,3.0,TTh 4-5:30PM,NIMBB 107,"MBBP, MBBP; BAUTISTA, MA. ANITA"
 MBB 196,Undergraduate Seminar,MBBP,1.0,F 1-2PM,NIMBB 105,"LAZARO, JOSE ENRICO"
 MBB 197,Special Topics in Molecular Biology and Biotechnology,MBBP,3.0,TTh 10-11:30AM,NIMBB 107,"PRIETO, ELOISE; LEE, ISAIAH PAOLO"
@@ -1699,22 +1699,22 @@ ME 11,Mathematical Methods in Mechanical Engineering I,DME,4.0,TTh 7-8:30AM,P&G,
 ME 12,Mathematical Methods in Mechanical Engineering II,DME,4.0,WF 11:30AM-1PM,IE-ME 206,"REMOLIN, JOSHUA ANDREI"
 ME 31,Mechanical Engineering CAD,DME,1.0,WF 1-2:30PM,ME 3,"MACASPAC, HANNAH ERIKA"
 ME 32,Machine Operations,DME,1.0,F 8:30-11:30AM,IE-ME ME Shop,"LANDICHO, GILDA"
-ME 51,Mechanics of Materials I,DME,4.0,TTh 8:30-10AM,MH 305-307; TTh 10-11:30AM lab MH 305-307,"BINGABING, REX"
-ME 61,Fundamentals of Thermal and Fluids Engineering,DME,4.0,TTh 8:30-10AM,IE-ME 204; TTh 10-11:30AM lab IE-ME 204,"LANDICHO, GILDA"
-ME 62,Thermal and Fluids Engineering Systems,DME,4.0,TTh 8:30-10AM,MH 301-303; TTh 10-11:30AM lab MH 301-303,"BERANA, MENANDRO"
-ME 63,Thermodynamics,"DMMM, DME",3.0,TTh 8:30-9:30AM,IE-ME 212; TTh 9:30-11AM lab IE-ME 212,"RODGERS, PAUL"
+ME 51,Mechanics of Materials I,DME,4.0,TTh 8:30-10AM; TTh 10-11:30AM,MH 305-307; MH 305-307,"BINGABING, REX"
+ME 61,Fundamentals of Thermal and Fluids Engineering,DME,4.0,TTh 8:30-10AM; TTh 10-11:30AM,IE-ME 204; IE-ME 204,"LANDICHO, GILDA"
+ME 62,Thermal and Fluids Engineering Systems,DME,4.0,TTh 8:30-10AM; TTh 10-11:30AM,MH 301-303; MH 301-303,"BERANA, MENANDRO"
+ME 63,Thermodynamics,"DMMM, DME",3.0,TTh 8:30-9:30AM; TTh 9:30-11AM,IE-ME 212; IE-ME 212,"RODGERS, PAUL"
 ME 71,Sensors and Actuators,DME,3.0,M 1-3PM,IE-ME 206,"MANALO, JERICO"
 ME 113,Mechanical Engineering Simulations,DME,2.0,M 8-9AM,P&G,"DANAO, LOUIS ANGELO"
-ME 133,Introduction to Mechanical Engineering Design,DME,3.0,WF 11:30AM-12:30PM,IE-ME 212; WF 12:30-2PM lab IE-ME 212,"CALUB, JOAN CYRIL"
-ME 134,Fundamentals of Manufacturing Processes,DME,4.0,WF 7-8:30AM,IE-ME 206; TTh 7-8:30AM lec IE-ME 206,"MACASPAC, JOSE YGNACIO JESUS"
-ME 147,System Dynamics and Control,DME,4.0,TTh 8:30-10AM,IE-ME 206; TTh 10-11:30AM lab IE-ME 206,"DENOGA, GERALD JO"
+ME 133,Introduction to Mechanical Engineering Design,DME,3.0,WF 11:30AM-12:30PM; WF 12:30-2PM,IE-ME 212; IE-ME 212,"CALUB, JOAN CYRIL"
+ME 134,Fundamentals of Manufacturing Processes,DME,4.0,WF 7-8:30AM; TTh 7-8:30AM,IE-ME 206; IE-ME 206,"MACASPAC, JOSE YGNACIO JESUS"
+ME 147,System Dynamics and Control,DME,4.0,TTh 8:30-10AM; TTh 10-11:30AM,IE-ME 206; IE-ME 206,"DENOGA, GERALD JO"
 ME 155,Machine Design III,DME,2.0,TTh 11:30AM-2:30PM,TBA,"BINGABING, REX"
-ME 156,Machine Design,DME,3.0,S 9AM-12PM,IE-ME 206; S 1-3PM lec IE-ME 206,"CRUZ, RHANDOLPH JEFFREY"
-ME 163,Thermal and Fluids Engineering Processes,DME,4.0,TTh 2:30-4PM,IE-ME 212; TTh 4-5:30PM lab IE-ME 212,"BALBARONA, JUVY"
+ME 156,Machine Design,DME,3.0,S 9AM-12PM; S 1-3PM,IE-ME 206; IE-ME 206,"CRUZ, RHANDOLPH JEFFREY"
+ME 163,Thermal and Fluids Engineering Processes,DME,4.0,TTh 2:30-4PM; TTh 4-5:30PM,IE-ME 212; IE-ME 212,"BALBARONA, JUVY"
 ME 166,Thermal and Fluids Engineering Design,DME,4.0,TWTh 1-2:30PM,P&G,"GARCIA, JOHN CARLO; DALISAY, JON DEWITT; ENCARNACION, JOB IMMANUEL"
 ME 172,Experimentation and Technical Exposition in Mechanical Engineering,DME,3.0,T 3-5PM,IE-ME 204,"LUMBERA, MIKASH"
-ME 192,Industrial Electrical and Electronic Equipment,DME,3.0,S 9-11AM,IE-ME 212; S 11:30AM-2:30PM lab EEEI 127,"MAG-ISA, ALEXANDER"
-ME 196,Product Engineering II,DME,2.0,M 8:30-11:30AM,TBA; M 1-4PM lab TBA,"DENOGA, GERALD JO"
+ME 192,Industrial Electrical and Electronic Equipment,DME,3.0,S 9-11AM; S 11:30AM-2:30PM,IE-ME 212; EEEI 127,"MAG-ISA, ALEXANDER"
+ME 196,Product Engineering II,DME,2.0,M 8:30-11:30AM; M 1-4PM,TBA; TBA,"DENOGA, GERALD JO"
 ME 197,Special Topics,DME,3.0,TTh 7-8:30AM,IE-ME 212,"RODGERS, PAUL"
 ME 198,Special Problems,DME,3.0,WF 11:30AM-1PM,IE-ME 208,"ENCARNACION, JOB IMMANUEL; AROCENA, VIRGEL"
 ME 199,Mechanical Engineering Research II,DME,2.0,WF 2:30-5:30PM,TBA,"ENCARNACION, JOB IMMANUEL; AROCENA, VIRGEL"
@@ -1770,7 +1770,7 @@ MS 278,Marine Natural Products,MSI,3.0,Th 4-7PM,MSI-MBRIS 303,"SALVADOR, LILIBET
 MS 283,Marine Agronomy,MSI,3.0,TTh 4-5:30PM,MSI-MBRIS 302,"SANTIANEZ, WILFRED JOHN"
 MS 300,M.S. Thesis,MSI,6.0,TBA,,"DAVID, LAURA"
 MS 366,Population Genetics of Marine Organisms,MSI,3.0,TTh 10-11:30AM,MSI-MBRIS 303,"GOTANCO, RACHEL JUNE"
-MS 395,Advanced Studies in Marine Science,MSI,4.0,W 8AM-12PM,TBA; F 8AM-5PM lab TBA,"GOTANCO, RACHEL JUNE"
+MS 395,Advanced Studies in Marine Science,MSI,4.0,W 8AM-12PM; F 8AM-5PM,TBA; TBA,"GOTANCO, RACHEL JUNE"
 MS 396,Seminar,MSI,1.0,Th 4-5PM,MSI Sem. Rm.,"LLUISMA, ARTURO"
 MS 397,Special Topics in Marine Science,MSI,3.0,TTh 11:30AM-1PM,MSI-MBRIS 303,"RODRIGUEZ, MARIA VANESSA"
 MS 398,Advanced Methods in Marine Science,MSI,3.0,TTh 11:30AM-1PM,MSI-MBRIS 301A,"ROLEDA, MICHAEL"
@@ -1813,10 +1813,10 @@ MatE 197,Special Topics,DMMM,3.0,M 1-4PM,TBA,CONCEALED
 MatE 200,Undergraduate Thesis,DMMM,2.0,TBA,,"MERCADO, CANDY"
 Math 2,Mathematics in Everyday Life,MATH,3.0,TTh 8:30-10AM,MBAN 306,"CONSORTE, ODESSA"
 Math 10,"Mathematics, Culture and Society",MATH,3.0,TTh 10-11:30AM,MB 118,"ARCEO, CARLENE PERPETUA"
-Math 20,Precalculus: Functions and their Graphs,MATH,4.0,TTh 7:15-8:15AM,MB 320; WF 7:15-8:15AM lec TBA,CONCEALED
-Math 21,Elementary Analysis I,MATH,4.0,WF 7:15-8:15AM,MB 301; TTh 7:15-8:15AM lec TBA,CONCEALED
-Math 22,Elementary Analysis II,MATH,4.0,TTh 7:15-8:15AM,MB 301; WF 7:15-8:15AM lec TBA,CONCEALED
-Math 23,Elementary Analysis III,MATH,4.0,WF 7-8:30AM,MB 320; Th 7:15-8:15AM lec TBA,CONCEALED
+Math 20,Precalculus: Functions and their Graphs,MATH,4.0,TTh 7:15-8:15AM; WF 7:15-8:15AM,MB 320; TBA,CONCEALED
+Math 21,Elementary Analysis I,MATH,4.0,WF 7:15-8:15AM; TTh 7:15-8:15AM,MB 301; TBA,CONCEALED
+Math 22,Elementary Analysis II,MATH,4.0,TTh 7:15-8:15AM; WF 7:15-8:15AM,MB 301; TBA,CONCEALED
+Math 23,Elementary Analysis III,MATH,4.0,WF 7-8:30AM; Th 7:15-8:15AM,MB 320; TBA,CONCEALED
 Math 30,Intermediate Analysis and Applications,MATH,3.0,TTh 1-2:30PM,MBAN 304,CONCEALED
 Math 40,Linear Algebra,MATH,3.0,TTh 10-11:30AM,MBAN 312,CONCEALED
 Math 108,Foundations of Abstract Mathematics,MATH,4.0,TWThF 8:45-9:45AM,MB 126,CONCEALED
@@ -1880,8 +1880,8 @@ Media 301,Media and Culture,GRADUATE,3.0,W 5:30-8:30PM,TBA,"GUIEB, EULALIO"
 Media 302,Media Historiography,GRADUATE,3.0,Th 4-7PM,TBA,"SANCHEZ, LOUIE JON"
 Media 304,Media and Identities,GRADUATE,3.0,Th 4-7PM,TBA,"ZAPATA, DAZZELYN"
 Media 331,Media and Popular Culture,GRADUATE,3.0,T 5-8PM,TBA,"BRILLON, CHERISH AILEEN"
-MetE 13,Metallurgical Measurements and Analysis,DMMM,2.0,T 2:30-3:30PM,TBA; Th 2:30-5:30PM lab TBA,CONCEALED
-MetE 13,Methods of Metallurgical Analysis,DMMM,2.0,T 2:30-3:30PM,TBA; Th 2:30-5:30PM lab TBA,CONCEALED
+MetE 13,Metallurgical Measurements and Analysis,DMMM,2.0,T 2:30-3:30PM; Th 2:30-5:30PM,TBA; TBA,CONCEALED
+MetE 13,Methods of Metallurgical Analysis,DMMM,2.0,T 2:30-3:30PM; Th 2:30-5:30PM,TBA; TBA,CONCEALED
 MetE 19,Kinetics of Metallurgical Reactions,DMMM,3.0,WF 8:30-10AM,TBA,CONCEALED
 MetE 20.1,Ore Beneficiation Laboratory,DMMM,2.0,WF 1-4PM,TBA,CONCEALED
 MetE 121,Mineral Processing I,DMMM,3.0,WF 1-2:30PM,TBA,CONCEALED
@@ -1895,33 +1895,33 @@ MetE 143,Elements of Materials Science,DMMM,3.0,WF 1-2:30PM,TBA,CONCEALED
 MetE 176,Physical Metallurgy,DMMM,3.0,WF 10-11:30AM,TBA,CONCEALED
 MetE 176.1,Physical Metallurgy Laboratory,DMMM,1.0,F 2:30-5:30PM,TBA,CONCEALED
 MetE 179,Failure and Degradation of Metals,DMMM,3.0,TTh 2:30-4PM,TBA,CONCEALED
-MetE 195,Metallurgical Plant Design,DMMM,3.0,T 10-11:30AM,TBA; Th 10AM-1PM lab TBA,CONCEALED
+MetE 195,Metallurgical Plant Design,DMMM,3.0,T 10-11:30AM; Th 10AM-1PM,TBA; TBA,CONCEALED
 MetE 197,Special Topics,DMMM,3.0,F 2:30-5:30PM,TBA,CONCEALED
 MetE 198,Special Problems,DMMM,1.0,TTh 1-2:30PM,TBA,CONCEALED
 MetE 198,Literature Review and Proposal Writing,DMMM,1.0,TTh 1-2:30PM,TBA,CONCEALED
 Meteo 101,General Meteorology,IESM,3.0,TTh 10-11:30AM,TBA,"DELFINO, RAFAELA JANE; RACOMA, BERNARD ALAN"
 Meteo 204,Tropical Meteorology,IESM,3.0,T 1-4PM,TBA,"DELFINO, RAFAELA JANE"
-Meteo 206,Hydrometeorology,IESM,3.0,W 10AM-12PM,TBA; W 1-4PM lab TBA,"HILARIO, FLAVIANA"
-Meteo 212,Climate Monitoring and Prediction,IESM,3.0,Th 1-4PM,TBA; T 5-7PM lec TBA,"DELFINO, RAFAELA JANE"
-Meteo 213,Agrometeorology,IESM,3.0,F 10AM-12PM,TBA; F 1-4PM lab TBA,"HILARIO, FLAVIANA"
-Meteo 222,Satellite Meteorology,IESM,3.0,W 1-3PM,TBA; W 4-7PM lab TBA,"RACOMA, BERNARD ALAN"
-Meteo 223,Radar Meteorology ,IESM,3.0,S 10AM-12PM,TBA; S 1-4PM lab TBA,"NILO, PRISCO"
-Meteo 224,Air Pollution Meteorology,IESM,3.0,S 9AM-12PM,TBA; M 5-7PM lec TBA,"GONZAGA-CAYETANO, MYLENE"
-Meteo 231,Dynamic Meteorology,IESM,4.0,T 9AM-12PM,TBA; F 1-4PM lab TBA,"BAGTASA, GERRY"
+Meteo 206,Hydrometeorology,IESM,3.0,W 10AM-12PM; W 1-4PM,TBA; TBA,"HILARIO, FLAVIANA"
+Meteo 212,Climate Monitoring and Prediction,IESM,3.0,Th 1-4PM; T 5-7PM,TBA; TBA,"DELFINO, RAFAELA JANE"
+Meteo 213,Agrometeorology,IESM,3.0,F 10AM-12PM; F 1-4PM,TBA; TBA,"HILARIO, FLAVIANA"
+Meteo 222,Satellite Meteorology,IESM,3.0,W 1-3PM; W 4-7PM,TBA; TBA,"RACOMA, BERNARD ALAN"
+Meteo 223,Radar Meteorology ,IESM,3.0,S 10AM-12PM; S 1-4PM,TBA; TBA,"NILO, PRISCO"
+Meteo 224,Air Pollution Meteorology,IESM,3.0,S 9AM-12PM; M 5-7PM,TBA; TBA,"GONZAGA-CAYETANO, MYLENE"
+Meteo 231,Dynamic Meteorology,IESM,4.0,T 9AM-12PM; F 1-4PM,TBA; TBA,"BAGTASA, GERRY"
 Meteo 233,Geophysical Fluid Dynamics,IESM,3.0,T 1-4PM,TBA,"NILO, PRISCO"
-Meteo 234,Numerical Weather Prediction,IESM,3.0,Th 9AM-12PM,TBA; F 10AM-12PM lec TBA,"BAGTASA, GERRY"
+Meteo 234,Numerical Weather Prediction,IESM,3.0,Th 9AM-12PM; F 10AM-12PM,TBA; TBA,"BAGTASA, GERRY"
 Meteo 296,Graduate Seminar,IESM,1.0,Th 5-6PM,TBA,"DELFINO, RAFAELA JANE; RACOMA, BERNARD ALAN"
 Meteo 300,M.S. Thesis,IESM,3.0,TBA,,"BAGTASA, GERRY"
-Microbio 211,Microbial Systematics,IB,3.0,W 1-2PM,IB 155; WF 2:30-5:30PM lab IB 169,"PEREZ, TERESITA; OBUSAN, MARIE CHRISTINE; DACONES, LEILANI"
+Microbio 211,Microbial Systematics,IB,3.0,W 1-2PM; WF 2:30-5:30PM,IB 155; IB 169,"PEREZ, TERESITA; OBUSAN, MARIE CHRISTINE; DACONES, LEILANI"
 Microbio 221,Physiology of Microorganisms,IB,3.0,TTh 10-11:30AM,IB 155,"ADAO, DAVIN EDRIC"
 Microbio 221,Advanced Microbial Physiology,IB,3.0,TTh 10-11:30AM,IB 155,"ADAO, DAVIN EDRIC"
-Microbio 241,Microbial Genetics,IB,3.0,T 11:30AM-2:30PM,IB 280; Th 12-2PM lec IB 280,"ADAO, DAVIN EDRIC"
-Microbio 241,Advanced Microbial Genetics,"IB, IB",3.0,T 11:30AM-2:30PM,IB 280; Th 12-2PM lec IB 280,"ADAO, DAVIN EDRIC"
+Microbio 241,Microbial Genetics,IB,3.0,T 11:30AM-2:30PM; Th 12-2PM,IB 280; IB 280,"ADAO, DAVIN EDRIC"
+Microbio 241,Advanced Microbial Genetics,"IB, IB",3.0,T 11:30AM-2:30PM; Th 12-2PM,IB 280; IB 280,"ADAO, DAVIN EDRIC"
 Microbio 251,Microbial Pathogenesis,IB,3.0,WF 11:30AM-1PM,IB 155,"RIVERA, WINDELL"
-Microbio 261,Advanced Microbial Ecology,IB,3.0,T 2:30-5:30PM,IB 280; Th 3-5PM lec IB 2000B,"SIMBAHAN, JESSICA"
-Microbio 261,Microbial Ecology,IB,3.0,T 2:30-5:30PM,IB 280; Th 3-5PM lec IB 2000B,"SIMBAHAN, JESSICA"
-Microbio 262,Soil Microbiology,IB,3.0,W 11:30AM-2:30PM,IB 309; F 12-2PM lec IB 309,"SIMBAHAN, JESSICA"
-Microbio 271,Protozoology,IB,3.0,W 8:30-11:30AM,IB 169; F 9-11AM lec IB 155,"RIVERA, WINDELL"
+Microbio 261,Advanced Microbial Ecology,IB,3.0,T 2:30-5:30PM; Th 3-5PM,IB 280; IB 2000B,"SIMBAHAN, JESSICA"
+Microbio 261,Microbial Ecology,IB,3.0,T 2:30-5:30PM; Th 3-5PM,IB 280; IB 2000B,"SIMBAHAN, JESSICA"
+Microbio 262,Soil Microbiology,IB,3.0,W 11:30AM-2:30PM; F 12-2PM,IB 309; IB 309,"SIMBAHAN, JESSICA"
+Microbio 271,Protozoology,IB,3.0,W 8:30-11:30AM; F 9-11AM,IB 169; IB 155,"RIVERA, WINDELL"
 Microbio 296,Seminar,IB,1.0,Th 9-10AM,IB 155,"IBANA, JOYCE"
 MuC 10,The Philippine Choral Experience,DCond,3.0,TTh 2:30-4PM,ANX 212,"NAVARRO, RAUL"
 MuC 100,Fundamentals of Conducting,DCond,3.0,TTh 10-11:30AM,ANX 212,TBA
@@ -1948,7 +1948,7 @@ MuD 193,Seminar on History of Dance,DVMT,3.0,WF 1-2:30PM,AH DANCE STUDIO,"BAGUIL
 MuD 194,Seminar on Dance Criticism,DVMT,3.0,WF 2:30-4PM,TBA,"VILLARUZ, BASILIO ESTEBAN"
 MuD 200,Thesis,DVMT,3.0,M 1-3PM,TBA,"BAGUILAT, ANGELA"
 MuEd 100,Introduction to Music Education,DMuE,3.0,WF 2:30-4PM,ANX 202,"ELGINCOLIN, JOAN HOPE"
-MuEd 110 PNO,Piano,DMuE,3.0,Th 10-11:30AM,AH 109; T 10-11:30AM prac AH 115,"MALICDEM, GEMMA FILIPINA; ACEVEDO, CLEMENT"
+MuEd 110 PNO,Piano,DMuE,3.0,Th 10-11:30AM; T 10-11:30AM,AH 109; AH 115,"MALICDEM, GEMMA FILIPINA; ACEVEDO, CLEMENT"
 MuEd 110 WWD,Wind,DMuE,3.0,M 10AM-1PM,AH 109,"AMBAT, RODNEY"
 MuEd 110 VMT,Voice and Music Theatre,DMuE,3.0,TTh 2:30-4PM,ANX 214,"DIAZ, RAYMOND LESLIE"
 MuEd 110 STG,String Instrument,DMuE,3.0,F 9AM-12PM,TBA,"MANIMTIM, NATHAN NEIL"
@@ -1966,7 +1966,7 @@ MuK 110,Composition Major II,"DComp, DComp",3.0,F 2-3PM,Online,"TRANGCO, MARY KA
 MuK 120,Composition Major III,"DComp, DComp",3.0,TBA,,TBA
 MuK 130,Composition Major IV,"DComp, DComp",3.0,F 3-4PM,Online,"TRANGCO, MARY KATHERINE"
 MuK 140,Composition Major V,"DComp, DComp",3.0,TBA,,"TRANGCO, MARY KATHERINE"
-MuK 150,Composition Major VI,"DComp, DComp",3.0,F 9-10AM,Online; Th 2:30-3:30PM lec Online,"TRANGCO, MARY KATHERINE"
+MuK 150,Composition Major VI,"DComp, DComp",3.0,F 9-10AM; Th 2:30-3:30PM,Online; Online,"TRANGCO, MARY KATHERINE"
 MuK 160,Composition Major VII,"DComp, DComp",3.0,TBA,,TBA
 MuK 163,Choral Writing,"DComp, DCond",3.0,TTh 10-11:30AM,AH 202-204,"TRANGCO, MARY KATHERINE"
 MuK 170,Composition Major VIII,"DComp, DComp",3.0,W 9-10AM,Online,"TRANGCO, MARY KATHERINE"
@@ -1993,7 +1993,7 @@ MuL 247,Works of Filipino Composers,"Musico, CMuGP",3.0,WF 2:30-4PM,TBA,"DELA PE
 MuP 11 VMT,Voice and Music Theatre,"DKey, DVMT, DSCM, DWP, Musico",3.0,TBA,,"FERRER, ALEGRIA"
 MuP 11 Ku,Kulintang,"DSCM, Musico, DVMT, DWP, DKey",3.0,M 12-1PM,AH MUSEUM,"BUTOCAN, AGA"
 MuP 11 BR Eup,Euphonium,"DKey, Musico, DSCM, DVMT, DWP",3.0,T 2-3PM,AH 209,"SAN JOSE, JORDAN SAMUEL"
-MuP 11 PERC,Percussion,"DVMT, Musico, DSCM, DWP, DKey",3.0,Th 1-2PM,AH 117; Th 2-3PM lec AH 117,"CASTELO, KEVIN JULIUS"
+MuP 11 PERC,Percussion,"DVMT, Musico, DSCM, DWP, DKey",3.0,Th 1-2PM; Th 2-3PM,AH 117; AH 117,"CASTELO, KEVIN JULIUS"
 MuP 11 PNO,Piano,"Musico, DVMT, DSCM, DWP, DKey",3.0,W 9-10AM,TBA,"FERNANDEZ, MITA ANTONIA"
 MuP 11 STG Gtr,Guitar,"DKey, DSCM, DVMT, Musico, DWP",3.0,F 3:30-4:30PM,AH 213,"MANIMTIM, NATHAN NEIL"
 MuP 11 WWD Rec,Recorder,"Musico, DSCM, DKey, DVMT, DWP",3.0,TBA,,"GUADALUPE, DAVID DINO"
@@ -2010,15 +2010,15 @@ MuP 21 CI,Chinese Instruments,"DKey, DWP, DVMT, Musico, DSCM",3.0,TBA,,TBA
 MuP 21 OR,Organ,"DWP, DSCM, Musico, DKey, DVMT",3.0,TBA,,"SALARZA, ARMANDO"
 MuP 21 BR Eup,Euphonium,"Musico, DWP, DVMT, DKey, DSCM",3.0,F 11AM-12PM,AH 209,"AMBAT, RODNEY"
 MuP 21 STG Gtr,Guitar,"Musico, DVMT, DSCM, DKey, DWP",3.0,F 2:30-3:30PM,AH 213,"MANIMTIM, NATHAN NEIL"
-MuP 21 Ku,Kulintang,"Musico, DKey, DWP, DSCM, DVMT",3.0,M 10-11AM,AH MUSEUM; M 11AM-12PM lec AH MUSEUM,"BUTOCAN, AGA"
-MuP 21 PNO,Piano,"DWP, DKey, Musico, DVMT, DSCM",3.0,M 10-11AM,TBA; Th 1-2PM lec TBA,"MAGALIT, LUCI"
+MuP 21 Ku,Kulintang,"Musico, DKey, DWP, DSCM, DVMT",3.0,M 10-11AM; M 11AM-12PM,AH MUSEUM; AH MUSEUM,"BUTOCAN, AGA"
+MuP 21 PNO,Piano,"DWP, DKey, Musico, DVMT, DSCM",3.0,M 10-11AM; Th 1-2PM,TBA; TBA,"MAGALIT, LUCI"
 MuP 21 WWD Fl,Flute,"DVMT, Musico, DKey, DSCM, DWP",3.0,Th 1:30-2:30PM,AH 201,"RODIS-CONCEPCION, CRYSTAL MILAROSE"
 MuP 21 BR Tu,Tuba,"DWP, DKey, DSCM, Musico, DVMT",3.0,M 10-11AM,AH 209,"DELA PERET, BENEDICTO"
-MuP 21 STG Hrp,Harp,"DSCM, Musico, DKey, DWP, DVMT",3.0,M 10:30-11:30AM,AH 111; M 12:30-1:30PM lec AH 111,"BANTA, MADELINE JANE"
+MuP 21 STG Hrp,Harp,"DSCM, Musico, DKey, DWP, DVMT",3.0,M 10:30-11:30AM; M 12:30-1:30PM,AH 111; AH 111,"BANTA, MADELINE JANE"
 MuP 21 Ka,Kalingga,"DSCM, DVMT, Musico, DKey, DWP",3.0,Th 2-3PM,AH MUSEUM,"MATUTE, MA LOURDES CECILIA"
 MuP 31 OR,Organ,"DSCM, DWP, DVMT, DKey, Musico",3.0,TBA,,"SALARZA, ARMANDO"
 MuP 31 VMT,Voice and Music Theatre,"Musico, DKey, DVMT, DWP, DSCM",3.0,TBA,,TBA
-MuP 31 KT,Koto,"DWP, Musico, DKey, DSCM, DVMT",3.0,Th 1-2PM,AH 214; Th 2-3PM lec AH 214,"NAGAI, HIROKO"
+MuP 31 KT,Koto,"DWP, Musico, DKey, DSCM, DVMT",3.0,Th 1-2PM; Th 2-3PM,AH 214; AH 214,"NAGAI, HIROKO"
 MuP 31 OR,Organ,"DKey, DVMT, Musico, DSCM, DWP",3.0,TBA,,"SALARZA, ARMANDO"
 MuP 31 VMT,Voice and Music Theatre,"DKey, DVMT, Musico, DWP, DSCM",3.0,TBA,,TBA
 MuP 31 Ku,Kulintang,"Musico, DVMT, DSCM, DKey, DWP",3.0,M 9-10AM,AH MUSEUM,"BUTOCAN, AGA"
@@ -2027,7 +2027,7 @@ MuP 31 Ha,Harpsichord,"DKey, DWP, Musico, DVMT, DSCM",3.0,TBA,,TBA
 MuP 31 Ku,Kulintang,"DKey, DWP, DVMT, DSCM, Musico",3.0,M 9-10AM,AH MUSEUM,"BUTOCAN, AGA"
 MuP 31 PNO,Piano,"DWP, DSCM, Musico, DKey, DVMT",3.0,W 3-4PM,TBA,"MAGALIT, LUCI"
 MuP 31 PNO,Piano,"DWP, Musico, DSCM, DKey, DVMT",3.0,W 3-4PM,TBA,"MAGALIT, LUCI"
-MuP 31 KT,Koto,"DSCM, DVMT, Musico, DWP, DKey",3.0,Th 1-2PM,AH 214; Th 2-3PM lec AH 214,"NAGAI, HIROKO"
+MuP 31 KT,Koto,"DSCM, DVMT, Musico, DWP, DKey",3.0,Th 1-2PM; Th 2-3PM,AH 214; AH 214,"NAGAI, HIROKO"
 MuP 41 Ka,Kalingga,"DVMT, DKey, DWP, Musico, DSCM",3.0,TBA,,TBA
 MuP 41 CI,Chinese Instruments,"DWP, DVMT, DKey, Musico, DSCM",3.0,TBA,,TBA
 MuP 41 PIC Fl,Piccolo Flute,"DKey, DVMT, Musico, DWP, DSCM",3.0,W 9-10AM,AH 201,"MAIGUE, ANTONIO"
@@ -2039,7 +2039,7 @@ MuP 41 KT,Koto,"DKey, DSCM, DWP, DVMT, Musico",3.0,TBA,,TBA
 MuP 41 PIC Trp,Piccolo Trumpet,"Musico, DWP, DKey, DSCM, DVMT",3.0,F 10-11AM,AH 205,"MAIGUE, RAYMUNDO"
 MuP 41 Ku,Kulintang,"DKey, DWP, DVMT, DSCM, Musico",3.0,TBA,,TBA
 MuP 51 WWD Bas,Bassoon ,"DSCM, Musico, DKey, DVMT, DWP",3.0,TBA,,"ANDRA, FRENVEE"
-MuP 51 PNO,Piano,"DWP, DVMT, DKey, DSCM, Musico",3.0,Th 9-10AM,TBA; M 11AM-12PM lec TBA,"MAGALIT, LUCI"
+MuP 51 PNO,Piano,"DWP, DVMT, DKey, DSCM, Musico",3.0,Th 9-10AM; M 11AM-12PM,TBA; TBA,"MAGALIT, LUCI"
 MuP 51 WWD Sax,Saxophone,"DWP, DKey, DSCM, DVMT, Musico",3.0,TBA,,"GUEVARRA, MICHAEL MARK"
 MuP 51 VMT,Voice and Music Theatre,"DVMT, DSCM, DWP, Musico, DKey",3.0,TBA,,"FERRER, ALEGRIA"
 MuP 61 Ka,Kalingga,"DKey, DVMT, DSCM, DWP, Musico",3.0,TBA,,TBA
@@ -2065,10 +2065,10 @@ MuP 110 VMT,Voice and Music Theatre,"DWP, DVMT, DKey, Musico, DSCM",3.0,TBA,,"VA
 MuP 110 STG Vn,Violin,"Musico, DKey, DVMT, DSCM, DWP",3.0,T 9-10AM,AH 217,"MARTINEZ, EDNA MARCIL"
 MuP 110 BR Fr,French Horn,"DWP, Musico, DVMT, DKey, DSCM",3.0,TBA,,"VILLANUEVA, MAHLER"
 MuP 110 WWD Fl,Flute,"DWP, DSCM, Musico, DKey, DVMT",3.0,TBA,,"MAIGUE, ANTONIO"
-MuP 110 WWD Cla,Clarinet,"Musico, DWP, DKey, DVMT, DSCM",3.0,M 8-9AM,AH 201; M 9-10AM lec AH 201; M 11AM-12PM lec AH 201,"RIVERA, JAYSON"
-MuP 110 WWD Sax,Saxophone,"Musico, DWP, DKey, DSCM, DVMT",3.0,W 10-11AM,ANX 108; W 11AM-12PM lec ANX 108; Th 1-2PM lec AH 201; Th 2-3PM lec AH 201,"GUEVARRA, MICHAEL MARK"
+MuP 110 WWD Cla,Clarinet,"Musico, DWP, DKey, DVMT, DSCM",3.0,M 8-9AM; M 9-10AM,AH 201; AH 201,"RIVERA, JAYSON"
+MuP 110 WWD Sax,Saxophone,"Musico, DWP, DKey, DSCM, DVMT",3.0,W 10-11AM; W 11AM-12PM,ANX 108; ANX 108,"GUEVARRA, MICHAEL MARK"
 MuP 110 Ba,Banduria,"DSCM, DWP, DVMT, DKey, Musico",3.0,M 4-5PM,AH 214,"BRUNO, LEONARDO"
-MuP 110 BR Tpt,Trumpet,"DWP, Musico, DSCM, DKey, DVMT",3.0,F 11AM-12PM,AH 205; T 1-2PM lec AH 205; T 3-4PM lec AH 205,"MAIGUE, RAYMUNDO"
+MuP 110 BR Tpt,Trumpet,"DWP, Musico, DSCM, DKey, DVMT",3.0,F 11AM-12PM; T 1-2PM,AH 205; AH 205,"MAIGUE, RAYMUNDO"
 MuP 110 STG Db,Double Bass,"Musico, DVMT, DKey, DWP, DSCM",3.0,W 4-6PM,AH 219,"PAYTE, ARISTON"
 MuP 110 WWD Ob,Oboe,"DKey, DVMT, Musico, DWP, DSCM",3.0,T 1-2PM,AH 201,"GALANG, MARLON"
 MuP 110 PERC,Percussion Instrument ,"Musico, DSCM, DVMT, DKey, DWP",3.0,TF 1-2PM,AH 117,"CASTELO, KEVIN JULIUS"
@@ -2077,7 +2077,7 @@ MuP 120 BR Tpt,Trumpet,"DKey, DSCM, DWP, Musico, DVMT",3.0,T 2-3PM,AH 205,"MAIGU
 MuP 120 STG Vn,Violin,"Musico, DSCM, DKey, DVMT, DWP",3.0,TTh 9-10AM,AH 215,"TAYLAN, RALPH WALDO"
 MuP 130 STG Vn,Violin,"DSCM, DWP, DVMT, Musico, DKey",3.0,T 10-11AM,AH 217,"MARTINEZ, EDNA MARCIL"
 MuP 130 STG Db,Double Bass,"Musico, DKey, DWP, DSCM, DVMT",3.0,W 3-4PM,AH 219,"PAYTE, ARISTON"
-MuP 130 WWD Ob,Oboe,"DSCM, DWP, DKey, Musico, DVMT",3.0,T 2:30-3:30PM,AH 201; T 4-5PM lec AH 201,"GALANG, MARLON"
+MuP 130 WWD Ob,Oboe,"DSCM, DWP, DKey, Musico, DVMT",3.0,T 2:30-3:30PM; T 4-5PM,AH 201; AH 201,"GALANG, MARLON"
 MuP 130 PNO,Piano,"DVMT, DWP, DSCM, DKey, Musico",3.0,TBA,,TBA
 MuP 130 BR Trb,Trombone,"DVMT, DWP, DKey, DSCM, Musico",3.0,T 1-2PM,AH 209,"SAN JOSE, JORDAN SAMUEL"
 MuP 130 STG Ce,Cello,"DSCM, Musico, DVMT, DWP, DKey",3.0,Th 3-4PM,AH 219,"DIESTRO, GIUSEPPE ANDRE"
@@ -2085,7 +2085,7 @@ MuP 130 WWD Cla,Clarinet,"DKey, Musico, DWP, DVMT, DSCM",3.0,M 2-3PM,AH 201,"RIV
 MuP 130 VMT,Voice and Music Theatre,"Musico, DVMT, DKey, DWP, DSCM",3.0,TBA,,"VALENA, MA. CECILIA"
 MuP 130 WWD Fl,Flute,"DKey, DSCM, Musico, DWP, DVMT",3.0,W 2-3PM,AH 201,"MAIGUE, ANTONIO"
 MuP 130 PERC,Percussion Instrument,"DSCM, DKey, Musico, DVMT, DWP",3.0,F 2-3PM,AH 117,"CASTELO, KEVIN JULIUS"
-MuP 130 BR Tpt,Trumpet,"DVMT, DWP, DKey, Musico, DSCM",3.0,F 1-2PM,AH 205; F 2-3PM lec AH 205,"MAIGUE, RAYMUNDO"
+MuP 130 BR Tpt,Trumpet,"DVMT, DWP, DKey, Musico, DSCM",3.0,F 1-2PM; F 2-3PM,AH 205; AH 205,"MAIGUE, RAYMUNDO"
 MuP 130 BR Tu,Tuba,"DVMT, DKey, DSCM, Musico, DWP",3.0,M 9-10AM,AH 209,"DELA PERET, BENEDICTO"
 MuP 130 BR Fr,French Horn,"DSCM, Musico, DVMT, DKey, DWP",3.0,F 4-5PM,AH 201,"VILLANUEVA, MAHLER"
 MuP 130 WWD Sax,Saxophone,"DWP, DVMT, DKey, Musico, DSCM",3.0,Th 3-4PM,AH 201,"GUEVARRA, MICHAEL MARK"
@@ -2094,13 +2094,13 @@ MuP 140 PERC,Percussion Instrument,"DWP, DSCM, Musico, DKey, DVMT",3.0,M 10AM-12
 MuP 140 WWD Cla,Clarinet,"Musico, DSCM, DKey, DVMT, DWP",3.0,M 1-2PM,AH 201,"RIVERA, JAYSON"
 MuP 140 VMT,Voice and Music Theatre,"DSCM, Musico, DKey, DWP, DVMT",3.0,T 3-4PM,ANX 218,"NEPOMUCENO, RICA"
 MuP 140 BR Trb,Trombone,"DWP, DVMT, DSCM, DKey, Musico",3.0,TBA,,"SAN JOSE, JORDAN SAMUEL"
-MuP 150 STG Vn,Violin,"DKey, DWP, DVMT, Musico, DSCM",3.0,Th 10-11AM,AH 215; T 12-1PM lec AH 215,"TAYLAN, RALPH WALDO"
-MuP 150 PNO,Piano,"DWP, DKey, DSCM, DVMT, Musico",3.0,T 9-10AM,TBA; MT 1-2PM lec TBA,"MAGALIT, LUCI"
+MuP 150 STG Vn,Violin,"DKey, DWP, DVMT, Musico, DSCM",3.0,Th 10-11AM; T 12-1PM,AH 215; AH 215,"TAYLAN, RALPH WALDO"
+MuP 150 PNO,Piano,"DWP, DKey, DSCM, DVMT, Musico",3.0,T 9-10AM; MT 1-2PM,TBA; TBA,"MAGALIT, LUCI"
 MuP 150 BR Tpt,Trumpet,"DVMT, DSCM, DKey, Musico, DWP",3.0,TBA,,"MAIGUE, RAYMUNDO"
 MuP 150 BR Trb,Trombone,"DWP, Musico, DSCM, DKey, DVMT",3.0,T 10-11AM,AH 209,"SAN JOSE, JORDAN SAMUEL"
-MuP 150 WWD Fl,Flute,"DWP, Musico, DSCM, DKey, DVMT",3.0,W 1-2PM,AH 201; W 3-4PM lec AH 201,"MAIGUE, ANTONIO"
+MuP 150 WWD Fl,Flute,"DWP, Musico, DSCM, DKey, DVMT",3.0,W 1-2PM; W 3-4PM,AH 201; AH 201,"MAIGUE, ANTONIO"
 MuP 150 STG Gtr,Guitar,"Musico, DWP, DKey, DSCM, DVMT",3.0,W 3-4PM,AH 115,"DEMETILLO, LESTER"
-MuP 150 WWD Sax,Saxophone,"DVMT, DWP, DKey, Musico, DSCM",3.0,T 1-2PM,ANX 108; T 2-3PM lec ANX 108,"GUEVARRA, MICHAEL MARK"
+MuP 150 WWD Sax,Saxophone,"DVMT, DWP, DKey, Musico, DSCM",3.0,T 1-2PM; T 2-3PM,ANX 108; ANX 108,"GUEVARRA, MICHAEL MARK"
 MuP 150 VMT,Voice and Music Theatre,"DWP, DKey, DVMT, DSCM, Musico",3.0,TBA,,"VALENA, MA. CECILIA"
 MuP 160 WWD Bas,Bassoon ,"DKey, DWP, DVMT, DSCM, Musico",3.0,T 3-4PM,AH 203,"ANDRA, FRENVEE"
 MuP 160 STG Va,Viola,"Musico, DKey, DSCM, DWP, DVMT",3.0,W 11AM-12PM,AH 217,"MARTINEZ, EDNA MARCIL"
@@ -2112,7 +2112,7 @@ MuP 160 BR Trb,Trombone,"DWP, Musico, DVMT, DKey, DSCM",3.0,F 1-2PM,AH 209,"AMBA
 MuP 170 WWD Sax,Saxophone,"DVMT, Musico, DKey, DWP, DSCM",3.0,TBA,,"GUEVARRA, MICHAEL MARK"
 MuP 170 PNO,Piano,"DVMT, DKey, DWP, Musico, DSCM",3.0,TBA,,"NICOLASORA, MICHELLE"
 MuP 170 VMT,Voice and Music Theatre,"DKey, DWP, DVMT, Musico, DSCM",3.0,Th 10:30-11:30AM,ANX 218,"NEPOMUCENO, RICA"
-MuP 170 STG Vn,Violin,"DWP, DVMT, DKey, Musico, DSCM",3.0,Th 12-1PM,AH 215; T 1-2PM lec AH 215; T 3-4PM lec AH 215,"TAYLAN, RALPH WALDO"
+MuP 170 STG Vn,Violin,"DWP, DVMT, DKey, Musico, DSCM",3.0,Th 12-1PM; T 1-2PM,AH 215; AH 215,"TAYLAN, RALPH WALDO"
 MuP 170 BR Tpt,Trumpet,"Musico, DSCM, DVMT, DWP, DKey",3.0,T 11AM-12PM,AH 205,"MAIGUE, RAYMUNDO"
 MuP 170 STG Gtr,Guitar,"Musico, DVMT, DKey, DWP, DSCM",3.0,F 1-2PM,TBA,"MANIMTIM, NATHAN NEIL"
 MuP 180 VMT,Voice and Music Theatre,"DVMT, DSCM, Musico, DKey, DWP",3.0,TBA,,"VALENA, MA. CECILIA"
@@ -2124,18 +2124,18 @@ MuP 195 COMP,Composition,"Musico, DKey, DVMT, DWP, DComp, DSCM, DCond",1.0,W 8-9
 MuP 195 BR Trb,Trombone,"DSCM, Musico, DComp, DWP, DVMT, DCond, DKey",1.0,W 1-2PM,AH 209,"AMBAT, RODNEY"
 MuP 195 BR Tpt,Trumpet,"DVMT, DKey, DCond, Musico, DSCM, DWP, DComp",1.0,TBA,,"MAIGUE, RAYMUNDO"
 MuP 195 WWD Ob,Oboe,"DSCM, DWP, DComp, Musico, DCond, DVMT, DKey",1.0,T 11AM-12PM,AH 201,"GALANG, MARLON"
-MuP 195 PNO,Piano,"DWP, DCond, Musico, DSCM, DVMT, DKey, DComp",1.0,T 10-11AM,TBA; MT 2-3PM lec TBA,"MAGALIT, LUCI"
+MuP 195 PNO,Piano,"DWP, DCond, Musico, DSCM, DVMT, DKey, DComp",1.0,T 10-11AM; MT 2-3PM,TBA; TBA,"MAGALIT, LUCI"
 MuP 195 VMT,Voice and Music Theatre,"DCond, DKey, DComp, DVMT, DWP, DSCM, Musico",1.0,TBA,,"VALENA, MA. CECILIA"
 MuP 195 C,Chorus,"DKey, DWP, DCond, Musico, DVMT, DSCM, DComp",1.0,TBA,,"ARACAMA, JANET"
 MuP 195 STG Gtr,Guitar,"DComp, DKey, DSCM, Musico, DVMT, DCond, DWP",1.0,W 4-5PM,AH 115,"DEMETILLO, LESTER"
 MuP 195 PERC,Percussion Instrument,"DSCM, DWP, DCond, DKey, Musico, DVMT, DComp",1.0,M 2-3PM,AH 117,"TOLENTINO, ELIZALDE"
-MuP 195 STG Vn,Violin,"Musico, DComp, DKey, DSCM, DVMT, DCond, DWP",1.0,Th 11AM-12PM,AH 215; Th 2-3PM lec AH 215,"TAYLAN, RALPH WALDO"
+MuP 195 STG Vn,Violin,"Musico, DComp, DKey, DSCM, DVMT, DCond, DWP",1.0,Th 11AM-12PM; Th 2-3PM,AH 215; AH 215,"TAYLAN, RALPH WALDO"
 MuP 196 WWD Sax,Saxophone,"DComp, DCond, Musico, DSCM, DVMT, DWP, DKey",1.0,F 9-10AM,AH 205,"GUEVARRA, MICHAEL MARK"
 MuP 196 PNO,Piano,"DCond, DWP, DSCM, Musico, DComp, DVMT, DKey",1.0,TBA,,"NICOLASORA, MICHELLE"
 MuP 196 COMP,Composition,"DKey, DComp, DSCM, DCond, Musico, DWP, DVMT",1.0,W 4-5PM,TBA,"TOLEDO, JOSEFINO"
 MuP 196 STG Gtr,Guitar,"DCond, DComp, Musico, DVMT, DSCM, DKey, DWP",1.0,Th 2:30-3:30PM,AH 219,"ROXAS, PATRICK PAUL"
 MuP 196 VMT,Voice and Music Theatre,"Musico, DWP, DComp, DCond, DVMT, DSCM, DKey",1.0,TBA,,"VALENA, MA. CECILIA"
-MuP 196 STG Vn,Violin,"DVMT, DCond, DComp, DSCM, Musico, DKey, DWP",1.0,Th 11AM-12PM,AH 215; Th 1-2PM lec AH 215; T 2-3PM lec AH 215,"TAYLAN, RALPH WALDO"
+MuP 196 STG Vn,Violin,"DVMT, DCond, DComp, DSCM, Musico, DKey, DWP",1.0,Th 11AM-12PM; Th 1-2PM,AH 215; AH 215,"TAYLAN, RALPH WALDO"
 MuP 196 C,Chorus,"DSCM, DComp, DVMT, DWP, DCond, Musico, DKey",1.0,F 1-2PM,ANX 208,"SHANGKUAN, BEVERLY CLAUDINE"
 MuP 196 BR Tpt,Trumpet,"DSCM, DCond, Musico, DKey, DVMT, DComp, DWP",1.0,F 9-10AM,AH 205,"MAIGUE, RAYMUNDO"
 MuP 204,Chamber Music II,"DKey, Musico, DSCM, CMuGP",3.0,MTh 9-10:30AM,TBA,"MAIGUE, ANTONIO"
@@ -2204,8 +2204,8 @@ MuPC 166 STG,Bowed and Guitar,"DKey, DSCM",3.0,W 1-4PM,AH 213,"MANIMTIM, NATHAN 
 MuPC 167 PNO,Piano,DKey,3.0,F 12-3PM,TBA,"ALDECOA, ENA MARIA; NICOLASORA, MICHELLE"
 MuPC 177,Jazz Improvisation II,DWP,3.0,TTh 10-11:30AM,AH 201,"GUEVARRA, MICHAEL MARK"
 MuPed 220,Piano Pedagogy II,"DKey, CMuGP",3.0,F 2-5PM,TBA,"RIVERA, RICHELLE"
-MuT 11,Fundamentals of Music II,"DKey, DComp, DCond",5.0,ThF 11:30AM-12:30PM,TBA; MW 11:30AM-1PM lec TBA,"GUADALUPE, JOCELYN; RODIS-CONCEPCION, CRYSTAL MILAROSE"
-MuT 13,Fundamentals of Music IV,"DCond, DKey, DComp",5.0,ThF 1-2PM,TBA; MW 1-2:30PM lec TBA,"MUYCO, MARIA CHRISTINE; GUADALUPE, JOCELYN"
+MuT 11,Fundamentals of Music II,"DKey, DComp, DCond",5.0,ThF 11:30AM-12:30PM; MW 11:30AM-1PM,TBA; TBA,"GUADALUPE, JOCELYN; RODIS-CONCEPCION, CRYSTAL MILAROSE"
+MuT 13,Fundamentals of Music IV,"DCond, DKey, DComp",5.0,ThF 1-2PM; MW 1-2:30PM,TBA; TBA,"MUYCO, MARIA CHRISTINE; GUADALUPE, JOCELYN"
 MuT 111,Score Reading,DComp,3.0,Th 2:30-5:30PM,AH MINIHALL,"MAGALIT, LUCI"
 MuT 123,Advanced Harmony,DComp,3.0,WF 10-11:30AM,AH 202-204,"BAES, JONAS"
 MuT 151,History of Theory,DComp,3.0,TTh 1-2:30PM,TBA,"BAES, JONAS"
@@ -2506,18 +2506,18 @@ Philo 393,Research Seminar in Filipino Philosophy,Philo,3.0,W 5:30-8:30PM,TBA,"P
 Philo 398,Advanced Topics in Philosophy,Philo,3.0,F 4-7PM,Conference Room,"YASOL-NAVAL, JEANETTE"
 Philo 400,Doctoral Dissertation,Philo,6.0,TBA,,TBA
 Physics 10,Physics and Astronomy for Pedestrians,NIP,3.0,TTh 2:30-4PM,NIP F201,TBA
-Physics 71,Elementary Physics I,NIP,4.0,F 7-8AM,NIP F209; TTh 7-8:30AM lec NIP F206,"MIRANDA, JESSA JAYNE"
+Physics 71,Elementary Physics I,NIP,4.0,F 7-8AM; TTh 7-8:30AM,NIP F209; NIP F206,"MIRANDA, JESSA JAYNE"
 Physics 71.1,Elementary Physics I Laboratory,NIP,1.0,F 8-10AM,NIP F106,"LOGROÑO, CLENT JOSEPH"
-Physics 72,Elementary Physics II,NIP,4.0,F 7-8AM,NIP F206; TTh 7-8:30AM lec NIP F201,"FORTUNA, SEAN JULIAN"
+Physics 72,Elementary Physics II,NIP,4.0,F 7-8AM; TTh 7-8:30AM,NIP F206; NIP F201,"FORTUNA, SEAN JULIAN"
 Physics 72.1,Elementary Physics II Laboratory,NIP,1.0,F 8-10AM,NIP F102,"RODRIGO, JUAN MARTIN"
-Physics 73,Elementary Physics III,NIP,4.0,TTh 8:30-10AM,NIP F207; W 8:45-9:45AM disc NIP F209,"BAYBAY, JOHN ADRIAN"
-Physics 106,Fundamental Physics I,NIP,5.0,F 10-11:15AM,NIP F201; TWTh 10-11:15AM lec NIP F201,CONCEALED
+Physics 73,Elementary Physics III,NIP,4.0,TTh 8:30-10AM; W 8:45-9:45AM,NIP F207; NIP F209,"BAYBAY, JOHN ADRIAN"
+Physics 106,Fundamental Physics I,NIP,5.0,F 10-11:15AM; TWTh 10-11:15AM,NIP F201; NIP F201,CONCEALED
 Physics 106.1,Fundamental Physics I Laboratory,NIP,1.0,M 8-11AM,NIP F101,"NIP, NIP; RODELAS, JOSEPH"
-Physics 107,Fundamental Physics II,NIP,5.0,F 10-11:15AM,NIP LP102; TWTh 10-11:15AM lec NIP LP102,"SOMINTAC, ARMANDO"
+Physics 107,Fundamental Physics II,NIP,5.0,F 10-11:15AM; TWTh 10-11:15AM,NIP LP102; NIP LP102,"SOMINTAC, ARMANDO"
 Physics 107.1,Fundamental Physics II Laboratory,NIP,1.0,M 8-11AM,NIP F102,"MAGSIGAY, CHRISTIAN JAY"
-Physics 108,Fundamental Physics III,NIP,5.0,F 10-11:15AM,NIP R201; TWTh 10-11:15AM lec NIP R201,"GROSVENOR, KEVIN JOHN"
+Physics 108,Fundamental Physics III,NIP,5.0,F 10-11:15AM; TWTh 10-11:15AM,NIP R201; NIP R201,"GROSVENOR, KEVIN JOHN"
 Physics 117,Mathematical Physics II,NIP,5.0,TWThF 8:30-9:45AM,NIP F201,CONCEALED
-Physics 126,Theoretical Mechanics I,NIP,4.0,M 4-5PM,NIP F206; TTh 4-5:30PM lec NIP F206,"MACAM, GENNEVIEVE"
+Physics 126,Theoretical Mechanics I,NIP,4.0,M 4-5PM; TTh 4-5:30PM,NIP F206; NIP F206,"MACAM, GENNEVIEVE"
 Physics 132,Electromagnetic Theory II,NIP,3.0,WF 8:30-10AM,NIP R109,CONCEALED
 Physics 141,Quantum Physics I,NIP,3.0,WF 10-11:30AM,NIP LP101,"VILLAGONZALO, CRISTINE"
 Physics 142,Quantum Physics II,NIP,3.0,WF 10-11:30AM,NIP R109,"COSME, JAYSON"
@@ -2525,7 +2525,7 @@ Physics 151,Statistical Physics I,NIP,3.0,TTh 10-11:30AM,NIP R109,"GALAPON, ERIC
 Physics 161,Introductory Laser Physics and Photonics,NIP,3.0,TTh 4-5:30PM,NIP R109,"HERMOSA, NATHANIEL"
 Physics 165,Optical Physics I,NIP,3.0,TTh 8:30-10AM,NIP R109,"ZOSA, MYLES ALLEN"
 Physics 170,Condensed Matter,NIP,3.0,TTh 4-5:30PM,NIP R201,"MATSUOKA, TAKIHIRO"
-Physics 191,Experimental Physics I,NIP,4.0,TTh 11:30AM-12:30PM,NIP LP101; TTh 1-4PM lab NIP F105,"ZOSA, MYLES ALLEN; EMPERADO, ROMMIL"
+Physics 191,Experimental Physics I,NIP,4.0,TTh 11:30AM-12:30PM; TTh 1-4PM,NIP LP101; NIP F105,"ZOSA, MYLES ALLEN; EMPERADO, ROMMIL"
 Physics 195,Special Topics,NIP,3.0,WF 10-11:30AM,NIP F207,CONCEALED
 Physics 196,Undergraduate Seminar,NIP,1.0,M 1-2PM,NIP F201,"BANZON, RONALD"
 Physics 199,Undergraduate Research,NIP,3.0,M 1-4PM,TBA,"ESTACIO, ELMER"
@@ -2539,8 +2539,8 @@ Physics 205,Foundations of Statistical Physics,NIP,3.0,WF 1-2:30PM,NIP R109,"SAL
 Physics 206.5,Foundations of Optics,NIP,3.0,TTh 8:30-10AM,NIP R211,"SORIANO, MARICOR"
 Physics 206.8,Physics of Nuclei and Particles,NIP,3.0,WF 2:30-4PM,NIP R201,"SOMBILLO, DENNY LANE"
 Physics 207,Seminar in Modern Physics,NIP,1.0,M 12-1PM,NIP F205,"ESGUERRA, JOSE PERICO"
-Physics 208,Foundations of Physical Electronics,NIP,4.0,T 1-4PM,NIP R208; WF 4-5:30PM lec NIP R210,TBA
-Physics 209.1,Foundations of Experimental Physics I,NIP,4.0,Th 10AM-1PM,NIP F106; T 11:30AM-12:30PM lec NIP R201; TTh 1-4PM lab NIP F106,"HERMOSA, NATHANIEL"
+Physics 208,Foundations of Physical Electronics,NIP,4.0,T 1-4PM; WF 4-5:30PM,NIP R208; NIP R210,TBA
+Physics 209.1,Foundations of Experimental Physics I,NIP,4.0,Th 10AM-1PM; T 11:30AM-12:30PM,NIP F106; NIP R201,"HERMOSA, NATHANIEL"
 Physics 210.1,Physics Teaching Practicum I,NIP,2.0,TBA,,"GARCIA, WILSON"
 Physics 212,Mathematical Methods of Physics II,NIP,3.0,WF 4-5:30PM,NIP F206,"COSME, JAYSON"
 Physics 215,Computational Methods of Physics,NIP,3.0,TTh 2:30-4PM,NIP F210,"LIM, MAY"
@@ -2600,7 +2600,7 @@ Psych 195,Special Topics in Psychology,Psych,3.0,TTh 1-2:30PM,LH 203,"MATSUGUMA,
 Psych 198,Practicum in Psychology,Psych,3.0,WF 8:30-10AM,LH 205,"MORALES, MARIE ROSE"
 Psych 300,Master's Thesis,Psych,3.0,TBA,,"PSYCH, PSYCH"
 Psych 400,PhD Dissertation,Psych,6.0,TBA,,"PSYCH, PSYCH"
-ROTC Mil Sci 2,ROTC Mil Sci 2,DMST,3.0,S 7AM-12PM,TBA; S 1-5PM lec TBA,CONCEALED
+ROTC Mil Sci 2,ROTC Mil Sci 2,DMST,3.0,S 7AM-12PM; S 1-5PM,TBA; TBA,CONCEALED
 Russ 10,Elementary Russian,DEL,3.0,WF 7-8:30AM,TBA,CONCEALED
 SD 303,Social Development Strategies,DSD,3.0,W 5:30-8:30PM,TBA,"LUNA, EMMANUEL"
 SD 304,Social Development Policy Analysis and Advocacy,DSD,3.0,F 5:30-8:30PM,TBA,"FERRER, OSCAR; GABO, LEOCITO"

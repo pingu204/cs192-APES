@@ -107,8 +107,27 @@ def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str])
                             split_a = (raw_sched_remarks.split("\n"))[:-1]
                             # DEBUGGING: print(split_a)
 
-                            raw_timeslot = (" ".join((split_a[1].split(" "))[:2]).rstrip()).replace("\t", "")
-                            raw_venue = (" ".join((split_a[1].split(" "))[3:]).rstrip()).replace("\t","")
+                            # print(split_a)
+
+                            # If there are 2 time slots (and venues), separate the cases :)
+                            if(';' in split_a[1]):
+                                raw_time_venue_txt = (split_a[1].replace("\t", "")).split(";")
+                                raw_tv_a, raw_tv_b = raw_time_venue_txt[0], raw_time_venue_txt[1]
+
+                                raw_timeslot_a = " ".join(((raw_tv_a.strip()).split(" "))[:2])
+                                raw_timeslot_b = " ".join(((raw_tv_b.strip()).split(" "))[:2])
+
+
+                                raw_venue_a = " ".join(((raw_tv_a.strip()).split(" "))[3:])
+                                raw_venue_b = " ".join(((raw_tv_b.strip()).split(" "))[3:])
+
+                                raw_timeslot = raw_timeslot_a + "; " + raw_timeslot_b
+                                raw_venue = raw_venue_a + "; " + raw_venue_b
+
+                            else:
+                                raw_timeslot = (" ".join((split_a[1].split(" "))[:2]).rstrip()).replace("\t", "")
+                                raw_venue = (" ".join((split_a[1].split(" "))[3:]).rstrip()).replace("\t","")
+                            
                             raw_instructor = (split_a[2]).replace("\t", "")
 
                             timeslot[course_code] = raw_timeslot
@@ -151,4 +170,3 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False)
-
