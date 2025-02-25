@@ -60,67 +60,30 @@
                 {% endif %} -->
             </form>
             <h6>0 RESULTS</h6>
+            <h6>{{ search_results|length }} RESULTS</h6>
             <div class="filler result-container">
-                <div  class="result-card">
+                {% for result in search_results %}
+                <div class="result-card">
                     <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
+                        <h5>{{ result.course_title }}</h5>
+                        <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
                     </div>
                     <div class="filler"></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="course_code" value="{{ result.course_code }}">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+                {% empty %}
+                <div class="result-card">
                     <div>
-                        <button class="btn btn-primary">Add</button>
+                        <h5>No results found</h5>
                     </div>
                 </div>
-                <div  class="result-card">
-                    <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <div>
-                        <button class="btn btn-primary">Add</button>
-                    </div>
-                </div>
-                <div  class="result-card">
-                    <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <div>
-                        <button class="btn btn-primary">Add</button>
-                    </div>
-                </div>
-                <div  class="result-card">
-                    <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <div>
-                        <button class="btn btn-primary">Add</button>
-                    </div>
-                </div>
-                <div  class="result-card">
-                    <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <div>
-                        <button class="btn btn-primary">Add</button>
-                    </div>
-                </div>
-                <div  class="result-card">
-                    <div>
-                        <h5>Course Title</h5>
-                        <h5><span class="bold-text">Course Code</span><i class="bi bi-dot"></i><span class="light-text">0  Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <div>
-                        <button class="btn btn-primary">Add</button>
-                    </div>
-                </div>       
+                {% endfor %}
             </div>
         </div>
     </div>

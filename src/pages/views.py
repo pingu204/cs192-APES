@@ -5,7 +5,6 @@ from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated
 
-
 from courses.models import DesiredCourse, Course
 # Create your views here.
 
@@ -18,37 +17,9 @@ def homepage_view(request, *args, **kwargs):
     if request.user.id == None: # Guest
         dcp = request.session['dcp'] 
 
-    else: # Not a Guest
-        # dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
-        dcp = [
-            Course(
-                course_code = "CS 20",
-                course_title = "Digital Electronics",
-                offering_unit = "DCS",
-                units = 4.0,
-                timeslot = "TTh 11:30AM-1PM",
-                venue = "DCS", 
-                instructor = "TAN, WILSON",
-            ),
-            Course(
-                course_code = "CS 30",
-                course_title = "Discrete Mathematics I",
-                offering_unit = "DCS",
-                units = 3.0,
-                timeslot = "F 9-10AM",
-                venue = "DCS", 
-                instructor = "BUNO, KELVIN",
-            ),
-            Course(
-                course_code = "CS 11",
-                course_title = "Basic Programming I",
-                offering_unit = "DCS",
-                units = 3.0,
-                timeslot = "WF 1-2:30PM",
-                venue = "DCS", 
-                instructor = "ZUNIGA, NATHAN",
-            ),
-        ]
+    else: # Not a Guest, getting the dcp of a student
+        dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
+        print("TESTINTG", dcp)
 
     context = {
         "user" : request.user,
@@ -57,15 +28,14 @@ def homepage_view(request, *args, **kwargs):
         "dcp_length" : len(dcp),
     }
 
-    print(request.user, request.user.id)
-    print(request.session.items())
+    print("eto yon", request.user, request.user.id)
+    print("eto yon2xx",request.session.items())
     print(
         
     )
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
     return render(request, "homepage.html", context)
-
 
 
 @require_POST # POST since user data gets saved during session; after session termination, flush user data
@@ -86,7 +56,6 @@ def guest_login_view(request, *args, **kwargs):
     # DEBUGGER: print(request.session.keys())
     # DEBUGGER: print(request.session['is_guest'])
     return redirect(reverse('homepage_view'))
-
 
 def logout_view(request, *args, **kwargs):
     # if POST method, ensures that users don't logout by simply rerouting to /logout/
