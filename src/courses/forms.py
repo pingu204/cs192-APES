@@ -19,6 +19,7 @@ class DesiredClassesForm(forms.Form):
 
     """ Checks if `course_code` exists in the CSV file -> Valid """
     def clean_course_code(self):
+        print(self.request.user)
         print("checking!")
         raw_course_code = self.cleaned_data.get("course_code")
         course_code = get_cleaned_course_code(raw_course_code)

@@ -2,21 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import DesiredClassesForm
 import csv
 import os
-from courses.models import Course
+from .models import Course
 from dataclasses import asdict
 from scraper.scrape import get_all_sections
-# Create your views here.
+from .misc import get_unique_courses
 
-def get_unique_courses(lst):
-    done_course_codes = []
-    unique_courses = []
-
-    for course in lst:
-        if course['course_code'] not in done_course_codes:
-            unique_courses.append(course)
-            done_course_codes.append(course['course_code'])
-
-    return unique_courses
 
 def dcp_add_view(request):
     search_results = []
@@ -77,6 +67,8 @@ def dcp_add_view(request):
 
             # Obtain all sections associated with `raw_search_query` course code
             course_sections = get_all_sections(cleaned_search_query)
+
+            
             search_results = get_unique_courses(course_sections)
 
         # To-do: Check if conflicting!
