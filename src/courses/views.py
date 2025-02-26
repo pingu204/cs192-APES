@@ -15,13 +15,13 @@ def dcp_add_view(request):
         # Handle the POST request to save the class code
         course_code = request.POST.get("course_code")
         course_title = request.POST.get("course_title")
-        print("ADDED", course_title, "TO DCP")
+        print("ADDED", course_code, "TO DCP")
         # Retrieve the current dcp from the session or initialize it if not present
         dcp = request.session.get('dcp', [])
         # Add the new course code to the dcp
         course_title = course_title.split(' ', 2)  # Split the string into at most 3 parts
         course_title = ' '.join(course_title[:2])
-        all_sections = getting_section_details(course_title)
+        all_sections = getting_section_details(course_code, course_title)
        
         for _, row in all_sections.iterrows():
             if row['course_code'] == course_code:

@@ -180,27 +180,38 @@ def getting_all_sections(course_code: str):
     
     return pd.DataFrame(courses)
 
-def getting_section_details(course_code: str):
+def getting_section_details(course_code: str, course_title: str):
     
     BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
     # Container for values
     courses: list[dict[str,str]] = []
-    soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
+    soup = parse_html(BASE_URL + course_title.replace(" ", "%20"), "tr")
     for row in soup[4:]: # Actual entries of the table start at index 4
         tr = row.find_all("td")
         # print(tr)
         print("COURSE CODE", course_code)
-        print("TR[0]", tr[0].text)
+        print("TR[1]", tr[0].text)
         # Check if there are no classes
         if (tr[0].text != "No courses to display" and tr[0].text == course_code):
             print("FOUND")
+            course_timeslot = (tr[3].text).split("\n\t\t\t")
+            print("course timeslot:", course_timeslot)
+            course_timeslot = course_timeslot[1].strip()
+            print("course timeslot:", course_timeslot)
+            course_timeslot = (course_timeslot.split(" ", 2))
+            print("course timeslot:", course_timeslot)
+            
+            
             courses.append(
                 {
                     "course_code" :     tr[0].text,
                     "course_title" :    tr[1].text,
                     "course_units" :    tr[2].text,
-                    "course_timeslot" :   tr[3].text,
+                    "course_timeslot" :   course_timeslot[1],
                     "course_offeringunit" :   tr[4].text,
+                    "venue" : course_timeslot[1],
+                    "instructor" : course_timeslot[2]
+                    
                 }
             )
             print(courses)
