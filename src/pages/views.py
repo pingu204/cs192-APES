@@ -22,6 +22,18 @@ def homepage_view(request, *args, **kwargs):
             request.session["dcp"] = []
             print("Guest DCP classes cleared!")
 
+    if request.method == "POST" and "removed_course" in request.POST:
+        removed_course_code = request.POST["removed_course"]
+
+        if request.user.is_authenticated:
+            print(f"{request.user} Removing {removed_course_code}")
+            DesiredCourse.objects.filter(student_id=request.user.id, course_code=removed_course_code).delete()
+        else:
+            print(f"Guest removing {removed_course_code}")
+            request.session["dcp"] = [course for course in request.session.get("dcp", []) if course["course_code"] != removed_course_code]
+            
+
+
     # Wala pang confirmation message like: CLEAR -> "Are you sure you wanna do this?" -> Yes/No -> skibidi act upon Yes/No
 
     if request.user.id is None:  # Guest
@@ -39,11 +51,9 @@ def homepage_view(request, *args, **kwargs):
         "dcp_length" : len(dcp),
     }
 
-    print("eto yon", request.user, request.user.id)
-    print("eto yon2xx",request.session.items())
-    print(
-        
-    )
+    #print("eto yon", request.user, request.user.id)
+    #print("eto yon2xx",request.session.items())
+
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
     return render(request, "homepage.html", context)
