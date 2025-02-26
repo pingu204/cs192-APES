@@ -227,7 +227,7 @@ def get_timeslots(raw_sched_remarks: str):
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0], temp[1], temp[2]
 
-        timeslots[slot_days] = convert_time(slot_time)
+        timeslots[slot_days.replace('Th', 'H')] = convert_time(slot_time)
         if "lab" in slot_venue:
             class_days["lab"] = slot_days
             location["lab"] = slot_venue.replace("lab", "").strip()
@@ -270,7 +270,6 @@ def get_timeslots(raw_sched_remarks: str):
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
     csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
-    print(csv_file_path)
     courses = pd.read_csv(csv_file_path, sep=',')
     return courses.loc[courses['course_code'] == course_code]
 
@@ -284,11 +283,12 @@ def get_all_sections(course_code: str, strict: bool = False):
     courses: list[dict[str,str]] = []
 
     # Scrape from URL
+    print(course_code)
     soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
 
     for row in soup[1:]: # Actual entries of the table start at index 1
         tr = row.find_all("td")
-        print(tr)
+
         # Check if there are no classes
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
@@ -314,7 +314,7 @@ def get_all_sections(course_code: str, strict: bool = False):
     return courses
     #return pd.DataFrame(courses)
 
-def getting_section_details(course_code: str, course_title: str):
+""" def getting_section_details(course_code: str, course_title: str):
     
     BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
     # Container for values
@@ -323,8 +323,7 @@ def getting_section_details(course_code: str, course_title: str):
     for row in soup[4:]: # Actual entries of the table start at index 4
         tr = row.find_all("td")
         # print(tr)
-        print("COURSE CODE", course_code)
-        print("TR[1]", tr[0].text)
+
         # Check if there are no classes
         if (tr[0].text != "No courses to display" and tr[0].text == course_code):
             print("FOUND")
@@ -364,7 +363,7 @@ def getting_section_details(course_code: str, course_title: str):
         "timeslot" : list(timeslot.values()),
         "venue" : list(venue.values()),
         "instructor" : list(instructor.values()),
-    })
+    }) """
 
 # *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":

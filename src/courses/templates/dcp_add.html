@@ -37,6 +37,19 @@
                         </span>
                     </div>
                 </div>
+                {% if messages %}
+                    <div class="errors">
+                        <ul class="errors-list">
+                            {% for message in messages %}
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                    <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                                {% else %}
+                                    <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
                 {% if form.errors %}
                 <div class="errors">
                     <ul class="errors-list">

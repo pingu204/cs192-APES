@@ -25,17 +25,19 @@ def get_ranges(start, end):
 def is_conflicting_with_dcp(course, dcp_courses):
     courses = [course] + dcp_courses
     for day in "MTWHFS":
-        # Check if the courses have a class on `day`
-        if not (False in [
-            day in ''.join(list(x['timeslot'].keys())) for x in courses
-        ]):
+        print(day)
+        # Check if course has a class on `day`
+        if day in ''.join(list(course['timeslot'].keys())):
+            # Only get DCP classes with a class on `day`
+            dcp_with_classes = list(filter(lambda x: day in ''.join(list(x['timeslot'].keys())), dcp_courses))
+
             # Get range of intervals for the courses in DCP
             dcp_slot_ranges = [set(
                 get_ranges(*get_start_and_end(
                     timeslot = c['timeslot'],
                     day = day
                 ))
-            ) for c in dcp_courses]
+            ) for c in dcp_with_classes]
             
             # Get range of intervals for the course to be added in DCP
             course_range = set(
@@ -45,26 +47,25 @@ def is_conflicting_with_dcp(course, dcp_courses):
             )))
 
             print(course_range, *dcp_slot_ranges)
-            
-            if False not in [course_range.intersection(x) == set() for x in dcp_slot_ranges]:
-                return False
+            if True in [course_range.intersection(slot_range) != set() for slot_range in dcp_slot_ranges]:
+                return True
     
-    return True
+    return False
 
 if __name__ == '__main__':
 
     course = {
         'timeslot':{
             'M':(0,60),
-            'TTh':(60,120),
+            'TH':(60,120),
         }
     }
 
     dcp_courses = [
         {
             'timeslot':{
-                'M':(0,360),
-                'TTh':(120,180),
+                'M':(120,360),
+                'TH':(120,180),
             }
         },
         {

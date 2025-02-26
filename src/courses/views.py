@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib import messages
 from .forms import DesiredClassesForm
 import csv
 import os
-from .models import Course
+from .models import Course, DesiredCourse
 from dataclasses import asdict
 from scraper.scrape import get_all_sections
-from .misc import get_unique_courses
+from .misc import get_unique_courses, is_conflicting_with_dcp
 from apes import settings
+
+from itertools import product
 
 
 def dcp_add_view(request):
@@ -19,18 +23,48 @@ def dcp_add_view(request):
 
         course_code = request.POST.get("course_code")
         
-        dcp_codes = ['CS 132', 'CS 180']
+        if request.user.id:
+            # Obtain DCP from database
+            dcp_codes = [
+                x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
+            ]
+        else:
+            # Guest user -> Obtain DCP from session
+            dcp_codes = [
+                x['course_code'] for x in request.session.get("dcp", [])
+            ]
+            print(dcp_codes)
+
+        # Scrape sections of classes in DCP
         dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
 
-        print(request.session['course_sections'])
-
+        # Get sections of course to be added
         course_sections = list(filter(
             lambda x: x['course_code'] == course_code,
             request.session['course_sections']
         ))
 
-        print("filtered: ", course_sections)
-
+        flag = False
+        for section in course_sections:
+            for dcp_section in list(product(*dcp_sections)):
+                print(dcp_section)
+                print(section)
+                if not is_conflicting_with_dcp(section, list(dcp_section)):
+                    print("goods")
+                    if request.user.id:
+                        DesiredCourse.objects.create(
+                            student_id = request.user.id,
+                            course_code = course_code
+                        )
+                    else:
+                        request.session['dcp'].append(course_sections[0])
+                        request.session.save()
+                        print(request.session['dcp'])
+                    
+                    return redirect(reverse('homepage_view'))
+        
+        messages.error(request, "Class conflicts with another class.")
+                
         """ course_code = request.POST.get("course_code")
         course_title = request.POST.get("course_title")
         print("ADDED", course_code, "TO DCP")

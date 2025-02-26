@@ -38,6 +38,7 @@ def homepage_view(request, *args, **kwargs):
 
     if request.user.id is None:  # Guest
         dcp = request.session.get("dcp", [])   
+        print(dcp)
     else:  # Authenticated user
         desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
         course_codes = [dc.course_code for dc in desired_courses]
