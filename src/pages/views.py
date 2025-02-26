@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import logout
 # from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from apes.utils import redirect_authenticated_users, guest_or_authenticated
+from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
 
 from courses.models import DesiredCourse, Course
 # Create your views here.
@@ -15,10 +15,20 @@ def landing_view(request, *args, **kwargs):
 @guest_or_authenticated
 def homepage_view(request, *args, **kwargs): 
     if request.user.id == None: # Guest
-        dcp = request.session['dcp'] 
+        dcp = request.session.get('dcp', [])    
 
     else: # Not a Guest, getting the dcp of a student
-        dcp = request.session['dcp'] 
+        desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
+
+        print("Desired courses:", desired_courses)
+
+        course_codes = [dc.course_code for dc in desired_courses]
+        
+        print("Course codes:", course_codes)
+
+        dcp = get_course_details_from_csv(course_codes)
+
+        print("DCP:", dcp)
         
 
     context = {
