@@ -61,7 +61,7 @@ def dcp_add_view(request):
                         request.session['dcp'].append(course_sections[0])
                         request.session.save()
                         print(request.session['dcp'])
-                    
+                    messages.success(request, "Class has been successfully added.")
                     return redirect(reverse('homepage_view'))
         
         messages.error(request, "Class conflicts with another class.")
@@ -98,8 +98,8 @@ def dcp_add_view(request):
        
         # Update the session with the new dcp
         request.session['dcp'] = dcp """
-        messages.success(request, "Class has been successfully added.")
-        return redirect('homepage_view')
+        
+        # return redirect('homepage_view')
     
     elif request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)

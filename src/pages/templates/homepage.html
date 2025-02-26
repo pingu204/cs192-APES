@@ -44,9 +44,9 @@
                     <h1>Desired Classes</h1>
                     <div class="filler"></div>
                     <div style="display: flex; gap: 3px; align-items: center;">
-                        <form action="{% url 'homepage_view' %}" method="POST">
+                        <form action="{% url 'homepage_view' %}" method="POST" id="clearDCP">
                             {% csrf_token %}    
-                            <button class="btn-sm" type="submit" name="clear_dcp">CLEAR</button>
+                            <button class="btn-sm" type="submit" id="submitClear" name="clear_dcp">CLEAR</button>
                         </form>
 
                         <button class="btn-sm"><a href="add/">+</a></button>
@@ -179,25 +179,33 @@
             </div>
         </div>
     </div>
+    
     {% if messages %}
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
     <!-- Confirmation Overlay -->
     <div id="overlay" onclick="overlayOff()">
         <div id="inner-overlay">
             <div id="close" onclick="overlayOff()"><i class="bi-x-circle"></i></div>
             <div id="overlay-text">
-                {% for message in messages %}
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
                 <h6>{{ message }}</h6>
-                <button class="btn-sm" type="submit" name="clear_dcp">Yes</button>
-                <button class="btn-sm" onclick="overlayOff()">No</button>
-                {% else %}
-                <h6>{{ message }}</h6>
-                {% endif %}
-                {% endfor %}
             </div>
         </div>
     </div>
     {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <div id="clearOverlay">
+        <div id="inner-overlay">
+            <form method="POST">
+            {% csrf_token %} 
+            <h6>Clear all Desired Classes?</h6>
+                <button class="btn-sm" name="clear_dcp" id="clearYes">Yes</button>
+                <button class="btn-sm" id="clearNo">No</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block footer %}
