@@ -69,7 +69,7 @@
                                 <div class="course-header">
                                     <h6><b>{{ course.course_code }}</b><i class="bi bi-dot"></i><span class="light-text">{{ course.units }} Units</span></h6>
                                     <div class="filler"></div>
-                                    <form method="POST" action="{% url 'homepage_view' %}">
+                                    <form method="POST">
                                         {% csrf_token %}
                                         <button type="submit" name="removed_course" value="{{ course.course_code }}" class="remove-unique-dcp-btn">
                                             <i class="bi bi-x-circle"></i>
