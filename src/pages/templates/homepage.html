@@ -52,8 +52,11 @@
                         <button class="btn-sm"><a href="add/">+</a></button>
                     </div>
                 </div>
+                {% if dcp_length == 1%}
+                <h5>{{ dcp_units }} UNITS<i class="bi bi-dot"></i><span class="light-text">{{ dcp_length }} CLASS</span></h5>
+                {% else %}
                 <h5>{{ dcp_units }} UNITS<i class="bi bi-dot"></i><span class="light-text">{{ dcp_length }} CLASSES</span></h5>
-
+                {% endif %}
                 <div class="courses-container">
                     {% if not dcp %}
 
