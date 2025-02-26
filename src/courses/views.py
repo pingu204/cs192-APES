@@ -3,8 +3,8 @@ from .forms import DesiredClassesForm
 import csv
 import os
 from courses.models import Course
-from django.forms.models import model_to_dict
-
+from dataclasses import asdict
+from scraper.scrape import getting_all_sections, getting_section_details
 # Create your views here.
 
 def dcp_add_view(request):
@@ -14,32 +14,34 @@ def dcp_add_view(request):
     if request.method == "POST":
         # Handle the POST request to save the class code
         course_code = request.POST.get("course_code")
-        print("ADDED", course_code, "TO DCP")
+        course_title = request.POST.get("course_title")
+        print("ADDED", course_title, "TO DCP")
         # Retrieve the current dcp from the session or initialize it if not present
         dcp = request.session.get('dcp', [])
         # Add the new course code to the dcp
-        print ("coursecode:", course_code)
-        csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
-        with open(csv_file_path, newline='') as csvfile:
-            
-            csvreader = csv.DictReader(csvfile)
-            for row in csvreader:
-                # if it matches a class, then appends the whole description to search_results
-                if course_code.upper() == row['course_code'].upper():
-                    course = Course(
-                        course_code=row['course_code'],
-                        course_title=row['course_title'],
-                        offering_unit=row['offering_unit'],
-                        units=float(row['units']),
-                        timeslot=row['timeslot'],
-                        venue=row['venue'],
-                        instructor=row['instructor']
-                    )
+        course_title = course_title.split(' ', 2)  # Split the string into at most 3 parts
+        course_title = ' '.join(course_title[:2])
+        all_sections = getting_section_details(course_title)
+       
+        for _, row in all_sections.iterrows():
+            if row['course_code'] == course_code:
+                course = Course(
+                    course_code=row['course_code'],
+                    course_title=row['course_title'],
+                    offering_unit=row['offering_unit'],
+                    units=float(row['units']),
+                    timeslot=row['timeslot'],
+                    venue=row['venue'],
+                    instructor=row['instructor']
+                )
+                print("FOUND  COURSE", course)
+                # Convert the Course object to a dictionary
+                course_dict = asdict(course)
+                dcp.append(course_dict)
+                
+                print("added finally the dcp", row)
+                print("THIS IS DCP", dcp)
                     
-                    dcp.append(course)
-                    print("added finally the dcp", row)
-                    print("THIS IS DCP", dcp)
-                    break
        
         # Update the session with the new dcp
         request.session['dcp'] = dcp
@@ -59,15 +61,13 @@ def dcp_add_view(request):
         
         csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
 
-        # Open and read the CSV file
-        with open(csv_file_path, newline='') as csvfile:
-            csvreader = csv.DictReader(csvfile)
-            for row in csvreader:
-                # if it matches a class, then appends the whole description to search_results
-                if cleaned_search_query == row['course_code'].upper():
-                    search_results.append(row)
-                    print(search_results)
-                # wala pang no class found dito
+        
+        all_sections = getting_all_sections(cleaned_search_query)
+        ##print(all_sections)
+        for _, row in all_sections.iterrows():
+            search_results.append(row.to_dict())
+            
+            # wala pang no class found dito
                     
 
      

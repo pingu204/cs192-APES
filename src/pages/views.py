@@ -18,13 +18,13 @@ def homepage_view(request, *args, **kwargs):
         dcp = request.session['dcp'] 
 
     else: # Not a Guest, getting the dcp of a student
-        dcp = DesiredCourse.objects.filter(student_id=int(request.user.id))
-        print("TESTINTG", dcp)
+        dcp = request.session['dcp'] 
+        
 
     context = {
         "user" : request.user,
         "dcp" : dcp,
-        "dcp_units" : sum([course.units for course in dcp]),
+        "dcp_units" : sum([course['units'] for course in dcp]),
         "dcp_length" : len(dcp),
     }
 

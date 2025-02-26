@@ -71,12 +71,13 @@
                 <div class="result-card">
                     <div>
                         <h5>{{ result.course_title }}</h5>
-                        <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
+                        <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.course_units }} Units</span></h5>
                     </div>
                     <div class="filler"></div>
                     <form method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="course_code" value="{{ result.course_code }}">
+                        <input type="hidden" name="course_title" value="{{ result.course_title }}">
                         <div>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>

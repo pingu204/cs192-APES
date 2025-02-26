@@ -152,7 +152,74 @@ def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str])
         "venue" : list(venue.values()),
         "instructor" : list(instructor.values()),
     })
+    
+def getting_all_sections(course_code: str):
+    # URL to scrape, note that after 120, yearthensemester is the next.
+    BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
+    # Container for values
+    courses: list[dict[str,str]] = []
+    soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
+    for row in soup[4:]: # Actual entries of the table start at index 4
+        tr = row.find_all("td")
+        # print(tr)
 
+        # Check if there are no classes
+        if (tr[0].text != "No courses to display"):
+            courses.append(
+                {
+                    "course_code" :     tr[0].text,
+                    "course_title" :    tr[1].text,
+                    "course_units" :    tr[2].text,
+                    "course_timeslot" :   tr[3].text,
+                    "course_offeringunit" :   tr[4].text,
+                }
+            )
+        
+    print("courses DONE")
+        # print(courses)
+    
+    return pd.DataFrame(courses)
+
+def getting_section_details(course_code: str):
+    
+    BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
+    # Container for values
+    courses: list[dict[str,str]] = []
+    soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
+    for row in soup[4:]: # Actual entries of the table start at index 4
+        tr = row.find_all("td")
+        # print(tr)
+        print("COURSE CODE", course_code)
+        print("TR[0]", tr[0].text)
+        # Check if there are no classes
+        if (tr[0].text != "No courses to display" and tr[0].text == course_code):
+            print("FOUND")
+            courses.append(
+                {
+                    "course_code" :     tr[0].text,
+                    "course_title" :    tr[1].text,
+                    "course_units" :    tr[2].text,
+                    "course_timeslot" :   tr[3].text,
+                    "course_offeringunit" :   tr[4].text,
+                }
+            )
+            print(courses)
+    # Container for values
+    units: dict[str, float] = {}
+    timeslot: dict[str, str] = {}
+    venue: dict[str, str] = {}
+    instructor: dict[str, str] = {}
+    len_courses = len(course_code)
+
+   
+
+    return pd.DataFrame({
+        "course_code" : list(units.keys()), 
+        "units" :       list(units.values()),
+        "timeslot" : list(timeslot.values()),
+        "venue" : list(venue.values()),
+        "instructor" : list(instructor.values()),
+    })
 
 # *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":
