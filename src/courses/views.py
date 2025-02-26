@@ -12,6 +12,7 @@ from apes import settings
 
 from itertools import product
 
+from django.contrib import messages
 
 def dcp_add_view(request):
     search_results = []
@@ -96,9 +97,9 @@ def dcp_add_view(request):
                     
        
         # Update the session with the new dcp
-        request.session['dcp'] = dcp
-        
-        return redirect('homepage_view') """
+        request.session['dcp'] = dcp """
+        messages.success(request, "Class has been successfully added.")
+        return redirect('homepage_view')
     
     elif request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)

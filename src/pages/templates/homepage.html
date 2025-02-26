@@ -179,7 +179,25 @@
             </div>
         </div>
     </div>
-
+    {% if messages %}
+    <!-- Confirmation Overlay -->
+    <div id="overlay" onclick="overlayOff()">
+        <div id="inner-overlay">
+            <div id="close" onclick="overlayOff()"><i class="bi-x-circle"></i></div>
+            <div id="overlay-text">
+                {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                <h6>{{ message }}</h6>
+                <button class="btn-sm" type="submit" name="clear_dcp">Yes</button>
+                <button class="btn-sm" onclick="overlayOff()">No</button>
+                {% else %}
+                <h6>{{ message }}</h6>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
