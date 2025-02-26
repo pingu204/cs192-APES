@@ -15,6 +15,22 @@ def dcp_add_view(request):
 
     if request.method == "POST":
         # Handle the POST request to save the class code
+        print(request.POST.get("course_code"))
+
+        course_code = request.POST.get("course_code")
+        
+        dcp_codes = ['CS 132', 'CS 180']
+        dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+
+        print(request.session['course_sections'])
+
+        course_sections = list(filter(
+            lambda x: x['course_code'] == course_code,
+            request.session['course_sections']
+        ))
+
+        print("filtered: ", course_sections)
+
         """ course_code = request.POST.get("course_code")
         course_title = request.POST.get("course_title")
         print("ADDED", course_code, "TO DCP")
@@ -50,7 +66,7 @@ def dcp_add_view(request):
         
         return redirect('homepage_view') """
     
-    if request.GET.get("course_code"):
+    elif request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)
 
         # Obtain the raw query text inputted by the user
@@ -73,8 +89,7 @@ def dcp_add_view(request):
             """ dcp_codes = ['CS 132', 'CS 180']
             dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
  """
-            print(dcp_sections)
-
+            request.session['course_sections'] = course_sections
             search_results = get_unique_courses(course_sections)
 
         # To-do: Check if conflicting!
