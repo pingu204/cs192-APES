@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import os
 
 import string
 
@@ -49,6 +50,9 @@ def get_courses() -> list[dict[str,str]]:
 def get_course_code(raw_code: str):
     # Only extract first line of the element in case of multi-line course codes
     # -- e.g. Bioinfo 297 HQR<br/>Computational Phylogenetics should be 'Bioinfo 297 HQR'
+    if "CS 145" in raw_code:
+        return "CS 145"
+
     course_code = raw_code.split('\n')[0]
 
     # Remove section names
@@ -109,7 +113,7 @@ def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str])
 
                             # print(split_a)
 
-                            # If there are 2 time slots (and venues), separate the cases :)
+                            # If there are 2 time slots (and location), separate the cases :)
                             if(';' in split_a[1]):
                                 raw_time_venue_txt = (split_a[1].replace("\t", "")).split(";")
                                 raw_tv_a, raw_tv_b = raw_time_venue_txt[0], raw_time_venue_txt[1]
@@ -152,33 +156,157 @@ def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str])
         "venue" : list(venue.values()),
         "instructor" : list(instructor.values()),
     })
+
+def convert_time(time_format: str) -> int:
+    def get_offset(raw_time: str, is_afternoon: bool) -> int:
+        # Normalize time string
+        raw_time = raw_time if ':' in raw_time else raw_time + ':00'
+        raw_time_split = raw_time.split(':')
+        hour = int(raw_time_split[0]) + (12 if is_afternoon else 0)
+        minute = int(raw_time_split[1])
+
+        # Base time = 07:00 AM
+        base = 7*60 
+
+        return ((hour*60) + minute) - base
+
+    start, end = 0, 0
+    if 'AM' in time_format.split('-')[0]:
+        # Format: XXAM-XXPM
+        start = get_offset(
+            raw_time = (time_format.split('-')[0]).replace('AM',''),
+            is_afternoon = False
+        )
+        end = get_offset(
+            raw_time = (time_format.split('-')[1]).replace('PM',''),
+            is_afternoon = True
+        )
+    else:
+        # Format: XX-XXAM or XX-XXPM
+        if 'AM' in time_format.split('-')[1]: # Morning Class
+            start = get_offset(
+                raw_time = (time_format.split('-')[0]).replace('AM',''),
+                is_afternoon = False
+            )
+            end = get_offset(
+                raw_time = (time_format.split('-')[1]).replace('AM',''),
+                is_afternoon = False
+            )
+        else: # Afternoon Class
+            start = get_offset(
+                raw_time = (time_format.split('-')[0]).replace('PM',''),
+                is_afternoon = True
+            )
+            end = get_offset(
+                raw_time = (time_format.split('-')[1]).replace('PM',''),
+                is_afternoon = True
+            )
     
-def getting_all_sections(course_code: str):
+    return (start,end)
+    
+
+def get_timeslots(raw_sched_remarks: str):
+    split_a = list(map(
+        lambda x : x.strip(), # Remove whitespace
+        (raw_sched_remarks.split("\n"))[:-1]
+    ))
+
+    # print(split_a)
+
+    # Container for values
+    timeslots: dict[str,str] = {}
+    location: dict[str,str] = {}
+    class_days: dict[str,str] = {}
+
+    # Ignore erroneous schedules
+    if split_a[1] == "TBA":
+        return None
+
+    for slot in split_a[1].split(';'):
+
+        temp = slot.strip().split(' ', maxsplit=2)
+        slot_days, slot_time, slot_venue = temp[0], temp[1], temp[2]
+
+        timeslots[slot_days] = convert_time(slot_time)
+        if "lab" in slot_venue:
+            class_days["lab"] = slot_days
+            location["lab"] = slot_venue.replace("lab", "").strip()
+        elif "disc" in slot_venue:
+            class_days["disc"] = slot_days
+            location["disc"] = slot_venue.replace("disc", "").strip()
+        else: # lec
+            class_days["lec"] = slot_days
+            location["lec"] = slot_venue.replace("lec", "").strip()
+
+    return timeslots
+
+
+
+    """ # If there are 2 time slots (and location), separate the cases :)
+    if(';' in split_a[1]):
+        raw_time_venue_txt = (split_a[1].replace("\t", "")).split(";")
+        raw_tv_a, raw_tv_b = raw_time_venue_txt[0], raw_time_venue_txt[1]
+
+        raw_timeslot_a = " ".join(((raw_tv_a.strip()).split(" "))[:2])
+        raw_timeslot_b = " ".join(((raw_tv_b.strip()).split(" "))[:2])
+
+
+        raw_venue_a = " ".join(((raw_tv_a.strip()).split(" "))[3:])
+        raw_venue_b = " ".join(((raw_tv_b.strip()).split(" "))[3:])
+
+        raw_timeslot = raw_timeslot_a + "; " + raw_timeslot_b
+        raw_venue = raw_venue_a + "; " + raw_venue_b
+
+    else:
+        raw_timeslot = (" ".join((split_a[1].split(" "))[:2]).rstrip()).replace("\t", "")
+        raw_venue = (" ".join((split_a[1].split(" "))[3:]).rstrip()).replace("\t","")
+    
+    raw_instructor = (split_a[2]).replace("\t", "")
+
+    timeslot[course_code] = raw_timeslot
+    venue[course_code] = raw_venue
+    instructor[course_code] = raw_instructor """
+
+""" Get information about a course given its `course_code` """
+def get_info_from_csv(course_code: str):
+    csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
+    courses = pd.read_csv(csv_file_path, sep=',')
+    return courses.loc[courses['course_code'] == course_code]
+
+
+""" Get all sections of `course_code` """    
+def get_all_sections(course_code: str):
     # URL to scrape, note that after 120, yearthensemester is the next.
     BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
+
     # Container for values
     courses: list[dict[str,str]] = []
-    soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
-    for row in soup[4:]: # Actual entries of the table start at index 4
-        tr = row.find_all("td")
-        # print(tr)
 
+    # Scrape from URL
+    soup = parse_html(BASE_URL + course_code.replace(" ", "%20"), "tr")
+
+    for row in soup[1:]: # Actual entries of the table start at index 1
+        tr = row.find_all("td")
+        print(tr)
         # Check if there are no classes
-        if (tr[0].text != "No courses to display"):
-            courses.append(
-                {
-                    "course_code" :     tr[0].text,
-                    "course_title" :    tr[1].text,
-                    "course_units" :    tr[2].text,
-                    "course_timeslot" :   tr[3].text,
-                    "course_offeringunit" :   tr[4].text,
-                }
-            )
-        
-    print("courses DONE")
-        # print(courses)
+        if (tr[0].text != "No classes to display"):
+            cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
+            course_code_csv = get_info_from_csv(cleaned_course_code) # guaranteed to be unique!
+            course_timeslot = get_timeslots(tr[3].text)
+
+            if course_timeslot:
+                courses.append(
+                    {
+                        "course_code" : cleaned_course_code,
+                        "course_title" : course_code_csv['course_title'].values[0],
+                        "units" : course_code_csv['units'].values[0],
+                        "timeslot" : get_timeslots(tr[3].text),
+                        "offeringunit" : tr[4].text,
+                    }
+                )
     
-    return pd.DataFrame(courses)
+    return courses
+    #return pd.DataFrame(courses)
 
 def getting_section_details(course_code: str, course_title: str):
     

@@ -4,8 +4,19 @@ import csv
 import os
 from courses.models import Course
 from dataclasses import asdict
-from scraper.scrape import getting_all_sections, getting_section_details
+from scraper.scrape import get_all_sections
 # Create your views here.
+
+def get_unique_courses(lst):
+    done_course_codes = []
+    unique_courses = []
+
+    for course in lst:
+        if course['course_code'] not in done_course_codes:
+            unique_courses.append(course)
+            done_course_codes.append(course['course_code'])
+
+    return unique_courses
 
 def dcp_add_view(request):
     search_results = []
@@ -13,7 +24,7 @@ def dcp_add_view(request):
 
     if request.method == "POST":
         # Handle the POST request to save the class code
-        course_code = request.POST.get("course_code")
+        """ course_code = request.POST.get("course_code")
         course_title = request.POST.get("course_title")
         print("ADDED", course_code, "TO DCP")
         # Retrieve the current dcp from the session or initialize it if not present
@@ -46,32 +57,29 @@ def dcp_add_view(request):
         # Update the session with the new dcp
         request.session['dcp'] = dcp
         
-        return redirect('homepage_view')
+        return redirect('homepage_view') """
     
     if request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)
-        print("searched")
-        # get the raw query search placed by the user
+
+        # Obtain the raw query text inputted by the user
         raw_search_query = request.GET["course_code"]
-        # clean the raw search query such that spaces are resolved;
+
+        # Clean the `raw_search_query` such that whitespaces are omitted
         cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
- 
         # DEBUGGING: purely for testing only; omit or comment when unneeded
         print(f"User's cleaned query: {cleaned_search_query}")
         
         csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
 
-        
-        all_sections = getting_all_sections(cleaned_search_query)
-        ##print(all_sections)
-        for _, row in all_sections.iterrows():
-            search_results.append(row.to_dict())
-            
-            # wala pang no class found dito
-                    
+        if form.is_valid():
 
-     
+            # Obtain all sections associated with `raw_search_query` course code
+            course_sections = get_all_sections(cleaned_search_query)
+            search_results = get_unique_courses(course_sections)
+
+        # To-do: Check if conflicting!
 
         # Now, we use this cleaned_search_query to match a course code! only EXACT MATCHING COURSE CODES
         # i.e. .startswith("course_code") can be used?

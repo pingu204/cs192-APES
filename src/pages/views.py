@@ -18,7 +18,7 @@ def homepage_view(request, *args, **kwargs):
         dcp = request.session['dcp'] 
 
     else: # Not a Guest, getting the dcp of a student
-        dcp = request.session['dcp'] 
+        dcp = []
         
 
     context = {
