@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const deleteButtons = document.querySelectorAll('.removeCourseSubmit');
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
-            overlay.style.display = 'block';
+            document.getElementById('remove-'+button.id).style.display = 'block';
         });
     });
 

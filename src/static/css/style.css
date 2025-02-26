@@ -822,7 +822,7 @@ button.btn-sm {
     /* cursor: pointer; */
   }
 
-  #removeCourseOverlay {
+  .removeCourseOverlay {
     position: fixed;
     display: none;
     width: 100%; 

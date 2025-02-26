@@ -74,14 +74,14 @@
                                     <div class="filler"></div>
                                     <form method="POST" id="removeCourse">
                                         {% csrf_token %}
-                                        <button type="button" class="removeCourseSubmit" name="removed_course" value="{{ course.course_code }}" class="remove-unique-dcp-btn">
+                                        <button id="{{course.course_code}}" type="button" class="removeCourseSubmit" name="removed_course" value="{{ course.course_code }}" class="remove-unique-dcp-btn">
                                             <i class="bi bi-x-circle"></i>
                                         </button>
                                     </form>
                                 </div>
                                 <h4>{{ course.course_title }}</h4>
                             </div> 
-                            <div id="removeCourseOverlay">
+                            <div class="removeCourseOverlay" id="remove-{{course.course_code}}">
                                 <div id="inner-overlay">
                                     <form method="POST">
                                     {% csrf_token %} 

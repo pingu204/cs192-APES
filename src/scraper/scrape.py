@@ -53,6 +53,9 @@ def get_course_code(raw_code: str):
     if "CS 145" in raw_code:
         return "CS 145"
 
+    if raw_code.startswith("CWTS 2"):
+        return ' '.join(raw_code.split(' ')[:3])
+
     course_code = raw_code.split('\n')[0]
 
     # Remove section names
@@ -268,7 +271,7 @@ def get_all_sections(course_code: str, strict: bool = False):
 
         if len(tr) < 7:
             continue
-
+        
         # Check if there are no classes
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
@@ -278,6 +281,7 @@ def get_all_sections(course_code: str, strict: bool = False):
                 continue
 
             course_code_csv = get_info_from_csv(cleaned_course_code) # guaranteed to be unique!
+            print(cleaned_course_code, course_code_csv)
             course_timeslot = get_timeslots(tr[3].text)
 
             if course_timeslot:
