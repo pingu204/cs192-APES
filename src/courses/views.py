@@ -73,7 +73,6 @@ def dcp_add_view(request):
             """ dcp_codes = ['CS 132', 'CS 180']
             dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
  """
-            print(dcp_sections)
 
             search_results = get_unique_courses(course_sections)
 
