@@ -266,8 +266,11 @@ def get_all_sections(course_code: str, strict: bool = False):
     for row in soup[1:]: # Actual entries of the table start at index 1
         tr = row.find_all("td")
 
-        # Check if there are no classes OR the row is for delegation
-        if (len(tr) == 7):
+        if len(tr) < 7:
+            continue
+
+        # Check if there are no classes
+        if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
 
             # Check if scraped class must be strictly equal to the course code
