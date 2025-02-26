@@ -270,12 +270,13 @@ def get_timeslots(raw_sched_remarks: str):
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
     csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
+    print(csv_file_path)
     courses = pd.read_csv(csv_file_path, sep=',')
     return courses.loc[courses['course_code'] == course_code]
 
 
 """ Get all sections of `course_code` """    
-def get_all_sections(course_code: str):
+def get_all_sections(course_code: str, strict: bool = False):
     # URL to scrape, note that after 120, yearthensemester is the next.
     BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
 
@@ -291,6 +292,11 @@ def get_all_sections(course_code: str):
         # Check if there are no classes
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
+
+            # Check if scraped class must be strictly equal to the course code
+            if strict and cleaned_course_code.lower() != course_code.lower():
+                continue
+
             course_code_csv = get_info_from_csv(cleaned_course_code) # guaranteed to be unique!
             course_timeslot = get_timeslots(tr[3].text)
 

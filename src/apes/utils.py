@@ -48,9 +48,9 @@ def get_course_details_from_csv(course_codes):
                     "course_title": row["course_title"].strip(),
                     "offering_unit": row["offering_unit"].strip(),
                     "units": float(row["units"]),
-                    "timeslot": row["timeslot"].strip(),
-                    "venue": row["venue"].strip(),
-                    "instructor": row["instructor"].strip(),
+                    #ow["timeslot"].strip(),
+                    #"venue": row["venue"].strip(),
+                    #"instructor": row["instructor"].strip(),
                 })
 
     return matched_courses

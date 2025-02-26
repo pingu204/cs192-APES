@@ -2,6 +2,7 @@ from django import forms
 import os, pandas as pd
 from .models import DesiredCourse
 from scraper.scrape import get_all_sections
+from apes import settings
 
 def get_cleaned_course_code(raw_code: str):
     return (' '.join(raw_code.split()))
@@ -19,11 +20,10 @@ class DesiredClassesForm(forms.Form):
 
     """ Checks if `course_code` exists in the CSV file -> Valid """
     def clean_course_code(self):
-        print(self.request.user)
         print("checking!")
         raw_course_code = self.cleaned_data.get("course_code")
         course_code = get_cleaned_course_code(raw_course_code)
-        path = '../src/scraper/csv/courses.csv'
+        path = os.path.join(settings.BASE_DIR, "scraper", "csv", "courses.csv")
         courses = pd.read_csv(path)
         courselist = (courses["course_code"].tolist())
 

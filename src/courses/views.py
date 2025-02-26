@@ -6,6 +6,7 @@ from .models import Course
 from dataclasses import asdict
 from scraper.scrape import get_all_sections
 from .misc import get_unique_courses
+from apes import settings
 
 
 def dcp_add_view(request):
@@ -61,14 +62,19 @@ def dcp_add_view(request):
         # DEBUGGING: purely for testing only; omit or comment when unneeded
         print(f"User's cleaned query: {cleaned_search_query}")
         
-        csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
+        csv_file_path = os.path.join(settings.BASE_DIR, "scraper", "csv", "courses.csv")
 
         if form.is_valid():
 
             # Obtain all sections associated with `raw_search_query` course code
             course_sections = get_all_sections(cleaned_search_query)
 
-            
+            # test: temporary DCP
+            """ dcp_codes = ['CS 132', 'CS 180']
+            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+ """
+            print(dcp_sections)
+
             search_results = get_unique_courses(course_sections)
 
         # To-do: Check if conflicting!
