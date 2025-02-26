@@ -1,3 +1,4 @@
+""" Obtain list of course codes """
 def get_unique_courses(lst):
     done_course_codes = []
     unique_courses = []
@@ -9,7 +10,7 @@ def get_unique_courses(lst):
 
     return unique_courses
 
-""" Unwraps value from dictionary """
+""" Unwrap value from dictionary """
 def get_start_and_end(timeslot, day):
     for key, value in timeslot.items():
         if day in key:
@@ -45,15 +46,18 @@ def is_conflicting_with_dcp(course, dcp_courses):
                 timeslot = course['timeslot'],
                 day = day
             )))
-
-            print(course_range, *dcp_slot_ranges)
+            
+            # DEBUGGING
+            # print(course_range, *dcp_slot_ranges)
             if True in [course_range.intersection(slot_range) != set() for slot_range in dcp_slot_ranges]:
                 return True
     
     return False
 
 if __name__ == '__main__':
-
+    #################
+    ## FOR TESTING ##
+    #################
     course = {
         'timeslot':{
             'M':(0,60),

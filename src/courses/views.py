@@ -16,7 +16,7 @@ from django.contrib import messages
 
 def dcp_add_view(request):
     search_results = []
-    form = DesiredClassesForm()
+    form = DesiredClassesForm(request.GET)
 
     if request.method == "POST":
         # Handle the POST request to save the class code
@@ -29,21 +29,25 @@ def dcp_add_view(request):
             dcp_codes = [
                 x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
             ]
-        else:
-            # Guest user -> Obtain DCP from session
+        else: # Guest user
+            # Obtain DCP from `request.session``
             dcp_codes = [
                 x['course_code'] for x in request.session.get("dcp", [])
             ]
             print(dcp_codes)
 
-        # Scrape sections of classes in DCP
-        dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+        # Check if course is already in DCP
+        if course_code in dcp_codes:
+            messages.error(request, "Class already exists.")
+        else:
+            # Scrape sections of classes in DCP
+            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
 
-        # Get sections of course to be added
-        course_sections = list(filter(
-            lambda x: x['course_code'] == course_code,
-            request.session['course_sections']
-        ))
+            # Obtain sections of course to be added
+            course_sections = list(filter(
+                lambda x: x['course_code'] == course_code,
+                request.session['course_sections']
+            ))
 
         flag = False
         for section in course_sections:
@@ -120,17 +124,8 @@ def dcp_add_view(request):
             # Obtain all sections associated with `raw_search_query` course code
             course_sections = get_all_sections(cleaned_search_query)
 
-            # test: temporary DCP
-            """ dcp_codes = ['CS 132', 'CS 180']
-            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
- """
             request.session['course_sections'] = course_sections
             search_results = get_unique_courses(course_sections)
-
-        # To-do: Check if conflicting!
-
-        # Now, we use this cleaned_search_query to match a course code! only EXACT MATCHING COURSE CODES
-        # i.e. .startswith("course_code") can be used?
     
     else: # Normal Loading
 
