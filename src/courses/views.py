@@ -7,7 +7,7 @@ from dataclasses import asdict
 from scraper.scrape import get_all_sections
 from .misc import get_unique_courses
 from apes import settings
-
+from django.contrib import messages
 
 def dcp_add_view(request):
     search_results = []
@@ -46,9 +46,9 @@ def dcp_add_view(request):
                     
        
         # Update the session with the new dcp
-        request.session['dcp'] = dcp
-        
-        return redirect('homepage_view') """
+        request.session['dcp'] = dcp """
+        messages.success(request, "Class has been successfully added.")
+        return redirect('homepage_view')
     
     if request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)
