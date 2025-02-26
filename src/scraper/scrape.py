@@ -162,7 +162,11 @@ def convert_time(time_format: str) -> int:
         # Normalize time string
         raw_time = raw_time if ':' in raw_time else raw_time + ':00'
         raw_time_split = raw_time.split(':')
+
+        # Get hour value
         hour = int(raw_time_split[0]) + (12 if is_afternoon else 0)
+
+        # Get minute value
         minute = int(raw_time_split[1])
 
         # Base time = 07:00 AM
@@ -211,8 +215,6 @@ def get_timeslots(raw_sched_remarks: str):
         (raw_sched_remarks.split("\n"))[:-1]
     ))
 
-    # print(split_a)
-
     # Container for values
     timeslots: dict[str,str] = {}
     location: dict[str,str] = {}
@@ -223,7 +225,6 @@ def get_timeslots(raw_sched_remarks: str):
         return None
 
     for slot in split_a[1].split(';'):
-
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0], temp[1], temp[2]
 
@@ -240,33 +241,6 @@ def get_timeslots(raw_sched_remarks: str):
 
     return timeslots
 
-
-
-    """ # If there are 2 time slots (and location), separate the cases :)
-    if(';' in split_a[1]):
-        raw_time_venue_txt = (split_a[1].replace("\t", "")).split(";")
-        raw_tv_a, raw_tv_b = raw_time_venue_txt[0], raw_time_venue_txt[1]
-
-        raw_timeslot_a = " ".join(((raw_tv_a.strip()).split(" "))[:2])
-        raw_timeslot_b = " ".join(((raw_tv_b.strip()).split(" "))[:2])
-
-
-        raw_venue_a = " ".join(((raw_tv_a.strip()).split(" "))[3:])
-        raw_venue_b = " ".join(((raw_tv_b.strip()).split(" "))[3:])
-
-        raw_timeslot = raw_timeslot_a + "; " + raw_timeslot_b
-        raw_venue = raw_venue_a + "; " + raw_venue_b
-
-    else:
-        raw_timeslot = (" ".join((split_a[1].split(" "))[:2]).rstrip()).replace("\t", "")
-        raw_venue = (" ".join((split_a[1].split(" "))[3:]).rstrip()).replace("\t","")
-    
-    raw_instructor = (split_a[2]).replace("\t", "")
-
-    timeslot[course_code] = raw_timeslot
-    venue[course_code] = raw_venue
-    instructor[course_code] = raw_instructor """
-
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
     csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
@@ -277,10 +251,13 @@ def get_info_from_csv(course_code: str):
 """ Get all sections of `course_code` """    
 def get_all_sections(course_code: str, strict: bool = False):
     # URL to scrape, note that after 120, yearthensemester is the next.
+    #######################################################
+    ## FOR FUTURE USE, REMOVE HARDCODING OF YEAR AND SEM ##
+    #######################################################
     BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
 
     # Container for values
-    courses: list[dict[str,str]] = []
+    courses = []
 
     # Scrape from URL
     print(course_code)
@@ -312,58 +289,6 @@ def get_all_sections(course_code: str, strict: bool = False):
                 )
     
     return courses
-    #return pd.DataFrame(courses)
-
-""" def getting_section_details(course_code: str, course_title: str):
-    
-    BASE_URL = "https://crs.upd.edu.ph/schedule/120242/"
-    # Container for values
-    courses: list[dict[str,str]] = []
-    soup = parse_html(BASE_URL + course_title.replace(" ", "%20"), "tr")
-    for row in soup[4:]: # Actual entries of the table start at index 4
-        tr = row.find_all("td")
-        # print(tr)
-
-        # Check if there are no classes
-        if (tr[0].text != "No courses to display" and tr[0].text == course_code):
-            print("FOUND")
-            course_timeslot = (tr[3].text).split("\n\t\t\t")
-            print("course timeslot:", course_timeslot)
-            course_timeslot = course_timeslot[1].strip()
-            print("course timeslot:", course_timeslot)
-            course_timeslot = (course_timeslot.split(" ", 2))
-            print("course timeslot:", course_timeslot)
-            
-            
-            courses.append(
-                {
-                    "course_code" :     tr[0].text,
-                    "course_title" :    tr[1].text,
-                    "course_units" :    tr[2].text,
-                    "course_timeslot" :   course_timeslot[1],
-                    "course_offeringunit" :   tr[4].text,
-                    "venue" : course_timeslot[1],
-                    "instructor" : course_timeslot[2]
-                    
-                }
-            )
-            print(courses)
-    # Container for values
-    units: dict[str, float] = {}
-    timeslot: dict[str, str] = {}
-    venue: dict[str, str] = {}
-    instructor: dict[str, str] = {}
-    len_courses = len(course_code)
-
-   
-
-    return pd.DataFrame({
-        "course_code" : list(units.keys()), 
-        "units" :       list(units.values()),
-        "timeslot" : list(timeslot.values()),
-        "venue" : list(venue.values()),
-        "instructor" : list(instructor.values()),
-    }) """
 
 # *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":

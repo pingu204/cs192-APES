@@ -72,36 +72,36 @@
                 </ul>
                 {% endif %} -->
             </form>
-            <!-- <h6>0 RESULTS</h6> -->
+            
             {% if search_results|length == 1 %}
-            <h6>{{ search_results|length }} RESULT</h6>
+                <h6>{{ search_results|length }} RESULT</h6>
             {% else %}
-            <h6>{{ search_results|length }} RESULTS</h6>
+                <h6>{{ search_results|length }} RESULTS</h6>
             {% endif %}
             
             <div class="filler result-container">
                 {% for result in search_results %}
-                <div class="result-card">
-                    <div>
-                        <h5>{{ result.course_title }}</h5>
-                        <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
-                    </div>
-                    <div class="filler"></div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="course_code" value="{{ result.course_code }}">
-                        <input type="hidden" name="course_title" value="{{ result.course_title }}">
+                    <div class="result-card">
                         <div>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <h5>{{ result.course_title }}</h5>
+                            <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
                         </div>
-                    </form>
-                </div>
-                {% empty %}
-                <div class="result-card">
-                    <div>
-                        <h5>No results found.</h5>
+                        <div class="filler"></div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="course_code" value="{{ result.course_code }}">
+                            <input type="hidden" name="course_title" value="{{ result.course_title }}">
+                            <div>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
+                    {% empty %}
+                    <div class="result-card">
+                        <div>
+                            <h5>No results found.</h5>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
