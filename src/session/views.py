@@ -44,6 +44,8 @@ def login_view(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
+            request.session.flush()
+
             login(request, user)
             # DEBUGGER: print(request.session.keys())
             request.session.pop('is_guest', None) # when a user logs in, pop the is_guest since no longer a guest
