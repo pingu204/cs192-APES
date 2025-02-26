@@ -49,6 +49,7 @@ def dcp_add_view(request):
         return redirect('homepage_view')
     
     if request.GET.get("course_code"):
+        form = DesiredClassesForm(request.GET)
         print("searched")
         # get the raw query search placed by the user
         raw_search_query = request.GET["course_code"]
