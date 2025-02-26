@@ -24,6 +24,7 @@ from pages.views import (
     homepage_view,
     guest_login_view,
     logout_view,
+    clear_desired_courses
 )
 
 from session.views import (
@@ -46,4 +47,5 @@ urlpatterns = [
     path('guest_home/', guest_login_view, name="guest_login_view"),
     path('logout/', logout_view, name="logout_view"),
     path('home/add/', dcp_add_view, name="dcp_add_view"),
+    path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
