@@ -21,7 +21,7 @@ function overlayOff() {
 }
 
 document.getElementById("submitClear").addEventListener("click", function() {
-    event.preventDefault()
+    // event.preventDefault()
     document.getElementById("clearOverlay").style.display = "block";
 });
 

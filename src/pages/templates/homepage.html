@@ -46,7 +46,7 @@
                     <div style="display: flex; gap: 3px; align-items: center;">
                         <form action="{% url 'homepage_view' %}" method="POST" id="clearDCP">
                             {% csrf_token %}    
-                            <button class="btn-sm" type="submit" id="submitClear" name="clear_dcp">CLEAR</button>
+                            <button class="btn-sm" type="button" id="submitClear">CLEAR</button>
                         </form>
 
                         <button class="btn-sm"><a href="add/">+</a></button>
@@ -209,6 +209,17 @@
             </form>
         </div>
     </div>
+
+    <!-- <div id="removeClassOverlay">
+        <div id="inner-overlay">
+            <form method="POST">
+            {% csrf_token %} 
+            <h6>Delete this class?</h6>
+                <button class="btn-sm" name="removed_course" id="removeYes">Yes</button>
+                <button class="btn-sm" id="removeNo">No</button>
+            </form>
+        </div>
+    </div> -->
 {% endblock %}
 
 {% block footer %}
