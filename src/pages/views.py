@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import logout
 # from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from apes.utils import redirect_authenticated_users, guest_or_authenticated
+from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
 
 from courses.models import DesiredCourse, Course
 # Create your views here.
@@ -14,11 +14,22 @@ def landing_view(request, *args, **kwargs):
 
 @guest_or_authenticated
 def homepage_view(request, *args, **kwargs): 
-    if request.user.id == None: # Guest
-        dcp = request.session['dcp'] 
+    if request.method == "POST" and "clear_dcp" in request.POST:
+        if request.user.is_authenticated:
+            DesiredCourse.objects.filter(student_id=request.user.id).delete()
+            print(f"User {request.user.id} DCP classes cleared!")
+        else:
+            request.session["dcp"] = []
+            print("Guest DCP classes cleared!")
 
-    else: # Not a Guest, getting the dcp of a student
-        dcp = []
+    # Wala pang confirmation message like: CLEAR -> "Are you sure you wanna do this?" -> Yes/No -> skibidi act upon Yes/No
+
+    if request.user.id is None:  # Guest
+        dcp = request.session.get("dcp", [])   
+    else:  # Authenticated user
+        desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
+        course_codes = [dc.course_code for dc in desired_courses]
+        dcp = get_course_details_from_csv(course_codes)
         
 
     context = {
@@ -61,6 +72,9 @@ def logout_view(request, *args, **kwargs):
     # if POST method, ensures that users don't logout by simply rerouting to /logout/
     if request.method == 'POST':
         logout(request)
+
+        request.session.flush()
+
         # messages.success(request, ("Successfully Logged Out.")) # optional (if we want to display an error message to the users, then just add here)
         return redirect(reverse("landing_view"))
     
@@ -73,3 +87,16 @@ def logout_view(request, *args, **kwargs):
 def database_error_view(request):
     error_message = request.session.pop('database_error', "Database connection failed. Please try again later.")
     return render(request, 'database_error.html', {'error': error_message}, status=500)
+
+def clear_desired_courses(request):
+    if request.method == "POST":
+
+        if request.user.is_authenticated:
+            DesiredCourse.objects.filter(student_id=request.user.id).delete()
+            print("User DCP classes cleared!")
+
+        else:
+            request.session["dcp"] = []
+            print("Guest DCP classes cleared!")
+
+    return redirect(reverse("homepage_view"))

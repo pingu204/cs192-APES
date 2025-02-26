@@ -43,8 +43,12 @@
                 <div class="dcp-header">
                     <h1>Desired Classes</h1>
                     <div class="filler"></div>
-                    <div>
-                        <button class="btn-sm">CLEAR</button>
+                    <div style="display: flex; gap: 3px; align-items: center;">
+                        <form action="{% url 'homepage_view' %}" method="POST">
+                            {% csrf_token %}    
+                            <button class="btn-sm" type="submit" name="clear_dcp">CLEAR</button>
+                        </form>
+
                         <button class="btn-sm"><a href="add/">+</a></button>
                     </div>
                 </div>
