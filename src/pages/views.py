@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 # from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
-
+from django.contrib import messages
 from courses.models import DesiredCourse, Course
 # Create your views here.
 
@@ -31,7 +31,7 @@ def homepage_view(request, *args, **kwargs):
         else:
             print(f"Guest removing {removed_course_code}")
             request.session["dcp"] = [course for course in request.session.get("dcp", []) if course["course_code"] != removed_course_code]
-            
+        messages.success(request, "Class has been successfully removed.")
 
 
     # Wala pang confirmation message like: CLEAR -> "Are you sure you wanna do this?" -> Yes/No -> skibidi act upon Yes/No
