@@ -16,7 +16,7 @@ from django.contrib import messages
 
 def dcp_add_view(request):
     search_results = []
-    form = DesiredClassesForm()
+    form = DesiredClassesForm(request.GET)
 
     if request.method == "POST":
         # Handle the POST request to save the class code
@@ -29,77 +29,53 @@ def dcp_add_view(request):
             dcp_codes = [
                 x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
             ]
-        else:
-            # Guest user -> Obtain DCP from session
+        else: # Guest user
+            # Obtain DCP from `request.session``
             dcp_codes = [
                 x['course_code'] for x in request.session.get("dcp", [])
             ]
             print(dcp_codes)
 
-        # Scrape sections of classes in DCP
-        dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+        # Check if course is already in DCP
+        if course_code in dcp_codes:
+            messages.error(request, "Class already exists.")
+        else:
+            # Scrape sections of classes in DCP
+            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
 
-        # Get sections of course to be added
-        course_sections = list(filter(
-            lambda x: x['course_code'] == course_code,
-            request.session['course_sections']
-        ))
+            # Obtain sections of course to be added
+            course_sections = list(filter(
+                lambda x: x['course_code'] == course_code,
+                request.session['course_sections']
+            ))
 
-        flag = False
-        for section in course_sections:
-            for dcp_section in list(product(*dcp_sections)):
-                print(dcp_section)
-                print(section)
-                if not is_conflicting_with_dcp(section, list(dcp_section)):
-                    print("goods")
-                    if request.user.id:
-                        DesiredCourse.objects.create(
-                            student_id = request.user.id,
-                            course_code = course_code
-                        )
-                    else:
-                        request.session['dcp'].append(course_sections[0])
-                        request.session.save()
-                        print(request.session['dcp'])
-                    
-                    return redirect(reverse('homepage_view'))
-        
-        messages.error(request, "Class conflicts with another class.")
-                
-        """ course_code = request.POST.get("course_code")
-        course_title = request.POST.get("course_title")
-        print("ADDED", course_code, "TO DCP")
-        # Retrieve the current dcp from the session or initialize it if not present
-        dcp = request.session.get('dcp', [])
-        # Add the new course code to the dcp
-        course_title = course_title.split(' ', 2)  # Split the string into at most 3 parts
-        course_title = ' '.join(course_title[:2])
-        all_sections = getting_section_details(course_code, course_title)
-       
-        for _, row in all_sections.iterrows():
-            if row['course_code'] == course_code:
-                course = Course(
-                    course_code=row['course_code'],
-                    course_title=row['course_title'],
-                    offering_unit=row['offering_unit'],
-                    units=float(row['units']),
-                    timeslot=row['timeslot'],
-                    venue=row['venue'],
-                    instructor=row['instructor']
-                )
-                print("FOUND  COURSE", course)
-                # Convert the Course object to a dictionary
-                course_dict = asdict(course)
-                dcp.append(course_dict)
-                
-                print("added finally the dcp", row)
-                print("THIS IS DCP", dcp)
-                    
-       
-        # Update the session with the new dcp
-        request.session['dcp'] = dcp """
-        messages.success(request, "Class has been successfully added.")
-        return redirect('homepage_view')
+            # Loop through each combination to see if there's a viable
+            # -- Only need to look for ONE possible schedule
+            for section in course_sections:
+                for dcp_section in list(product(*dcp_sections)):
+
+                    # Check if the course to be added conflicts with the classes currently in DCP
+                    if not is_conflicting_with_dcp(section, list(dcp_section)):
+                        
+                        if request.user.id:
+                            DesiredCourse.objects.create(
+                                student_id = request.user.id,
+                                course_code = course_code
+                            )
+                        else: # Guest user
+                            request.session['dcp'].append(course_sections[0])   # Dummy course!
+                                                                                # -- other fields don't matter
+                            
+                            # Necessary for `request.session` to be used in another view
+                            request.session.save()
+                            
+                            # DEBUGGING
+                            # print(request.session['dcp'])
+
+                        messages.success(request, "Class has been successfully added.")
+                        return redirect(reverse('homepage_view'))
+            
+            messages.error(request, "Class conflicts with another class.")
     
     elif request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)
@@ -120,17 +96,8 @@ def dcp_add_view(request):
             # Obtain all sections associated with `raw_search_query` course code
             course_sections = get_all_sections(cleaned_search_query)
 
-            # test: temporary DCP
-            """ dcp_codes = ['CS 132', 'CS 180']
-            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
- """
             request.session['course_sections'] = course_sections
             search_results = get_unique_courses(course_sections)
-
-        # To-do: Check if conflicting!
-
-        # Now, we use this cleaned_search_query to match a course code! only EXACT MATCHING COURSE CODES
-        # i.e. .startswith("course_code") can be used?
     
     else: # Normal Loading
 

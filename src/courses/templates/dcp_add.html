@@ -78,7 +78,7 @@
             {% else %}
             <h6>{{ search_results|length }} RESULTS</h6>
             {% endif %}
-
+            
             <div class="filler result-container">
                 {% for result in search_results %}
                 <div class="result-card">
@@ -99,7 +99,7 @@
                 {% empty %}
                 <div class="result-card">
                     <div>
-                        <h5>No results found</h5>
+                        <h5>No results found.</h5>
                     </div>
                 </div>
                 {% endfor %}
