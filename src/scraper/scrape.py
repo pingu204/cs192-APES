@@ -50,17 +50,22 @@ def get_courses() -> list[dict[str,str]]:
 def get_course_code(raw_code: str):
     # Only extract first line of the element in case of multi-line course codes
     # -- e.g. Bioinfo 297 HQR<br/>Computational Phylogenetics should be 'Bioinfo 297 HQR'
-    if "CS 145" in raw_code:
-        return "CS 145"
-
-    if raw_code.startswith("CWTS 2"):
-        return ' '.join(raw_code.split(' ')[:3])
-
     course_code = raw_code.split('\n')[0]
 
-    # Remove section names
-    # -- e.g. Bioinfo 297 HQR should be 'Bioinfo 297'
-    course_code = ' '.join(course_code.split(' ')[:-1])
+    # Get index of course number, which will serve as the marker
+    # -- e.g.
+    # -- 'Bioinfo 297 HQR'      -> index 1
+    # -- 'App Physics 101 THV'  -> index 2 
+    idx = 0
+
+    # Remove `.` in the course numbers
+    for i, word in enumerate(course_code.replace('.', '').split(' ')):
+        if word.isnumeric():
+            idx = i
+            break
+    
+    # Slice the string until the marker
+    course_code = ' '.join(course_code.split(' ')[:idx+1])
 
     # Remove trailing spaces
     return course_code.rstrip()
