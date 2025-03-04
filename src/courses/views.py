@@ -7,10 +7,11 @@ import os
 from .models import Course, DesiredCourse
 from dataclasses import asdict
 from scraper.scrape import get_all_sections
-from .misc import get_unique_courses, is_conflicting_with_dcp
+from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 
 from itertools import product
+import numpy as np
 
 from django.contrib import messages
 
@@ -30,7 +31,7 @@ def dcp_add_view(request):
                 x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
             ]
         else: # Guest user
-            # Obtain DCP from `request.session``
+            # Obtain DCP from `request.session`
             dcp_codes = [
                 x['course_code'] for x in request.session.get("dcp", [])
             ]
@@ -40,8 +41,13 @@ def dcp_add_view(request):
         if course_code in dcp_codes:
             messages.error(request, "Class already exists.")
         else:
-            # Scrape sections of classes in DCP
-            dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+            # Obtain sections of classes in DCP
+            dcp_sections = request.session.get("dcp_sections", [])
+            
+            if dcp_sections == []: # Not cached yet
+                dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+                request.session['dcp_sections'] = dcp_sections
+                request.session.save()
 
             # Obtain sections of course to be added
             course_sections = list(filter(
@@ -49,13 +55,43 @@ def dcp_add_view(request):
                 request.session['course_sections']
             ))
 
-            flag = False
+            timeout = False
+
             for section in course_sections:
-                for dcp_section in list(product(*dcp_sections)):
-                    print(dcp_section)
-                    print(section)
-                    if not is_conflicting_with_dcp(section, list(dcp_section)):
-                        print("goods")
+                """Checks if `section`'s timeslots collides with `x`"""
+                def is_not_within_range(x) -> bool:
+                    course_days = set(list(''.join(list(section['timeslot'].keys()))))
+                    x_days = set(list(''.join(list(x['timeslot'].keys()))))
+
+                    for day in list(course_days.intersection(x_days)):
+                        print(day)
+                        course_start, course_end = get_start_and_end(section['timeslot'], day)
+                        x_start, x_end = get_start_and_end(x['timeslot'], day)
+
+                        if not (x_end <= course_start or x_start >= course_end):
+                            return False
+
+                    return True
+
+                print("before filtering: ", sum([len(x) for x in dcp_sections]))
+
+                temp = []
+
+                # Pre-filter the DCP sections
+                for i, section_lst in enumerate(dcp_sections):
+                    temp.append(
+                        list(filter(
+                            is_not_within_range,
+                            section_lst
+                        ))
+                    )
+
+                print("after filtering: ", ([len(x) for x in temp]))
+
+                for i, dcp_section in enumerate(list(product(*temp))):
+
+                    if not is_conflicting([section] + list(dcp_section)):
+                        print([section] + list(dcp_section))
                         if request.user.id:
                             DesiredCourse.objects.create(
                                 student_id = request.user.id,
@@ -64,47 +100,25 @@ def dcp_add_view(request):
                         else:
                             request.session['dcp'].append(course_sections[0])
                             request.session.save()
-                            print(request.session['dcp'])
+
+                        # Append current course's sections to DCP sections
+                        request.session['dcp_sections'].append(course_sections)
+                        request.session.save()
+                        print(f"Sessions's `dcp_sections` now has {len(request.session['dcp_sections'])} sections.")
+
                         messages.success(request, "Class has been successfully added.")
                         return redirect(reverse('homepage_view'))
-            
-            messages.error(request, "Class conflicts with another class.")
-                
-        """ course_code = request.POST.get("course_code")
-        course_title = request.POST.get("course_title")
-        print("ADDED", course_code, "TO DCP")
-        # Retrieve the current dcp from the session or initialize it if not present
-        dcp = request.session.get('dcp', [])
-        # Add the new course code to the dcp
-        course_title = course_title.split(' ', 2)  # Split the string into at most 3 parts
-        course_title = ' '.join(course_title[:2])
-        all_sections = getting_section_details(course_code, course_title)
-       
-        for _, row in all_sections.iterrows():
-            if row['course_code'] == course_code:
-                course = Course(
-                    course_code=row['course_code'],
-                    course_title=row['course_title'],
-                    offering_unit=row['offering_unit'],
-                    units=float(row['units']),
-                    timeslot=row['timeslot'],
-                    venue=row['venue'],
-                    instructor=row['instructor']
-                )
-                print("FOUND  COURSE", course)
-                # Convert the Course object to a dictionary
-                course_dict = asdict(course)
-                dcp.append(course_dict)
-                
-                print("added finally the dcp", row)
-                print("THIS IS DCP", dcp)
                     
-       
-        # Update the session with the new dcp
-        request.session['dcp'] = dcp """
-        
-        # return redirect('homepage_view')
-    
+                    if i == 100000:
+                        timeout = True
+                        break
+                    
+            if timeout:
+                messages.error(request, "Couldn't complete request in time.")
+            else:
+                messages.error(request, "Class conflicts with another class.")
+            
+                
     elif request.GET.get("course_code"):
         form = DesiredClassesForm(request.GET)
 
@@ -139,3 +153,4 @@ def dcp_add_view(request):
     }
 
     return render(request, "dcp_add.html", context)
+

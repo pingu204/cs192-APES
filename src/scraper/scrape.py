@@ -55,17 +55,35 @@ def get_course_code(raw_code: str):
     # Get index of course number, which will serve as the marker
     # -- e.g.
     # -- 'Bioinfo 297 HQR'      -> index 1
-    # -- 'App Physics 101 THV'  -> index 2 
-    idx = 0
+    # -- 'App Physics 101 THV'  -> index 2
 
-    # Remove `.` in the course numbers
-    for i, word in enumerate(course_code.replace('.', '').split(' ')):
-        if word.isnumeric():
+    # -- Edge case: Courses w/o a course number 
+    no_course_number = ['Int','Spec']
+
+    idx = 0 if course_code.split(' ')[0] not in no_course_number else -2
+
+    for i, word in enumerate(course_code.split(' ')):
+        if word[0].isnumeric():
             idx = i
             break
+
+    # Obtain index offsets for special cases
+    offset = 0
+
+    # -- Initials of special courses
+    one_suffix =        ['CWTS', 'LTS']
+    three_suffix =      ['CWTS 1 and 2', 'LTS 1 and 2']
+    variable_suffix =   ['MuL', 'MuP', 'MuEd', 'PE']    # infer from length of code
+
+    if True in [course_code.startswith(code) for code in variable_suffix]:
+        offset = len(course_code.split(' ')) - 3
+    elif True in [code in course_code for code in three_suffix]:
+        offset = 3
+    elif True in [code in course_code for code in one_suffix]:
+        offset = 1
     
     # Slice the string until the marker
-    course_code = ' '.join(course_code.split(' ')[:idx+1])
+    course_code = ' '.join(course_code.split(' ')[: idx + offset + 1])
 
     # Remove trailing spaces
     return course_code.rstrip()

@@ -22,6 +22,9 @@ def homepage_view(request, *args, **kwargs):
             request.session["dcp"] = []
             print("Guest DCP classes cleared!")
 
+        request.session["dcp_sections"] = []
+        request.session.save()
+
     if request.method == "POST" and "removed_course" in request.POST:
         removed_course_code = request.POST["removed_course"]
 
@@ -31,6 +34,11 @@ def homepage_view(request, *args, **kwargs):
         else:
             print(f"Guest removing {removed_course_code}")
             request.session["dcp"] = [course for course in request.session.get("dcp", []) if course["course_code"] != removed_course_code]
+
+        request.session["dcp_sections"] = [section_lst for section_lst in request.session.get("dcp_sections", []) if section_lst[0]["course_code"] != removed_course_code]
+
+        print(f"Session's `dcp_sections` now has {len(request.session["dcp_sections"])} sections.")
+        
         messages.success(request, "Class has been successfully removed.")
 
 
