@@ -35,6 +35,7 @@ from session.views import (
 
 from courses.views import (
     dcp_add_view,
+    view_sched_view,
 )
 
 urlpatterns = [
@@ -47,5 +48,6 @@ urlpatterns = [
     path('guest_home/', guest_login_view, name="guest_login_view"),
     path('logout/', logout_view, name="logout_view"),
     path('home/add/', dcp_add_view, name="dcp_add_view"),
-    path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses')
+    path('home/view/<int:sched_id>/', view_sched_view, name="view_sched_view"),
+    path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

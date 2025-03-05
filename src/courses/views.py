@@ -154,3 +154,13 @@ def dcp_add_view(request):
 
     return render(request, "dcp_add.html", context)
 
+def view_sched_view(request, sched_id:int):
+
+    context = {
+        "sched_id" : sched_id,
+    }
+
+    print(sched_id)
+
+    return render(request, "view_sched.html", context)
+
