@@ -12,14 +12,14 @@
 
 <div class="body-container homepage sched-viewer">
     <div class="user-header">
-        <h1 class="margin-right-sm"><span class=bold-text>Sched {{ sched_id }}</span></h1>
+        <h2 class="margin-right-sm"><span class=bold-text>Sched {{ sched_id }}</span></h2>
         <button class="btn-sm margin-right-xs">SAVE</button>
         <button class="btn-sm">EXPORT</button>
         <div class="filler"></div>
-        <span class="bold-text"><a href="../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
+        <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
     </div>
 
-    <div class="main">
+    <div class="main two-column">
 
     <div class="course-list-container">
         <div class="tabs-container">
@@ -72,7 +72,79 @@
                     <button class="btn-sm" disabled>REMOVE</button>
                     <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
                 </div>
-            </div>  
+            </div>
+            <div class="course-card view-card">
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-3"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
+                </div>
+                <div class="details-container three-column margin-top-md">
+                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
+                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
+                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
+                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
+                </div>
+                <div class="d-flex margin-top-md">
+                    <div class="filler"></div>
+                    <button class="btn-sm" disabled>REMOVE</button>
+                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
+                </div>
+            </div> 
+            <div class="course-card view-card">
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-4"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
+                </div>
+                <div class="details-container three-column margin-top-md">
+                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
+                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
+                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
+                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
+                </div>
+                <div class="d-flex margin-top-md">
+                    <div class="filler"></div>
+                    <button class="btn-sm" disabled>REMOVE</button>
+                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
+                </div>
+            </div> 
+            <div class="course-card view-card">
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-5"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
+                </div>
+                <div class="details-container three-column margin-top-md">
+                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
+                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
+                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
+                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
+                </div>
+                <div class="d-flex margin-top-md">
+                    <div class="filler"></div>
+                    <button class="btn-sm" disabled>REMOVE</button>
+                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
+                </div>
+            </div> 
+            <div class="course-card view-card">
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-6"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
+                </div>
+                <div class="details-container three-column margin-top-md">
+                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
+                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
+                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
+                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
+                </div>
+                <div class="d-flex margin-top-md">
+                    <div class="filler"></div>
+                    <button class="btn-sm" disabled>REMOVE</button>
+                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
+                </div>
+            </div>   
         </div>
         <div></div>
     </div>
@@ -87,17 +159,17 @@
                 <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                 <tr class="bound"><th>08:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td></td></tr>
+                <tr><th></th><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr class="bound"><th>09:00 AM</th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>10:00 AM</th><td></td><td class="rowspanned" rowspan="8.0"><b>CS 192 TDE2/HUV2</b><br>10:00 AM - 12:00 PM<br>AECH</td><td class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td class="rowspanned" rowspan="12.0"><b>CS 192 lab TDE2/HUV2</b><br>10:00 AM - 01:00 PM<br>AECH</td><td class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td></td></tr>
+                <tr class="bound"><th>10:00 AM</th><td></td><td id="td-5" class="rowspanned" rowspan="8.0"><b>CS 192 TDE2/HUV2</b><br>10:00 AM - 12:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td id="td-5" class="rowspanned" rowspan="12.0"><b>CS 192 lab TDE2/HUV2</b><br>10:00 AM - 01:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td></td></tr>
                 <tr><th></th><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td></tr>
-                <tr class="bound"><th>11:00 AM</th><td class="rowspanned" rowspan="12.0"><b>CS 145 lab HONOR 2</b><br>11:00 AM - 02:00 PM<br>TL2</td><td></td></tr>
+                <tr class="bound"><th>11:00 AM</th><td id="td-4" class="rowspanned" rowspan="12.0"><b>CS 145 lab HONOR 2</b><br>11:00 AM - 02:00 PM<br>TL2</td><td></td></tr>
                 <tr><th></th><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td></tr>
@@ -105,13 +177,13 @@
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>01:00 PM</th><td class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td></td></tr>
+                <tr class="bound"><th>01:00 PM</th><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td></td></tr>
                 <tr><th></th><td></td></tr>
                 <tr><th></th><td></td></tr>
                 <tr><th></th><td></td></tr>
                 <tr class="bound"><th>02:00 PM</th><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td></tr>
-                <tr><th></th><td></td><td class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td></td></tr>
+                <tr><th></th><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>
                 <tr class="bound"><th>03:00 PM</th><td></td><td></td><td></td><td></td></tr>
                 <tr><th></th><td></td><td></td><td></td><td></td></tr>

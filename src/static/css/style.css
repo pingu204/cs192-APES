@@ -554,10 +554,14 @@ img.apes-logo {
 
 div.main {
     display: grid;
-    grid-template-columns: 35% auto;
+    grid-template-columns: 30% auto auto;
     height: 90%;
     margin-top: 20px;
     gap: 30px;
+}
+
+div.two-column {
+    grid-template-columns: 35% auto;
 }
 
 div.vr {
@@ -635,6 +639,7 @@ div.course-card {
 
 div.view-card {
     padding: 20px;
+    border-radius: 10px;
 }
 
 div.course-card.blank {
@@ -712,42 +717,110 @@ span.tab-sm {
 
 div.timetable {
     height: 100%;
-    background: rgb(0,0,0,0.1);
+    background: #f9f9f9;
     border-radius: 10px;
     line-height: 100%;
-    padding: 30px;
+    padding: 2%;
 }
 
 #i-1 {
-    color: red;
+    color: #fc706c;
 }
 
 #i-2 {
-    color: blue;
+    color: #6eff98;
+}
+
+#i-3 {
+    color: #c28fef;
+}
+
+#i-4 {
+    color: #ffdd7d;
+}
+
+#i-5 {
+    color: #72a8fe;
+}
+
+#i-6 {
+    color: #feaaff;
+}
+
+#td-1 {
+    background: #fc706c;
+}
+
+#td-2 {
+    background: #6eff98;
+}
+
+#td-3 {
+    background: #c28fef;
+}
+
+#td-4 {
+    background: #ffdd7d;
+}
+
+#td-5 {
+    background: #72a8fe;
+}
+
+#td-6 {
+    background: #feaaff;
+}
+
+table {
+    height: 100%;
+    width: 100%;
 }
 
 table, th, td {
     /* border: 1px solid black; */
     border-collapse: collapse;
-    font-size: 7pt;
-    line-height: 90%;
+    font-size: 8pt;
+    line-height: 100%;
+}
+
+th {
+    color: rgb(0,0,0,0.5);
+    font-weight: bolder;
 }
 
 td.rowspanned {
-    border: 1px solid black;
+    /* border: 1px solid rgb(0,0,0,0.5); */
+    border-radius: 7px;
+    transition: 0.1s linear;
+    background: red;
+    padding: 5px;
+    transform: scaleY(0.97) scaleX(0.98);
+    
+}
+
+td.rowspanned p {
+    transform: scaleY(0.97);
+}
+
+td.rowspanned:hover {
+    transform: scale(1.05);
 }
 
 tr.bound {
-    border-top: 1px solid black;
+    border-top: 1px solid rgb(0,0,0,0.5);
+}
+th {
+    text-align: center;
 }
 
 tr.bound th {
-    width: 80px;
+    width: auto;
+    text-align: left;
 }
 
 td {
-    height: 9px;
-    width: 150px;
+    height: 2%;
+    width: auto;
     vertical-align: top;
 }
 
