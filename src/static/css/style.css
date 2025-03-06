@@ -556,12 +556,13 @@ div.main {
     display: grid;
     grid-template-columns: 30% auto auto;
     height: 90%;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     gap: 30px;
 }
 
 div.two-column {
-    grid-template-columns: 35% auto;
+    grid-template-columns: auto 35%;
+    height: 100%;
 }
 
 div.vr {
@@ -681,6 +682,19 @@ button.btn-sm {
     font-size: 10pt;
 }
 
+button.btn-round {
+    border-radius: 1000px;
+}
+
+button.btn-round:hover {
+    border-radius: 1000px;
+}
+
+button.remove-unique-dcp-btn {
+    font-size: 8pt;
+    padding: 2px 5px 2px 5px;
+}
+
 button.btn-sm:hover {
     opacity: 0.5;
 }
@@ -708,6 +722,11 @@ span.tab {
     margin-right: 5px;
     border-radius: 100px;
     line-height: 350%;
+}
+
+span.tab:hover {
+    background: #007bff;
+    color: white;
 }
 
 span.tab-sm {

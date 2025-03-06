@@ -11,18 +11,76 @@
 {% load static %}
 
 <div class="body-container homepage sched-viewer">
-    <div class="user-header">
-        <h2 class="margin-right-sm"><span class=bold-text>Sched {{ sched_id }}</span></h2>
-        <button class="btn-sm margin-right-xs">SAVE</button>
-        <button class="btn-sm">EXPORT</button>
-        <div class="filler"></div>
-        <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
-    </div>
-
     <div class="main two-column">
 
+    <div class="sched-container">
+        <div class="timetable">
+            <table>
+                <tr><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>
+                <tr class="bound"><th>07:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>08:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>09:00 AM</th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>10:00 AM</th><td></td><td id="td-5" class="rowspanned" rowspan="8.0"><b>CS 192 TDE2/HUV2</b><br>10:00 AM - 12:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td id="td-5" class="rowspanned" rowspan="12.0"><b>CS 192 lab TDE2/HUV2</b><br>10:00 AM - 01:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td></td></tr>
+                <tr><th></th><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td></tr>
+                <tr class="bound"><th>11:00 AM</th><td id="td-4" class="rowspanned" rowspan="12.0"><b>CS 145 lab HONOR 2</b><br>11:00 AM - 02:00 PM<br>TL2</td><td></td></tr>
+                <tr><th></th><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>12:00 PM</th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>01:00 PM</th><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td></td></tr>
+                <tr><th></th><td></td></tr>
+                <tr><th></th><td></td></tr>
+                <tr><th></th><td></td></tr>
+                <tr class="bound"><th>02:00 PM</th><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td></tr>
+                <tr><th></th><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>03:00 PM</th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>04:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>05:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>06:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr class="bound"><th>07:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </table>
+        </div>
+    </div>
+
+
     <div class="course-list-container">
-        <div class="tabs-container">
+        <div class="user-header">
+            <h2 class="margin-right-sm"><span class=bold-text>Sched {{ sched_id }}</span></h2>
+            <button class="btn-sm margin-right-xs">SAVE</button>
+            <button class="btn-sm">EXPORT</button>
+            <div class="filler"></div>
+            <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
+        </div>
+
+        <div class="tabs-container margin-top-md">
             <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i>Travel 0 kilometers/day</span></div>
             <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i>0% chance of being granted</span></div>
             <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i>0-min. to 0-hour breaks</span></div>
@@ -31,9 +89,9 @@
             <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i>As late as 00:00 PM</span></div>
         </div>
         <div class="course-list-header">
-            <h1>Classes</h1>
+            <h1 style="font-size:16pt;">Classes & Sections</h1>
             <div class="filler"></div>
-            <h5 style="font-size:16pt; margin:0"><span class="bold-text light-text">0 units</span></h5>
+            <h5 style="font-size:12pt; margin:0"><span class="bold-text light-text">0 units</span></h5>
             <button class="btn-sm"><a href="add/">+</a></button>
         </div>
         <div class="courses-container margin-top-md">
@@ -147,63 +205,6 @@
             </div>   
         </div>
         <div></div>
-    </div>
-
-    <div class="sched-container">
-        <div class="timetable">
-            <table>
-                <tr><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>
-                <tr class="bound"><th>07:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>08:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>09:00 AM</th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>10:00 AM</th><td></td><td id="td-5" class="rowspanned" rowspan="8.0"><b>CS 192 TDE2/HUV2</b><br>10:00 AM - 12:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td id="td-5" class="rowspanned" rowspan="12.0"><b>CS 192 lab TDE2/HUV2</b><br>10:00 AM - 01:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td></td></tr>
-                <tr><th></th><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td></tr>
-                <tr class="bound"><th>11:00 AM</th><td id="td-4" class="rowspanned" rowspan="12.0"><b>CS 145 lab HONOR 2</b><br>11:00 AM - 02:00 PM<br>TL2</td><td></td></tr>
-                <tr><th></th><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>12:00 PM</th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>01:00 PM</th><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td></td></tr>
-                <tr><th></th><td></td></tr>
-                <tr><th></th><td></td></tr>
-                <tr><th></th><td></td></tr>
-                <tr class="bound"><th>02:00 PM</th><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td></tr>
-                <tr><th></th><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>03:00 PM</th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>04:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>05:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>06:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr class="bound"><th>07:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            </table>
-        </div>
     </div>
     </div>
 </div>

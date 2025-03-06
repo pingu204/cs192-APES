@@ -38,7 +38,7 @@
             <h6>1st Semester, A.Y. 2024-2025</h6>
         </div>
         
-        <div class="main">
+        <div class="main margin-top-md">
             <div class="course-list-container">
                 <div class="course-list-header">
                     <h1>Desired Classes</h1>
@@ -74,8 +74,8 @@
                                     <div class="filler"></div>
                                     <form method="POST" id="removeCourse">
                                         {% csrf_token %}
-                                        <button id="{{course.course_code}}" type="button" class="removeCourseSubmit" name="removed_course" value="{{ course.course_code }}" class="remove-unique-dcp-btn">
-                                            <i class="bi bi-x-circle"></i>
+                                        <button id="{{course.course_code}}" type="button" class="removeCourseSubmit btn-outline btn-round remove-unique-dcp-btn" name="removed_course" value="{{ course.course_code }}">
+                                            <i class="bi bi-x-lg"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -181,7 +181,7 @@
             <div class="sched-container">
                 <div class="course-list-header">
                     <h1>Schedules</h1>
-                    <button class="btn-sm generate">GENERATE</button>
+                    <button class="btn-sm generate" disabled>GENERATE</button>
                     <div class="filler">
                         <p>
                             The generated schedules will appear here once your desired classses have been processed. Try clicking the 'Generate' button once you've added classes!
