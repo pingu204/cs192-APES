@@ -57,7 +57,7 @@
                 {% else %}
                 <h5>{{ dcp_units }} UNITS<i class="bi bi-dot"></i><span class="light-text">{{ dcp_length }} CLASSES</span></h5>
                 {% endif %}
-                <div class="courses-container">
+                <div class="flex-grow-container">
                     {% if not dcp %}
 
                         <div class="course-card blank"></div>
@@ -68,36 +68,34 @@
                     {% else %}
 
                         {% for course in dcp %}
-                            <div class="course-card">
-                                <div class="course-header">
-                                    <h6><b>{{ course.course_code }}</b><i class="bi bi-dot"></i><span class="light-text">{{ course.units }} Units</span></h6>
-                                    <div class="filler"></div>
-                                    <form method="POST" id="removeCourse">
-                                        {% csrf_token %}
-                                        <button id="{{course.course_code}}" type="button" class="removeCourseSubmit btn-outline btn-round remove-unique-dcp-btn" name="removed_course" value="{{ course.course_code }}">
-                                            <i class="bi bi-x-lg"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <h4>{{ course.course_title }}</h4>
-                            </div> 
-                            <div class="removeCourseOverlay" id="remove-{{course.course_code}}">
-                                <div id="inner-overlay">
-                                    <form method="POST">
-                                    {% csrf_token %} 
-                                    <h6>Delete this class?</h6>
-                                        <button class="btn-sm" name="removed_course" id="removeYes" value="{{ course.course_code }}">Yes</button>
-                                        <button class="btn-sm" id="removeNo">No</button>
-                                    </form>
-                                </div>
+                        <div class="course-card">
+                            <div class="course-header">
+                                <h6><b>{{ course.course_code }}</b><i class="bi bi-dot"></i><span class="light-text">{{ course.units }} Units</span></h6>
+                                <div class="filler"></div>
+                                <form method="POST" id="removeCourse">
+                                    {% csrf_token %}
+                                    <button id="{{course.course_code}}" type="button" class="removeCourseSubmit btn-outline btn-round remove-unique-dcp-btn" name="removed_course" value="{{ course.course_code }}">
+                                        <i class="bi bi-x-lg"></i>
+                                    </button>
+                                </form>
                             </div>
+                            <h4>{{ course.course_title }}</h4>
+                        </div> 
+                        <div class="removeCourseOverlay" id="remove-{{course.course_code}}">
+                            <div id="inner-overlay">
+                                <form method="POST">
+                                {% csrf_token %} 
+                                <h6>Delete this class?</h6>
+                                    <button class="btn-sm" name="removed_course" id="removeYes" value="{{ course.course_code }}">Yes</button>
+                                    <button class="btn-sm" id="removeNo">No</button>
+                                </form>
+                            </div>
+                        </div>
                         {% endfor %}
                         
 
                     {% endif %}
                     
-                   
-
                     <!-- Template for class card
                     
                     <div class="course-card">
@@ -111,69 +109,6 @@
                     
                     -->
                     
-<!-- 
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div> 
-
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h6><b>Class Code</b><i class="bi bi-dot"></i><span class="light-text">Units</span></h6>
-                            <div class="filler"></div>
-                            <h6><i class="bi bi-x-circle"></i></h6>
-                        </div>
-                        <h4>Course Title Course Title Course Title Course Title</h4>
-                    </div>  -->
                 </div>
                 <div></div>
             </div>
@@ -189,6 +124,56 @@
                         
                     </div>
                 </div>
+                <div class="flex-grow-container margin-top-md">
+                    <div class="sched-list-container">
+                        <div class="course-card sched-card saved">
+                            <div class="course-header padding-sm">
+                                <div class="day margin-right-xs">M</div>
+                                <div class="day day-filled margin-right-xs">T</div>
+                                <div class="day day-filled margin-right-xs">W</div>
+                                <div class="day day-filled margin-right-xs">H</div>
+                                <div class="day day-filled margin-right-xs">F</div>
+                                <div class="day margin-right-xs">S</div>
+                                <div class="filler"></div>
+                                <i class="bi bi-bookmark-fill"></i>
+                            </div>
+                            <div class="padding-md tabs-container">
+                                <h4>Sched 02</h4>
+                                <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i>0 kilometers/day</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i>0% chance of being granted</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i>0-min. to 0-hour breaks</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i>0 to 0 classes/day</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i>As early as 00:00 AM</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i>As late as 00:00 PM</span></div>
+                            </div>
+                        </div>
+                        <a href="view/1/">
+                        <div class="course-card sched-card">
+                            <div class="course-header padding-sm">
+                                <div class="day margin-right-xs">M</div>
+                                <div class="day day-filled margin-right-xs">T</div>
+                                <div class="day day-filled margin-right-xs">W</div>
+                                <div class="day day-filled margin-right-xs">H</div>
+                                <div class="day day-filled margin-right-xs">F</div>
+                                <div class="day margin-right-xs">S</div>
+                                <div class="filler"></div>
+                                <i class="bi bi-bookmark"></i>
+                                <!-- <i class="bi bi-bookmark-fill"></i> -->
+                            </div>
+                            <div class="padding-md tabs-container">
+                                <h4>Sched 01</h4>
+                                <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i>0 kilometers/day</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i>0% chance of being granted</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i>0-min. to 0-hour breaks</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i>0 to 0 classes/day</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i>As early as 00:00 AM</span></div>
+                                <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i>As late as 00:00 PM</span></div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div></div>
             </div>
         </div>
     </div>
