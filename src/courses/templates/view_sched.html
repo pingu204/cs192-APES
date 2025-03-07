@@ -70,12 +70,11 @@
         </div>
     </div>
 
-
     <div class="course-list-container">
         <div class="user-header">
             <h2 class="margin-right-sm"><span class=bold-text>Sched {{ sched_id }}</span></h2>
             <button class="btn-sm margin-right-xs">SAVE</button>
-            <button class="btn-sm">EXPORT</button>
+            <button class="btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="export">EXPORT</button>
             <div class="filler"></div>
             <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
         </div>
@@ -207,6 +206,124 @@
         <div></div>
     </div>
     </div>
+    <div id="export-sched">
+        <div class="contents padding-md">
+            <div class="sched-container">
+                <div class="timetable export">
+                    <table>
+                        <tr><th></th><th>MON</th><th>TUES</th><th>WED</th><th>THURS</th><th>FRI</th><th>SAT</th></tr>
+                        <tr class="bound"><th>7 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>8 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td id="td-6" class="rowspanned" rowspan="6.0"><b>CS 180 THR</b><br>08:30 AM - 10:00 AM<br>AECH</td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>9 AM</th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>10 AM</th><td></td><td id="td-5" class="rowspanned" rowspan="8.0"><b>CS 192 TDE2/HUV2</b><br>10:00 AM - 12:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td id="td-5" class="rowspanned" rowspan="12.0"><b>CS 192 lab TDE2/HUV2</b><br>10:00 AM - 01:00 PM<br>AECH</td><td id="td-3" class="rowspanned" rowspan="6.0"><b>LIS 51 WFU</b><br>10:00 AM - 11:30 AM<br>SOLAIR</td><td></td></tr>
+                        <tr><th></th><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td></tr>
+                        <tr class="bound"><th>11 AM</th><td id="td-4" class="rowspanned" rowspan="12.0"><b>CS 145 lab HONOR 2</b><br>11:00 AM - 02:00 PM<br>TL2</td><td></td></tr>
+                        <tr><th></th><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>12 PM</th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>1 PM</th><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-1" class="rowspanned" rowspan="6.0"><b>CS 153 THW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td id="td-2" class="rowspanned" rowspan="6.0"><b>CS 132 WFW</b><br>01:00 PM - 02:30 PM<br>AECH</td><td></td></tr>
+                        <tr><th></th><td></td></tr>
+                        <tr><th></th><td></td></tr>
+                        <tr><th></th><td></td></tr>
+                        <tr class="bound"><th>2 PM</th><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td></tr>
+                        <tr><th></th><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td id="td-4" class="rowspanned" rowspan="6.0"><b>CS 145 HONOR</b><br>02:30 PM - 04:00 PM<br>Accenture</td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>3 PM</th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>4 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>5 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>6 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><th></th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr class="bound"><th>7 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="padding-md">
+                <div class="course-list-header margin-top-lg margin-bottom-md">
+                    <h1>Classes & Sections</h1>
+                    <div class="filler"></div>
+                    <h5><span class="bold-text light-text">0 units</span></h5>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-1"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-2"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-3"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-4"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-5"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+                <div class="course-header">
+                    <h6><span class="bold-text"><span id="i-6"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">0.0 units</span>
+                </div>
+            </div>
+            <div class="filler"></div>
+            <!-- <div class="d-flex flex-column justify-content-center">
+                <span class="bold-text">Generated using </span><img class="apes-logo" src="{% static 'images/apes_logo.png' %}">
+            </div> -->
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            </div> -->
+            <div class="modal-body" id="export-container">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Download</button>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
@@ -214,5 +331,12 @@
 {% block footer %}
 
     {% include 'footer.html' %}
+
+{% endblock %}
+
+{% block addtl_scripts %}
+
+<script  type="module" type="text/javascript" src="{% static 'js/view.js' %}"></script>
+<script type="module" type="text/javascript" src="{% static 'js/html2canvas.js' %}" ></script>
 
 {% endblock %}

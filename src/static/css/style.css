@@ -22,6 +22,10 @@ a:hover {
     margin-top: 20px;
 }
 
+.margin-top-lg {
+    margin-top: 60px;
+}
+
 .margin-bottom-md {
     margin-bottom: 20px;
 }
@@ -893,12 +897,13 @@ td.rowspanned:hover {
 tr.bound {
     border-top: 1px solid rgb(0,0,0,0.5);
 }
+
 th {
     text-align: center;
 }
 
 tr.bound th {
-    width: auto;
+    min-width: 5%;
     text-align: left;
 }
 
@@ -913,6 +918,58 @@ div.sched-list-container {
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
     row-gap: 10px;
+}
+
+div#export-sched {
+    display:none;
+    height: 1920px;
+    width: 1080px;
+    background:#FC706C;
+    padding: 40px;
+}
+
+div#export-sched div.contents div.sched-container {
+    height: 60%;
+}
+
+div#export-container canvas {
+    width: 100%;
+    height: auto;
+}
+
+div.contents {
+    height: 100%;
+    background: white;
+    border-radius: 15px;
+}
+
+div.timetable.export td, div.timetable.export th {
+    font-size: 15px;
+}
+
+div.timetable.export tr.bound th {
+    width: 10%;
+}
+
+div.contents div.course-list-header h1 {
+    font-size: 48px;
+}
+
+div.contents div.course-list-header h5 {
+    font-size: 40px;
+    margin: 0;
+}
+
+div.contents div.course-header {
+    margin-bottom: 10px;
+}
+
+div.contents div.course-header h6 {
+    font-size: 32px;
+}
+
+div.contents div.course-header span.tab-sm {
+    font-size: 24px;
 }
 
 /* Icons from Iconify */
