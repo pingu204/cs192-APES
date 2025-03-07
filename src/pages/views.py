@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
 from django.contrib import messages
-from courses.models import DesiredCourse, Course
+from courses.models import DesiredCourse
 # Create your views here.
 
 @redirect_authenticated_users

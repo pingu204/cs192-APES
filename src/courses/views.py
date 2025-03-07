@@ -4,11 +4,12 @@ from django.contrib import messages
 from .forms import DesiredClassesForm
 import csv
 import os
-from .models import Course, DesiredCourse
+from .models import DesiredCourse
 from dataclasses import asdict
 from scraper.scrape import get_all_sections
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
+from .schedule import Course, generate_timetable
 
 from itertools import product
 import numpy as np
@@ -155,12 +156,98 @@ def dcp_add_view(request):
     return render(request, "dcp_add.html", context)
 
 def view_sched_view(request, sched_id:int):
+    #############################
+    # For testing purposes only #
+    #############################
+
+    classes = [
+        Course(
+            course_code="CS 180",
+            sectionName={"lec":"THR"},
+            capacity=30,
+            demand=30,
+            units=3.0,
+            class_days={"lec":"TH"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"ROSELYN GABUD"},
+            timeslots={"lec":(90,180)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="CS 145",
+            sectionName={"lec":"HONOR", "lab":"HONOR 2"},
+            capacity=30,
+            demand=1,
+            units=4.0,
+            class_days={"lec":"TH","lab":"M"},
+            location={"lec":"Accenture","lab":"TL2"},
+            coords={"lec":(0,0), "lab":(0,0)},
+            instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
+            timeslots={"lec":(450,540), "lab":(240,420)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="CS 192",
+            sectionName={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
+            capacity=30,
+            demand=1,
+            units=3.0,
+            class_days={"lec":"T", "lab":"H"},
+            location={"lec":"AECH", "lab":"AECH"},
+            coords={"lec":(0,0), "lab":(0,0)},
+            instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
+            timeslots={"lec":(180,300), "lab":(180,360)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="LIS 51",
+            sectionName={"lec":"WFU"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"WF"},
+            location={"lec":"SOLAIR"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"DRIDGE REYES"},
+            timeslots={"lec":(180,270)},
+            offering_unit="SLIS"
+        ),
+
+        Course(
+            course_code="CS 153",
+            sectionName={"lec":"THW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"TH"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"PHILIP ZUNIGA"},
+            timeslots={"lec":(360,450)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="CS 132",
+            sectionName={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"WF"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"PAUL REGONIA"},
+            timeslots={"lec":(360,450)},
+            offering_unit="DCS"
+        ),
+    ]
+
 
     context = {
         "sched_id" : sched_id,
+        "timetable" : generate_timetable(classes),
     }
-
-    print(sched_id)
 
     return render(request, "view_sched.html", context)
 
