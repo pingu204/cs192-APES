@@ -52,10 +52,12 @@ class ClassStatus(StrEnum):
     ONGOING = auto()
 
 """ Return time in HH:MM AM/PM format """
-def get_time(offset:int) -> str:
+def get_time(offset:int, extended:bool=True) -> str:
     # Base Time = 7:00 AM (year, month, and day are placeholders)
     dt = datetime(year=2000, month=1, day=1, hour=7) + timedelta(minutes=offset)
-    return dt.strftime("%I:%M %p")
+
+    # Shorten time string if not `extended`
+    return dt.strftime("%I:%M %p") if extended else dt.strftime("%I %p")
 
 """ Find class at day and current time """
 def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus, int, int] | None:
@@ -90,15 +92,31 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
 
 """ Returns the contents of the HTML timetable given list of `classes` """
 def generate_timetable(classes: list[Course]):
+    
+    # Header for days
+    # -- Shortened days for export ver.
+    main_days_header = "<tr><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>" 
+    export_days_header = "<tr><th></th><th>MON</th><th>TUES</th><th>WED</th><th>THURS</th><th>FRI</th><th>SAT</th></tr>" 
+
+    # Header for last boundary
+    main_last_header = '<tr class="bound"><th>12:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
+    export_last_header = '<tr class="bound"><th>12 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
+    
     # Container for output
-    to_print = ["<tr><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>"]
+    main_output =   []
+    export_output = []
+
+    # Markers
+    start, end = -1, -1
 
     # Loop through each offset 
     # -- Note: Each offset represents one row in the table
-    for i in range(48):
+    # -- 07:00 AM to 12:00 AM
+    for i in range(17*4): # 17 hours, 4 offset per hour
 
         # Base string for the row
-        row_str:str = ""
+        main_row_str:str =   ""
+        export_row_str:str = ""
         
         # Display time at whole hour
         # -- e.g. i = 60 => 8:00 AM
@@ -108,7 +126,8 @@ def generate_timetable(classes: list[Course]):
         is_bound:bool = minute == 0
 
         # -- Configure row header based on `is_bound`
-        row_str += f"<th>{get_time(offset=i*15)}</th>" if is_bound else "<th></th>" 
+        main_row_str += f"<th>{get_time(offset=i*15)}</th>" if is_bound else "<th></th>" 
+        export_row_str += f"<th>{get_time(offset=i*15, extended=False)}</th>" if is_bound else "<th></th>"
 
         # Loop through each day
         # -- Note: Each day represents one column
@@ -118,26 +137,36 @@ def generate_timetable(classes: list[Course]):
             current_class = find_class(classes, day, i*15)
 
             if current_class:
+                # Update `start` if first class was found
+                start = i if start == -1 else start
+
+                # Update `end` each time a class is found
+                end = i if end != i else end
+
                 # Decompose `current_class`; check type annotation of find_class()
                 c_str, status, length, idx = current_class
 
                 # Configure row spanning at the boundary
                 # -- Note: if `status` == ONGOING, the `td` is skipped because of row spanning
                 if status == ClassStatus.STARTS_AT:
-                    row_str += f'<td id="td-{i+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
+                    main_row_str += f'<td id="td-{i+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
+                    export_row_str += f'<td id="td-{i+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
 
             else: # No class in time cell
-                row_str += f'<td></td>'
+                main_row_str += f'<td></td>'
+                export_row_str += f'<td></td>'
         
         # Append row string to the output container
-        to_print.append(f"<tr>{row_str}</tr>" if not is_bound else f'<tr class="bound">{row_str}</tr>')
+        main_output.append(f"<tr>{main_row_str}</tr>" if not is_bound else f'<tr class="bound">{main_row_str}</tr>')
+        export_output.append(f"<tr>{export_row_str}</tr>" if not is_bound else f'<tr class="bound">{export_row_str}</tr>')
 
-    # Add row for 07:00 PM
-    to_print.append('<tr class="bound"><th>07:00 PM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>')
+    # Collate row strings
+    main_output = [main_days_header] + (main_output + [main_last_header])[(start//4)*4:(end//4+1)*4+1]
+    export_output = [export_days_header] + (export_output + [export_last_header])[(start//4)*4:(end//4+1)*4+1]
 
-    return to_print
+    return '\n'.join(main_output), '\n'.join(export_output)
 
-# print('\n'.join(to_print))
+# print('\n'.join(main_output))
 
 if __name__ == '__main__':
 
@@ -153,7 +182,7 @@ if __name__ == '__main__':
         location={"lec":"AECH"},
         coords={"lec":(0,0)},
         instructor_name={"lec":"ROSELYN GABUD"},
-        timeslots={"lec":(90,180)},
+        timeslots={"lec":(600,780)},
         offering_unit="DCS"
     )
 
@@ -194,7 +223,7 @@ if __name__ == '__main__':
         location={"lec":"SOLAIR"},
         coords={"lec":(0,0)},
         instructor_name={"lec":"DRIDGE REYES"},
-        timeslots={"lec":(180,270)},
+        timeslots={"lec":(90,270)},
         offering_unit="SLIS"
     )
 
@@ -226,4 +255,8 @@ if __name__ == '__main__':
 
     classes = [cs180, cs145, cs153, cs132, cs192, lis51]
 
-    print(generate_timetable(classes))
+    main_table, export_table = generate_timetable(classes)
+
+    print(main_table)
+
+    print(export_table)
