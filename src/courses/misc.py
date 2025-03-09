@@ -27,8 +27,9 @@ def get_ranges(start, end):
 """ Check if set of courses conflict with each other """
 def is_conflicting(courses):
     for day in "MTWHFS":
-        # 12 hours, 4 offsets per hour, 1 for end
-        mat = np.zeros(12*4+1)
+        # 19 hours, 4 offsets per hour, 1 for end
+        # -- 07:00 AM to 12:00 AM
+        mat = np.zeros(19*4+1)
 
         courses_with_classes = list(
             filter(
