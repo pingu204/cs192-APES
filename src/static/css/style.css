@@ -882,6 +882,7 @@ table, th, td {
 th {
     color: rgb(0,0,0,0.5);
     font-weight: bolder;
+    text-align: center;
 }
 
 td.rowspanned {
@@ -906,19 +907,23 @@ tr.bound {
     border-top: 1px solid rgb(0,0,0,0.5);
 }
 
-th {
-    text-align: center;
-}
-
 tr.bound th {
     min-width: 5%;
     text-align: left;
 }
 
-td {
+tr.days-header th {
     height: 2%;
+}
+
+td {
+    /* height: auto; */
     width: auto;
     vertical-align: top;
+}
+
+tr {
+    height: 30cm;
 }
 
 div.sched-list-container {

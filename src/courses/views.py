@@ -161,19 +161,19 @@ def view_sched_view(request, sched_id:int):
     #############################
 
     classes = [
-        Course(
-            course_code="CS 180",
-            sectionName={"lec":"THR"},
-            capacity=30,
-            demand=30,
-            units=3.0,
-            class_days={"lec":"TH"},
-            location={"lec":"AECH"},
-            coords={"lec":(0,0)},
-            instructor_name={"lec":"ROSELYN GABUD"},
-            timeslots={"lec":(90,180)},
-            offering_unit="DCS"
-        ),
+        # Course(
+        #     course_code="CS 180",
+        #     sectionName={"lec":"THR"},
+        #     capacity=30,
+        #     demand=30,
+        #     units=3.0,
+        #     class_days={"lec":"TH"},
+        #     location={"lec":"AECH"},
+        #     coords={"lec":(0,0)},
+        #     instructor_name={"lec":"ROSELYN GABUD"},
+        #     timeslots={"lec":(90,180)},
+        #     offering_unit="DCS"
+        # ),
 
         Course(
             course_code="CS 145",
@@ -243,10 +243,14 @@ def view_sched_view(request, sched_id:int):
         ),
     ]
 
+    main_table, export_table = generate_timetable(classes)
+
+
 
     context = {
         "sched_id" : sched_id,
-        "timetable" : generate_timetable(classes),
+        "main_table" : main_table,
+        "export_table" : export_table,
     }
 
     return render(request, "view_sched.html", context)

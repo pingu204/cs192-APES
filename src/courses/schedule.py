@@ -74,7 +74,7 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
             # Check if class starts at `t`
             if start == t:
                 course_code = f"{c.course_code} "
-                match c.sectionName[classType]:
+                match classType:
                     case "lec":
                         course_code += c.sectionName[classType]
                     case "lab":
@@ -95,8 +95,8 @@ def generate_timetable(classes: list[Course]):
     
     # Header for days
     # -- Shortened days for export ver.
-    main_days_header = "<tr><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>" 
-    export_days_header = "<tr><th></th><th>MON</th><th>TUES</th><th>WED</th><th>THURS</th><th>FRI</th><th>SAT</th></tr>" 
+    main_days_header = '<tr class="days-header"><th></th><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th><th>FRIDAY</th><th>SATURDAY</th></tr>'
+    export_days_header = '<tr class="days-header"><th></th><th>MON</th><th>TUES</th><th>WED</th><th>THURS</th><th>FRI</th><th>SAT</th></tr>'
 
     # Header for last boundary
     main_last_header = '<tr class="bound"><th>12:00 AM</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>'
@@ -149,8 +149,8 @@ def generate_timetable(classes: list[Course]):
                 # Configure row spanning at the boundary
                 # -- Note: if `status` == ONGOING, the `td` is skipped because of row spanning
                 if status == ClassStatus.STARTS_AT:
-                    main_row_str += f'<td id="td-{i+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
-                    export_row_str += f'<td id="td-{i+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
+                    main_row_str += f'<td id="td-{idx+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
+                    export_row_str += f'<td id="td-{idx+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
 
             else: # No class in time cell
                 main_row_str += f'<td></td>'

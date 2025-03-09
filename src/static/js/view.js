@@ -1,6 +1,31 @@
 // https://stackoverflow.com/questions/74396736/the-requested-module-does-not-provide-an-export-named-default
 import html2canvas from "./html2canvas.js";
 
+/* Dynamically adjusts the height of the tiles in the timetable */
+function adjustTableHeight(tableID) {
+    // Get the timetable associated with `tableID`
+    var timetable = document.getElementById(tableID);
+
+    // Get the rows and number of rows
+    var timetableChildren = timetable.children[0].children
+    var numChildren = timetableChildren.length
+
+    // The header occupies 2% of the table height => 98% for the remaining
+    var rowHeight = 98/(numChildren-1);
+
+    // Convert HTML collection into an array
+    // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+    let arr = Array.from(timetableChildren);
+
+    // Set the height of each row
+    for (let row of arr) {
+        row.style.height = String(rowHeight) + "%";
+    }
+}
+
+adjustTableHeight("timetable");
+adjustTableHeight("exportTimetable");
+
 /* Converts the `div` of id `export-sched` into a canvas */
 html2canvas(
     document.getElementById('export-sched')
@@ -33,3 +58,6 @@ html2canvas(
     // -- Wait 0.5s before "removing" the cover
     setInterval(()=>{document.getElementById("cover").style.display = "None";}, 500); 
 });
+
+
+
