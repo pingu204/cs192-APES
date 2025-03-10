@@ -31,6 +31,7 @@ def is_conflicting(courses):
         # -- 07:00 AM to 12:00 AM
         mat = np.zeros(19*4+1)
 
+        # Only obtain courses in DCP that have a class in `day`
         courses_with_classes = list(
             filter(
                 lambda x: day in ''.join(list(x['timeslot'].keys())), 
@@ -38,18 +39,32 @@ def is_conflicting(courses):
             )
         )
 
+        # Check if there are more than 2 classes
+        # -- 0 or 1 class is trivially non-conflicting
         if len(courses_with_classes) > 1:
+
+            # Get intervals of all the filtered courses
             slot_ranges: list[list[int]] = [
                 get_ranges(*get_start_and_end(
                     timeslot = c['timeslot'],
                     day = day
                 )) for c in courses_with_classes]
 
+            # Loop through the ranges of each course
             for slot in slot_ranges:
+                
+                # Loop through each offset in the intervals
                 for offset in slot:
+                    # Get the index of the offset
+                    # -- its position in the index
                     idx = offset // 15
+
+                    # There's already a class that occupies the index
+                    # -- conflicting!
                     if mat[idx] == 1:
                         return True
+
+                    # Occupy the index
                     mat[idx] = 1
         
     return False

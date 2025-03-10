@@ -241,6 +241,71 @@ def view_sched_view(request, sched_id:int):
             timeslots={"lec":(360,450)},
             offering_unit="DCS"
         ),
+
+        Course(
+            course_code="Riana",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"WF"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"THEODORE ESGUERRA"},
+            timeslots={"lec":(780,840)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="Jopeth",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"WF"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"THEODORE ESGUERRA"},
+            timeslots={"lec":(720,780)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="G",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"TH"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"THEODORE ESGUERRA"},
+            timeslots={"lec":(720,780)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="Jason",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"TH"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"THEODORE ESGUERRA"},
+            timeslots={"lec":(780,840)},
+            offering_unit="DCS"
+        ),
+
+        Course(
+            course_code="THEO...",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":"S"},
+            location={"lec":"AECH"},
+            coords={"lec":(0,0)},
+            instructor_name={"lec":"THEODORE ESGUERRA"},
+            timeslots={"lec":(720,840)},
+            offering_unit="DCS"
+        ),
     ]
 
     main_table, export_table = generate_timetable(classes)

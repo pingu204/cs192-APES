@@ -843,6 +843,22 @@ div.timetable {
     color: #feaaff;
 }
 
+#i-7 {
+    color: #f88330;
+}
+
+#i-8 {
+    color: rgb(128, 234, 234);
+}
+
+#i-9 {
+    color: burlywood;
+}
+
+#i-10 {
+    color: yellowgreen;
+}
+
 #td-1 {
     background: #fc706c;
 }
@@ -865,6 +881,22 @@ div.timetable {
 
 #td-6 {
     background: #feaaff;
+}
+
+#td-7 {
+    background: #f88330;
+}
+
+#td-8 {
+    background: rgb(128, 234, 234);
+}
+
+#td-9 {
+    background: burlywood;
+}
+
+#td-10 {
+    background: yellowgreen;
 }
 
 table {
