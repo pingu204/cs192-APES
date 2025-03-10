@@ -10,6 +10,7 @@ from scraper.scrape import get_all_sections
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
+from apes.utils import get_course_details_from_csv
 
 from itertools import product
 import numpy as np
@@ -31,16 +32,24 @@ def dcp_add_view(request):
             dcp_codes = [
                 x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
             ]
+            print (dcp_codes)
         else: # Guest user
             # Obtain DCP from `request.session`
             dcp_codes = [
                 x['course_code'] for x in request.session.get("dcp", [])
             ]
             print(dcp_codes)
-
+            
+        dcp = get_course_details_from_csv(dcp_codes)
+        total_units = sum([course['units'] for course in dcp])
+        
+        print ("TOTAL UNITSSSSS ->>: " ,total_units)
+        
         # Check if course is already in DCP
         if course_code in dcp_codes:
             messages.error(request, "Class already exists.")
+        elif (total_units +  (get_course_details_from_csv(course_code))[0]['units']) > 30:
+            messages.error(request, "Units exceed 30.")
         else:
             # Obtain sections of classes in DCP
             dcp_sections = request.session.get("dcp_sections", [])
