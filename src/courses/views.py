@@ -163,7 +163,7 @@ def view_sched_view(request, sched_id:int):
     classes = [
         # Course(
         #     course_code="CS 180",
-        #     sectionName={"lec":"THR"},
+        #     section_name={"lec":"THR"},
         #     capacity=30,
         #     demand=30,
         #     units=3.0,
@@ -177,7 +177,7 @@ def view_sched_view(request, sched_id:int):
 
         Course(
             course_code="CS 145",
-            sectionName={"lec":"HONOR", "lab":"HONOR 2"},
+            section_name={"lec":"HONOR", "lab":"HONOR 2"},
             capacity=30,
             demand=1,
             units=4.0,
@@ -191,7 +191,7 @@ def view_sched_view(request, sched_id:int):
 
         Course(
             course_code="CS 192",
-            sectionName={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
+            section_name={"lec":"TDE2", "lab":"HUV2"},
             capacity=30,
             demand=1,
             units=3.0,
@@ -205,7 +205,7 @@ def view_sched_view(request, sched_id:int):
 
         Course(
             course_code="LIS 51",
-            sectionName={"lec":"WFU"},
+            section_name={"lec":"WFU"},
             capacity=30, demand=1,
             units=3.0,
             class_days={"lec":"WF"},
@@ -218,7 +218,7 @@ def view_sched_view(request, sched_id:int):
 
         Course(
             course_code="CS 153",
-            sectionName={"lec":"THW"},
+            section_name={"lec":"THW"},
             capacity=30, demand=1,
             units=3.0,
             class_days={"lec":"TH"},
@@ -231,7 +231,7 @@ def view_sched_view(request, sched_id:int):
 
         Course(
             course_code="CS 132",
-            sectionName={"lec":"WFW"},
+            section_name={"lec":"WFW"},
             capacity=30, demand=1,
             units=3.0,
             class_days={"lec":"WF"},
@@ -251,6 +251,8 @@ def view_sched_view(request, sched_id:int):
         "sched_id" : sched_id,
         "main_table" : main_table,
         "export_table" : export_table,
+        "courses" : classes,
+        "units" : f"{sum([course.units for course in classes])} units",
     }
 
     return render(request, "view_sched.html", context)

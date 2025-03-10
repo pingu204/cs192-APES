@@ -8,7 +8,7 @@ class Course:
     capacity:           int
     demand:             int
     units:              float
-    sectionName:        dict[str,str]
+    section_name:       dict[str,str]
     class_days:         dict[str,str] 
                         # -- possible days: MTWHFS (H -> Thursday)
     location:           dict[str,str]
@@ -22,7 +22,7 @@ class Course:
     def example(self):
         return Course(
             course_code = "CS 192",
-            sectionName= {
+            section_name= {
                 "lec":"TDE2/HUV2", 
                 "lab":"TDE2/HUV2"
             },
@@ -76,10 +76,10 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
                 course_code = f"{c.course_code} "
                 match classType:
                     case "lec":
-                        course_code += c.sectionName[classType]
+                        course_code += c.section_name[classType]
                     case "lab":
-                        course_code += f"{'lab ' + c.sectionName[classType]}"
-                # course_code = f"{c.course_code} {"lab " + c.sectionName[classType] if classType == "lab" else c.sectionName[classType]}"
+                        course_code += f"{'lab ' + c.section_name[classType]}"
+                # course_code = f"{c.course_code} {"lab " + c.section_name[classType] if classType == "lab" else c.section_name[classType]}"
                 timeslot = f"{get_time(offset=start)} - {get_time(offset=end)}"
                 location = c.location[classType]
 
@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
     cs180 = Course(
         course_code="CS 180",
-        sectionName={"lec":"THR"},
+        section_name={"lec":"THR"},
         capacity=30,
         demand=30,
         units=3.0,
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 
     cs145 = Course(
         course_code="CS 145",
-        sectionName={"lec":"HONOR", "lab":"HONOR 2"},
+        section_name={"lec":"HONOR", "lab":"HONOR 2"},
         capacity=30,
         demand=1,
         units=4.0,
@@ -202,7 +202,7 @@ if __name__ == '__main__':
 
     cs192 = Course(
         course_code="CS 192",
-        sectionName={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
+        section_name={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
         capacity=30,
         demand=1,
         units=3.0,
@@ -216,7 +216,7 @@ if __name__ == '__main__':
 
     lis51 = Course(
         course_code="LIS 51",
-        sectionName={"lec":"WFU"},
+        section_name={"lec":"WFU"},
         capacity=30, demand=1,
         units=3.0,
         class_days={"lec":"WF"},
@@ -229,7 +229,7 @@ if __name__ == '__main__':
 
     cs153 = Course(
         course_code="CS 153",
-        sectionName={"lec":"THW"},
+        section_name={"lec":"THW"},
         capacity=30, demand=1,
         units=3.0,
         class_days={"lec":"TH"},
@@ -242,7 +242,7 @@ if __name__ == '__main__':
 
     cs132 = Course(
         course_code="CS 132",
-        sectionName={"lec":"WFW"},
+        section_name={"lec":"WFW"},
         capacity=30, demand=1,
         units=3.0,
         class_days={"lec":"WF"},

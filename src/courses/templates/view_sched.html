@@ -55,7 +55,7 @@
         <div class="course-list-header">
             <h1 style="font-size:16pt;">Classes & Sections</h1>
             <div class="filler"></div>
-            <h5 style="font-size:12pt; margin:0"><span class="bold-text light-text">0 units</span></h5>
+            <h5 style="font-size:12pt; margin:0"><span class="bold-text light-text">{{ units }}</span></h5>
             <button class="btn-sm"><a href="add/">+</a></button>
         </div>
 
@@ -63,17 +63,19 @@
         <div class="flex-grow-container margin-top-md">
 
             <!-- Course cards -->
+             {% for course in courses %}
             <div class="course-card view-card">
                 <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-1"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                    <h6><span class="bold-text"><span id="i-{{ forloop.counter }}"><i class="bi bi-circle-fill color-icon"></i></span>
+                    {{ course.course_code }} {{ course.section_name.lec }}{% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}</span></h6>
                     <div class="filler"></div>
                     <span class="tab tab-sm bold-text">0% chance of being granted</span>
                 </div>
                 <div class="details-container margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
+                    <div><i class="bi bi-person color-icon"></i> {{ course.instructor_name.lec }}</div>
+                    <div><i class="bi bi bi-book color-icon"></i> {{ course.units }} units</div>
+                    <div><i class="bi bi bi-door-closed color-icon"></i> {{ course.capacity }} students max.</div>
+                    <div><i class="bi bi bi-mortarboard color-icon"></i> {{ course.offering_unit }}</div>
                 </div>
                 <div class="d-flex margin-top-md">
                     <div class="filler"></div>
@@ -81,96 +83,7 @@
                     <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
                 </div>
             </div>
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-2"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                    <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
-                </div>
-                <div class="details-container three-column margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
-                </div>
-            </div>
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-3"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                    <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
-                </div>
-                <div class="details-container three-column margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
-                </div>
-            </div> 
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-4"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                    <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
-                </div>
-                <div class="details-container three-column margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
-                </div>
-            </div> 
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-5"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                    <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
-                </div>
-                <div class="details-container three-column margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
-                </div>
-            </div> 
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-6"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                    <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
-                </div>
-                <div class="details-container three-column margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> Professor Name</div>
-                    <div><i class="bi bi bi-book color-icon"></i> 0 units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> 0 students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> Offering Unit</div>
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm" disabled>REDRAW</button>
-                </div>
-            </div>   
+            {% endfor %}
         </div>
         <div></div>
     </div>
@@ -209,44 +122,22 @@
             </div>
         </div>
         <div class="padding-md padding-left-lg padding-right-lg">
+
             <!-- Container for the header -->
             <div class="course-list-header margin-top-lg margin-bottom-md">
                 <h1>Classes & Sections</h1>
                 <div class="filler"></div>
-                <h5><span class="bold-text light-text">0 units</span></h5>
+                <h5><span class="bold-text light-text">{{units}}</span></h5>
             </div>
 
             <!-- Included classes in the schedule -->
+            {% for course in courses %}
             <div class="course-header">
-                <h6><span class="bold-text"><span id="i-1"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
+                <h6><span class="bold-text"><span id="i-{{forloop.counter}}"><i class="bi bi-circle-fill color-icon"></i></span>{{ course.course_code }} {{ course.section_name.lec }}{% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}</span></h6>
                 <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
+                <span class="tab tab-sm bold-text">{{ course.units }} units</span>
             </div>
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-2"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
-            </div>
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-3"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
-            </div>
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-4"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
-            </div>
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-5"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
-            </div>
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-6"><i class="bi bi-circle-fill color-icon"></i></span>Course Code</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">0.0 units</span>
-            </div>
+            {% endfor %}
         </div>
         <div class="filler"></div>
         <!-- <div class="d-flex flex-column justify-content-center">
