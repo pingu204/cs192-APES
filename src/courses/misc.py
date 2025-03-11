@@ -31,10 +31,12 @@ def is_conflicting(courses):
         # -- 07:00 AM to 12:00 AM
         mat = np.zeros(19*4+1)
 
+        print(courses)
+
         # Only obtain courses in DCP that have a class in `day`
         courses_with_classes = list(
             filter(
-                lambda x: day in ''.join(list(x['timeslot'].keys())), 
+                lambda x: day in ''.join(list(x['timeslots'].keys())), 
                 courses
             )
         )
@@ -46,7 +48,7 @@ def is_conflicting(courses):
             # Get intervals of all the filtered courses
             slot_ranges: list[list[int]] = [
                 get_ranges(*get_start_and_end(
-                    timeslot = c['timeslot'],
+                    timeslot = c['timeslots'],
                     day = day
                 )) for c in courses_with_classes]
 
@@ -75,11 +77,11 @@ def is_conflicting_with_dcp(course, dcp_courses):
     for day in "MTWHFS":
         print(day)
         # Check if course has a class on `day`
-        if day in ''.join(list(course['timeslot'].keys())):
+        if day in ''.join(list(course['timeslots'].keys())):
             # Only get DCP classes with a class on `day`
             dcp_with_classes = list(
                 filter(
-                    lambda x: day in ''.join(list(x['timeslot'].keys())), 
+                    lambda x: day in ''.join(list(x['timeslots'].keys())), 
                     dcp_courses
                 )
             )
@@ -87,7 +89,7 @@ def is_conflicting_with_dcp(course, dcp_courses):
             # Get range of intervals for the courses in DCP
             dcp_slot_ranges = [set(
                 get_ranges(*get_start_and_end(
-                    timeslot = c['timeslot'],
+                    timeslot = c['timeslots'],
                     day = day
                 ))
             ) for c in dcp_with_classes]
@@ -95,7 +97,7 @@ def is_conflicting_with_dcp(course, dcp_courses):
             # Get range of intervals for the course to be added in DCP
             course_range = set(
                 get_ranges(*get_start_and_end(
-                timeslot = course['timeslot'],
+                timeslot = course['timeslots'],
                 day = day
             )))
             

@@ -88,6 +88,10 @@ def get_course_code(raw_code: str):
     # Remove trailing spaces
     return course_code.rstrip()
 
+def get_section(raw_code:str, course_code:str):
+    raw_code = raw_code.split('\n')[0]
+    return raw_code[raw_code.index(course_code) + len(course_code):].strip()
+
 """ Obtain units of all courses in `course_codes` from A.Y. `start` to `end` """
 def get_units_and_timeslot(start_year:int, end_year:int, course_codes:list[str]):
     # Note: start_year must be <= end_year
@@ -234,7 +238,7 @@ def convert_time(time_format: str) -> int:
     
     return (start,end)
     
-
+""" Returns info about a section """
 def get_timeslots(raw_sched_remarks: str):
     split_a = list(map(
         lambda x : x.strip(), # Remove whitespace
@@ -245,6 +249,7 @@ def get_timeslots(raw_sched_remarks: str):
     timeslots: dict[str,str] = {}
     location: dict[str,str] = {}
     class_days: dict[str,str] = {}
+    instructor_name: dict[str,str] = {}
 
     # Ignore erroneous schedules
     if split_a[1] == "TBA":
@@ -252,20 +257,20 @@ def get_timeslots(raw_sched_remarks: str):
 
     for slot in split_a[1].split(';'):
         temp = slot.strip().split(' ', maxsplit=2)
-        slot_days, slot_time, slot_venue = temp[0], temp[1], temp[2]
+        slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
 
-        timeslots[slot_days.replace('Th', 'H')] = convert_time(slot_time)
+        timeslots[slot_days] = convert_time(slot_time)
         if "lab" in slot_venue:
             class_days["lab"] = slot_days
-            location["lab"] = slot_venue.replace("lab", "").strip()
+            instructor_name["lab"] = split_a[2]
         elif "disc" in slot_venue:
             class_days["disc"] = slot_days
-            location["disc"] = slot_venue.replace("disc", "").strip()
+            instructor_name["disc"] = split_a[2]
         else: # lec
             class_days["lec"] = slot_days
-            location["lec"] = slot_venue.replace("lec", "").strip()
+            instructor_name["lec"] = split_a[2]
 
-    return timeslots
+    return timeslots, class_days, instructor_name
 
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
@@ -298,31 +303,135 @@ def get_all_sections(course_code: str, strict: bool = False):
         # Check if there are no classes
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
+            section_name = get_section(tr[1].get_text(separator='\n'), cleaned_course_code)
 
             # Check if scraped class must be strictly equal to the course code
             if strict and cleaned_course_code.lower() != course_code.lower():
                 continue
 
             course_code_csv = get_info_from_csv(cleaned_course_code) # guaranteed to be unique!
-            print(cleaned_course_code, course_code_csv)
-            course_timeslot = get_timeslots(tr[3].text)
+            
+            # Get the course's
+            # -- timeslot (dict)
+            # -- class days (dict)
+            # -- instructor name/s (dict)
+            course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
 
-            if course_timeslot:
+            # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
+            if course_timeslot and section_name != 'X':
+                # Configure `section_name` field
+                # -- Check if section is both a lec and lab section (e.g. CS 192)
+                if "lec" in list(course_class_days.keys()) and "lab" in list(course_class_days.keys()):
+                    section_name = {
+                        # -- Format: <course code> <lec section>/<lab section>
+                        "lec" : section_name.split('/')[0], 
+                        "lab" : section_name,
+                    }
+                else:
+                    # -- Section is a standalone course
+                    section_name = {
+                        "lec" if "lab" not in list(course_class_days.keys()) else "lab": section_name,
+                    }
+
                 courses.append(
                     {
-                        "course_code" : cleaned_course_code,
-                        "course_title" : course_code_csv['course_title'].values[0],
-                        "units" : course_code_csv['units'].values[0],
-                        "timeslot" : get_timeslots(tr[3].text),
-                        "offeringunit" : tr[4].text,
+                        "course_code" :     cleaned_course_code,
+                        "course_title" :    course_code_csv['course_title'].values[0],
+                        "section_name" :    section_name,
+                        "units" :           course_code_csv['units'].values[0],
+                        "timeslots" :       course_timeslot,
+                        "class_days" :      course_class_days,
+                        "offering_unit" :   tr[4].text,
+                        "instructor_name" : instructor_name,
                     }
                 )
     
     return courses
 
+""" Couples lab sections to their corresponding lec sections """
+def couple_lec_and_lab(lst):
+
+    """ Checks if `x` is a sole lab section """
+    def is_lab_section(x):
+        return "lab" in list(x["class_days"].keys()) and "lec" not in list(x["class_days"].keys())
+
+    """ Checks if `x` is a CS course """
+    def is_cs_course(x):
+        return x["course_code"].startswith("CS")
+
+    # Only get 'CS' sections with lab
+    sections_with_lab = list(filter(
+        lambda x: is_lab_section(x) and is_cs_course(x),
+        lst
+    ))
+
+    # Get 'CS' sections without lab
+    sections_without_lab = list(filter(
+        lambda x: not (is_lab_section(x) and is_cs_course(x)),
+        lst
+    ))
+
+    # Container for lec sections to be removed later
+    to_remove = []
+
+    # Loop through the lab sections
+    for course in sections_with_lab:
+        # Get the lec section
+        # -- Format: <course code> <lec section>/<lab section>
+        code = course["course_code"]
+        section = course["section_name"]["lab"].split('/')[0]
+
+        # Check if lec section was previously found
+        lec_section = list(filter(
+            lambda x: f"{x['course_code']} {x['section_name']['lec']}" == f"{code} {section}",
+            to_remove
+        ))[:]   # returns [] if none was found;
+                # otherwise, returns singleton
+
+        if lec_section:
+            lec_section = lec_section[0]
+        else:
+            # Lec section was not previously found yet
+            # -- Check main set of lec sections
+            lec_section = list(filter(
+                lambda x: f"{x['course_code']} {x['section_name']['lec']}" == f"{code} {section}" and not is_lab_section(x),
+                sections_without_lab
+            ))[:]   # returns [] if none was found;
+                    # otherwise, returns singleton
+
+            if lec_section:
+                lec_section = lec_section[0]
+            else:
+                # Lab section is standalone
+                continue
+        
+        # Obtain lecture fields from `lec_section`
+        course["section_name"]["lec"] = lec_section["section_name"]["lec"]
+        course["class_days"]["lec"] = lec_section["class_days"]["lec"]
+        course["instructor_name"]["lec"] = lec_section["instructor_name"]["lec"]
+        course_class_days = course["class_days"]["lec"]
+        course["timeslots"][course_class_days] = lec_section["timeslots"][course_class_days]
+
+        # Check if it's the first time that `lec_section` was found
+        if lec_section not in to_remove:
+            to_remove.append(lec_section)
+
+    # Remove lec sections in `to_remove`
+    # -- these courses are not standalone
+    for course in to_remove:
+        lst.remove(course)
+
+    return lst
+
+""" Prints a dictionary """
+def print_dict(d):
+    print("--")
+    for key,value in d.items():
+        print(f"+ {key} : {value}")
+
 # *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":
-    course_list = get_courses()
+    """ course_list = get_courses()
     print(course_list)
 
     units_list = get_units_and_timeslot(
@@ -335,4 +444,14 @@ if __name__ == "__main__":
     course_list_with_units = course_list.merge(units_list, on="course_code", how="left")
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
-    course_list_with_units.to_csv("csv/courses.csv", index=False)
+    course_list_with_units.to_csv("csv/courses.csv", index=False) """
+
+    query = "cs 10"
+    result = get_all_sections(query)
+    print("####\nbefore coupling:\n####")
+    for x in result:
+        print_dict(x)
+    coupled_result = couple_lec_and_lab(result)
+    print("####\nafter coupling:\n####")
+    for x in coupled_result:
+        print_dict(x)

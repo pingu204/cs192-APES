@@ -6,7 +6,7 @@ import csv
 import os
 from .models import DesiredCourse
 from dataclasses import asdict
-from scraper.scrape import get_all_sections
+from scraper.scrape import get_all_sections, couple_lec_and_lab
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
@@ -55,7 +55,7 @@ def dcp_add_view(request):
             dcp_sections = request.session.get("dcp_sections", [])
             
             if dcp_sections == []: # Not cached yet
-                dcp_sections = [get_all_sections(code, strict=True) for code in dcp_codes]
+                dcp_sections = [couple_lec_and_lab(get_all_sections(code, strict=True)) for code in dcp_codes]
                 request.session['dcp_sections'] = dcp_sections
                 request.session.save()
 
@@ -70,13 +70,13 @@ def dcp_add_view(request):
             for section in course_sections:
                 """Checks if `section`'s timeslots collides with `x`"""
                 def is_not_within_range(x) -> bool:
-                    course_days = set(list(''.join(list(section['timeslot'].keys()))))
-                    x_days = set(list(''.join(list(x['timeslot'].keys()))))
+                    course_days = set(list(''.join(list(section['timeslots'].keys()))))
+                    x_days = set(list(''.join(list(x['timeslots'].keys()))))
 
                     for day in list(course_days.intersection(x_days)):
                         print(day)
-                        course_start, course_end = get_start_and_end(section['timeslot'], day)
-                        x_start, x_end = get_start_and_end(x['timeslot'], day)
+                        course_start, course_end = get_start_and_end(section['timeslots'], day)
+                        x_start, x_end = get_start_and_end(x['timeslots'], day)
 
                         if not (x_end <= course_start or x_start >= course_end):
                             return False
@@ -146,7 +146,7 @@ def dcp_add_view(request):
         if form.is_valid():
 
             # Obtain all sections associated with `raw_search_query` course code
-            course_sections = get_all_sections(cleaned_search_query)
+            course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query))
 
             request.session['course_sections'] = course_sections
             search_results = get_unique_courses(course_sections)
