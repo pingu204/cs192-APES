@@ -501,7 +501,8 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    print(get_all_sections('arts 1'))
+    for x in get_all_sections('arts 1'):
+        print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)
     # print("####\nbefore coupling:\n####")

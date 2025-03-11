@@ -72,10 +72,50 @@
                     <span class="tab tab-sm bold-text">0% chance of being granted</span>
                 </div>
                 <div class="details-container margin-top-md">
-                    <div><i class="bi bi-person color-icon"></i> {{ course.instructor_name.lec }}</div>
-                    <div><i class="bi bi bi-book color-icon"></i> {{ course.units }} units</div>
-                    <div><i class="bi bi bi-door-closed color-icon"></i> {{ course.capacity }} students max.</div>
-                    <div><i class="bi bi bi-mortarboard color-icon"></i> {{ course.offering_unit }}</div>
+                    
+                    <!-- Instructor/s -->
+                    <div class="d-flex flex-row align-items start">
+                        <i class="bi bi-person color-icon"></i>
+                        <div class="d-flex flex-column justify-content-left">
+                            <!-- Only choose either lec or disc prof -->
+                            {% if course.instructor_name.lec %}
+                                <span>{{ course.instructor_name.lec }}</span>
+                            {% elif course.instructor_name.disc %}
+                                <span>{{ course.instructor_name.disc }}</span>
+                            {% endif %}
+
+                            <!-- Additional prof for lab, if applicable -->
+                            {% if course.instructor_name.lab %} 
+                                <span>{{ course.instructor_name.lab }} <span class="tab tab-lab bold-text">LAB</span></span>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Units -->
+                    <div class="d-flex flex-row align-items start">
+                        <i class="bi bi bi-book color-icon"></i>
+                        <div class="d-flex flex-column justify-content-left">
+                            {{ course.units }} units
+                        </div>
+                    </div>
+                    
+                    <!-- Capacity -->
+                    <div class="d-flex flex-row align-items start">
+                        <i class="bi bi bi-door-closed color-icon"></i>
+                        <div class="d-flex flex-column justify-content-left">
+                            {{ course.capacity }} students max.
+                        </div>
+                    </div>
+
+                    <!-- Offering Unit -->
+                    <div class="d-flex flex-row align-items start">
+                        <i class="bi bi bi-mortarboard color-icon"></i>
+                        <div class="d-flex flex-column justify-content-left">
+                            {{ course.offering_unit }}
+                        </div>
+                    </div>
+
                 </div>
                 <div class="d-flex margin-top-md">
                     <div class="filler"></div>

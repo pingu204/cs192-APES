@@ -793,6 +793,14 @@ span.tab-sm {
     padding: 5px 10px 5px 10px;
 }
 
+span.tab-lab {
+    padding: 2px 4px 2px 4px;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    font-size: 8pt;
+}
+
 div.day {
     display: flex;
     align-items: center;

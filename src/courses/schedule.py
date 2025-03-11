@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime, time, timedelta
 from enum import StrEnum, auto
+
 """ Class for an instance of a course section """
 @dataclass(frozen=True)
 class Course:

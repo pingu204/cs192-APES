@@ -6,7 +6,7 @@ import csv
 import os
 from .models import DesiredCourse
 from dataclasses import asdict
-from scraper.scrape import get_all_sections, couple_lec_and_lab
+from scraper.scrape import get_all_sections, couple_lec_and_lab, print_dict
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
@@ -101,7 +101,10 @@ def dcp_add_view(request):
                 for i, dcp_section in enumerate(list(product(*temp))):
 
                     if not is_conflicting([section] + list(dcp_section)):
-                        print([section] + list(dcp_section))
+
+                        for x in ([section] + list(dcp_section)):
+                            print_dict(x)
+                            
                         if request.user.id:
                             DesiredCourse.objects.create(
                                 student_id = request.user.id,
