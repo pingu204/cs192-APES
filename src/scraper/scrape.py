@@ -295,7 +295,7 @@ def map_venues(room : str, courses, cleaned_course_code):
     else:
         return room
 
-def get_venues(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
+def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
     split_a = list(map(
         lambda x : x.strip(), # Remove whitespace
         (raw_sched_remarks.split("\n"))[:-1]
@@ -324,6 +324,24 @@ def get_venues(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         
     return location
 
+def get_venues(raw_sched_remarks: str):
+    split_a = list(map(
+        lambda x : x.strip(), # Remove whitespace
+        (raw_sched_remarks.split("\n"))[:-1]
+    ))
+
+    venues : dict[str, str] = {}
+    for slot in split_a[1].split(';'):
+        temp = slot.strip().split(' ', maxsplit=2)
+        slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
+        room = (slot_venue.split(' ', maxsplit=1))[1]
+        # print(room)
+
+        if 'lab' in slot_venue:
+            venues['lab'] = room
+        else:
+            venues[(slot_venue.split(' ', maxsplit=1))[0]] = room
+    return venues
 
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
@@ -370,10 +388,11 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
-            course_venue = get_venues(tr[3].text, course_code_csv, cleaned_course_code)
+            location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
             demand = int(demand_capacity[0].strip(' \n'))
             capacity = int(demand_capacity[1].strip(' \n\t'))
+            course_venue = get_venues(tr[3].text)
             # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
             if course_timeslot and section_name != 'X':
@@ -403,7 +422,8 @@ def get_all_sections(course_code: str, strict: bool = False):
                         "instructor_name" : instructor_name,
                         "venue" : course_venue,
                         "capacity": capacity,
-                        "demand": demand
+                        "demand": demand,
+                        "location" : location,
                     }
                 )
     

@@ -13,11 +13,30 @@ class Course:
     class_days:         dict[str,str] 
                         # -- possible days: MTWHFS (H -> Thursday)
     location:           dict[str,str]
-    coords:             dict[str, tuple[float,float]]
+                        # -- for distance computation
+    # coords:             dict[str, tuple[float,float]]
     instructor_name:    dict[str,str]
     timeslots:          dict[str, tuple[int,int]]
                         # -- value is `minute` offsets from 07:00 AM
     offering_unit:      str
+    venue:              str
+
+    @classmethod
+    def from_dict(cls, d:dict):
+        return cls(
+            course_code = d.get('course_code'),
+            course_title = d.get('course_title'),
+            section_name = d.get('section_name'),
+            units = d.get('units'),
+            timeslots = d.get('timeslots'),
+            class_days = d.get('class_days'),
+            offering_unit = d.get('offering_unit'),
+            instructor_name = d.get('instructor_name'),
+            venue = d.get('venue'),
+            capacity = d.get('capacity'),
+            demand = d.get('demand'),
+            location = d.get('location'),
+        )
 
     @classmethod
     def example(self):
@@ -36,9 +55,9 @@ class Course:
             location = {
                 "lec" : "AECH",
             },
-            coords = {
-                "lec" : (0,0),
-            },
+            # coords = {
+            #     "lec" : (0,0),
+            # },
             instructor_name = {
                 "lec":"ROWENA SOLAMO",
             },
@@ -181,7 +200,7 @@ if __name__ == '__main__':
         units=3.0,
         class_days={"lec":"TH"},
         location={"lec":"AECH"},
-        coords={"lec":(0,0)},
+        # coords={"lec":(0,0)},
         instructor_name={"lec":"ROSELYN GABUD"},
         timeslots={"lec":(600,780)},
         offering_unit="DCS"
@@ -195,7 +214,7 @@ if __name__ == '__main__':
         units=4.0,
         class_days={"lec":"TH","lab":"M"},
         location={"lec":"Accenture","lab":"TL2"},
-        coords={"lec":(0,0), "lab":(0,0)},
+        # coords={"lec":(0,0), "lab":(0,0)},
         instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
         timeslots={"lec":(450,540), "lab":(240,420)},
         offering_unit="DCS"
@@ -209,7 +228,7 @@ if __name__ == '__main__':
         units=3.0,
         class_days={"lec":"T", "lab":"H"},
         location={"lec":"AECH", "lab":"AECH"},
-        coords={"lec":(0,0), "lab":(0,0)},
+        # coords={"lec":(0,0), "lab":(0,0)},
         instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
         timeslots={"lec":(180,300), "lab":(180,360)},
         offering_unit="DCS"
@@ -222,7 +241,7 @@ if __name__ == '__main__':
         units=3.0,
         class_days={"lec":"WF"},
         location={"lec":"SOLAIR"},
-        coords={"lec":(0,0)},
+        # coords={"lec":(0,0)},
         instructor_name={"lec":"DRIDGE REYES"},
         timeslots={"lec":(90,270)},
         offering_unit="SLIS"
@@ -235,7 +254,7 @@ if __name__ == '__main__':
         units=3.0,
         class_days={"lec":"TH"},
         location={"lec":"AECH"},
-        coords={"lec":(0,0)},
+        # coords={"lec":(0,0)},
         instructor_name={"lec":"PHILIP ZUNIGA"},
         timeslots={"lec":(360,450)},
         offering_unit="DCS"
@@ -248,7 +267,7 @@ if __name__ == '__main__':
         units=3.0,
         class_days={"lec":"WF"},
         location={"lec":"AECH"},
-        coords={"lec":(0,0)},
+        # coords={"lec":(0,0)},
         instructor_name={"lec":"PAUL REGONIA"},
         timeslots={"lec":(360,450)},
         offering_unit="DCS"
