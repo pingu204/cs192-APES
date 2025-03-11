@@ -369,8 +369,11 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- class days (dict)
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
-            print('course_timeslot: ', course_timeslot)
+            # print('course_timeslot: ', course_timeslot)
             course_venue = get_venues(tr[3].text, course_code_csv, cleaned_course_code)
+            demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
+            demand = int(demand_capacity[0].strip(' \n'))
+            capacity = int(demand_capacity[1].strip(' \n\t'))
             # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
             if course_timeslot and section_name != 'X':
@@ -399,6 +402,8 @@ def get_all_sections(course_code: str, strict: bool = False):
                         "offering_unit" :   tr[4].text,
                         "instructor_name" : instructor_name,
                         "venue" : course_venue,
+                        "capacity": capacity,
+                        "demand": demand
                     }
                 )
     
@@ -501,7 +506,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('arts 1'):
+    for x in get_all_sections('cs 11'):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)
