@@ -388,12 +388,20 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
+
+            # Obtain the class' venue and location
             location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
+            course_venue = get_venues(tr[3].text)
+
+            # Obtain the class' demand and capacity
             demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
+
+            # -- Check if class has been dissolved -> ignore
+            if demand_capacity[0].strip(' \n') == "DISSOLVED":
+                continue
             demand = int(demand_capacity[0].strip(' \n'))
             capacity = int(demand_capacity[1].strip(' \n\t'))
-            course_venue = get_venues(tr[3].text)
-            # print(course_venue)
+
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
             if course_timeslot and section_name != 'X':
                 # Configure `section_name` field
@@ -420,10 +428,10 @@ def get_all_sections(course_code: str, strict: bool = False):
                         "class_days" :      course_class_days,
                         "offering_unit" :   tr[4].text,
                         "instructor_name" : instructor_name,
-                        "venue" : course_venue,
-                        "capacity": capacity,
-                        "demand": demand,
-                        "location" : location,
+                        "venue" :           course_venue,
+                        "capacity":         capacity,
+                        "demand":           demand,
+                        "location" :        location,
                     }
                 )
     
