@@ -3,7 +3,7 @@ import requests
 import os
 
 import string
-
+import re
 import pandas as pd
 
 """ Parses HTML Website and Returns `tag` Elements """
@@ -272,6 +272,59 @@ def get_timeslots(raw_sched_remarks: str):
 
     return timeslots, class_days, instructor_name
 
+def map_venues(room : str, courses, cleaned_course_code):
+    if 'TBA' in room:
+        if (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]) == 'GRADUATE':
+            return (courses.loc[courses['course_code'] == cleaned_course_code, 'course_code'].values[0]).split()[0]
+        else:
+            return (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]).split()[0]
+    elif 'Online' in room:
+        return 'Online'
+    elif re.search('B[0-9]', room):
+        return 'Arch'
+    elif re.search('[A-Z]{2,4}', room.split()[0]):
+        if 'AECH' in room:
+            return 'AECH'
+        else:
+            return room.split()[0]
+    elif 'Room' in room or 'room' in room:
+        if (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]) == 'GRADUATE':
+            return (courses.loc[courses['course_code'] == cleaned_course_code, 'course_code'].values[0]).split()[0]
+        else:
+            return (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]).split()[0]
+    else:
+        return room
+
+def get_venues(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
+    split_a = list(map(
+        lambda x : x.strip(), # Remove whitespace
+        (raw_sched_remarks.split("\n"))[:-1]
+    ))
+
+    location: dict[str,str] = {}
+
+    # load csv of rooms mapped to venues, in csv/venues_mapped.csv
+    csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/venues_mapped.csv')
+    df = pd.read_csv(csv_file_path, index_col=0)
+    # print(df)
+    
+    for slot in split_a[1].split(';'):
+        temp = slot.strip().split(' ', maxsplit=2)
+        slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
+        room = (slot_venue.split(' ', maxsplit=1))[1]
+        # print(room)
+        # print('mapped: ', map_venues(room, course_code_csv))
+        mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
+        venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
+
+        if 'lab' in slot_venue:
+            location['lab'] = venue
+        else:
+            location[(slot_venue.split(' ', maxsplit=1))[0]] = venue
+        
+    return location
+
+
 """ Get information about a course given its `course_code` """
 def get_info_from_csv(course_code: str):
     csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/courses.csv')
@@ -310,13 +363,15 @@ def get_all_sections(course_code: str, strict: bool = False):
                 continue
 
             course_code_csv = get_info_from_csv(cleaned_course_code) # guaranteed to be unique!
-            
+            # print(course_code_csv)
             # Get the course's
             # -- timeslot (dict)
             # -- class days (dict)
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
-
+            print('course_timeslot: ', course_timeslot)
+            course_venue = get_venues(tr[3].text, course_code_csv, cleaned_course_code)
+            # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
             if course_timeslot and section_name != 'X':
                 # Configure `section_name` field
@@ -343,6 +398,7 @@ def get_all_sections(course_code: str, strict: bool = False):
                         "class_days" :      course_class_days,
                         "offering_unit" :   tr[4].text,
                         "instructor_name" : instructor_name,
+                        "venue" : course_venue,
                     }
                 )
     
@@ -445,13 +501,13 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-
-    query = "cs 10"
-    result = get_all_sections(query)
-    print("####\nbefore coupling:\n####")
-    for x in result:
-        print_dict(x)
-    coupled_result = couple_lec_and_lab(result)
-    print("####\nafter coupling:\n####")
-    for x in coupled_result:
-        print_dict(x)
+    print(get_all_sections('arts 1'))
+    # query = "cs 10"
+    # result = get_all_sections(query)
+    # print("####\nbefore coupling:\n####")
+    # for x in result:
+    #     print_dict(x)
+    # coupled_result = couple_lec_and_lab(result)
+    # print("####\nafter coupling:\n####")
+    # for x in coupled_result:
+    #     print_dict(x)
