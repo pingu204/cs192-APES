@@ -101,7 +101,7 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
                         course_code += f"{'lab ' + c.section_name[classType]}"
                 # course_code = f"{c.course_code} {"lab " + c.section_name[classType] if classType == "lab" else c.section_name[classType]}"
                 timeslot = f"{get_time(offset=start)} - {get_time(offset=end)}"
-                location = c.location[classType]
+                location = c.venue[classType]
 
                 return f"<b>{course_code}</b><br>{timeslot}<br>{location}", ClassStatus.STARTS_AT, end-start, i
 

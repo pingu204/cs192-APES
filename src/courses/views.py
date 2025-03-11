@@ -104,7 +104,7 @@ def dcp_add_view(request):
 
                         for x in ([section] + list(dcp_section)):
                             print_dict(x)
-                            
+
                         if request.user.id:
                             DesiredCourse.objects.create(
                                 student_id = request.user.id,
@@ -195,7 +195,7 @@ def view_sched_view(request, sched_id:int):
             units=4.0,
             class_days={"lec":"TH","lab":"M"},
             location={"lec":"Accenture","lab":"TL2"},
-            coords={"lec":(0,0), "lab":(0,0)},
+            venue={"lec":"Accenture","lab":"TL2"},
             instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
             timeslots={"lec":(450,540), "lab":(240,420)},
             offering_unit="DCS"
@@ -209,7 +209,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"T", "lab":"H"},
             location={"lec":"AECH", "lab":"AECH"},
-            coords={"lec":(0,0), "lab":(0,0)},
+            venue={"lec":"AECH", "lab":"AECH"},
             instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
             timeslots={"lec":(180,300), "lab":(180,360)},
             offering_unit="DCS"
@@ -222,7 +222,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"WF"},
             location={"lec":"SOLAIR"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"DRIDGE REYES"},
             timeslots={"lec":(180,270)},
             offering_unit="SLIS"
@@ -235,7 +235,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"TH"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"PHILIP ZUNIGA"},
             timeslots={"lec":(360,450)},
             offering_unit="DCS"
@@ -248,7 +248,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"WF"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"PAUL REGONIA"},
             timeslots={"lec":(360,450)},
             offering_unit="DCS"
@@ -261,7 +261,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"WF"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"THEODORE ESGUERRA"},
             timeslots={"lec":(780,840)},
             offering_unit="DCS"
@@ -274,7 +274,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"WF"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"THEODORE ESGUERRA"},
             timeslots={"lec":(720,780)},
             offering_unit="DCS"
@@ -287,7 +287,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"TH"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"THEODORE ESGUERRA"},
             timeslots={"lec":(720,780)},
             offering_unit="DCS"
@@ -300,7 +300,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"TH"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"THEODORE ESGUERRA"},
             timeslots={"lec":(780,840)},
             offering_unit="DCS"
@@ -313,7 +313,7 @@ def view_sched_view(request, sched_id:int):
             units=3.0,
             class_days={"lec":"S"},
             location={"lec":"AECH"},
-            coords={"lec":(0,0)},
+            venue={"lec":"SOLAIR"},
             instructor_name={"lec":"THEODORE ESGUERRA"},
             timeslots={"lec":(720,840)},
             offering_unit="DCS"
