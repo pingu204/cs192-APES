@@ -116,7 +116,11 @@
             <div class="sched-container">
                 <div class="course-list-header">
                     <h1>Schedules</h1>
-                    <button class="btn-sm generate" disabled>GENERATE</button>
+                    <form action="{% url 'homepage_view' %}" method="POST">
+                        {% csrf_token %}    
+                        <button class="btn-sm generate" name ="generate_permutation" >GENERATE</button>
+                    </form>
+                    
                     <div class="filler">
                         <p>
                             The generated schedules will appear here once your desired classses have been processed. Try clicking the 'Generate' button once you've added classes!

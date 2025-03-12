@@ -390,6 +390,10 @@ def get_all_sections(course_code: str, strict: bool = False):
             # print('course_timeslot: ', course_timeslot)
             location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
+
+# -- Check if class has been dissolved -> ignore
+            if demand_capacity[0].strip(' \n') == "DISSOLVED":
+                continue
             demand = int(demand_capacity[0].strip(' \n'))
             capacity = int(demand_capacity[1].strip(' \n\t'))
             course_venue = get_venues(tr[3].text)
