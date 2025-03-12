@@ -171,15 +171,23 @@ def dcp_add_view(request):
 ##----------------------------------------------Generating Permutation------------------------------------------------
 def generate_permutation_view(request):
         # Obtain sections of classes in DCP
-
+        ##printing DCP sesections, pero note na need mo muna mag add ng class bago mo to makita, cuz di sya nagsasave
+        ##no work from fresh open i think, cuz cache to
+        ## all sections to from dcp
         dcp_sections = request.session['dcp_sections']
-        print("DCP SECTIONS: ", dcp_sections)
+        #print("DCP SECTIONS: ", dcp_sections)
+        
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
-
+            #check not conflicting
             if not is_conflicting(list(dcp_section)):
 
                 for x in (list(dcp_section)):
+                    #create classes
                     print_dict(x)
+                    ...
+                    
+                print("\n")
+                ## need nalang i save sa models 
                 '''
                 if request.user.id:
                     DesiredCourse.objects.create(
@@ -202,6 +210,7 @@ def generate_permutation_view(request):
             '''
             if i == 100000:
                 break
+        print("Number of Schedules.", i)
 
         return redirect(reverse("homepage_view"))
 
