@@ -389,13 +389,15 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
-            demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
+            scrape_capacity = tr[5].get_text(separator='\n').strip().split('/')
+            print(scrape_capacity)
 
 # -- Check if class has been dissolved -> ignore
-            if demand_capacity[0].strip(' \n') == "DISSOLVED":
+            if scrape_capacity[0].strip(' \n') == "DISSOLVED":
                 continue
-            demand = int(demand_capacity[0].strip(' \n'))
-            capacity = int(demand_capacity[1].strip(' \n\t'))
+            demand = int(tr[6].text)
+            print(demand)
+            capacity = int(scrape_capacity[1].strip(' \n\t'))
             location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             course_venue = get_venues(tr[3].text)
             # print(course_venue)
@@ -531,7 +533,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('cs 11'):
+    for x in get_all_sections('cs 20'):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)
