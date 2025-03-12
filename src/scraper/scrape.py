@@ -253,7 +253,7 @@ def get_timeslots(raw_sched_remarks: str):
 
     # Ignore erroneous schedules
     if split_a[1] == "TBA":
-        return None
+        return None, None, None
 
     for slot in split_a[1].split(';'):
         temp = slot.strip().split(' ', maxsplit=2)
@@ -301,6 +301,10 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         (raw_sched_remarks.split("\n"))[:-1]
     ))
 
+    # Ignore erroneous schedules
+    if split_a[1] == "TBA":
+        return None
+
     location: dict[str,str] = {}
 
     # load csv of rooms mapped to venues, in csv/venues_mapped.csv
@@ -330,6 +334,10 @@ def get_venues(raw_sched_remarks: str):
         lambda x : x.strip(), # Remove whitespace
         (raw_sched_remarks.split("\n"))[:-1]
     ))
+
+    # Ignore erroneous schedules
+    if split_a[1] == "TBA":
+        return None
 
     venues : dict[str, str] = {}
     for slot in split_a[1].split(';'):
@@ -533,7 +541,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('cs 20'):
+    for x in get_all_sections('eng 30'):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)
