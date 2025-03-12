@@ -130,51 +130,59 @@
                 </div>
                 <div class="flex-grow-container margin-top-md">
                     <div class="sched-list-container">
-                        <div class="course-card sched-card saved">
-                            <div class="course-header padding-sm">
-                                <div class="day margin-right-xs">M</div>
-                                <div class="day day-filled margin-right-xs">T</div>
-                                <div class="day day-filled margin-right-xs">W</div>
-                                <div class="day day-filled margin-right-xs">H</div>
-                                <div class="day day-filled margin-right-xs">F</div>
-                                <div class="day margin-right-xs">S</div>
-                                <div class="filler"></div>
-                                <i class="bi bi-bookmark-fill"></i>
-                            </div>
-                            <div class="padding-md tabs-container">
-                                <h4>Sched 02</h4>
-                                <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i>0 kilometers/day</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i>0% chance of being granted</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i>0-min. to 0-hour breaks</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i>0 to 0 classes/day</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i>As early as 00:00 AM</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i>As late as 00:00 PM</span></div>
-                            </div>
-                        </div>
-                        <a href="view/1/">
-                        <div class="course-card sched-card">
-                            <div class="course-header padding-sm">
-                                <div class="day margin-right-xs">M</div>
-                                <div class="day day-filled margin-right-xs">T</div>
-                                <div class="day day-filled margin-right-xs">W</div>
-                                <div class="day day-filled margin-right-xs">H</div>
-                                <div class="day day-filled margin-right-xs">F</div>
-                                <div class="day margin-right-xs">S</div>
-                                <div class="filler"></div>
-                                <i class="bi bi-bookmark"></i>
-                                <!-- <i class="bi bi-bookmark-fill"></i> -->
-                            </div>
-                            <div class="padding-md tabs-container">
-                                <h4>Sched 01</h4>
-                                <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i>0 kilometers/day</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i>0% chance of being granted</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i>0-min. to 0-hour breaks</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i>0 to 0 classes/day</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i>As early as 00:00 AM</span></div>
-                                <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i>As late as 00:00 PM</span></div>
-                            </div>
-                        </div>
-                        </a>
+                        {% for schedule in saved_schedules %}
+                            <a href="{% url 'view_saved_sched_view' schedule.sched_id %}">
+                                <div class="course-card sched-card saved">
+                                    <div class="course-header padding-sm">
+                                        {% for day in "MTWHFS" %}
+                                            {% if day in schedule.class_days %}
+                                                <div class="day day-filled margin-right-xs">{{ day }}</div>
+                                            {% else %}
+                                                <div class="day margin-right-xs">{{ day }}</div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <div class="filler"></div>
+                                        <i class="bi bi-bookmark-fill"></i>
+                                    </div>
+                                    <div class="padding-md tabs-container">
+                                        <h4>{{ schedule.schedule_name }}</h4>
+                                        <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ schedule.total_distance|default:"0" }} kilometers/day</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ schedule.grant_probability|default:"0" }}% chance of being granted</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.min_break|default:"0" }}-min. to {{ schedule.max_break|default:"0" }}-hour breaks</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> {{ schedule.min_classes|default:"0" }} to {{ schedule.max_classes|default:"0" }} classes/day</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.earliest_time|default:"00:00 AM" }}</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.latest_time|default:"00:00 PM" }}</span></div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <p>No saved schedules yet.</p>
+                        {% endfor %}
+                        {% for sched in request.session.schedule_permutations %}
+                            <a href="{% url 'view_sched_view' sched.sched_id %}">
+                                <div class="course-card sched-card">
+                                    <div class="course-header padding-sm">
+                                        <div class="day margin-right-xs">M</div>
+                                        <div class="day day-filled margin-right-xs">T</div>
+                                        <div class="day day-filled margin-right-xs">W</div>
+                                        <div class="day day-filled margin-right-xs">H</div>
+                                        <div class="day day-filled margin-right-xs">F</div>
+                                        <div class="day margin-right-xs">S</div>
+                                        <div class="filler"></div>
+                                        <i class="bi bi-bookmark"></i>
+                                    </div>
+                                    <div class="padding-md tabs-container">
+                                        <h4>Sched {{ sched.sched_id|add:1 }}</h4>
+                                        <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> 0 kilometers/day</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> 0% chance of being granted</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> 0-min. to 0-hour breaks</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 0 to 0 classes/day</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as 00:00 AM</span></div>
+                                        <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as 00:00 PM</span></div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
                 <div></div>

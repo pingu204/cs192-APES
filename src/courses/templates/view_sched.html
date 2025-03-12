@@ -27,14 +27,23 @@
     <div class="course-list-container">
         <div class="user-header">
             <!-- Schedule Identifier -->
-            <h2 class="margin-right-sm"><span>Sched {{ sched_id }}</span></h2>
+            <h2 class="margin-right-sm"><span>Sched {{ sched_id|add:1 }}</span></h2>
 
-            <!-- Save Button -->
-            <button class="btn-sm margin-right-xs">SAVE</button>
+            {% if show_save_button %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn-sm margin-right-xs" name="click_saved_sched">SAVE</button>
+                </form>
+            {% elif show_unsave_button %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button class="btn-sm margin-right-xs" name="click_unsaved_sched">UNSAVE</button>
+                </form>
+            {% endif %}
 
             <!-- Export Button -->
             <button class="btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="export">EXPORT</button>
-
+            
             <div class="filler"></div>
 
             <!-- Redirect to Home -->

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from .forms import DesiredClassesForm
@@ -11,6 +11,8 @@ from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
 from apes.utils import get_course_details_from_csv
+
+from courses.models import SavedSchedule, SavedCourse
 
 from itertools import product
 import numpy as np
@@ -99,7 +101,7 @@ def dcp_add_view(request):
 
                         for x in ([section] + list(dcp_section)):
                             print_dict(x)
-
+                            
                         if request.user.id:
                             DesiredCourse.objects.create(
                                 student_id = request.user.id,
@@ -174,20 +176,47 @@ def generate_permutation_view(request):
         # -- guaranteed to be nonempty
         # -- already filled in `homepage_view`
         dcp_sections = request.session['dcp_sections']
-        #print("DCP SECTIONS: ", dcp_sections)
         
+        if 'schedule_permutations' not in request.session:
+            request.session['schedule_permutations'] = []  # Initialize if not exists
+        else:
+            request.session['schedule_permutations'] = []
+
+
+        student_id = request.user.id if request.user.is_authenticated else None
+        saved_sched_ids = set()  # Store all saved schedule IDs
+
+        if student_id:
+            saved_sched_ids = set(SavedSchedule.objects.filter(student_id=student_id).values_list("sched_id", flat=True))
+
+
         count = 0
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
+            #check if dcp_section is not in SavedSchedules
+            if count in saved_sched_ids:  # Skip if schedule already saved
+                count += 1
+                continue
+            
             #check not conflicting
             if not is_conflicting(list(dcp_section)):
+
+                schedule_entry = {
+                    "sched_id": count,
+                    "courses": tuple(fix_timeslots(course) for course in dcp_section)
+                }
+
+                request.session['schedule_permutations'].append(schedule_entry)
 
                 count += 1
                 print(f"Schedule {count}")
                 for x in (list(dcp_section)):
-                    #create classes
-                    print_dict(x)
-                    ...
+                    x.pop("course_title", None)
+                    # dcp_section contains specific DICT section!
+                    # 
                     
+                    
+                    #print_dict(x)
+                    ...
                 print("\n")
                 ## need nalang i save sa models 
                 '''
@@ -213,175 +242,161 @@ def generate_permutation_view(request):
             if i == 100000:
                 break
         
+        print("lebron", request.session.get('schedule_permutations'))
+
         print(f"-- Found {count} schedules --")
 
         return redirect(reverse("homepage_view"))
 
 
-def view_sched_view(request, sched_id:int):
+
+def fix_timeslots(course):
+    section_keys = list(course['section_name'].keys())  # Get keys from section_name
+    timeslot_values = list(course.get('timeslots', {}).values())  # Get timeslot values
+    venue_values = list(course.get('venue', {}).values())  # Get venue values
+
+    # Convert timeslot values to tuples and align them with section_name keys
+    course['timeslots'] = {
+        section_keys[i]: tuple(timeslot_values[i]) if i < len(timeslot_values) else ()
+        for i in range(len(section_keys))
+    }
+
+    # Align venue keys with section_name keys
+    course['venue'] = {
+        section_keys[i]: venue_values[i] if i < len(venue_values) else ""
+        for i in range(len(section_keys))
+    }
+
+    return course
+
+
+
+
+def view_sched_view(request, sched_id: int):
     #############################
     # For testing purposes only #
     #############################
 
+    # Get the correct schedule based on sched_id
+    schedule_permutations = request.session.get('schedule_permutations', [])
+    selected_schedule = next((sched for sched in schedule_permutations if sched["sched_id"] == sched_id), None)
+
+    #if selected_schedule is None:
+        #return HttpResponse("Schedule not found", status=404)
+
+    # Fix timeslots
+    courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
+
+    if request.method == "POST" and "click_saved_sched" in request.POST:
+        # Ensure user is logged in
+        if not request.user.is_authenticated:
+            messages.error(request, "You need to be logged in to save schedules.")
+            return redirect("login")
+
+        student_id = request.user.id  # Get logged-in user's ID
+        schedule_name = f"Sched {sched_id+1}"  # Generate a name
+
+        # Check if this schedule already exists for the user
+        saved_schedule, created = SavedSchedule.objects.get_or_create(
+            student_id=student_id,
+            sched_id=sched_id, 
+            schedule_name=schedule_name,
+            defaults={"is_saved": True},
+        )
+        
+        for course in courses:
+            # Check if a SavedCourse exists with the same course_details
+            saved_course = SavedCourse.objects.filter(
+                student_id=student_id,
+                course_code=course["course_code"],
+                course_details=course  # Ensures exact match on details
+            ).first()
+
+            if not saved_course:
+                # Create a new SavedCourse if no exact match is found
+                saved_course = SavedCourse.objects.create(
+                    student_id=student_id,
+                    course_code=course["course_code"],
+                    course_details=course
+                )
+
+            saved_schedule.courses.add(saved_course)  # Add the correct SavedCourse
+            
+
+        messages.success(request, f"Schedule {sched_id+1} saved successfully!")
+        return redirect("homepage_view")
+
     classes = [
-        # Course(
-        #     course_code="CS 180",
-        #     section_name={"lec":"THR"},
-        #     capacity=30,
-        #     demand=30,
-        #     units=3.0,
-        #     class_days={"lec":"TH"},
-        #     location={"lec":"AECH"},
-        #     coords={"lec":(0,0)},
-        #     instructor_name={"lec":"ROSELYN GABUD"},
-        #     timeslots={"lec":(90,180)},
-        #     offering_unit="DCS"
-        # ),
-
         Course(
-            course_code="CS 145",
-            section_name={"lec":"HONOR", "lab":"HONOR 2"},
-            capacity=30,
-            demand=1,
-            units=4.0,
-            class_days={"lec":"TH","lab":"M"},
-            location={"lec":"Accenture","lab":"TL2"},
-            venue={"lec":"Accenture","lab":"TL2"},
-            instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
-            timeslots={"lec":(450,540), "lab":(240,420)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="CS 192",
-            section_name={"lec":"TDE2", "lab":"HUV2"},
-            capacity=30,
-            demand=1,
-            units=3.0,
-            class_days={"lec":"T", "lab":"H"},
-            location={"lec":"AECH", "lab":"AECH"},
-            venue={"lec":"AECH", "lab":"AECH"},
-            instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
-            timeslots={"lec":(180,300), "lab":(180,360)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="LIS 51",
-            section_name={"lec":"WFU"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"WF"},
-            location={"lec":"SOLAIR"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"DRIDGE REYES"},
-            timeslots={"lec":(180,270)},
-            offering_unit="SLIS"
-        ),
-
-        Course(
-            course_code="CS 153",
-            section_name={"lec":"THW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"TH"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"PHILIP ZUNIGA"},
-            timeslots={"lec":(360,450)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="CS 132",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"WF"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"PAUL REGONIA"},
-            timeslots={"lec":(360,450)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="Riana",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"WF"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"THEODORE ESGUERRA"},
-            timeslots={"lec":(780,840)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="Jopeth",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"WF"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"THEODORE ESGUERRA"},
-            timeslots={"lec":(720,780)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="G",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"TH"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"THEODORE ESGUERRA"},
-            timeslots={"lec":(720,780)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="Jason",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"TH"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"THEODORE ESGUERRA"},
-            timeslots={"lec":(780,840)},
-            offering_unit="DCS"
-        ),
-
-        Course(
-            course_code="THEO...",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":"S"},
-            location={"lec":"AECH"},
-            venue={"lec":"SOLAIR"},
-            instructor_name={"lec":"THEODORE ESGUERRA"},
-            timeslots={"lec":(720,840)},
-            offering_unit="DCS"
-        ),
+            course_code=course['course_code'],
+            section_name=course['section_name'],
+            capacity=course['capacity'],
+            demand=course['demand'],
+            units=course['units'],
+            class_days=course['class_days'],
+            location=course['location'],
+            venue=course['venue'],
+            instructor_name=course['instructor_name'],
+            timeslots=course['timeslots'],
+            offering_unit=course['offering_unit']
+        )
+        for course in courses
     ]
 
     main_table, export_table = generate_timetable(classes)
 
-
-
     context = {
-        "sched_id" : sched_id,
-        "main_table" : main_table,
-        "export_table" : export_table,
-        "courses" : classes,
-        "units" : f"{sum([course.units for course in classes])} units",
+        "sched_id": sched_id,
+        "main_table": main_table,
+        "export_table": export_table,
+        "courses": classes,
+        "units": f"{sum([course.units for course in classes])} units",
+        "show_save_button": True,
     }
 
     return render(request, "view_sched.html", context)
 
+
+def view_saved_sched_view(request, sched_id: int):
+    if request.method == "POST" and "click_unsaved_sched" in request.POST:
+        if not request.user.is_authenticated:
+            messages.error(request, "You need to be logged in to unsave schedules.")
+            return redirect("login")
+
+        student_id = request.user.id
+        saved_schedule = SavedSchedule.objects.filter(student_id=student_id, sched_id=sched_id).first()
+
+        if saved_schedule:
+            saved_schedule.delete()
+            messages.success(request, f"Schedule {sched_id+1} unsaved successfully!")
+
+        return redirect("homepage_view")
+
+    student_id = request.user.id  # Ensure the user is logged in
+    
+    # Fetch the saved schedule for this user
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+
+    # Retrieve all associated saved courses
+    saved_courses = saved_schedule.courses.all()
+
+    # Convert saved courses (JSONField) into Course objects
+    classes = [
+        Course(**course.course_details)  # Unpack the dictionary properly
+        for course in saved_courses
+    ]
+
+    # Generate schedule tables
+    main_table, export_table = generate_timetable(classes)
+
+    context = {
+        "sched_id": sched_id,
+        "schedule_name": saved_schedule.schedule_name,
+        "main_table": main_table,
+        "export_table": export_table,
+        "courses": classes,
+        "units": f"{sum([course.units for course in classes])} units",
+        "show_unsave_button": True,
+    }
+
+    return render(request, "view_sched.html", context)

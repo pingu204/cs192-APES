@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
 from django.contrib import messages
-from courses.models import DesiredCourse
+from courses.models import DesiredCourse, SavedSchedule
 from courses.views import generate_permutation_view
 from scraper.scrape import couple_lec_and_lab, get_all_sections
 # Create your views here.
@@ -50,11 +50,10 @@ def homepage_view(request, *args, **kwargs):
             return redirect(reverse("homepage_view"))
 
         dcp_sections = request.session['dcp_sections']
-        print("DCP SECTIONS: ", dcp_sections)  # Debugging
+        #print("DCP SECTIONS: ", dcp_sections)  # Debugging
         generate_permutation_view(request)
 
-
-    # Wala pang confirmation message like: CLEAR -> "Are you sure you wanna do this?" -> Yes/No -> skibidi act upon Yes/No
+        # request.session.get('schedule_permutations')
 
     if request.user.id is None:  # Guest
         dcp = request.session.get("dcp", [])   
@@ -71,7 +70,7 @@ def homepage_view(request, *args, **kwargs):
         dcp_sections = [couple_lec_and_lab(get_all_sections(code, strict=True)) for code in dcp_codes]
         request.session['dcp_sections'] = dcp_sections
         request.session.save()
-        
+
     print("-- User DCP --")
     print('\n'.join([f"+ {code} [{len(dcp_sections[i])} sections]" for i, code in enumerate(dcp_codes)]))
 
@@ -80,10 +79,8 @@ def homepage_view(request, *args, **kwargs):
         "dcp" : dcp,
         "dcp_units" : sum([course['units'] for course in dcp]),
         "dcp_length" : len(dcp),
+        "saved_schedules" : SavedSchedule.objects.filter(student_id=request.user.id)
     }
-
-    #print("eto yon", request.user, request.user.id)
-    #print("eto yon2xx",request.session.items())
 
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest
     # DEBUGGER: print(context['user'].username)
