@@ -53,11 +53,6 @@ def dcp_add_view(request):
         else:
             # Obtain sections of classes in DCP
             dcp_sections = request.session.get("dcp_sections", [])
-            
-            if dcp_sections == []: # Not cached yet
-                dcp_sections = [couple_lec_and_lab(get_all_sections(code, strict=True)) for code in dcp_codes]
-                request.session['dcp_sections'] = dcp_sections
-                request.session.save()
 
             # Obtain sections of course to be added
             course_sections = list(filter(
@@ -174,13 +169,20 @@ def generate_permutation_view(request):
         ##printing DCP sesections, pero note na need mo muna mag add ng class bago mo to makita, cuz di sya nagsasave
         ##no work from fresh open i think, cuz cache to
         ## all sections to from dcp
+
+        # Obtain all sections of courses in the DCP
+        # -- guaranteed to be nonempty
+        # -- already filled in `homepage_view`
         dcp_sections = request.session['dcp_sections']
         #print("DCP SECTIONS: ", dcp_sections)
         
+        count = 0
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
             #check not conflicting
             if not is_conflicting(list(dcp_section)):
 
+                count += 1
+                print(f"Schedule {count}")
                 for x in (list(dcp_section)):
                     #create classes
                     print_dict(x)
@@ -210,7 +212,8 @@ def generate_permutation_view(request):
             '''
             if i == 100000:
                 break
-        print("Number of Schedules.", i)
+        
+        print(f"-- Found {count} schedules --")
 
         return redirect(reverse("homepage_view"))
 

@@ -7,6 +7,7 @@ from apes.utils import redirect_authenticated_users, guest_or_authenticated, get
 from django.contrib import messages
 from courses.models import DesiredCourse
 from courses.views import generate_permutation_view
+from scraper.scrape import couple_lec_and_lab, get_all_sections
 # Create your views here.
 
 @redirect_authenticated_users
@@ -62,7 +63,17 @@ def homepage_view(request, *args, **kwargs):
         desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
         course_codes = [dc.course_code for dc in desired_courses]
         dcp = get_course_details_from_csv(course_codes)
+
+    dcp_codes = [course["course_code"] for course in dcp]
+    dcp_sections = request.session.get("dcp_sections", [])
+
+    if dcp_sections == []: # Not cached yet
+        dcp_sections = [couple_lec_and_lab(get_all_sections(code, strict=True)) for code in dcp_codes]
+        request.session['dcp_sections'] = dcp_sections
+        request.session.save()
         
+    print("-- User DCP --")
+    print('\n'.join([f"+ {code} [{len(dcp_sections[i])} sections]" for i, code in enumerate(dcp_codes)]))
 
     context = {
         "user" : request.user,
