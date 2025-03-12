@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from apes.utils import redirect_authenticated_users, guest_or_authenticated, get_course_details_from_csv
 from django.contrib import messages
 from courses.models import DesiredCourse
+from courses.views import generate_permutation_view
 # Create your views here.
 
 @redirect_authenticated_users
@@ -40,6 +41,16 @@ def homepage_view(request, *args, **kwargs):
         print(f"Session's `dcp_sections` now has {len(request.session["dcp_sections"])} sections.")
         
         messages.success(request, "Class has been successfully removed.")
+        
+    if request.method == "POST" and "generate_permutation" in request.POST:
+        if 'dcp_sections' not in request.session or not request.session['dcp_sections']:
+            messages.error(request, "No DCP sections found.")
+            print("Crashout")  # Debugging
+            return redirect(reverse("homepage_view"))
+
+        dcp_sections = request.session['dcp_sections']
+        print("DCP SECTIONS: ", dcp_sections)  # Debugging
+        generate_permutation_view(request)
 
 
     # Wala pang confirmation message like: CLEAR -> "Are you sure you wanna do this?" -> Yes/No -> skibidi act upon Yes/No

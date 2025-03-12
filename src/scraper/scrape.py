@@ -315,6 +315,7 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         # print(room)
         # print('mapped: ', map_venues(room, course_code_csv))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
+        print('room: ', room, 'mapped: ', mapped_venue)
         venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
 
         if 'lab' in slot_venue:
@@ -388,20 +389,18 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
+            scrape_capacity = tr[5].get_text(separator='\n').strip().split('/')
+            print(scrape_capacity)
 
-            # Obtain the class' venue and location
+# -- Check if class has been dissolved -> ignore
+            if scrape_capacity[0].strip(' \n') == "DISSOLVED":
+                continue
+            demand = int(tr[6].text)
+            print(demand)
+            capacity = int(scrape_capacity[1].strip(' \n\t'))
             location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             course_venue = get_venues(tr[3].text)
-
-            # Obtain the class' demand and capacity
-            demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
-
-            # -- Check if class has been dissolved -> ignore
-            if demand_capacity[0].strip(' \n') == "DISSOLVED":
-                continue
-            demand = int(demand_capacity[0].strip(' \n'))
-            capacity = int(demand_capacity[1].strip(' \n\t'))
-
+            # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
             if course_timeslot and section_name != 'X':
                 # Configure `section_name` field
@@ -534,7 +533,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('cs 11'):
+    for x in get_all_sections('cs 20'):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)

@@ -167,6 +167,54 @@ def dcp_add_view(request):
 
     return render(request, "dcp_add.html", context)
 
+##------------------------------------------------------------------------------------------------------------------
+##----------------------------------------------Generating Permutation------------------------------------------------
+def generate_permutation_view(request):
+        # Obtain sections of classes in DCP
+        ##printing DCP sesections, pero note na need mo muna mag add ng class bago mo to makita, cuz di sya nagsasave
+        ##no work from fresh open i think, cuz cache to
+        ## all sections to from dcp
+        dcp_sections = request.session['dcp_sections']
+        #print("DCP SECTIONS: ", dcp_sections)
+        
+        for i, dcp_section in enumerate(list(product(*dcp_sections))):
+            #check not conflicting
+            if not is_conflicting(list(dcp_section)):
+
+                for x in (list(dcp_section)):
+                    #create classes
+                    print_dict(x)
+                    ...
+                    
+                print("\n")
+                ## need nalang i save sa models 
+                '''
+                if request.user.id:
+                    DesiredCourse.objects.create(
+                        student_id = request.user.id,
+                        course_code = course_code
+                    )
+                else:
+                    request.session['dcp'].append(course_sections[0])
+                    request.session.save()
+
+                # Append current course's sections to DCP sections
+                request.session['dcp_sections'].append(course_sections)
+                request.session.save()
+                print(f"Sessions's dcp_sections now has {len(request.session['dcp_sections'])} sections.")
+                print("EVERYCLASS IN THE DCP", request.session['dcp_sections'])
+                messages.success(request, "Class has been successfully added.")
+                return redirect(reverse('homepage_view'))
+
+
+            '''
+            if i == 100000:
+                break
+        print("Number of Schedules.", i)
+
+        return redirect(reverse("homepage_view"))
+
+
 def view_sched_view(request, sched_id:int):
     #############################
     # For testing purposes only #

@@ -31,7 +31,7 @@ def is_conflicting(courses):
         # -- 07:00 AM to 12:00 AM
         mat = np.zeros(19*4+1)
 
-        print(courses)
+        ##print(courses)
 
         # Only obtain courses in DCP that have a class in `day`
         courses_with_classes = list(
