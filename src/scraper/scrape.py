@@ -315,6 +315,7 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         # print(room)
         # print('mapped: ', map_venues(room, course_code_csv))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
+        print('room: ', room, 'mapped: ', mapped_venue)
         venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
 
         if 'lab' in slot_venue:
@@ -388,7 +389,6 @@ def get_all_sections(course_code: str, strict: bool = False):
             # -- instructor name/s (dict)
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
-            location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             demand_capacity = tr[5].get_text(separator='\n').strip().split('/')
 
 # -- Check if class has been dissolved -> ignore
@@ -396,6 +396,7 @@ def get_all_sections(course_code: str, strict: bool = False):
                 continue
             demand = int(demand_capacity[0].strip(' \n'))
             capacity = int(demand_capacity[1].strip(' \n\t'))
+            location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             course_venue = get_venues(tr[3].text)
             # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
