@@ -271,6 +271,70 @@ def get_timeslots(raw_sched_remarks: str):
             instructor_name["lec"] = split_a[2]
 
     return timeslots, class_days, instructor_name
+def map_cwts_venues(room: str, unit : str, cleaned_course_code):
+    if 'TBA' in room:
+        return unit
+    elif re.search('[A-Z]{2,4}', room.split()[0]):
+        if 'AECH' in room:
+            return 'AECH'
+        else:
+            return room.split()[0]
+    # elif 'Room' in room or 'room' in room:
+    #     if (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]) == 'GRADUATE':
+    #         return (courses.loc[courses['course_code'] == cleaned_course_code, 'course_code'].values[0]).split()[0]
+    #     else:
+    #         return (courses.loc[courses['course_code'] == cleaned_course_code, 'offering_unit'].values[0]).split()[0]
+    elif room == 'F204':
+        return cleaned_course_code.split()[2]
+    else:
+        return room
+
+def get_cwts_locs(raw_sched_remarks: str, raw_enlisting_unit: str, cleaned_course_code):
+    split_a = list(map(
+        lambda x : x.strip(), # Remove whitespace
+        (raw_sched_remarks.split("\n"))[:-1]
+    ))
+
+    # Ignore erroneous schedules
+    if split_a[1] == "TBA":
+        return None
+
+    location: dict[str,str] = {}
+
+    # load csv of rooms mapped to venues, in csv/venues_mapped.csv
+    csv_file_path = os.path.join(os.path.dirname(__file__), '../scraper/csv/venues_mapped.csv')
+    df = pd.read_csv(csv_file_path, index_col=0)
+    # print(df)
+    
+    for slot in split_a[1].split(';'):
+        # print('slot: ',slot)
+        temp = slot.strip().split(' ', maxsplit=2)
+        slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
+        room = (slot_venue.split(' ', maxsplit=1))[1]
+        # print(room, cleaned_course_code)
+        # print('mapped: ', map_venues(room, course_code_csv))
+        mapped_venue = map_cwts_venues(room, raw_enlisting_unit, cleaned_course_code)
+        # print('course_code: ', cleaned_course_code, 'room: ', room, 'mapped: ', mapped_venue)
+        # print(mapped_venue)
+        # print(df.loc[df['code'] == mapped_venue, 'location'].values[0], ' <- venue')
+        # test = "SW, Lingg, Philo, WD, DCI, DIE/OR, Socio, EEEP, PolSci, CPAGE, IESM, CD, DMMM, EnE, DES, ICE, SSP, DCS, EEEI, Kas, DGE, UPDEPP/O, DGeog, DChE, DSD, DELPS, Psych, DAnthro, DME, EgyE, PopIns, CAL, DCond, DAF, Arch, SLIS, VC, DPE, DSS, Musico, CS, DFPP, SA, NIP, DFAVC, IC, AIT, Engg, SOLAIR, DMO, CTID, DComp, DAS, SURP, DBA, DSCM, DMST, Theory, DMuE, DFSN, CMC, MBBP, MATH, CSSP, CMu, AC, DBC, DKey, CFA, DECL, DSCTA, IB, NIGS, SE, ESP, OCS, CHE, HRIM, NCPAG, FLCD, DVMT, CSWCD, Stat, CHK, DEL, OCS, DWP, MSI, Educ, HEED, DCRes, VSB, DJourn"
+        # print('mapped: ', mapped_venue)
+        # print(df.loc[df['code'] == test, 'location'].values)
+        # print(mapped_venue)
+        # print(df.loc[df['code'] == mapped_venue, 'location'].values)
+        # print('a: ', df.loc[df['code'] == mapped_venue, 'location'])
+        venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
+        # if len(venue) > 0:
+        #     venue = venue[0]
+        # else:
+        #     venue = None
+
+        if 'lab' in slot_venue:
+            location['lab'] = venue
+        else:
+            location[(slot_venue.split(' ', maxsplit=1))[0]] = venue
+        
+    return location
 
 def map_venues(room : str, courses, cleaned_course_code):
     if 'TBA' in room:
@@ -313,13 +377,20 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
     # print(df)
     
     for slot in split_a[1].split(';'):
+        # print('slot: ',slot)
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
         room = (slot_venue.split(' ', maxsplit=1))[1]
-        # print(room)
+        # print(room, cleaned_course_code)
         # print('mapped: ', map_venues(room, course_code_csv))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
-        print('room: ', room, 'mapped: ', mapped_venue)
+        # print('course_code: ', cleaned_course_code, 'room: ', room, 'mapped: ', mapped_venue)
+        # print(mapped_venue)
+        # print(df.loc[df['code'] == mapped_venue, 'location'].values[0], ' <- venue')
+        # test = "SW, Lingg, Philo, WD, DCI, DIE/OR, Socio, EEEP, PolSci, CPAGE, IESM, CD, DMMM, EnE, DES, ICE, SSP, DCS, EEEI, Kas, DGE, UPDEPP/O, DGeog, DChE, DSD, DELPS, Psych, DAnthro, DME, EgyE, PopIns, CAL, DCond, DAF, Arch, SLIS, VC, DPE, DSS, Musico, CS, DFPP, SA, NIP, DFAVC, IC, AIT, Engg, SOLAIR, DMO, CTID, DComp, DAS, SURP, DBA, DSCM, DMST, Theory, DMuE, DFSN, CMC, MBBP, MATH, CSSP, CMu, AC, DBC, DKey, CFA, DECL, DSCTA, IB, NIGS, SE, ESP, OCS, CHE, HRIM, NCPAG, FLCD, DVMT, CSWCD, Stat, CHK, DEL, OCS, DWP, MSI, Educ, HEED, DCRes, VSB, DJourn"
+        # print('mapped: ', mapped_venue)
+        # print(df.loc[df['code'] == test, 'location'].values)
+        # print(mapped_venue)
         venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
 
         if 'lab' in slot_venue:
@@ -398,15 +469,18 @@ def get_all_sections(course_code: str, strict: bool = False):
             course_timeslot, course_class_days, instructor_name = get_timeslots(tr[3].text)
             # print('course_timeslot: ', course_timeslot)
             scrape_capacity = tr[5].get_text(separator='\n').strip().split('/')
-            print(scrape_capacity)
+            # print(scrape_capacity)
 
 # -- Check if class has been dissolved -> ignore
             if scrape_capacity[0].strip(' \n') == "DISSOLVED":
                 continue
             demand = int(tr[6].text)
-            print(demand)
+            # print(demand)
             capacity = int(scrape_capacity[1].strip(' \n\t'))
-            location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
+            if 'CWTS' in cleaned_course_code:
+                location = get_cwts_locs(tr[3].text, tr[4].text, cleaned_course_code)
+            else:
+                location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             course_venue = get_venues(tr[3].text)
             # print(course_venue)
             # Check if timeslot is not 'TBA' and that class was not dissolved ('X')
@@ -541,8 +615,9 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('eng 30'):
+    for x in get_all_sections('cwts 1'):
         print_dict(x)
+    # get_all_sections('cwts 2')
     # query = "cs 10"
     # result = get_all_sections(query)
     # print("####\nbefore coupling:\n####")
