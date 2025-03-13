@@ -195,6 +195,8 @@ def convert_time(time_format: str) -> int:
 
         # Get hour value
         hour = int(raw_time_split[0]) + (12 if is_afternoon else 0)
+        if (int(raw_time_split[0]) == 12 and is_afternoon):
+            hour = 12
 
         # Get minute value
         minute = int(raw_time_split[1])
@@ -547,7 +549,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('eng 30'):
+    for x in get_all_sections('eng 13'):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)

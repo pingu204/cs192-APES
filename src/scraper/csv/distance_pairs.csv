@@ -48,6 +48,7 @@
 "('UP Alumni Engineers Centennial Hall', 'UP School of Statistics New Building')",641.1
 "('UP Alumni Engineers Centennial Hall', 'Technology Management Center - University of the Philippines')",496.1
 "('UP Alumni Engineers Centennial Hall', 'UP Asian Institute Of Tourism')",1993.3
+"('UP Alumni Engineers Centennial Hall', 'College of Science Admin Auditorium')",455.4
 "('UP SOLAIR', 'College of Arts and Letters')",990.8
 "('UP SOLAIR', 'UP School of Archaeology')",634.1
 "('UP SOLAIR', 'GT-Toyota Asian Center')",1509.3
@@ -96,6 +97,7 @@
 "('UP SOLAIR', 'UP School of Statistics New Building')",1027.6
 "('UP SOLAIR', 'Technology Management Center - University of the Philippines')",1894.6
 "('UP SOLAIR', 'UP Asian Institute Of Tourism')",580.9
+"('UP SOLAIR', 'College of Science Admin Auditorium')",1661.8
 "('College of Arts and Letters', 'UP School of Archaeology')",609.5
 "('College of Arts and Letters', 'GT-Toyota Asian Center')",1250.1
 "('College of Arts and Letters', 'College of Business Administration')",835.3
@@ -143,6 +145,7 @@
 "('College of Arts and Letters', 'UP School of Statistics New Building')",290.7
 "('College of Arts and Letters', 'Technology Management Center - University of the Philippines')",1025.8
 "('College of Arts and Letters', 'UP Asian Institute Of Tourism')",1491.6
+"('College of Arts and Letters', 'College of Science Admin Auditorium')",704.3
 "('UP School of Archaeology', 'GT-Toyota Asian Center')",1656.7
 "('UP School of Archaeology', 'College of Business Administration')",1245.2
 "('UP School of Archaeology', 'University of the Philippines, College of Social Sciences and Philosophy')",796.4
@@ -189,6 +192,7 @@
 "('UP School of Archaeology', 'UP School of Statistics New Building')",469.0
 "('UP School of Archaeology', 'Technology Management Center - University of the Philippines')",1336.0
 "('UP School of Archaeology', 'UP Asian Institute Of Tourism')",1134.9
+"('UP School of Archaeology', 'College of Science Admin Auditorium')",1103.2
 "('GT-Toyota Asian Center', 'College of Business Administration')",436.9
 "('GT-Toyota Asian Center', 'University of the Philippines, College of Social Sciences and Philosophy')",914.1
 "('GT-Toyota Asian Center', 'National Institute of Physics')",1182.7
@@ -234,6 +238,7 @@
 "('GT-Toyota Asian Center', 'UP School of Statistics New Building')",1439.1
 "('GT-Toyota Asian Center', 'Technology Management Center - University of the Philippines')",1509.0
 "('GT-Toyota Asian Center', 'UP Asian Institute Of Tourism')",1846.2
+"('GT-Toyota Asian Center', 'College of Science Admin Auditorium')",1163.7
 "('College of Business Administration', 'University of the Philippines, College of Social Sciences and Philosophy')",477.1
 "('College of Business Administration', 'National Institute of Physics')",782.4
 "('College of Business Administration', 'University of the Philippines College of Architecture')",1256.3
@@ -278,6 +283,7 @@
 "('College of Business Administration', 'UP School of Statistics New Building')",1020.0
 "('College of Business Administration', 'Technology Management Center - University of the Philippines')",1104.9
 "('College of Business Administration', 'UP Asian Institute Of Tourism')",1842.1
+"('College of Business Administration', 'College of Science Admin Auditorium')",726.8
 "('University of the Philippines, College of Social Sciences and Philosophy', 'National Institute of Physics')",936.6
 "('University of the Philippines, College of Social Sciences and Philosophy', 'University of the Philippines College of Architecture')",787.6
 "('University of the Philippines, College of Social Sciences and Philosophy', 'University of the Philippines College of Mass Communication')",865.1
@@ -321,6 +327,7 @@
 "('University of the Philippines, College of Social Sciences and Philosophy', 'UP School of Statistics New Building')",551.3
 "('University of the Philippines, College of Social Sciences and Philosophy', 'Technology Management Center - University of the Philippines')",1129.3
 "('University of the Philippines, College of Social Sciences and Philosophy', 'UP Asian Institute Of Tourism')",1674.2
+"('University of the Philippines, College of Social Sciences and Philosophy', 'College of Science Admin Auditorium')",751.2
 "('National Institute of Physics', 'University of the Philippines College of Architecture')",1026.8
 "('National Institute of Physics', 'University of the Philippines College of Mass Communication')",1621.6
 "('National Institute of Physics', 'UP Institute of Biology')",328.9
@@ -363,6 +370,7 @@
 "('National Institute of Physics', 'UP School of Statistics New Building')",1027.3
 "('National Institute of Physics', 'Technology Management Center - University of the Philippines')",466.0
 "('National Institute of Physics', 'UP Asian Institute Of Tourism')",2390.5
+"('National Institute of Physics', 'College of Science Admin Auditorium')",332.9
 "('University of the Philippines College of Architecture', 'University of the Philippines College of Mass Communication')",1032.6
 "('University of the Philippines College of Architecture', 'UP Institute of Biology')",860.7
 "('University of the Philippines College of Architecture', 'University of the Philippines College of Social Work and Community Development')",1075.9
@@ -404,6 +412,7 @@
 "('University of the Philippines College of Architecture', 'UP School of Statistics New Building')",386.5
 "('University of the Philippines College of Architecture', 'Technology Management Center - University of the Philippines')",1031.7
 "('University of the Philippines College of Architecture', 'UP Asian Institute Of Tourism')",1379.1
+"('University of the Philippines College of Architecture', 'College of Science Admin Auditorium')",798.9
 "('University of the Philippines College of Mass Communication', 'UP Institute of Biology')",1405.6
 "('University of the Philippines College of Mass Communication', 'University of the Philippines College of Social Work and Community Development')",315.6
 "('University of the Philippines College of Mass Communication', 'UP Diliman Institute of Civil Engineering (UP-ICE)')",1441.4
@@ -444,6 +453,7 @@
 "('University of the Philippines College of Mass Communication', 'UP School of Statistics New Building')",1138.4
 "('University of the Philippines College of Mass Communication', 'Technology Management Center - University of the Philippines')",1719.5
 "('University of the Philippines College of Mass Communication', 'UP Asian Institute Of Tourism')",882.4
+"('University of the Philippines College of Mass Communication', 'College of Science Admin Auditorium')",1384.0
 "('UP Institute of Biology', 'University of the Philippines College of Social Work and Community Development')",1652.8
 "('UP Institute of Biology', 'UP Diliman Institute of Civil Engineering (UP-ICE)')",835.0
 "('UP Institute of Biology', 'Pavilion 1 - Palma Hall')",743.3
@@ -483,6 +493,7 @@
 "('UP Institute of Biology', 'UP School of Statistics New Building')",811.2
 "('UP Institute of Biology', 'Technology Management Center - University of the Philippines')",534.4
 "('UP Institute of Biology', 'UP Asian Institute Of Tourism')",2189.4
+"('UP Institute of Biology', 'College of Science Admin Auditorium')",156.2
 "('University of the Philippines College of Social Work and Community Development', 'UP Diliman Institute of Civil Engineering (UP-ICE)')",1484.7
 "('University of the Philippines College of Social Work and Community Development', 'Pavilion 1 - Palma Hall')",1160.4
 "('University of the Philippines College of Social Work and Community Development', 'Crafts and Interior Design Laboratory')",1470.0
@@ -521,6 +532,7 @@
 "('University of the Philippines College of Social Work and Community Development', 'UP School of Statistics New Building')",1225.2
 "('University of the Philippines College of Social Work and Community Development', 'Technology Management Center - University of the Philippines')",1966.7
 "('University of the Philippines College of Social Work and Community Development', 'UP Asian Institute Of Tourism')",629.3
+"('University of the Philippines College of Social Work and Community Development', 'College of Science Admin Auditorium')",1631.2
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'Pavilion 1 - Palma Hall')",794.7
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'Crafts and Interior Design Laboratory')",949.5
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'UP College of Home Economics Annex Building')",980.0
@@ -558,6 +570,7 @@
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'UP School of Statistics New Building')",468.8
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'Technology Management Center - University of the Philippines')",841.9
 "('UP Diliman Institute of Civil Engineering (UP-ICE)', 'UP Asian Institute Of Tourism')",1787.8
+"('UP Diliman Institute of Civil Engineering (UP-ICE)', 'College of Science Admin Auditorium')",773.2
 "('Pavilion 1 - Palma Hall', 'Crafts and Interior Design Laboratory')",450.0
 "('Pavilion 1 - Palma Hall', 'UP College of Home Economics Annex Building')",815.6
 "('Pavilion 1 - Palma Hall', 'UP Diliman Electrical and Electronics Engineering Institute')",489.6
@@ -594,6 +607,7 @@
 "('Pavilion 1 - Palma Hall', 'UP School of Statistics New Building')",476.1
 "('Pavilion 1 - Palma Hall', 'Technology Management Center - University of the Philippines')",1057.2
 "('Pavilion 1 - Palma Hall', 'UP Asian Institute Of Tourism')",1722.2
+"('Pavilion 1 - Palma Hall', 'College of Science Admin Auditorium')",721.6
 "('Crafts and Interior Design Laboratory', 'UP College of Home Economics Annex Building')",549.9
 "('Crafts and Interior Design Laboratory', 'UP Diliman Electrical and Electronics Engineering Institute')",644.4
 "('Crafts and Interior Design Laboratory', 'UP National College of Public Administration and Governance')",1667.9
@@ -629,6 +643,7 @@
 "('Crafts and Interior Design Laboratory', 'UP School of Statistics New Building')",630.9
 "('Crafts and Interior Design Laboratory', 'Technology Management Center - University of the Philippines')",1037.8
 "('Crafts and Interior Design Laboratory', 'UP Asian Institute Of Tourism')",2009.1
+"('Crafts and Interior Design Laboratory', 'College of Science Admin Auditorium')",659.7
 "('UP College of Home Economics Annex Building', 'UP Diliman Electrical and Electronics Engineering Institute')",541.6
 "('UP College of Home Economics Annex Building', 'UP National College of Public Administration and Governance')",1915.0
 "('UP College of Home Economics Annex Building', 'UP College of Human Kinetics')",1923.8
@@ -663,6 +678,7 @@
 "('UP College of Home Economics Annex Building', 'UP School of Statistics New Building')",956.2
 "('UP College of Home Economics Annex Building', 'Technology Management Center - University of the Philippines')",679.4
 "('UP College of Home Economics Annex Building', 'UP Asian Institute Of Tourism')",2256.2
+"('UP College of Home Economics Annex Building', 'College of Science Admin Auditorium')",301.3
 "('UP Diliman Electrical and Electronics Engineering Institute', 'UP National College of Public Administration and Governance')",1486.6
 "('UP Diliman Electrical and Electronics Engineering Institute', 'UP College of Human Kinetics')",1566.9
 "('UP Diliman Electrical and Electronics Engineering Institute', 'University of the Philippines Diliman Institute of Chemistry - Teaching Building')",512.0
@@ -696,6 +712,7 @@
 "('UP Diliman Electrical and Electronics Engineering Institute', 'UP School of Statistics New Building')",475.6
 "('UP Diliman Electrical and Electronics Engineering Institute', 'Technology Management Center - University of the Philippines')",567.6
 "('UP Diliman Electrical and Electronics Engineering Institute', 'UP Asian Institute Of Tourism')",1827.8
+"('UP Diliman Electrical and Electronics Engineering Institute', 'College of Science Admin Auditorium')",334.8
 "('UP National College of Public Administration and Governance', 'UP College of Human Kinetics')",480.0
 "('UP National College of Public Administration and Governance', 'University of the Philippines Diliman Institute of Chemistry - Teaching Building')",1998.6
 "('UP National College of Public Administration and Governance', 'University of the Philippines College of Engineering')",1251.1
@@ -728,6 +745,7 @@
 "('UP National College of Public Administration and Governance', 'UP School of Statistics New Building')",1187.2
 "('UP National College of Public Administration and Governance', 'Technology Management Center - University of the Philippines')",2054.2
 "('UP National College of Public Administration and Governance', 'UP Asian Institute Of Tourism')",740.9
+"('UP National College of Public Administration and Governance', 'College of Science Admin Auditorium')",1821.4
 "('UP College of Human Kinetics', 'University of the Philippines Diliman Institute of Chemistry - Teaching Building')",2048.6
 "('UP College of Human Kinetics', 'University of the Philippines College of Engineering')",1091.6
 "('UP College of Human Kinetics', 'UP College of Music')",562.8
@@ -759,6 +777,7 @@
 "('UP College of Human Kinetics', 'UP School of Statistics New Building')",1267.5
 "('UP College of Human Kinetics', 'Technology Management Center - University of the Philippines')",2134.5
 "('UP College of Human Kinetics', 'UP Asian Institute Of Tourism')",545.0
+"('UP College of Human Kinetics', 'College of Science Admin Auditorium')",1861.6
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'University of the Philippines College of Engineering')",1166.7
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'UP College of Music')",1587.6
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'UP School of Economics')",871.5
@@ -789,6 +808,7 @@
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'UP School of Statistics New Building')",976.5
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'Technology Management Center - University of the Philippines')",496.0
 "('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'UP Asian Institute Of Tourism')",2339.8
+"('University of the Philippines Diliman Institute of Chemistry - Teaching Building', 'College of Science Admin Auditorium')",282.2
 "('University of the Philippines College of Engineering', 'UP College of Music')",630.6
 "('University of the Philippines College of Engineering', 'UP School of Economics')",418.3
 "('University of the Philippines College of Engineering', 'UP College of Fine Arts')",1206.4
@@ -818,6 +838,7 @@
 "('University of the Philippines College of Engineering', 'UP School of Statistics New Building')",816.7
 "('University of the Philippines College of Engineering', 'Technology Management Center - University of the Philippines')",1397.8
 "('University of the Philippines College of Engineering', 'UP Asian Institute Of Tourism')",1428.0
+"('University of the Philippines College of Engineering', 'College of Science Admin Auditorium')",1044.4
 "('UP College of Music', 'UP School of Economics')",999.5
 "('UP College of Music', 'UP College of Fine Arts')",932.4
 "('UP College of Music', 'Department of Chemical Engineering, University of the Philippines Diliman')",1621.6
@@ -846,6 +867,7 @@
 "('UP College of Music', 'UP School of Statistics New Building')",1155.1
 "('UP College of Music', 'Technology Management Center - University of the Philippines')",1736.2
 "('UP College of Music', 'UP Asian Institute Of Tourism')",899.2
+"('UP College of Music', 'College of Science Admin Auditorium')",1400.6
 "('UP School of Economics', 'UP College of Fine Arts')",1575.3
 "('UP School of Economics', 'Department of Chemical Engineering, University of the Philippines Diliman')",1529.9
 "('UP School of Economics', 'Computational Science Research Center')",832.6
@@ -873,6 +895,7 @@
 "('UP School of Economics', 'UP School of Statistics New Building')",1159.9
 "('UP School of Economics', 'Technology Management Center - University of the Philippines')",1244.8
 "('UP School of Economics', 'UP Asian Institute Of Tourism')",1800.2
+"('UP School of Economics', 'College of Science Admin Auditorium')",866.7
 "('UP College of Fine Arts', 'Department of Chemical Engineering, University of the Philippines Diliman')",1077.3
 "('UP College of Fine Arts', 'Computational Science Research Center')",1393.0
 "('UP College of Fine Arts', 'UP College of Education')",1291.0
@@ -899,6 +922,7 @@
 "('UP College of Fine Arts', 'UP School of Statistics New Building')",709.4
 "('UP College of Fine Arts', 'Technology Management Center - University of the Philippines')",1576.4
 "('UP College of Fine Arts', 'UP Asian Institute Of Tourism')",1069.1
+"('UP College of Fine Arts', 'College of Science Admin Auditorium')",1343.6
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'Computational Science Research Center')",807.2
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'UP College of Education')",1247.6
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'Department of Mining, Metallurgical and Materials Engineering (UP DMMME)')",268.1
@@ -924,6 +948,7 @@
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'UP School of Statistics New Building')",616.7
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'Technology Management Center - University of the Philippines')",730.9
 "('Department of Chemical Engineering, University of the Philippines Diliman', 'UP Asian Institute Of Tourism')",1935.8
+"('Department of Chemical Engineering, University of the Philippines Diliman', 'College of Science Admin Auditorium')",757.8
 "('Computational Science Research Center', 'UP College of Education')",579.2
 "('Computational Science Research Center', 'Department of Mining, Metallurgical and Materials Engineering (UP DMMME)')",603.3
 "('Computational Science Research Center', 'Industrial Engineering - Mechanical Engineering Building')",1146.9
@@ -948,6 +973,7 @@
 "('Computational Science Research Center', 'UP School of Statistics New Building')",838.9
 "('Computational Science Research Center', 'Technology Management Center - University of the Philippines')",522.0
 "('Computational Science Research Center', 'UP Asian Institute Of Tourism')",2212.0
+"('Computational Science Research Center', 'College of Science Admin Auditorium')",143.9
 "('UP College of Education', 'Department of Mining, Metallurgical and Materials Engineering (UP DMMME)')",1058.6
 "('UP College of Education', 'Industrial Engineering - Mechanical Engineering Building')",693.0
 "('UP College of Education', 'Institute of Environmental Science and Meteorology')",915.3
@@ -971,6 +997,7 @@
 "('UP College of Education', 'UP School of Statistics New Building')",781.1
 "('UP College of Education', 'Technology Management Center - University of the Philippines')",991.4
 "('UP College of Education', 'UP Asian Institute Of Tourism')",1928.3
+"('UP College of Education', 'College of Science Admin Auditorium')",613.2
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'Industrial Engineering - Mechanical Engineering Building')",1365.8
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'Institute of Environmental Science and Meteorology')",264.7
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'UP Child Development Center')",957.2
@@ -993,6 +1020,7 @@
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'UP School of Statistics New Building')",718.1
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'Technology Management Center - University of the Philippines')",527.0
 "('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'UP Asian Institute Of Tourism')",2037.2
+"('Department of Mining, Metallurgical and Materials Engineering (UP DMMME)', 'College of Science Admin Auditorium')",553.9
 "('Industrial Engineering - Mechanical Engineering Building', 'Institute of Environmental Science and Meteorology')",1413.4
 "('Industrial Engineering - Mechanical Engineering Building', 'UP Child Development Center')",886.3
 "('Industrial Engineering - Mechanical Engineering Building', 'Alonso Hall')",815.2
@@ -1014,6 +1042,7 @@
 "('Industrial Engineering - Mechanical Engineering Building', 'UP School of Statistics New Building')",1088.3
 "('Industrial Engineering - Mechanical Engineering Building', 'Technology Management Center - University of the Philippines')",1559.0
 "('Industrial Engineering - Mechanical Engineering Building', 'UP Asian Institute Of Tourism')",1395.5
+"('Industrial Engineering - Mechanical Engineering Building', 'College of Science Admin Auditorium')",1180.9
 "('Institute of Environmental Science and Meteorology', 'UP Child Development Center')",799.9
 "('Institute of Environmental Science and Meteorology', 'Alonso Hall')",728.8
 "('Institute of Environmental Science and Meteorology', 'UP Department of Geodetics Engineering')",1407.4
@@ -1034,6 +1063,7 @@
 "('Institute of Environmental Science and Meteorology', 'UP School of Statistics New Building')",787.2
 "('Institute of Environmental Science and Meteorology', 'Technology Management Center - University of the Philippines')",335.9
 "('Institute of Environmental Science and Meteorology', 'UP Asian Institute Of Tourism')",2139.4
+"('Institute of Environmental Science and Meteorology', 'College of Science Admin Auditorium')",372.0
 "('UP Child Development Center', 'Alonso Hall')",71.1
 "('UP Child Development Center', 'UP Department of Geodetics Engineering')",968.2
 "('UP Child Development Center', 'University of the Philippines Center for International Studies')",470.5
@@ -1053,6 +1083,7 @@
 "('UP Child Development Center', 'UP School of Statistics New Building')",1099.8
 "('UP Child Development Center', 'Technology Management Center - University of the Philippines')",789.7
 "('UP Child Development Center', 'UP Asian Institute Of Tourism')",2241.5
+"('UP Child Development Center', 'College of Science Admin Auditorium')",497.8
 "('Alonso Hall', 'UP Department of Geodetics Engineering')",897.0
 "('Alonso Hall', 'University of the Philippines Center for International Studies')",399.4
 "('Alonso Hall', 'National Institute of Geological Sciences')",779.6
@@ -1071,6 +1102,7 @@
 "('Alonso Hall', 'UP School of Statistics New Building')",1028.6
 "('Alonso Hall', 'Technology Management Center - University of the Philippines')",804.8
 "('Alonso Hall', 'UP Asian Institute Of Tourism')",2170.4
+"('Alonso Hall', 'College of Science Admin Auditorium')",426.7
 "('UP Department of Geodetics Engineering', 'University of the Philippines Center for International Studies')",669.0
 "('UP Department of Geodetics Engineering', 'National Institute of Geological Sciences')",1330.9
 "('UP Department of Geodetics Engineering', 'UP College of Home Economics')",951.2
@@ -1088,6 +1120,7 @@
 "('UP Department of Geodetics Engineering', 'UP School of Statistics New Building')",1082.3
 "('UP Department of Geodetics Engineering', 'Technology Management Center - University of the Philippines')",1640.9
 "('UP Department of Geodetics Engineering', 'UP Asian Institute Of Tourism')",1389.6
+"('UP Department of Geodetics Engineering', 'College of Science Admin Auditorium')",1262.8
 "('University of the Philippines Center for International Studies', 'National Institute of Geological Sciences')",908.2
 "('University of the Philippines Center for International Studies', 'UP College of Home Economics')",453.5
 "('University of the Philippines Center for International Studies', 'UP Institute of Islamic Studies')",1266.1
@@ -1104,6 +1137,7 @@
 "('University of the Philippines Center for International Studies', 'UP School of Statistics New Building')",659.6
 "('University of the Philippines Center for International Studies', 'Technology Management Center - University of the Philippines')",1069.1
 "('University of the Philippines Center for International Studies', 'UP Asian Institute Of Tourism')",1776.5
+"('University of the Philippines Center for International Studies', 'College of Science Admin Auditorium')",691.0
 "('National Institute of Geological Sciences', 'UP College of Home Economics')",833.8
 "('National Institute of Geological Sciences', 'UP Institute of Islamic Studies')",1552.5
 "('National Institute of Geological Sciences', 'UP College of Law')",1256.1
@@ -1119,6 +1153,7 @@
 "('National Institute of Geological Sciences', 'UP School of Statistics New Building')",710.7
 "('National Institute of Geological Sciences', 'Technology Management Center - University of the Philippines')",386.7
 "('National Institute of Geological Sciences', 'UP Asian Institute Of Tourism')",2062.9
+"('National Institute of Geological Sciences', 'College of Science Admin Auditorium')",422.8
 "('UP College of Home Economics', 'UP Institute of Islamic Studies')",1714.2
 "('UP College of Home Economics', 'UP College of Law')",591.7
 "('UP College of Home Economics', 'National Institute of Molecular Biology and Biotechnology')",392.2
@@ -1133,6 +1168,7 @@
 "('UP College of Home Economics', 'UP School of Statistics New Building')",1082.8
 "('UP College of Home Economics', 'Technology Management Center - University of the Philippines')",831.5
 "('UP College of Home Economics', 'UP Asian Institute Of Tourism')",2224.6
+"('UP College of Home Economics', 'College of Science Admin Auditorium')",480.9
 "('UP Institute of Islamic Studies', 'UP College of Law')",1366.4
 "('UP Institute of Islamic Studies', 'National Institute of Molecular Biology and Biotechnology')",1680.1
 "('UP Institute of Islamic Studies', 'UP Department of Mechanical Engineering')",848.1
@@ -1146,6 +1182,7 @@
 "('UP Institute of Islamic Studies', 'UP School of Statistics New Building')",1018.0
 "('UP Institute of Islamic Studies', 'Technology Management Center - University of the Philippines')",1885.0
 "('UP Institute of Islamic Studies', 'UP Asian Institute Of Tourism')",602.6
+"('UP Institute of Islamic Studies', 'College of Science Admin Auditorium')",1652.2
 "('UP College of Law', 'National Institute of Molecular Biology and Biotechnology')",814.5
 "('UP College of Law', 'UP Department of Mechanical Engineering')",524.8
 "('UP College of Law', 'UP Marine Science Institute')",1029.4
@@ -1158,6 +1195,7 @@
 "('UP College of Law', 'UP School of Statistics New Building')",1069.5
 "('UP College of Law', 'Technology Management Center - University of the Philippines')",1281.3
 "('UP College of Law', 'UP Asian Institute Of Tourism')",1681.6
+"('UP College of Law', 'College of Science Admin Auditorium')",903.2
 "('National Institute of Molecular Biology and Biotechnology', 'UP Department of Mechanical Engineering')",1134.7
 "('National Institute of Molecular Biology and Biotechnology', 'UP Marine Science Institute')",472.8
 "('National Institute of Molecular Biology and Biotechnology', 'Institute of Mathematics')",462.0
@@ -1169,6 +1207,7 @@
 "('National Institute of Molecular Biology and Biotechnology', 'UP School of Statistics New Building')",812.3
 "('National Institute of Molecular Biology and Biotechnology', 'Technology Management Center - University of the Philippines')",535.4
 "('National Institute of Molecular Biology and Biotechnology', 'UP Asian Institute Of Tourism')",2190.5
+"('National Institute of Molecular Biology and Biotechnology', 'College of Science Admin Auditorium')",157.3
 "('UP Department of Mechanical Engineering', 'UP Marine Science Institute')",826.5
 "('UP Department of Mechanical Engineering', 'Institute of Mathematics')",1374.1
 "('UP Department of Mechanical Engineering', 'Alfredo V. Lagmay Hall')",764.3
@@ -1179,6 +1218,7 @@
 "('UP Department of Mechanical Engineering', 'UP School of Statistics New Building')",866.5
 "('UP Department of Mechanical Engineering', 'Technology Management Center - University of the Philippines')",1447.6
 "('UP Department of Mechanical Engineering', 'UP Asian Institute Of Tourism')",1163.3
+"('UP Department of Mechanical Engineering', 'College of Science Admin Auditorium')",1112.0
 "('UP Marine Science Institute', 'Institute of Mathematics')",601.6
 "('UP Marine Science Institute', 'Alfredo V. Lagmay Hall')",688.0
 "('UP Marine Science Institute', 'UP School of Urban and Regional Planning')",1369.1
@@ -1188,6 +1228,7 @@
 "('UP Marine Science Institute', 'UP School of Statistics New Building')",490.0
 "('UP Marine Science Institute', 'Technology Management Center - University of the Philippines')",675.1
 "('UP Marine Science Institute', 'UP Asian Institute Of Tourism')",1868.1
+"('UP Marine Science Institute', 'College of Science Admin Auditorium')",410.0
 "('Institute of Mathematics', 'Alfredo V. Lagmay Hall')",1001.4
 "('Institute of Mathematics', 'UP School of Urban and Regional Planning')",1822.9
 "('Institute of Mathematics', 'UP Vanguard Building')",1961.8
@@ -1196,6 +1237,7 @@
 "('Institute of Mathematics', 'UP School of Statistics New Building')",969.7
 "('Institute of Mathematics', 'Technology Management Center - University of the Philippines')",158.9
 "('Institute of Mathematics', 'UP Asian Institute Of Tourism')",2321.9
+"('Institute of Mathematics', 'College of Science Admin Auditorium')",374.6
 "('Alfredo V. Lagmay Hall', 'UP School of Urban and Regional Planning')",1345.8
 "('Alfredo V. Lagmay Hall', 'UP Vanguard Building')",1351.5
 "('Alfredo V. Lagmay Hall', 'University of the Philippines-Diliman Department of Sociology')",159.6
@@ -1203,24 +1245,32 @@
 "('Alfredo V. Lagmay Hall', 'UP School of Statistics New Building')",728.0
 "('Alfredo V. Lagmay Hall', 'Technology Management Center - University of the Philippines')",1074.8
 "('Alfredo V. Lagmay Hall', 'UP Asian Institute Of Tourism')",1844.8
+"('Alfredo V. Lagmay Hall', 'College of Science Admin Auditorium')",696.7
 "('UP School of Urban and Regional Planning', 'UP Vanguard Building')",369.6
 "('UP School of Urban and Regional Planning', 'University of the Philippines-Diliman Department of Sociology')",1318.7
 "('UP School of Urban and Regional Planning', 'Bulwagang Silangang Palma')",1411.4
 "('UP School of Urban and Regional Planning', 'UP School of Statistics New Building')",1029.3
 "('UP School of Urban and Regional Planning', 'Technology Management Center - University of the Philippines')",1896.4
 "('UP School of Urban and Regional Planning', 'UP Asian Institute Of Tourism')",549.8
+"('UP School of Urban and Regional Planning', 'College of Science Admin Auditorium')",1663.5
 "('UP Vanguard Building', 'University of the Philippines-Diliman Department of Sociology')",1324.4
 "('UP Vanguard Building', 'Bulwagang Silangang Palma')",1417.1
 "('UP Vanguard Building', 'UP School of Statistics New Building')",1348.2
 "('UP Vanguard Building', 'Technology Management Center - University of the Philippines')",2035.2
 "('UP Vanguard Building', 'UP Asian Institute Of Tourism')",625.8
+"('UP Vanguard Building', 'College of Science Admin Auditorium')",1699.7
 "('University of the Philippines-Diliman Department of Sociology', 'Bulwagang Silangang Palma')",225.2
 "('University of the Philippines-Diliman Department of Sociology', 'UP School of Statistics New Building')",570.9
 "('University of the Philippines-Diliman Department of Sociology', 'Technology Management Center - University of the Philippines')",977.8
 "('University of the Philippines-Diliman Department of Sociology', 'UP Asian Institute Of Tourism')",1817.7
+"('University of the Philippines-Diliman Department of Sociology', 'College of Science Admin Auditorium')",599.7
 "('Bulwagang Silangang Palma', 'UP School of Statistics New Building')",690.2
 "('Bulwagang Silangang Palma', 'Technology Management Center - University of the Philippines')",1082.3
 "('Bulwagang Silangang Palma', 'UP Asian Institute Of Tourism')",1910.4
+"('Bulwagang Silangang Palma', 'College of Science Admin Auditorium')",704.2
 "('UP School of Statistics New Building', 'Technology Management Center - University of the Philippines')",1043.2
 "('UP School of Statistics New Building', 'UP Asian Institute Of Tourism')",1528.4
+"('UP School of Statistics New Building', 'College of Science Admin Auditorium')",789.6
 "('Technology Management Center - University of the Philippines', 'UP Asian Institute Of Tourism')",2395.4
+"('Technology Management Center - University of the Philippines', 'College of Science Admin Auditorium')",448.0
+"('UP Asian Institute Of Tourism', 'College of Science Admin Auditorium')",2162.6

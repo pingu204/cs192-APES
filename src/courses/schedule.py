@@ -127,7 +127,7 @@ def generate_timetable(classes: list[Course]):
     export_output = []
 
     # Markers
-    start, end = -1, -1
+    start, end = 5000, -1
 
     # Loop through each offset 
     # -- Note: Each offset represents one row in the table
@@ -158,10 +158,10 @@ def generate_timetable(classes: list[Course]):
 
             if current_class:
                 # Update `start` if first class was found
-                start = i if start == -1 else start
+                start = min(start, i)
 
                 # Update `end` each time a class is found
-                end = i if end != i else end
+                end = max(end, i)
 
                 # Decompose `current_class`; check type annotation of find_class()
                 c_str, status, length, idx = current_class
