@@ -193,9 +193,12 @@ def generate_permutation_view(request):
         count = 0
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
             #check if dcp_section is not in SavedSchedules
+            
+            """
             if count in saved_sched_ids:  # Skip if schedule already saved
                 count += 1
                 continue
+            """
             
             #check not conflicting
             if not is_conflicting(list(dcp_section)):
