@@ -74,6 +74,12 @@ def homepage_view(request, *args, **kwargs):
     print("-- User DCP --")
     print('\n'.join([f"+ {code} [{len(dcp_sections[i])} sections]" for i, code in enumerate(dcp_codes)]))
 
+    schedules = SavedSchedule.objects.filter(student_id=request.user.id).prefetch_related('courses')
+    for sched in schedules:
+        print(f"+++ {request.user} Saved Schedule: {sched.schedule_name}")  # Adjust based on actual field name
+        for course in sched.courses.all():
+            print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
+
     context = {
         "user" : request.user,
         "dcp" : dcp,
@@ -101,7 +107,7 @@ def guest_login_view(request, *args, **kwargs):
     # DEBUGGER: print("GUEST AUTHENTICATED")
     request.session['is_guest'] = True # might be useful if we choose to separate guest from user dashboards// if guest -> save session, else flush after
     request.session['dcp'] = [] # for Desired Classes Pool
-    print(request.session.items())
+    # print(request.session.items())
     # DEBUGGER: print(request.session.keys())
     # DEBUGGER: print(request.session['is_guest'])
     return redirect(reverse('homepage_view'))

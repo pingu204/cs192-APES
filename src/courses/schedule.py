@@ -188,6 +188,7 @@ def generate_timetable(classes: list[Course]):
 
 # print('\n'.join(main_output))
 
+"""
 if __name__ == '__main__':
 
     print(Course.example())
@@ -280,3 +281,4 @@ if __name__ == '__main__':
     print(main_table)
 
     print(export_table)
+"""

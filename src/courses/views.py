@@ -208,7 +208,7 @@ def generate_permutation_view(request):
                 request.session['schedule_permutations'].append(schedule_entry)
 
                 count += 1
-                print(f"Schedule {count}")
+                #print(f"Schedule {count}")
                 for x in (list(dcp_section)):
                     x.pop("course_title", None)
                     # dcp_section contains specific DICT section!
@@ -217,7 +217,7 @@ def generate_permutation_view(request):
                     
                     #print_dict(x)
                     ...
-                print("\n")
+                # print("\n")
                 ## need nalang i save sa models 
                 '''
                 if request.user.id:
@@ -242,7 +242,7 @@ def generate_permutation_view(request):
             if i == 100000:
                 break
         
-        print("lebron", request.session.get('schedule_permutations'))
+        print(" +++ SCHEDULE PERMUTATIONS START\n", request.session.get('schedule_permutations'), "\n +++ SCHEDULE PERMUTATIONS END")
 
         print(f"-- Found {count} schedules --")
 
