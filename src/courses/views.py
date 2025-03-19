@@ -272,9 +272,6 @@ def fix_timeslots(course):
 
     return course
 
-
-
-
 def view_sched_view(request, sched_id: int):
     #############################
     # For testing purposes only #
@@ -360,7 +357,129 @@ def view_sched_view(request, sched_id: int):
     return render(request, "view_sched.html", context)
 
 
+def add_course_to_sched_view(request, sched_id: int):
+    cs180 = Course(
+        course_code="CS 180",
+        section_name={"lec":"THR"},
+        capacity=30,
+        demand=30,
+        units=3.0,
+        class_days={"lec":"TH"},
+        location={"lec":"AECH"}, venue={"lec":"AECH"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"ROSELYN GABUD"},
+        timeslots={"lec":(600,780)},
+        offering_unit="DCS"
+    )
+
+    cs145 = Course(
+        course_code="CS 145",
+        section_name={"lec":"HONOR", "lab":"HONOR 2"},
+        capacity=30,
+        demand=1,
+        units=4.0,
+        class_days={"lec":"TH","lab":"M"},
+        location={"lec":"Accenture","lab":"TL2"}, venue={"lec":"Accenture","lab":"TL2"},
+        # coords={"lec":(0,0), "lab":(0,0)},
+        instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
+        timeslots={"lec":(450,540), "lab":(240,420)},
+        offering_unit="DCS"
+    )
+
+    cs192 = Course(
+        course_code="CS 192",
+        section_name={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
+        capacity=30,
+        demand=1,
+        units=3.0,
+        class_days={"lec":"T", "lab":"H"},
+        location={"lec":"AECH", "lab":"AECH"}, venue={"lec":"AECH", "lab":"AECH"},
+        # coords={"lec":(0,0), "lab":(0,0)},
+        instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
+        timeslots={"lec":(180,300), "lab":(180,360)},
+        offering_unit="DCS"
+    )
+
+    lis51 = Course(
+        course_code="LIS 51",
+        section_name={"lec":"WFU"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"WF"},
+        location={"lec":"SOLAIR"}, venue={"lec":"AECH"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"DRIDGE REYES"},
+        timeslots={"lec":(90,270)},
+        offering_unit="SLIS"
+    )
+
+    cs153 = Course(
+        course_code="CS 153",
+        section_name={"lec":"THW"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"TH"},
+        location={"lec":"AECH"}, venue={"lec":"AECH"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"PHILIP ZUNIGA"},
+        timeslots={"lec":(360,450)},
+        offering_unit="DCS"
+    )
+
+    cs132 = Course(
+        course_code="CS 132",
+        section_name={"lec":"WFW"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"WF"},
+        location={"lec":"AECH"}, venue={"lec":"AECH"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"PAUL REGONIA"},
+        timeslots={"lec":(360,450)},
+        offering_unit="DCS"
+    )
+
+    classes = [cs180, cs145, cs153, cs132, cs192]
+
+    dummy_course_sections = [
+        Course(
+            course_code="Dummy",
+            section_name={"lec":"WFW"},
+            capacity=30, demand=1,
+            units=3.0,
+            class_days={"lec":days},
+            location={"lec":"AECH"}, venue={"lec":"AECH"},
+            # coords={"lec":(0,0)},
+            instructor_name={"lec":"PAUL REGONIA"},
+            timeslots={"lec":slot},
+            offering_unit="DCS"
+        ) for (days, slot) in [('M',(0,180)),('M',(420,600)), ('M',(600,780)), ('W',(600,780)), ('F',(600,780))]
+    ]
+
+    # Generate schedule tables
+    main_table, _ = generate_timetable(classes)
+
+    timetables = []
+    for dummy_course in dummy_course_sections:
+        table, _ = generate_timetable(classes + [dummy_course])
+        timetables.append(table)
+
+    context = {
+        "sched_id": sched_id,
+        "schedule_name": "Temp",
+        "main_table": main_table,
+        "timetables": timetables,
+        "new_sections" : dummy_course_sections,
+        # "export_table": export_table,
+        "courses": classes,
+        "units": f"{sum([course.units for course in classes])} units",
+        "show_unsave_button": True,
+    }
+
+    return render(request, "sched_add_course.html", context)
+
 def view_saved_sched_view(request, sched_id: int):
+
     if request.method == "POST" and "click_unsaved_sched" in request.POST:
         if not request.user.is_authenticated:
             messages.error(request, "You need to be logged in to unsave schedules.")
