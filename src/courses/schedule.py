@@ -111,7 +111,7 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
     return None # No class at `day` and `time`
 
 """ Returns the contents of the HTML timetable given list of `classes` """
-def generate_timetable(classes: list[Course]):
+def generate_timetable(classes:list[Course], glow_idx:int=-1):
     
     # Header for days
     # -- Shortened days for export ver.
@@ -169,8 +169,14 @@ def generate_timetable(classes: list[Course]):
                 # Configure row spanning at the boundary
                 # -- Note: if `status` == ONGOING, the `td` is skipped because of row spanning
                 if status == ClassStatus.STARTS_AT:
-                    main_row_str += f'<td id="td-{idx+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
-                    export_row_str += f'<td id="td-{idx+1}" class="rowspanned" rowspan="{length/15}">{c_str}</td>'
+                    if glow_idx != -1:
+                        if glow_idx == idx: 
+                            main_row_str += f'<td rowspan="{length/15}"><div id="td-{idx+1}" class="rowspanned glow">{c_str}</div></td>'
+                        else:
+                            main_row_str += f'<td rowspan="{length/15}"><div class="rowspanned">{c_str}</div></td>'
+                    else:
+                        main_row_str += f'<td rowspan="{length/15}"><div id="td-{idx+1}" class="rowspanned">{c_str}</div></td>'
+                    export_row_str += f'<td rowspan="{length/15}"><div id="td-{idx+1}" class="rowspanned">{c_str}</div></td>'
 
             else: # No class in time cell
                 main_row_str += f'<td></td>'

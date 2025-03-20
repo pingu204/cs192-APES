@@ -44,3 +44,10 @@ sectionBlocks.forEach(t => {
     })
 
 });
+
+const addedBlocks = document.getElementsByClassName('glow');
+for (let block of addedBlocks) {
+    var styles = getComputedStyle(block);
+    block.style.boxShadow = "0 0 50px " + styles.getPropertyValue("background-color").toString();
+    console.log("0 0 30px " + styles.getPropertyValue("background-color").toString()); 
+}

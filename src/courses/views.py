@@ -457,11 +457,11 @@ def add_course_to_sched_view(request, sched_id: int):
     ]
 
     # Generate schedule tables
-    main_table, _ = generate_timetable(classes)
+    main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
     timetables = []
     for dummy_course in dummy_course_sections:
-        table, _ = generate_timetable(classes + [dummy_course])
+        table, _ = generate_timetable([dummy_course] + classes, glow_idx=0)
         timetables.append(table)
 
     context = {
