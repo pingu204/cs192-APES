@@ -1193,7 +1193,10 @@ div#cover {
   }
 
   #inner-overlay {
-    position: absolute;
+    /* position: absolute; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%; 
     height: 20%;
     /* top: 0;
