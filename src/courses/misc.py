@@ -67,8 +67,7 @@ def is_conflicting(courses):
                         return True
 
                     # Occupy the index
-                    mat[idx] = 1
-        
+                    mat[idx] = 1             
     return False
 
 """ Check if course to be added conflicts with the courses in DCP """

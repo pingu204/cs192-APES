@@ -535,3 +535,35 @@ def view_saved_sched_view(request, sched_id: int):
 
 
 ##----------------------REDRAW CLASS-----------------------------------##
+def redraw_course_to_sched(request, sched_id: int):
+    
+    student_id = request.user.id 
+    
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+    
+    saved_courses = saved_schedule.courses.all()
+    classes = [
+        convert_timeslots_to_tuples(course.course_details)  # Unpack the dictionary properly
+        for course in saved_courses
+    ]
+    #search_results = []
+    #form = DesiredClassesForm(request.GET)
+    #raw_search_query = request.GET.get("course_code")
+    
+    print("YOU ARE IN REDRAW")
+    
+    context = {
+        "sched_id": sched_id,
+        "schedule_name": "Temp",
+        #"main_table": main_table,
+        #"timetables": timetables,
+        #"new_sections" : search_results,
+        # "export_table": export_table,
+        #"courses": classes,
+        #"units": f"{sum([course.units for course in classes])} units",
+        #"show_unsave_button": True,
+        #"form": form,
+        #"search_results": search_results,
+    }
+
+    return render(request, "sched_add_course.html", context)
