@@ -7,7 +7,7 @@ import os
 from .models import DesiredCourse
 from dataclasses import asdict
 from scraper.scrape import get_all_sections, couple_lec_and_lab, print_dict
-from .misc import get_unique_courses, is_conflicting, get_start_and_end
+from .misc import get_unique_courses, is_conflicting, get_start_and_end, is_conflicting_with_dcp
 from apes import settings
 from .schedule import Course, generate_timetable
 from apes.utils import get_course_details_from_csv
@@ -63,7 +63,7 @@ def dcp_add_view(request):
             ))
 
             timeout = False
-
+            print("COURSE SECTIONS: ", course_sections)  # Debugging
             for section in course_sections:
                 """Checks if `section`'s timeslots collides with `x`"""
                 def is_not_within_range(x) -> bool:
@@ -176,7 +176,7 @@ def generate_permutation_view(request):
         # -- guaranteed to be nonempty
         # -- already filled in `homepage_view`
         dcp_sections = request.session['dcp_sections']
-        
+        print("DCP SECTIONS: ", dcp_sections)  # Debugging
         if 'schedule_permutations' not in request.session:
             request.session['schedule_permutations'] = []  # Initialize if not exists
         else:
@@ -199,7 +199,7 @@ def generate_permutation_view(request):
                 count += 1
                 continue
             """
-            
+            print("Schedule Entry: ", dcp_section)
             #check not conflicting
             if not is_conflicting(list(dcp_section)):
 
@@ -209,7 +209,7 @@ def generate_permutation_view(request):
                 }
 
                 request.session['schedule_permutations'].append(schedule_entry)
-
+                
                 count += 1
                 #print(f"Schedule {count}")
                 for x in (list(dcp_section)):
@@ -245,9 +245,9 @@ def generate_permutation_view(request):
             if i == 100000:
                 break
         
-        print(" +++ SCHEDULE PERMUTATIONS START\n", request.session.get('schedule_permutations'), "\n +++ SCHEDULE PERMUTATIONS END")
+        #print(" +++ SCHEDULE PERMUTATIONS START\n", request.session.get('schedule_permutations'), "\n +++ SCHEDULE PERMUTATIONS END")
 
-        print(f"-- Found {count} schedules --")
+        #print(f"-- Found {count} schedules --")
 
         return redirect(reverse("homepage_view"))
 
@@ -276,7 +276,7 @@ def view_sched_view(request, sched_id: int):
     #############################
     # For testing purposes only #
     #############################
-
+    print("ViewSched")
     # Get the correct schedule based on sched_id
     schedule_permutations = request.session.get('schedule_permutations', [])
     selected_schedule = next((sched for sched in schedule_permutations if sched["sched_id"] == sched_id), None)
@@ -289,6 +289,7 @@ def view_sched_view(request, sched_id: int):
 
     if request.method == "POST" and "click_saved_sched" in request.POST:
         # Ensure user is logged in
+        
         if not request.user.is_authenticated:
             messages.error(request, "You need to be logged in to save schedules.")
             return redirect("login")
@@ -356,130 +357,137 @@ def view_sched_view(request, sched_id: int):
 
     return render(request, "view_sched.html", context)
 
+def convert_timeslots_to_tuples(course):
+    for key, value in course['timeslots'].items():
+        if isinstance(value, list):
+            course['timeslots'][key] = tuple(value)
+    return course
 
+def has_conflict(classes):
+    """
+    Check if there are any conflicting classes based on timeslots and days,
+    including cases where courses may have multiple sections with separate times.
+    
+    Args:
+        classes (list): List of class dictionaries, each containing 'timeslots' and 'class_days'.
+        
+    Returns:
+        bool: True if there's a conflict, otherwise False.
+    """
+    
+    # Loop through each day (M, T, W, H, F, S) to detect conflicts
+    for day in "MTWHFS":
+        # Store occupied time slots as intervals for each section on this day
+        occupied_slots = []
+
+        # Check each class in the list
+        for course in classes:
+            # Determine which sections (lec/lab/etc.) have classes on the given day
+            timeslots = course.get("timeslots", {})
+            class_days = course.get("class_days", {})
+            
+            for section, section_days in class_days.items():
+                # If this section has a class on the current day
+                if day in section_days:
+                    # Retrieve the start and end times for the section's timeslot
+                    timeslot = timeslots.get(section, ())
+                    
+                    if timeslot:  # Check only if the timeslot exists and isn't empty
+                        start_time, end_time = timeslot
+
+                        # Check for conflicts with already occupied time slots
+                        for occupied_start, occupied_end in occupied_slots:
+                            if not (end_time <= occupied_start or start_time >= occupied_end):
+                                # If times overlap, there's a conflict
+                                return True
+                        
+                        # Add the current class's time slot to the list of occupied slots
+                        occupied_slots.append((start_time, end_time))
+                    
+    # If no conflicts are found after checking all classes
+    return False
+
+#adding course to saved schedule
 def add_course_to_sched_view(request, sched_id: int):
-    cs180 = Course(
-        course_code="CS 180",
-        section_name={"lec":"THR"},
-        capacity=30,
-        demand=30,
-        units=3.0,
-        class_days={"lec":"TH"},
-        location={"lec":"AECH"}, venue={"lec":"AECH"},
-        # coords={"lec":(0,0)},
-        instructor_name={"lec":"ROSELYN GABUD"},
-        timeslots={"lec":(600,780)},
-        offering_unit="DCS"
-    )
-
-    cs145 = Course(
-        course_code="CS 145",
-        section_name={"lec":"HONOR", "lab":"HONOR 2"},
-        capacity=30,
-        demand=1,
-        units=4.0,
-        class_days={"lec":"TH","lab":"M"},
-        location={"lec":"Accenture","lab":"TL2"}, venue={"lec":"Accenture","lab":"TL2"},
-        # coords={"lec":(0,0), "lab":(0,0)},
-        instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
-        timeslots={"lec":(450,540), "lab":(240,420)},
-        offering_unit="DCS"
-    )
-
-    cs192 = Course(
-        course_code="CS 192",
-        section_name={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
-        capacity=30,
-        demand=1,
-        units=3.0,
-        class_days={"lec":"T", "lab":"H"},
-        location={"lec":"AECH", "lab":"AECH"}, venue={"lec":"AECH", "lab":"AECH"},
-        # coords={"lec":(0,0), "lab":(0,0)},
-        instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
-        timeslots={"lec":(180,300), "lab":(180,360)},
-        offering_unit="DCS"
-    )
-
-    lis51 = Course(
-        course_code="LIS 51",
-        section_name={"lec":"WFU"},
-        capacity=30, demand=1,
-        units=3.0,
-        class_days={"lec":"WF"},
-        location={"lec":"SOLAIR"}, venue={"lec":"AECH"},
-        # coords={"lec":(0,0)},
-        instructor_name={"lec":"DRIDGE REYES"},
-        timeslots={"lec":(90,270)},
-        offering_unit="SLIS"
-    )
-
-    cs153 = Course(
-        course_code="CS 153",
-        section_name={"lec":"THW"},
-        capacity=30, demand=1,
-        units=3.0,
-        class_days={"lec":"TH"},
-        location={"lec":"AECH"}, venue={"lec":"AECH"},
-        # coords={"lec":(0,0)},
-        instructor_name={"lec":"PHILIP ZUNIGA"},
-        timeslots={"lec":(360,450)},
-        offering_unit="DCS"
-    )
-
-    cs132 = Course(
-        course_code="CS 132",
-        section_name={"lec":"WFW"},
-        capacity=30, demand=1,
-        units=3.0,
-        class_days={"lec":"WF"},
-        location={"lec":"AECH"}, venue={"lec":"AECH"},
-        # coords={"lec":(0,0)},
-        instructor_name={"lec":"PAUL REGONIA"},
-        timeslots={"lec":(360,450)},
-        offering_unit="DCS"
-    )
-
-    classes = [cs180, cs145, cs153, cs132, cs192]
-
-    dummy_course_sections = [
-        Course(
-            course_code="Dummy",
-            section_name={"lec":"WFW"},
-            capacity=30, demand=1,
-            units=3.0,
-            class_days={"lec":days},
-            location={"lec":"AECH"}, venue={"lec":"AECH"},
-            # coords={"lec":(0,0)},
-            instructor_name={"lec":"PAUL REGONIA"},
-            timeslots={"lec":slot},
-            offering_unit="DCS"
-        ) for (days, slot) in [('M',(0,180)),('M',(420,600)), ('M',(600,780)), ('W',(600,780)), ('F',(600,780))]
+    ##Already legit schedule na kinukuha not ung testing ni jopeth
+    
+    #get the schedule from database 
+    student_id = request.user.id 
+    
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+    
+    saved_courses = saved_schedule.courses.all()
+    classes = [
+        convert_timeslots_to_tuples(course.course_details)  # Unpack the dictionary properly
+        for course in saved_courses
     ]
+    ##print("Classes: ", classes)
+    
+    #Form for the search
+    search_results = []
+    form = DesiredClassesForm(request.GET)
+    raw_search_query = request.GET.get("course_code")
+    if request.GET.get("course_code"):
+        ##print("Raw Search Query: ", raw_search_query)
+        #cleaning the search query
+        cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
+        if form.is_valid():
+            # Obtain all sections associated 
+            course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query)) 
+            course_sections = tuple(fix_timeslots(course) for course in course_sections)
+            print("Course Sections: ", course_sections)
+            for course in course_sections:
+                #fix the scraping
+                course['units'] = float(course['units'])
+                del course['course_title'] 
+                flat_classes = [course for sublist in classes for course in (sublist if isinstance(sublist, list) else [sublist])]
+                flat_classes.append(course) #add the new course to the classes
+                if not has_conflict(flat_classes): #newly created function on top of here
+                    print("Course OK: ", flat_classes)   
+                    search_results.append(Course(**course)) #add the new course to the search results
+                    flat_classes.pop() #remove the new course from the classes
+            
+    ## Search Results contain the classes non conflicting  ----> 
+    ##print("Search Results: ", search_results)
+    
     # Generate schedule tables
+    # Get the saved Classes again para maging course sila ulet
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+    
+    saved_courses = saved_schedule.courses.all()
+    classes = [
+        Course(**convert_timeslots_to_tuples(course.course_details))  # Unpack the dictionary properly
+        for course in saved_courses
+    ]
+     # Generate schedule tables
     main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
     timetables = []
-    for dummy_course in dummy_course_sections:
-        table, _ = generate_timetable([dummy_course] + classes, glow_idx=0)
+     # Generate schedule tables + the new class maybe here ung schedules
+    for courses_result in search_results:
+        table, _ = generate_timetable([courses_result] + classes, glow_idx=0)
         timetables.append(table)
-
+    
     context = {
         "sched_id": sched_id,
         "schedule_name": "Temp",
         "main_table": main_table,
         "timetables": timetables,
-        "new_sections" : dummy_course_sections,
+        "new_sections" : search_results,
         # "export_table": export_table,
         "courses": classes,
         "units": f"{sum([course.units for course in classes])} units",
         "show_unsave_button": True,
+        "form": form,
+        "search_results": search_results,
     }
 
     return render(request, "sched_add_course.html", context)
 
+#viewing saved schedules
 def view_saved_sched_view(request, sched_id: int):
-
+    
     if request.method == "POST" and "click_unsaved_sched" in request.POST:
         if not request.user.is_authenticated:
             messages.error(request, "You need to be logged in to unsave schedules.")
@@ -522,3 +530,8 @@ def view_saved_sched_view(request, sched_id: int):
     }
 
     return render(request, "view_sched.html", context)
+
+
+
+
+##----------------------REDRAW CLASS-----------------------------------##
