@@ -265,9 +265,9 @@ def get_timeslots(raw_sched_remarks: str):
         if "lab" in slot_venue:
             class_days["lab"] = slot_days
             instructor_name["lab"] = split_a[2]
-        elif "disc" in slot_venue:
-            class_days["disc"] = slot_days
-            instructor_name["disc"] = split_a[2]
+        # elif "disc" in slot_venue:
+        #     class_days["disc"] = slot_days
+        #     instructor_name["disc"] = split_a[2]
         else: # lec
             class_days["lec"] = slot_days
             instructor_name["lec"] = split_a[2]
