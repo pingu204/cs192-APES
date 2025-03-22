@@ -85,8 +85,8 @@ def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus,
     for i, c in enumerate(classes):
         
         # For each class, loop through each class type (lec/lab)
-        for classType,(start,end) in c.timeslots.items():
-            
+        for classType, (start,end) in c.timeslots.items():
+            # print(c.course_code, classType)
             # Check if lec/lab section has a class on `day`
             if day not in c.class_days[classType]:
                 continue

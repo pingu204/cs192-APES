@@ -19,6 +19,8 @@ import numpy as np
 
 from django.contrib import messages
 
+import copy
+
 def dcp_add_view(request):
     search_results = []
     form = DesiredClassesForm(request.GET)
@@ -434,9 +436,16 @@ def add_course_to_sched_view(request, sched_id: int):
 
         if form.is_valid():
             # Obtain all sections associated 
-            course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query)) 
-            course_sections = tuple(fix_timeslots(course) for course in course_sections)
-            print("Course Sections: ", course_sections)
+            course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query, strict=True)) 
+            for c in course_sections:
+                print_dict(c)
+            temp = copy.deepcopy(course_sections)
+            #course_sections = tuple(fix_timeslots(course) for course in course_sections)
+            print("after")
+            for i, c in enumerate(course_sections):
+                print_dict(temp[i])
+                print_dict(course_sections[i])
+            # print("Course Sections: ", course_sections)
             for course in course_sections:
                 #fix the scraping
                 course['units'] = float(course['units'])
@@ -444,7 +453,7 @@ def add_course_to_sched_view(request, sched_id: int):
                 flat_classes = [course for sublist in classes for course in (sublist if isinstance(sublist, list) else [sublist])]
                 flat_classes.append(course) #add the new course to the classes
                 if not has_conflict(flat_classes): #newly created function on top of here
-                    print("Course OK: ", flat_classes)   
+                    # print("Course OK: ", flat_classes)   
                     search_results.append(Course(**course)) #add the new course to the search results
                     flat_classes.pop() #remove the new course from the classes
             

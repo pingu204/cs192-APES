@@ -261,16 +261,19 @@ def get_timeslots(raw_sched_remarks: str):
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
 
-        timeslots[slot_days] = convert_time(slot_time)
+        
         if "lab" in slot_venue:
             class_days["lab"] = slot_days
             instructor_name["lab"] = split_a[2]
-        # elif "disc" in slot_venue:
-        #     class_days["disc"] = slot_days
-        #     instructor_name["disc"] = split_a[2]
+            timeslots["lab"] = convert_time(slot_time)
+        elif "disc" in slot_venue:
+            class_days["disc"] = slot_days
+            instructor_name["disc"] = split_a[2]
+            timeslots["disc"] = convert_time(slot_time)
         else: # lec
             class_days["lec"] = slot_days
             instructor_name["lec"] = split_a[2]
+            timeslots["lec"] = convert_time(slot_time)
 
     return timeslots, class_days, instructor_name
 
@@ -465,9 +468,11 @@ def couple_lec_and_lab(lst):
 
     # Get 'CS' sections without lab
     sections_without_lab = list(filter(
-        lambda x: not (is_lab_section(x) and is_cs_course(x)),
+        lambda x: not (is_lab_section(x)) and is_cs_course(x),
         lst
     ))
+
+    print(sections_without_lab)
 
     # Container for lec sections to be removed later
     to_remove = []
@@ -478,6 +483,8 @@ def couple_lec_and_lab(lst):
         # -- Format: <course code> <lec section>/<lab section>
         code = course["course_code"]
         section = course["section_name"]["lab"].split('/')[0]
+
+        print(code, course["section_name"]["lab"])
 
         if code == "CS 145":
             section = "HONOR" if "HONOR" in course["section_name"]["lab"] else "EXCELLENCE"
@@ -507,12 +514,15 @@ def couple_lec_and_lab(lst):
                 # Lab section is standalone
                 continue
         
+        print(code, course["section_name"]["lab"], lec_section["section_name"]["lec"])
+
         # Obtain lecture fields from `lec_section`
         course["section_name"]["lec"] = lec_section["section_name"]["lec"]
         course["class_days"]["lec"] = lec_section["class_days"]["lec"]
         course["instructor_name"]["lec"] = lec_section["instructor_name"]["lec"]
         course_class_days = course["class_days"]["lec"]
-        course["timeslots"][course_class_days] = lec_section["timeslots"][course_class_days]
+        print(course, lec_section)
+        course["timeslots"]["lec"] = lec_section["timeslots"]["lec"]
         course["location"]["lec"] = lec_section["location"]["lec"]
         course["venue"]["lec"] = lec_section["venue"]["lec"]
 
@@ -549,7 +559,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in get_all_sections('eng 13'):
+    for x in couple_lec_and_lab(get_all_sections('cs 155')):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)
