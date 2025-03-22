@@ -16,3 +16,8 @@ function togglePassword(passwordField, toggleIcon){
 }
 
 toggleLoginPassword.addEventListener("click", function(){togglePassword(passwordLogin, toggleLoginPassword);});
+
+function renderLoading() {
+    var loading = document.getElementById("loader");
+    loading.style.display = "block";
+}

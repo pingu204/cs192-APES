@@ -9,12 +9,15 @@
 {% block content %}
 
 {% load static %}
-
+    <div id="loader">
+        <div class="spinner-border" id="loading" role="status">
+        </div>
+    </div>
     <div class="body-container sessions">
         <div class="form-body login">
             <h1>Welcome</h1>
             
-            <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
+            <form method="POST" id="logInForm" onsubmit="renderLoading()"> {% csrf_token %} <!--action="/users/login"-->
                 <div class="form-row">
                     <div class="col">
                         <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
