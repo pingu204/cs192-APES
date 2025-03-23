@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+    {% include 'nav_main.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="body-container homepage sched-viewer">
+    <div class="main two-column">
+
+    <div class="sched-container">
+        <!-- Container for the timetable -->
+        <div class="timetable">
+            <table class="time_table" id="timetable">
+                {{ main_table | safe }}
+            </table>
+            {% for table in timetables %}
+            <table class="time_table" id="table-{{forloop.counter}}" style="display:none;">
+                {{ table | safe }}
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+    <div class="course-list-container">
+        <div class="form-body login dcp" style="padding: 30px">
+            <div class="course-list-header">
+                <h1>Pick New Section</h1>
+                <div class="filler"></div>
+                <span class="bold-text small"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
+            </div>
+
+            <!-- Search form -->
+            <!-- <form method="GET">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="id_course_code">
+                            {{ form.course_code.label | upper }}
+                        </label>
+                        <div class="input-wrapper">
+                            {{ form.course_code }}
+                            <button type="submit" class="search-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="form-text">
+                            You can try searching for more specific class codes for faster results! (e.g. 'Eng 13' instead of 'Eng')
+                        </span>
+                    </div>
+                </div>
+            </form> -->
+
+            {% if messages %}
+                <div class="errors">
+                    <ul class="errors-list">
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                            {% else %}
+                                <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if form.errors %}
+            <div class="errors">
+                <ul class="errors-list">
+                    {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li><i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        
+        {% if search_results|length == 1 %}
+            <h6>{{ search_results|length }} RESULT</h6>
+        {% else %}
+            <h6>{{ search_results|length }} RESULTS</h6>
+        {% endif %}
+        
+        <div class="filler result-container flex-grow-container">
+            {% for section in search_results %}
+                <div class="result-card" id="{{forloop.counter}}">
+                    <div>
+                        <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lec}}</span> 00:00</span>
+                        <h5>{{ section.course_code }} {{ section.section_name.lec }}{% if section.section_name.lab %}/{{ section.section_name.lab }}{% endif %}</h5>
+                        <h5><span class="bold-text">Desired by 0 people</span><i class="bi bi-dot"></i><span class="light-text">Professor</span></h5>
+                    </div>
+                    <div class="filler"></div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="course_code" value="{{ section.course_code }}">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Choose</button>
+                        </div>
+                    </form>
+                </div>
+                {% empty %}
+                <div class="result-card">
+                    <div>
+                        <h5>No results found.</h5>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+    {% include 'footer.html' %}
+
+{% endblock %}
+
+
+{% block addtl_scripts %}
+
+<script type="module" type="text/javascript" src="{% static 'js/add_to_sched.js' %}"></script>
+
+{% endblock %}
