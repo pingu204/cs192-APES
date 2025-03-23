@@ -626,7 +626,8 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         ]
         redrawn_sched.append(changed)
     
-    
+    #eto ung filtering ng course_sections para sa redrawn_sched
+    course_sections = filter_course_sections(course_sections, schedule_permutations)
     print("Redrawn Schedule:", redrawn_sched)
     main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
@@ -642,18 +643,31 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         course.pop('course_title', None)  # Remove the course_title key if it exists
         course_sectionss.append(Course(**course))
     
-    
     context = {
         "sched_id": sched_id,
         "schedule_name": "Temp",
         "main_table": main_table,
         "timetables": timetables,
         "redrawn_scheds" : course_sectionss,
-        #"export_table": export_table,
-        #"courses": classes,
-        #"units": f"{sum([course.units for course in classes])} units",
-        #"show_unsave_button": True,
-        #"search_results": search_results,
+       
     }
 
     return render(request, "sched_redraw.html", context)
+
+def filter_course_sections(course_sections, schedule_permutations):
+    # Create a set of course codes and section names that are in the schedule_permutations
+    valid_courses = set()
+    for schedule in schedule_permutations:
+        for course in schedule:
+            valid_courses.add((course['course_code'], course['section_name']['lec']))
+            if 'lab' in course['section_name']:
+                valid_courses.add((course['course_code'], course['section_name']['lab']))
+
+    # Filter course_sections to only include those in valid_courses
+    filtered_sections = [
+        course for course in course_sections
+        if (course['course_code'], course['section_name']['lec']) in valid_courses or
+           ('lab' in course['section_name'] and (course['course_code'], course['section_name']['lab']) in valid_courses)
+    ]
+
+    return filtered_sections
