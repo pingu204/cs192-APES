@@ -544,7 +544,7 @@ def view_saved_sched_view(request, sched_id: int):
 
 
 ##----------------------REDRAW CLASS-----------------------------------##
-def redraw_course_to_sched(request, sched_id: int):
+def redraw_course_to_sched(request, sched_id: int, course_code: str):
     
     student_id = request.user.id 
     
@@ -555,23 +555,78 @@ def redraw_course_to_sched(request, sched_id: int):
         convert_timeslots_to_tuples(course.course_details)  # Unpack the dictionary properly
         for course in saved_courses
     ]
-    #search_results = []
-    #form = DesiredClassesForm(request.GET)
-    #raw_search_query = request.GET.get("course_code")
-    
+   
+    ## GET THE COURSE DETAILS NG PINILI NA REDRAWN
+    course_details = next((course for course in classes if course['course_code'] == course_code), None)
+    if not course_details:
+        messages.error(request, "Course not found.")
+        return redirect("view_saved_sched_view", sched_id=sched_id)
+
     print("YOU ARE IN REDRAW")
+    print("Course Details:", course_details)
+    print("Course Code", course_code)
+    #GET FROM CACHE UNG PERMUTATION NG CLASS
+    schedule_permutations = request.session.get('schedule_permutations', [])
+    selected_schedules = []
+    #ETO UNG MAIN FUNC FOR GETTING THE REDRAWN SCHEDULES, BASICALLY SAME UNG OTHER CLASS EXCEPT FOR THE SECTION NG REDRAWN
+    for schedule in schedule_permutations:
+        # Check if the schedule contains the same class code but different sections
+        contains_course_code = any(course['course_code'] == course_code and course['section_name'] != course_details['section_name'] for course in schedule['courses'])
+        same_other_classes = all(
+            any(course['course_code'] == saved_course['course_code'] and course['section_name'] == saved_course['section_name']
+                for course in schedule['courses'])
+            for saved_course in classes if saved_course['course_code'] != course_code
+        )
+        if contains_course_code and same_other_classes:
+            if schedule == classes:
+                continue
+            else:
+                selected_schedules.append(schedule)
+                continue
+    #NOTE FROM above na conflicting is fixed na kasi ung generated permutation naman chineck na for nonconflicting
+    
+    if not selected_schedules:
+        messages.error(request, "Schedule containing the specified course with different sections not found.")
+        return redirect("view_saved_sched_view", sched_id=sched_id)
+
+    print("Selected Schedule:", selected_schedules)
+    
+    #eto same shit na needed kasi ung Course class to the schedules for the time table
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+    saved_courses = saved_schedule.courses.all()
+    classes = [
+        Course(**convert_timeslots_to_tuples(course.course_details))  # Unpack the dictionary properly
+        for course in saved_courses
+    ]
+    #eto naman changing lahat sa schedules to Course class (inside selected_schedules) but di pa ayos need ko umalis sorry whoever needs to fix this 
+    #pero nung isa lang ung class ganto ung logic niya, but now multiple class inside the selected schedules
+    #redrawn_sched ung container forfinal na naka Course Class na, 
+    redrawn_sched = []
+    for courses in selected_schedules:
+        print("Courses:", courses["courses"])
+        temp = courses["courses"]
+        redrawn_sched.append(Course(**(temp)))
+    
+    
+    print("Redrawn Schedule:", redrawn_sched)
+    main_table, _ = generate_timetable(classes, glow_idx=len(classes))
+
+    timetables = []
+     # Generate schedule tables + the new class maybe here ung schedules di ko pa gets pano to sorry
+    for redrawn_scheds in redrawn_sched:
+        table, _ = generate_timetable(redrawn_scheds + classes, glow_idx=0)
+        timetables.append(table)
     
     context = {
         "sched_id": sched_id,
         "schedule_name": "Temp",
-        #"main_table": main_table,
-        #"timetables": timetables,
+        "main_table": main_table,
+        "timetables": timetables,
         #"new_sections" : search_results,
         # "export_table": export_table,
         #"courses": classes,
         #"units": f"{sum([course.units for course in classes])} units",
         #"show_unsave_button": True,
-        #"form": form,
         #"search_results": search_results,
     }
 

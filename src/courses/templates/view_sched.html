@@ -129,7 +129,7 @@
                 <div class="d-flex margin-top-md">
                     <div class="filler"></div>
                     <button class="btn-sm" disabled>REMOVE</button>
-                    <button class="btn-sm margin-left-sm"><a href = "redraw/">REDRAW</button></a>
+                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="btn-sm margin-left-sm">REDRAW</a>
                 </div>
             </div>
             {% endfor %}

@@ -55,5 +55,5 @@ urlpatterns = [
     path('home/view_saved_sched/<int:sched_id>/add/', add_course_to_sched_view, name="add_course_to_sched_view"),
     path('home/view_saved_sched/<int:sched_id>/', view_saved_sched_view, name="view_saved_sched_view"),
     path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses'),
-    path('home/view_saved_sched/<int:sched_id>/redraw/', redraw_course_to_sched, name="add_course_to_sched_view")
+    path('home/view_saved_sched/<int:sched_id>/redraw/<str:course_code>/', redraw_course_to_sched, name="redraw_course_to_sched")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
