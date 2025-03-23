@@ -472,7 +472,7 @@ def couple_lec_and_lab(lst):
         lst
     ))
 
-    print(sections_without_lab)
+    #print(sections_without_lab)
 
     # Container for lec sections to be removed later
     to_remove = []
@@ -514,7 +514,7 @@ def couple_lec_and_lab(lst):
                 # Lab section is standalone
                 continue
         
-        print(code, course["section_name"]["lab"], lec_section["section_name"]["lec"])
+        #print(code, course["section_name"]["lab"], lec_section["section_name"]["lec"])
 
         # Obtain lecture fields from `lec_section`
         course["section_name"]["lec"] = lec_section["section_name"]["lec"]

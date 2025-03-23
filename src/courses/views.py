@@ -7,7 +7,7 @@ import os
 from .models import DesiredCourse
 from dataclasses import asdict
 from scraper.scrape import get_all_sections, couple_lec_and_lab, print_dict
-from .misc import get_unique_courses, is_conflicting, get_start_and_end, is_conflicting_with_dcp
+from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
 from apes.utils import get_course_details_from_csv
@@ -563,49 +563,68 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         return redirect("view_saved_sched_view", sched_id=sched_id)
 
     print("YOU ARE IN REDRAW")
-    print("Course Details:", course_details)
-    print("Course Code", course_code)
-    #GET FROM CACHE UNG PERMUTATION NG CLASS
-    schedule_permutations = request.session.get('schedule_permutations', [])
-    selected_schedules = []
-    #ETO UNG MAIN FUNC FOR GETTING THE REDRAWN SCHEDULES, BASICALLY SAME UNG OTHER CLASS EXCEPT FOR THE SECTION NG REDRAWN
-    for schedule in schedule_permutations:
-        # Check if the schedule contains the same class code but different sections
-        contains_course_code = any(course['course_code'] == course_code and course['section_name'] != course_details['section_name'] for course in schedule['courses'])
-        same_other_classes = all(
-            any(course['course_code'] == saved_course['course_code'] and course['section_name'] == saved_course['section_name']
-                for course in schedule['courses'])
-            for saved_course in classes if saved_course['course_code'] != course_code
-        )
-        if contains_course_code and same_other_classes:
-            if schedule == classes:
-                continue
-            else:
-                selected_schedules.append(schedule)
-                continue
-    #NOTE FROM above na conflicting is fixed na kasi ung generated permutation naman chineck na for nonconflicting
+    print("COURSE DETAILS: ", course_code)   
     
-    if not selected_schedules:
+    #GET FROM CACHE UNG PERMUTATION NG CLASS
+    schedule_permutations = []
+    
+    #remove the course_code class from the classes
+    temp = [course for course in classes if course['course_code'] != course_code]
+   
+    #get all sections of the course_code
+    course_sections = couple_lec_and_lab(get_all_sections(course_code, strict=True))
+    #print("COURSE SECTIONS: ", course_sections)
+    
+    for c in course_sections:
+        temp.append(c)
+        if not has_conflict(temp):
+            schedule_permutations.append(temp[:]) #[:] so the pop wont affect the schedule_permutations
+        temp.pop()
+        
+    #selected_schedules = []
+    #ETO UNG MAIN FUNC FOR GETTING THE REDRAWN SCHEDULES from permutations, BASICALLY SAME UNG OTHER CLASS EXCEPT FOR THE SECTION NG REDRAWN
+    #for schedule in schedule_permutations:
+     #   print ("SCHEDULE: ", schedule)
+    #    # Check if the schedule contains the same class code but different sections
+     #   contains_course_code = any(course['course_code'] == course_code and course['section_name'] != course_details['section_name'] for course in schedule)
+     #   same_other_classes = all(
+     #       any(course['course_code'] == saved_course['course_code'] and course['section_name'] == saved_course['section_name']
+     #           for course in schedule)
+     #       for saved_course in classes if saved_course['course_code'] != course_code
+     #   )
+     #   if contains_course_code and same_other_classes:
+     #       if schedule == classes:
+     #           continue
+      #      else:
+      #          selected_schedules.append(schedule)
+
+    
+    if not schedule_permutations:
         messages.error(request, "Schedule containing the specified course with different sections not found.")
+        print("GO BACK")
         return redirect("view_saved_sched_view", sched_id=sched_id)
 
-    print("Selected Schedule:", selected_schedules)
     
-    #eto same shit na needed kasi ung Course class to the schedules for the time table
+    #eto same na needed kasi ung Course class to the schedules for the time table
     saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
     saved_courses = saved_schedule.courses.all()
     classes = [
         Course(**convert_timeslots_to_tuples(course.course_details))  # Unpack the dictionary properly
         for course in saved_courses
     ]
-    #eto naman changing lahat sa schedules to Course class (inside selected_schedules) but di pa ayos need ko umalis sorry whoever needs to fix this 
-    #pero nung isa lang ung class ganto ung logic niya, but now multiple class inside the selected schedules
-    #redrawn_sched ung container forfinal na naka Course Class na, 
+    
+    #eto naman changing lahat sa schedules to Course class (inside selected_schedules) 
+    #redrawn_sched ung container for final na naka Course Class na, 
     redrawn_sched = []
-    for courses in selected_schedules:
-        print("Courses:", courses["courses"])
-        temp = courses["courses"]
-        redrawn_sched.append(Course(**(temp)))
+    for courses in schedule_permutations:
+        
+        for course in courses:
+            course['units'] = float(course['units'])
+            course.pop('course_title', None)  # Remove the course_title key if it exists
+        changed = [
+            Course(**course) for course in courses
+        ]
+        redrawn_sched.append(changed)
     
     
     print("Redrawn Schedule:", redrawn_sched)
@@ -614,20 +633,27 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     timetables = []
      # Generate schedule tables + the new class maybe here ung schedules di ko pa gets pano to sorry
     for redrawn_scheds in redrawn_sched:
-        table, _ = generate_timetable(redrawn_scheds + classes, glow_idx=0)
+        table, _ = generate_timetable(redrawn_scheds, glow_idx=0)
         timetables.append(table)
+        
+    course_sectionss = []
+    for course in course_sections:
+        course['units'] = float(course['units'])
+        course.pop('course_title', None)  # Remove the course_title key if it exists
+        course_sectionss.append(Course(**course))
+    
     
     context = {
         "sched_id": sched_id,
         "schedule_name": "Temp",
         "main_table": main_table,
         "timetables": timetables,
-        #"new_sections" : search_results,
-        # "export_table": export_table,
+        "redrawn_scheds" : course_sectionss,
+        #"export_table": export_table,
         #"courses": classes,
         #"units": f"{sum([course.units for course in classes])} units",
         #"show_unsave_button": True,
         #"search_results": search_results,
     }
 
-    return render(request, "sched_add_course.html", context)
+    return render(request, "sched_redraw.html", context)
