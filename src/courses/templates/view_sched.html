@@ -65,7 +65,14 @@
             <h1 style="font-size:16pt;">Classes & Sections</h1>
             <div class="filler"></div>
             <h5 style="font-size:12pt; margin:0"><span class="bold-text light-text">{{ units }}</span></h5>
-            <button class="btn-sm"><a href="add/">+</a></button>
+            {% if show_unsave_button %} 
+                <button class="btn-sm"><a href="add/">+</a></button>
+            {% elif show_save_button %}
+                <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before adding a class!">
+                <button class="btn-sm" disabled>+</button>
+                </span>
+                <!-- <button class="btn-sm" data-bs-toggle="popover" data-bs-content="Testing">+</button> -->
+            {% endif %}
         </div>
 
         <!-- Container for the course cards -->

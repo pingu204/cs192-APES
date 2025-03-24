@@ -59,5 +59,14 @@ html2canvas(
     setInterval(()=>{document.getElementById("cover").style.display = "None";}, 500); 
 });
 
-
+// For popovers
+// Assisted by: GitHub Copilot
+// Date: 03/24/2025
+// prompt: how do i add a popover to a button
+document.addEventListener('DOMContentLoaded', function () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
+    });
+});
 
