@@ -135,8 +135,16 @@
                 </div>
                 <div class="d-flex margin-top-md">
                     <div class="filler"></div>
+                    {% if show_unsave_button %}
                     <button class="btn-sm" disabled>REMOVE</button>
                     <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="btn-sm margin-left-sm">REDRAW</a>
+
+                    {% elif show_save_button %}
+                    <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before removing a class!">
+                    <button class="btn-sm" disabled>REMOVE</button>
+                    </span>
+                    <a class="btn-sm margin-left-sm" data-bs-toggle="popover" data-bs-content="Save this schedule first before redrawing a class!" data-bs-trigger="hover focus">REDRAW</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

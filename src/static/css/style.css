@@ -1304,3 +1304,13 @@ div#cover {
     top: 50%;
     left: 50%;
   }
+
+  .popover {
+    background-color: black;
+    color: white;
+  }
+
+  .popover-body {
+    color: white;
+    font-family: 'Onest';
+  }
