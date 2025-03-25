@@ -415,8 +415,32 @@ def view_saved_sched_view(request, sched_id: int):
         for course in saved_courses
     ]
 
+    print("SWEREEERRRRRRRR", classes)
+    print("SWEREEERRRRRRRR2", len(classes))
+
     # Generate schedule tables
     main_table, export_table = generate_timetable(classes)
+
+
+    # get the class to remove from what the user clicked in HTML; garnered from 'courses' in the context
+    if request.method == "POST" and "class_to_remove" in request.POST:
+        course_data_str = request.POST["class_to_remove"]
+
+        # convert the returned course_data from view_sched.html to the correct dict
+        course_data = eval(f"dict({course_data_str.replace("Course(", "").rstrip(")")})")
+
+        course_to_remove = saved_schedule.courses.filter(course_details=course_data).first()
+
+        # Check if course exists before removing
+        if course_to_remove:
+            saved_schedule.courses.remove(course_to_remove)  # Remove from the schedule
+            course_to_remove.delete()  # Delete the course instance
+            #messages.success(request, f"{course_data['course_code']} removed successfully!")
+        else:
+            #messages.error(request, f"Course {course_data['course_code']} not found in the schedule.")
+            pass #placeholder muna, please remove this @riana, thanks!
+        
+        return redirect("view_saved_sched_view", sched_id=sched_id)
 
     context = {
         "sched_id": sched_id,
