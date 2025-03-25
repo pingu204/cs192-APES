@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from .forms import DesiredClassesForm
+from django import forms
 import csv
 import os
 from .models import DesiredCourse
@@ -23,7 +24,7 @@ import copy
 
 def dcp_add_view(request):
     search_results = []
-    form = DesiredClassesForm(request.GET)
+    form = DesiredClassesForm(request.GET, request=request)
 
     if request.method == "POST":
         # Handle the POST request to save the class code
@@ -132,7 +133,7 @@ def dcp_add_view(request):
             
                 
     elif request.GET.get("course_code"):
-        form = DesiredClassesForm(request.GET)
+        form = DesiredClassesForm(request.GET, request=request)
 
         # Obtain the raw query text inputted by the user
         raw_search_query = request.GET["course_code"]
@@ -274,6 +275,8 @@ def fix_timeslots(course):
 
     return course
 
+
+#viewing unsaved schedules
 def view_sched_view(request, sched_id: int):
     #############################
     # For testing purposes only #
@@ -285,6 +288,8 @@ def view_sched_view(request, sched_id: int):
 
     #if selected_schedule is None:
         #return HttpResponse("Schedule not found", status=404)
+
+    print("Unsaved Sched ID:", sched_id)
 
     # Fix timeslots
     courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
@@ -359,6 +364,56 @@ def view_sched_view(request, sched_id: int):
 
     return render(request, "view_sched.html", context)
 
+
+#viewing saved schedules
+def view_saved_sched_view(request, sched_id: int):
+    
+    print("Saved Sched ID:", sched_id)
+
+    if request.method == "POST" and "click_unsaved_sched" in request.POST:
+        if not request.user.is_authenticated:
+            messages.error(request, "You need to be logged in to unsave schedules.")
+            return redirect("login")
+
+        student_id = request.user.id
+        saved_schedule = SavedSchedule.objects.filter(student_id=student_id, sched_id=sched_id).first()
+
+        if saved_schedule:
+            saved_schedule.delete()
+            messages.success(request, f"Schedule {sched_id+1} unsaved successfully!")
+
+        return redirect("homepage_view")
+
+    student_id = request.user.id  # Ensure the user is logged in
+    
+    # Fetch the saved schedule for this user
+    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
+
+    # Retrieve all associated saved courses
+    saved_courses = saved_schedule.courses.all()
+
+    # Convert saved courses (JSONField) into Course objects
+    classes = [
+        Course(**course.course_details)  # Unpack the dictionary properly
+        for course in saved_courses
+    ]
+
+    # Generate schedule tables
+    main_table, export_table = generate_timetable(classes)
+
+    context = {
+        "sched_id": sched_id,
+        "schedule_name": saved_schedule.schedule_name,
+        "main_table": main_table,
+        "export_table": export_table,
+        "courses": classes,
+        "units": f"{sum([course.units for course in classes])} units",
+        "show_unsave_button": True,
+    }
+
+    return render(request, "view_sched.html", context)
+
+
 def convert_timeslots_to_tuples(course):
     for key, value in course['timeslots'].items():
         if isinstance(value, list):
@@ -427,13 +482,19 @@ def add_course_to_sched_view(request, sched_id: int):
     
     #Form for the search
     search_results = []
-    form = DesiredClassesForm(request.GET)
+    form = DesiredClassesForm(request.GET, request=request, sched_id=sched_id)
     raw_search_query = request.GET.get("course_code")
     if request.GET.get("course_code"):
         ##print("Raw Search Query: ", raw_search_query)
         #cleaning the search query
         cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
+
+        # test and implementation if search query is already in the saved_courses; should not push thru:
+        #print("  - CLEANED SEARCH ADD QUERY", cleaned_search_query, "TEST")
+        #print("  - Saved courses course codes:", [course.course_code for course in saved_courses])
+
+        #saved_courses_codes = [course.course_code for course in saved_courses]
         if form.is_valid():
             # Obtain all sections associated 
             course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query, strict=True)) 
@@ -494,51 +555,7 @@ def add_course_to_sched_view(request, sched_id: int):
 
     return render(request, "sched_add_course.html", context)
 
-#viewing saved schedules
-def view_saved_sched_view(request, sched_id: int):
-    
-    if request.method == "POST" and "click_unsaved_sched" in request.POST:
-        if not request.user.is_authenticated:
-            messages.error(request, "You need to be logged in to unsave schedules.")
-            return redirect("login")
 
-        student_id = request.user.id
-        saved_schedule = SavedSchedule.objects.filter(student_id=student_id, sched_id=sched_id).first()
-
-        if saved_schedule:
-            saved_schedule.delete()
-            messages.success(request, f"Schedule {sched_id+1} unsaved successfully!")
-
-        return redirect("homepage_view")
-
-    student_id = request.user.id  # Ensure the user is logged in
-    
-    # Fetch the saved schedule for this user
-    saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
-
-    # Retrieve all associated saved courses
-    saved_courses = saved_schedule.courses.all()
-
-    # Convert saved courses (JSONField) into Course objects
-    classes = [
-        Course(**course.course_details)  # Unpack the dictionary properly
-        for course in saved_courses
-    ]
-
-    # Generate schedule tables
-    main_table, export_table = generate_timetable(classes)
-
-    context = {
-        "sched_id": sched_id,
-        "schedule_name": saved_schedule.schedule_name,
-        "main_table": main_table,
-        "export_table": export_table,
-        "courses": classes,
-        "units": f"{sum([course.units for course in classes])} units",
-        "show_unsave_button": True,
-    }
-
-    return render(request, "view_sched.html", context)
 
 
 
