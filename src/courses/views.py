@@ -30,7 +30,7 @@ def dcp_add_view(request):
 
     if request.method == "POST":
         # Handle the POST request to save the class code
-        # print(request.POST.get("course_code"))
+        print(request.POST.get("course_code"))
 
         course_code = request.POST.get("course_code")
         
@@ -68,7 +68,7 @@ def dcp_add_view(request):
             ))
 
             timeout = False
-            # print("COURSE SECTIONS: ", course_sections)  # Debugging
+            print("COURSE SECTIONS: ", course_sections)  # Debugging
             for section in course_sections:
                 """Checks if `section`'s timeslots collides with `x`"""
                 def is_not_within_range(x) -> bool:
@@ -76,7 +76,7 @@ def dcp_add_view(request):
                     x_days = set(list(''.join(list(x['timeslots'].keys()))))
 
                     for day in list(course_days.intersection(x_days)):
-                        # print(day)
+                        print(day)
                         course_start, course_end = get_start_and_end(section['timeslots'], day)
                         x_start, x_end = get_start_and_end(x['timeslots'], day)
 
@@ -705,20 +705,11 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     course_sections = couple_lec_and_lab(get_all_sections(course_code, strict=True))
     #print("COURSE SECTIONS: ", course_sections)
     
-    print("test on CS 194: ETO LANG", course_sections)
-
-    if len(course_sections) == 1:
-        c = course_sections[0]
+    for c in course_sections:
         temp.append(c)
         if not has_conflict(temp):
-            schedule_permutations.append(temp[:])
+            schedule_permutations.append(temp[:]) #[:] so the pop wont affect the schedule_permutations
         temp.pop()
-    else:
-        for c in course_sections:
-            temp.append(c)
-            if not has_conflict(temp):
-                schedule_permutations.append(temp[:])
-            temp.pop()
     
     
     if not schedule_permutations:
