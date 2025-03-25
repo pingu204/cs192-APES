@@ -99,9 +99,10 @@
                         <h5><span class="bold-text">Desired by 0 people</span><i class="bi bi-dot"></i><span class="light-text">Professor</span></h5>
                     </div>
                     <div class="filler"></div>
-                    <form method="POST">
+                    <form method="POST" action="{% url 'add_course_to_sched_view' sched_id=sched_id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="course_code" value="{{ section.course_code }}">
+
+                        <input type="hidden" name="course_data" value='{{ section }}' />
                         <div>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>

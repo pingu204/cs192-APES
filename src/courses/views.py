@@ -12,6 +12,8 @@ from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable
 from apes.utils import get_course_details_from_csv
+import json
+import ast 
 
 from courses.models import SavedSchedule, SavedCourse
 
@@ -497,6 +499,29 @@ def add_course_to_sched_view(request, sched_id: int):
     
     #Form for the search
     search_results = []
+
+    
+    # add class to the saved schedule via "Add" button
+    if request.method == "POST" and "course_data" in request.POST:
+        course_data_str = request.POST["course_data"]
+
+        # convert the returned course_data from sched_add_course.html to the correct dict
+        course_data = eval(f"dict({course_data_str.replace("Course(", "").rstrip(")")})")
+
+        print("COURSE DATA STR", course_data)
+        print("COURSE DATA TYPE", type(course_data))
+
+        # Add new course to SavedSchedule
+        saved_course = SavedCourse.objects.create(
+            student_id=student_id,
+            course_code=course_data["course_code"],
+            course_details=course_data
+        )
+
+        # Add course to the saved schedule
+        saved_schedule.courses.add(saved_course)
+    
+
     form = DesiredClassesForm(request.GET, request=request, sched_id=sched_id)
     raw_search_query = request.GET.get("course_code")
     if request.GET.get("course_code"):
@@ -535,7 +560,7 @@ def add_course_to_sched_view(request, sched_id: int):
             
     ## Search Results contain the classes non conflicting  ----> 
     ##print("Search Results: ", search_results)
-    
+
     # Generate schedule tables
     # Get the saved Classes again para maging course sila ulet
     saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
