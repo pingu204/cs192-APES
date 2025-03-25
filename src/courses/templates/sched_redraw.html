@@ -84,10 +84,10 @@
             </div>
             {% endif %}
         
-        {% if search_results|length == 1 %}
-            <h6>{{ search_results|length }} RESULT</h6>
+        {% if schedule_permutations|length == 1 %}
+            <h6>{{ schedule_permutations|length }} RESULT</h6>
         {% else %}
-            <h6>{{ search_results|length }} RESULTS</h6>
+            <h6>{{ schedule_permutations|length }} RESULTS</h6>
         {% endif %}
         
         <div class="filler result-container flex-grow-container">
@@ -99,9 +99,9 @@
                         <h5><span class="bold-text">Desired by 0 people</span><i class="bi bi-dot"></i><span class="light-text">Professor</span></h5>
                     </div>
                     <div class="filler"></div>
-                    <form method="POST">
+                    <form method="POST" action="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=section.course_code %}">
                         {% csrf_token %}
-                        <input type="hidden" name="course_code" value="{{ section.course_code }}">
+                        <input type="hidden" name="course_data" value="{{ section }}">
                         <div>
                             <button type="submit" class="btn btn-primary">Choose</button>
                         </div>

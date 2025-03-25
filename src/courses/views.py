@@ -508,8 +508,8 @@ def add_course_to_sched_view(request, sched_id: int):
         # convert the returned course_data from sched_add_course.html to the correct dict
         course_data = eval(f"dict({course_data_str.replace("Course(", "").rstrip(")")})")
 
-        print("COURSE DATA STR", course_data)
-        print("COURSE DATA TYPE", type(course_data))
+        #print("COURSE DATA STR", course_data)
+        #print("COURSE DATA TYPE", type(course_data))
 
         # Add new course to SavedSchedule
         saved_course = SavedCourse.objects.create(
@@ -613,6 +613,34 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         for course in saved_courses
     ]
    
+    # redraw class in the saved schedule via "Choose" button
+    if request.method == "POST" and "course_data" in request.POST:
+        course_data_str = request.POST["course_data"]
+
+        # convert the returned course_data from sched_add_course.html to the correct dict
+        course_data = eval(f"dict({course_data_str.replace("Course(", "").rstrip(")")})")
+
+        # ensure and remove the course with the same course_code as the course we chose to redraw it with:
+        existing_course = saved_schedule.courses.filter(course_code=course_data["course_code"]).first()
+
+        # ensure if course we chose to redraw exists, delete it since we will redraw it with our chosen course via the "Choose" button
+        if existing_course:
+            saved_schedule.courses.remove(existing_course)
+            existing_course.delete()
+
+        #print("COURSE DATA STR", course_data)
+        #print("COURSE DATA TYPE", type(course_data))
+
+        # Add new course to SavedSchedule to replace the old one, effectively redrawing it
+        saved_course = SavedCourse.objects.create(
+            student_id=student_id,
+            course_code=course_data["course_code"],
+            course_details=course_data
+        )
+
+        # Add course to the saved schedule
+        saved_schedule.courses.add(saved_course)
+
     ## GET THE COURSE DETAILS NG PINILI NA REDRAWN
     course_details = next((course for course in classes if course['course_code'] == course_code), None)
     if not course_details:
@@ -637,24 +665,7 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         if not has_conflict(temp):
             schedule_permutations.append(temp[:]) #[:] so the pop wont affect the schedule_permutations
         temp.pop()
-        
-    #selected_schedules = []
-    #ETO UNG MAIN FUNC FOR GETTING THE REDRAWN SCHEDULES from permutations, BASICALLY SAME UNG OTHER CLASS EXCEPT FOR THE SECTION NG REDRAWN
-    #for schedule in schedule_permutations:
-     #   print ("SCHEDULE: ", schedule)
-    #    # Check if the schedule contains the same class code but different sections
-     #   contains_course_code = any(course['course_code'] == course_code and course['section_name'] != course_details['section_name'] for course in schedule)
-     #   same_other_classes = all(
-     #       any(course['course_code'] == saved_course['course_code'] and course['section_name'] == saved_course['section_name']
-     #           for course in schedule)
-     #       for saved_course in classes if saved_course['course_code'] != course_code
-     #   )
-     #   if contains_course_code and same_other_classes:
-     #       if schedule == classes:
-     #           continue
-      #      else:
-      #          selected_schedules.append(schedule)
-
+    
     
     if not schedule_permutations:
         messages.error(request, "Schedule containing the specified course with different sections not found.")
@@ -685,13 +696,14 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     
     #eto ung filtering ng course_sections para sa redrawn_sched
     course_sections = filter_course_sections(course_sections, schedule_permutations)
-    print("Redrawn Schedule:", redrawn_sched)
+    # print("Redrawn Schedule:", redrawn_sched)
     main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
     timetables = []
      # Generate schedule tables + the new class maybe here ung schedules di ko pa gets pano to sorry
     for redrawn_scheds in redrawn_sched:
-        table, _ = generate_timetable(redrawn_scheds, glow_idx=0)
+        table, _ = generate_timetable(redrawn_scheds, glow_idx=len(redrawn_scheds)-1)
+        print("REDRAWN SCHED", redrawn_scheds)
         timetables.append(table)
         
     course_sectionss = []
@@ -700,12 +712,22 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         course.pop('course_title', None)  # Remove the course_title key if it exists
         course_sectionss.append(Course(**course))
     
+    #print(schedule_permutations)
+    #print("SCHEDPERMLEN", len(schedule_permutations))
+
+    #print(redrawn_scheds)
+    #print("REDRAWLEN", len(redrawn_scheds))
+    
+    #print(redrawn_sched)
+    #print(len(redrawn_sched))
+
     context = {
         "sched_id": sched_id,
         "schedule_name": "Temp",
         "main_table": main_table,
-        "timetables": timetables,
+        "timetables": timetables, 
         "redrawn_scheds" : course_sectionss,
+        "schedule_permutations": schedule_permutations,
        
     }
 
