@@ -35,7 +35,7 @@ class DesiredClassesForm(forms.Form):
         courselist = (courses["course_code"].tolist())
 
         # If we pass both the request and sched_id (occurs when adding a class...)
-        if self.request and self.sched_id + 1: # +1 since sched_id first index is 0 and 0 is a Falsy value so need to +1 in the case that its the first sched
+        if self.request is not None and self.sched_id is not None: # +1 since sched_id first index is 0 and 0 is a Falsy value so need to +1 in the case that its the first sched
             student_id = self.request.user.id
             saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=self.sched_id)
             usercourselist = [course.course_code for course in saved_schedule.courses.all()]

@@ -304,8 +304,14 @@ def view_sched_view(request, sched_id: int):
         student_id = request.user.id  # Get logged-in user's ID
         schedule_name = f"Sched {sched_id+1}"  # Generate a name
 
+        # (1) if sched to save already in saved scheds, overwrite the old saved sched totally by deleting it first
+        SavedSchedule.objects.filter(
+            student_id=student_id,
+            sched_id=sched_id
+        ).delete()
+
         # Check if this schedule already exists for the user
-        saved_schedule, created = SavedSchedule.objects.get_or_create(
+        saved_schedule, _ = SavedSchedule.objects.get_or_create(
             student_id=student_id,
             sched_id=sched_id, 
             schedule_name=schedule_name,
