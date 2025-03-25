@@ -349,7 +349,7 @@ def view_sched_view(request, sched_id: int):
             
 
         messages.success(request, f"Schedule {sched_id+1} saved successfully!")
-        return redirect("homepage_view")
+        return redirect(reverse('homepage_view'))
 
     classes = [
         Course(
@@ -415,9 +415,6 @@ def view_saved_sched_view(request, sched_id: int):
         for course in saved_courses
     ]
 
-    print("SWEREEERRRRRRRR", classes)
-    print("SWEREEERRRRRRRR2", len(classes))
-
     # Generate schedule tables
     main_table, export_table = generate_timetable(classes)
 
@@ -427,20 +424,44 @@ def view_saved_sched_view(request, sched_id: int):
         course_data_str = request.POST["class_to_remove"]
 
         # convert the returned course_data from view_sched.html to the correct dict
-        course_data = eval(f"dict({course_data_str.replace("Course(", "").rstrip(")")})")
+        course_data = eval(f"dict({course_data_str.replace('Course(', '').rstrip(')')})")
 
-        course_to_remove = saved_schedule.courses.filter(course_details=course_data).first()
+        # Get the course to remove
+        course_to_remove = saved_schedule.courses.filter(course_code=course_data['course_code']).first() # based on course code instead of course_details
 
         # Check if course exists before removing
         if course_to_remove:
-            saved_schedule.courses.remove(course_to_remove)  # Remove from the schedule
-            course_to_remove.delete()  # Delete the course instance
-            #messages.success(request, f"{course_data['course_code']} removed successfully!")
+            if saved_schedule.courses.count() == 1:  # Only 1 course left
+                saved_schedule.courses.remove(course_to_remove)  # Remove from the schedule
+
+                if course_to_remove:  # Check if not None before deleting
+                    course_to_remove.delete()  # Delete the course instance
+                
+                # Refresh the schedule from DB to update the courses relation
+                saved_schedule.refresh_from_db()
+
+                # Double-check if the schedule is empty after refresh
+                if saved_schedule.courses.count() == 0:  # NOW IT WORKS!!!!!!!!!!!!
+                    saved_schedule.delete()  # Delete the entire schedule
+                    messages.success(request, f"Schedule {sched_id+1} unsaved successfully!")
+
+                    # Redirect to homepage after removing the last course
+                    return redirect(reverse("homepage_view"))
+            
+            else:
+                saved_schedule.courses.remove(course_to_remove)  # Remove the course from schedule
+                
+                if course_to_remove:  # Check if not None before deleting
+                    course_to_remove.delete()  # Delete the course instance
         else:
-            #messages.error(request, f"Course {course_data['course_code']} not found in the schedule.")
-            pass #placeholder muna, please remove this @riana, thanks!
-        
+            # Placeholder for when the course is not found in the schedule
+            messages.error(request, f"Course {course_data['course_code']} not found in the schedule.")
+            pass  # Placeholder muna, please remove this @riana, thanks!
+
+        # Redirect to view the schedule after removing the course
         return redirect("view_saved_sched_view", sched_id=sched_id)
+
+
 
     context = {
         "sched_id": sched_id,
