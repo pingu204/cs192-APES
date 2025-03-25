@@ -46,7 +46,9 @@ def homepage_view(request, *args, **kwargs):
     if request.method == "POST" and "generate_permutation" in request.POST:
         if 'dcp_sections' not in request.session or not request.session['dcp_sections']:
             messages.error(request, "No DCP sections found.")
+            generate_permutation_view(request)
             print("Crashout")  # Debugging
+            # generate_permutation_view(request) # generate again to refresh the displayed permutations when GENERATE clicked again after CLEAR
             return redirect(reverse("homepage_view"))
 
         dcp_sections = request.session['dcp_sections']

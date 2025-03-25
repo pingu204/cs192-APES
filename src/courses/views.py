@@ -179,6 +179,10 @@ def generate_permutation_view(request):
         # -- guaranteed to be nonempty
         # -- already filled in `homepage_view`
         dcp_sections = request.session['dcp_sections']
+
+        #if dcp_sections == []:
+            #return redirect(reverse("homepage_view"))
+
         print("DCP SECTIONS: ", dcp_sections)  # Debugging
         if 'schedule_permutations' not in request.session:
             request.session['schedule_permutations'] = []  # Initialize if not exists
@@ -211,7 +215,12 @@ def generate_permutation_view(request):
                     "courses": tuple(fix_timeslots(course) for course in dcp_section)
                 }
 
-                request.session['schedule_permutations'].append(schedule_entry)
+                print("SCHEDULE ENTRY:", schedule_entry)
+
+                # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
+                # if CLEAR -> GENERATE; must generate NO PERMUTATIONS
+                if len(schedule_entry['courses']) != 0: 
+                    request.session['schedule_permutations'].append(schedule_entry)
                 
                 count += 1
                 #print(f"Schedule {count}")
@@ -245,7 +254,7 @@ def generate_permutation_view(request):
 
 
             '''
-            if i == 100000:
+            if i == 100000: 
                 break
         
         #print(" +++ SCHEDULE PERMUTATIONS START\n", request.session.get('schedule_permutations'), "\n +++ SCHEDULE PERMUTATIONS END")
