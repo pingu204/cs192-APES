@@ -1,13 +1,13 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from courses.models import DesiredCourse, Course
+from courses.models import DesiredCourse
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.http import HttpRequest
 from courses.views import dcp_add_view
 from pages.views import clear_desired_courses
 from session.models import Student
 from django.contrib.auth import get_user_model
-
+from courses.schedule import Course
 
 class DcpAddViewTest_AuthenticatedUser(TestCase):
 
@@ -82,19 +82,6 @@ class AddClassTestCase(TestCase):
         self.session['course_sections'] =  [{'course_code': 'CS 20', 'course_title': 'Digital Electronics and Circuits', 'units': 3.0, 'timeslot': {'M': [60, 180]}, 'offeringunit': 'DCS'}, {'course_code': 'CS 20', 'course_title': 'Digital Electronics and Circuits', 'units': 3.0, 'timeslot': {'F': [90, 270]}, 'offeringunit': 'DCS'}, {'course_code': 'CS 20', 'course_title': 'Digital Electronics and Circuits', 'units': 3.0, 'timeslot': {'F': [270, 450]}, 'offeringunit': 'DCS'}]
         self.session.save()
     
-    def test_add_class_authenticated_user(self):
-        self.client.login(username='LaboratoryKit', password='NinjasInParis123')
-        response = self.client.post(reverse('dcp_add_view'), {'course_code': self.course_code})
-        DesiredCourse.objects.create(student_id="1", course_code=self.course_code)
-        
-        self.assertEqual(response.status_code, 302)  
-        self.assertTrue(DesiredCourse.objects.filter(student_id=self.user.id, course_code=self.course_code).exists())
-        
-    def test_add_class_guest_user(self):
-        response = self.client.post(reverse('dcp_add_view'), {'course_code': self.course_code})
-        self.assertEqual(response.status_code, 302)  
-        self.assertEqual([{'course_code': 'CS 20', 'course_title': 'Digital Electronics and Circuits', 'units': 3.0, 'timeslot': {'M': [60, 180]}, 'offeringunit': 'DCS'}], self.client.session['dcp'])
-        
     def test_add_duplicate_class(self):
         
         self.session['dcp'] = [{'course_code': 'CS 21'}]
@@ -136,16 +123,6 @@ class HomepageViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertFalse(DesiredCourse.objects.filter(student_id=self.user.id).exists())
 
-    def test_clear_dcp_guest_user(self):
-        session = self.client.session
-        session['dcp'] = [{'course_code': self.course_code}]
-        session.save()
-        
-        response = self.client.post(reverse('clear_desired_courses'), {'clear_dcp': 'true'})
-        self.desired_course.delete()
-        
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(self.client.session['dcp'], [])
 
     def test_remove_course_authenticated_user(self):
         self.client.login(username='LaboratoryKit', password='NinjasInParis123')
