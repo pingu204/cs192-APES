@@ -329,8 +329,10 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
 
         if 'lab' in slot_venue:
             location['lab'] = venue
+        elif 'disc' in slot_venue:
+            location['disc'] = venue
         else:
-            location[(slot_venue.split(' ', maxsplit=1))[0]] = venue
+            location['lec'] = venue
         
     return location
 
@@ -353,8 +355,10 @@ def get_venues(raw_sched_remarks: str):
 
         if 'lab' in slot_venue:
             venues['lab'] = room
+        elif 'disc' in slot_venue:
+            venues['disc'] = room
         else:
-            venues[(slot_venue.split(' ', maxsplit=1))[0]] = room
+            venues['lec'] = room
     return venues
 
 """ Get information about a course given its `course_code` """
