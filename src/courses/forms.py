@@ -38,10 +38,10 @@ class DesiredClassesForm(forms.Form):
         if self.request is not None and self.sched_id is not None: # +1 since sched_id first index is 0 and 0 is a Falsy value so need to +1 in the case that its the first sched
             student_id = self.request.user.id
             saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=self.sched_id)
-            usercourselist = [course.course_code for course in saved_schedule.courses.all()]
+            usercourselist = [course.course_code.lower() for course in saved_schedule.courses.all()]
 
             # Check if course is already saved
-            if course_code in usercourselist:
+            if course_code.lower() in usercourselist:
                 raise forms.ValidationError("Course already in the saved schedule. Try redrawing the course instead.")
         #usercourselist = [course.course_code for course in saved_schedule.courses.all()]
         
