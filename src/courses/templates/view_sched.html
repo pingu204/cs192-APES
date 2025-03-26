@@ -215,6 +215,20 @@
     </div>
 </div>
 
+<!-- Redraw Overlay if no other classes -->
+ {% if messages %}
+ {% for message in messages %}
+ <div id="overlay" onclick="overlayOff()">
+    <div id="confirmation-inner-overlay">
+        <div id="close" onclick="overlayOff()"><i class="bi-x-circle"></i></div>
+        <div id="overlay-text">
+            <h6>{{ message }}</h6>
+        </div>
+    </div>
+</div>   
+ {% endfor %}
+ {% endif %}
+
 {% endblock %}
 
 {% block footer %}
