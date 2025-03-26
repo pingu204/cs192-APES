@@ -310,7 +310,7 @@ def view_sched_view(request, sched_id: int):
         
         if not request.user.is_authenticated:
             messages.error(request, "You need to be logged in to save schedules.")
-            return redirect("login")
+            return redirect("login_view")
 
         student_id = request.user.id  # Get logged-in user's ID
         schedule_name = f"Sched {sched_id+1}"  # Generate a name
