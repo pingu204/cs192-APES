@@ -71,24 +71,48 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Assisted by Github Copilot
+// Date: 03/26/2025
+// prompt: how do i make the overlays show on clicking 'remove', display none on clicking 'no', and submit the form on clicking 'yes'
+// changes made: changed button variable names
 document.addEventListener('DOMContentLoaded', function() {
-    //const overlay = document.getElementById('removeCourseOverlay');
-    
+    // Show overlay on clicking "Remove"
     const deleteButtons = document.querySelectorAll('.removeFromSched');
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
-            document.getElementById('removeFromSched-'+button.id).style.display = 'block';
+            const overlay = document.getElementById('removeFromSched-'+button.id)
+            if (overlay) {
+                overlay.style.display = 'block';
+            }
+        });
+    });
+    //Assisted by Github Copilot
+    //Date: 03/26/2025
+    //prompt: how do i access the removeCourseFromSched-{{}} form in javascript for the yes buttons
+
+    // Submit the form when "Yes" is clicked
+    document.querySelectorAll("#removeFromSchedYes").forEach(yesButton => {
+        yesButton.addEventListener("click", function() {
+            // Get the course code from the data attribute
+            const courseCode = yesButton.getAttribute('data-course-code');
+            
+            // Find the corresponding form by ID
+            const form = document.getElementById(`removeCourseFromSched-${courseCode}`);
+            
+            // Submit the form
+            if (form) {
+                form.submit();
+            }
         });
     });
 
-    document.getElementById("removeFromSchedYes").addEventListener("click", function() {
-        document.getElementById('removeCourseFromSched').submit();
-    });
-    
-    const noButtons = document.querySelectorAll('.removeFromSchedNo');
-    noButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            document.getElementById('removeFromSched-'+button.id).style.display = 'none';
+    // Hide the overlay when "No" is clicked
+    document.querySelectorAll("#removeFromSchedNo").forEach(noButton => {
+        noButton.addEventListener("click", function() {
+            const overlay = noButton.closest('.removeCourseOverlay');
+            if (overlay) {
+                overlay.style.display = "none";
+            }
         });
     });
 });
