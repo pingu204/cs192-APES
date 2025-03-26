@@ -1,19 +1,16 @@
 
+function showLoading() {
+    document.getElementById("loader").style.display = "block";
+}
 
-/* Checks if user chose to reveal/hide their password */
-// function togglePassword(passwordField, toggleIcon){
-//     if (passwordField.type == "password") {
-//         passwordField.type = "text";
-//         toggleIcon.className = "bi-eye eye-icon";
-//     }
-//     else {
-//         passwordField.type = "password";
-//         toggleIcon.className = "bi-eye-slash eye-icon";
-//     }
-// }
-
-
-/* console.log(toggleLoginPassword.className); */
+document.addEventListener('DOMContentLoaded', function() {
+    const loadButtons = document.getElementsByClassName('load-button');
+    for (var button of loadButtons)  {
+        button.addEventListener('click', function(){
+            showLoading();
+        })
+    }
+})
 
 // for overlays
 function overlayOff() {
@@ -23,18 +20,24 @@ function overlayOff() {
 // Date: 02/26/2025
 // prompt: in django how can i make an "are you sure?" overlay appear upon submission of a form, and only submit a form when "yes"
 // changes made: integrated with current forms and changed element ids; removed event.preventDefault()
-document.getElementById("submitClear").addEventListener("click", function() {
-    // event.preventDefault()
-    document.getElementById("clearOverlay").style.display = "block";
-});
+try {
+    document.getElementById("submitClear").addEventListener("click", function() {
+        // event.preventDefault()
+        document.getElementById("clearOverlay").style.display = "block";
+    });
+    
+    document.getElementById("clearYes").addEventListener("click", function() {
+        document.getElementById('clearDCP').submit();
+    });
+    
+    document.getElementById("clearNo").addEventListener("click", function() {
+        document.getElementById("clearOverlay").style.display = "none";
+    });
+}
+catch {
 
-document.getElementById("clearYes").addEventListener("click", function() {
-    document.getElementById('clearDCP').submit();
-});
+}
 
-document.getElementById("clearNo").addEventListener("click", function() {
-    document.getElementById("clearOverlay").style.display = "none";
-});
 
 // Assisted by Microsoft Copilot
 // Date: 02/26/2025
@@ -42,19 +45,24 @@ document.getElementById("clearNo").addEventListener("click", function() {
 // changes made: adapted to form (changed ids), removed itemNameSpan
 document.addEventListener('DOMContentLoaded', function() {
     //const overlay = document.getElementById('removeCourseOverlay');
-    
-    const deleteButtons = document.querySelectorAll('.removeCourseSubmit');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            document.getElementById('remove-'+button.id).style.display = 'block';
+    try {
+        const deleteButtons = document.querySelectorAll('.removeCourseSubmit');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('remove-'+button.id).style.display = 'block';
+            });
         });
-    });
 
-    document.getElementById("removeYes").addEventListener("click", function() {
-        document.getElementById('removeCourse').submit();
-    });
+        document.getElementById("removeYes").addEventListener("click", function() {
+            document.getElementById('removeCourse').submit();
+        });
+        
+        document.getElementById("removeNo").addEventListener("click", function() {
+            document.getElementById("removeCourseOverlay").style.display = "none";
+        });
+    }
+    catch {
+
+    }
     
-    document.getElementById("removeNo").addEventListener("click", function() {
-        document.getElementById("removeCourseOverlay").style.display = "none";
-    });
 });

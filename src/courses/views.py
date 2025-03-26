@@ -566,6 +566,8 @@ def add_course_to_sched_view(request, sched_id: int):
 
         # Add course to the saved schedule
         saved_schedule.courses.add(saved_course)
+
+        return redirect(reverse("view_saved_sched_view", kwargs={'sched_id':sched_id}))
     
 
     form = DesiredClassesForm(request.GET, request=request, sched_id=sched_id)
@@ -624,7 +626,7 @@ def add_course_to_sched_view(request, sched_id: int):
      # Generate schedule tables + the new class maybe here ung schedules
     for courses_result in search_results:
 
-        table, _ = generate_timetable([courses_result] + classes, glow_idx=0)
+        table, _ = generate_timetable(classes + [courses_result], glow_idx=len(classes))
         timetables.append(table)
 
         course_timeslots = {}
@@ -693,6 +695,8 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
 
         # Add course to the saved schedule
         saved_schedule.courses.add(saved_course)
+
+        return redirect(reverse("view_saved_sched_view", kwargs={'sched_id':sched_id}))
 
     ## GET THE COURSE DETAILS NG PINILI NA REDRAWN
     course_details = next((course for course in classes if course['course_code'] == course_code), None)

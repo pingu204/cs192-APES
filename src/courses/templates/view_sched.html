@@ -141,7 +141,7 @@
                         <input type="hidden" name="class_to_remove" value="{{ course }}">
                         <button id="{{ course.course_code }}" type="button" class="removeFromSched btn-sm">REMOVE</button>
                     </form>
-                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="margin-left-sm"><button class="btn-sm">REDRAW</button></a>
+                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="margin-left-sm"><button class="btn-sm load-button">REDRAW</button></a>
 
                     {% elif show_save_button %}
                     <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before removing a class!">

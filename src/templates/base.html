@@ -22,6 +22,11 @@
 <body>
     {% block nav %}{% endblock %}
 
+    <div id="loader">
+        <div class="spinner-border" id="loading" role="status">
+        </div>
+    </div>
+    
     {% block content %}{% endblock %}
 
     {% block footer %}{% endblock %}
