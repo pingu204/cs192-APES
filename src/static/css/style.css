@@ -215,7 +215,7 @@ hr {
 div.result-card {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: end;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid black;

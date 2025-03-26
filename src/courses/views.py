@@ -10,7 +10,7 @@ from dataclasses import asdict
 from scraper.scrape import get_all_sections, couple_lec_and_lab, print_dict
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
-from .schedule import Course, generate_timetable
+from .schedule import Course, generate_timetable, get_time
 from apes.utils import get_course_details_from_csv
 import json
 import ast 
@@ -619,10 +619,17 @@ def add_course_to_sched_view(request, sched_id: int):
     main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
     timetables = []
+    timeslots = []
      # Generate schedule tables + the new class maybe here ung schedules
     for courses_result in search_results:
+
         table, _ = generate_timetable([courses_result] + classes, glow_idx=0)
         timetables.append(table)
+
+        course_timeslots = {}
+        for classType, (start,end) in courses_result.timeslots.items():
+            course_timeslots[classType] = f"{get_time(start)} - {get_time(end)}"
+        timeslots.append(course_timeslots)
     
     context = {
         "sched_id": sched_id,
@@ -635,7 +642,7 @@ def add_course_to_sched_view(request, sched_id: int):
         "units": f"{sum([course.units for course in classes])} units",
         "show_unsave_button": True,
         "form": form,
-        "search_results": search_results,
+        "search_results": zip(search_results, timeslots),
     }
 
     return render(request, "sched_add_course.html", context)
@@ -745,6 +752,7 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     main_table, _ = generate_timetable(classes, glow_idx=len(classes))
 
     timetables = []
+    timeslots = []
      # Generate schedule tables + the new class maybe here ung schedules di ko pa gets pano to sorry
     for redrawn_scheds in redrawn_sched:
         table, _ = generate_timetable(redrawn_scheds, glow_idx=len(redrawn_scheds)-1)
@@ -754,6 +762,12 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     course_sectionss = []
     for course in course_sections:
         course['units'] = float(course['units'])
+
+        course_timeslots = {}
+        for classType, (start,end) in course["timeslots"].items():
+            course_timeslots[classType] = f"{get_time(start)} - {get_time(end)}"
+        timeslots.append(course_timeslots)
+
         course.pop('course_title', None)  # Remove the course_title key if it exists
         course_sectionss.append(Course(**course))
     
@@ -771,9 +785,9 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         "schedule_name": "Temp",
         "main_table": main_table,
         "timetables": timetables, 
-        "redrawn_scheds" : course_sectionss,
+        "redrawn_scheds" : zip(course_sectionss, timeslots),
         "schedule_permutations": schedule_permutations,
-       
+        "course_code" : course_code,
     }
 
     return render(request, "sched_redraw.html", context)

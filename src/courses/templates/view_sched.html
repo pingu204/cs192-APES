@@ -95,14 +95,14 @@
                         <div class="d-flex flex-column justify-content-left">
                             <!-- Only choose either lec or disc prof -->
                             {% if course.instructor_name.lec %}
-                                <span>{{ course.instructor_name.lec }}</span>
+                                <span>{{ course.instructor_name.lec | title }}</span>
                             {% elif course.instructor_name.disc %}
-                                <span>{{ course.instructor_name.disc }}</span>
+                                <span>{{ course.instructor_name.disc | title }}</span>
                             {% endif %}
 
                             <!-- Additional prof for lab, if applicable -->
                             {% if course.instructor_name.lab %} 
-                                <span>{{ course.instructor_name.lab }} <span class="tab tab-lab bold-text">LAB</span></span>
+                                <span>{{ course.instructor_name.lab | title }} <span class="tab tab-lab bold-text">LAB</span></span>
                             {% endif %}
                             
                         </div>
@@ -141,7 +141,7 @@
                         <input type="hidden" name="class_to_remove" value="{{ course }}">
                         <button type="submit" class="btn-sm">REMOVE</button>
                     </form>
-                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="btn-sm margin-left-sm">REDRAW</a>
+                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="margin-left-sm"><button class="btn-sm">REDRAW</button></a>
 
                     {% elif show_save_button %}
                     <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before removing a class!">

@@ -31,7 +31,7 @@
     <div class="course-list-container">
         <div class="form-body login dcp" style="padding: 30px">
             <div class="course-list-header">
-                <h1>Add to Schedule</h1>
+                <h1 style="font-size: 2em;">Add to Schedule</h1>
                 <div class="filler"></div>
                 <span class="bold-text small"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
             </div>
@@ -53,7 +53,7 @@
                             </button>
                         </div>
                         <span class="form-text">
-                            You can try searching for more specific class codes for faster results! (e.g. 'Eng 13' instead of 'Eng')
+                            Search for <b>specific</b> course codes (e.g. 'Eng 13' instead of just 'Eng')
                         </span>
                     </div>
                 </div>
@@ -91,12 +91,36 @@
         {% endif %}
         
         <div class="filler result-container flex-grow-container">
-            {% for section in search_results %}
+            {% for section, timeslot in search_results %}
                 <div class="result-card" id="{{forloop.counter}}">
                     <div>
-                        <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lec}}</span> 00:00</span>
-                        <h5>{{ section.course_code }} {{ section.section_name.lec }}{% if section.section_name.lab %}/{{ section.section_name.lab }}{% endif %}</h5>
-                        <h5><span class="bold-text">Desired by 0 people</span><i class="bi bi-dot"></i><span class="light-text">Professor</span></h5>
+                        <div class="mb-2">
+                            {% if section.class_days.lec %}
+                            <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lec}}</span> {{timeslot.lec}}</span>
+                            {% endif %}
+
+                            {% if section.class_days.lab %}
+                            <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lab}}</span> {{timeslot.lab}}</span> 
+                            {% endif %}
+
+                            {% if section.class_days.disc %}
+                            <span class="tab tab-sm"><span class="bold-text">{{section.class_days.disc}}</span> {{timeslot.disc}}</span>
+                            {% endif %}
+                        </div>
+                        <!-- <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lec}}</span> 00:00</span> -->
+                        <h5>{{ section.course_code }} {{ section.section_name.lec }}{% if section.section_name.lab %}/{{ section.section_name.lab }}{% endif %}<i class="bi bi-dot"></i><span class="bold-text">Desired by {{section.demand}} people</span></h5>
+                        
+                        {% if section.instructor_name.lec %}
+                        <h5><span class="light-text">{{section.instructor_name.lec | title}}</span></h5>
+                        {% endif %}
+
+                        {% if section.instructor_name.lab %}
+                        <h5><span class="light-text">{{section.instructor_name.lab | title}} <i class="bi bi-gear"></i></span></h5>
+                        {% endif %}
+
+                        {% if section.instructor_name.disc %}
+                        <h5><span class="light-text">{{section.instructor_name.disc | title}}</span></h5>
+                        {% endif %}
                     </div>
                     <div class="filler"></div>
                     <form method="POST" action="{% url 'add_course_to_sched_view' sched_id=sched_id %}">
