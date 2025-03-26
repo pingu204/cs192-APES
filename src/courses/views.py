@@ -453,6 +453,7 @@ def view_saved_sched_view(request, sched_id: int):
                 
                 if course_to_remove:  # Check if not None before deleting
                     course_to_remove.delete()  # Delete the course instance
+                    messages.success(request, "Class has been removed from the schedule.")
         else:
             # Placeholder for when the course is not found in the schedule
             messages.error(request, f"Course {course_data['course_code']} not found in the schedule.")
