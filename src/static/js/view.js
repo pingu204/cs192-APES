@@ -70,3 +70,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    //const overlay = document.getElementById('removeCourseOverlay');
+    
+    const deleteButtons = document.querySelectorAll('.removeFromSched');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            document.getElementById('removeFromSched-'+button.id).style.display = 'block';
+        });
+    });
+
+    document.getElementById("removeFromSchedYes").addEventListener("click", function() {
+        document.getElementById('removeCourseFromSched').submit();
+    });
+    
+    const noButtons = document.querySelectorAll('.removeFromSchedNo');
+    noButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            document.getElementById('removeFromSched-'+button.id).style.display = 'none';
+        });
+    });
+});

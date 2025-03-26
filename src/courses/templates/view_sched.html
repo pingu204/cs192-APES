@@ -136,10 +136,10 @@
                 <div class="d-flex margin-top-md">
                     <div class="filler"></div>
                     {% if show_unsave_button %}
-                    <form method="POST" action="{% url 'view_saved_sched_view' sched_id=sched_id %}">
+                    <form method="POST" action="{% url 'view_saved_sched_view' sched_id=sched_id %}" id="removeCourseFromSched">
                         {% csrf_token %}
                         <input type="hidden" name="class_to_remove" value="{{ course }}">
-                        <button type="submit" class="btn-sm">REMOVE</button>
+                        <button id="{{ course.course_code }}" type="button" class="removeFromSched btn-sm">REMOVE</button>
                     </form>
                     <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="margin-left-sm"><button class="btn-sm">REDRAW</button></a>
 
@@ -151,6 +151,18 @@
                     {% endif %}
                 </div>
             </div>
+
+            <div class="removeCourseOverlay" id="removeFromSched-{{ course.course_code }}">
+                <div id="inner-overlay">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h5>Remove {{course.course_code}} from this schedule?</h5>
+                        <button class="btn-sm" name="remove_course_from_sched" id="removeFromSchedYes" value="{{ course }}">Yes</button>
+                        <button class="btn-sm" id="removeFromSchedNo">No</button>
+                    </form>
+                </div>
+            </div>
+
             {% endfor %}
         </div>
         <div></div>
