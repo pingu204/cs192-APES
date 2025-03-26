@@ -717,13 +717,18 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         if not has_conflict(temp):
             schedule_permutations.append(temp[:]) #[:] so the pop wont affect the schedule_permutations
         temp.pop()
-    
+
     
     if not schedule_permutations:
         messages.error(request, "Schedule containing the specified course with different sections not found.")
         print("GO BACK")
         return redirect("view_saved_sched_view", sched_id=sched_id)
 
+    # case where only orig class is part of the schedule_permutations; 
+    # i.e., only sched permutation is the sched with the class we chose to redraw (1 sched)
+    if len(schedule_permutations) <= 1:
+        messages.error(request, "No available classes.")
+        return redirect("view_saved_sched_view", sched_id=sched_id)
     
     #eto same na needed kasi ung Course class to the schedules for the time table
     saved_schedule = get_object_or_404(SavedSchedule, student_id=student_id, sched_id=sched_id)
