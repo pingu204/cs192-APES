@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'pages',
     'session',
     'courses',
+    'preferences',
 ]
 
 SESSION_COOKIE_SECURE = False

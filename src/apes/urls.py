@@ -41,6 +41,10 @@ from courses.views import (
     redraw_course_to_sched,
 )
 
+from preferences.views import (
+    modify_preferences_view,
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin_view"),
     path('', landing_view, name="landing_view"),
@@ -55,5 +59,6 @@ urlpatterns = [
     path('home/view_saved_sched/<int:sched_id>/add/', add_course_to_sched_view, name="add_course_to_sched_view"),
     path('home/view_saved_sched/<int:sched_id>/', view_saved_sched_view, name="view_saved_sched_view"),
     path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses'),
-    path('home/view_saved_sched/<int:sched_id>/redraw/<str:course_code>/', redraw_course_to_sched, name="redraw_course_to_sched")
+    path('home/view_saved_sched/<int:sched_id>/redraw/<str:course_code>/', redraw_course_to_sched, name="redraw_course_to_sched"),
+    path('home/preferences/', modify_preferences_view, name="modify_preferences_view")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

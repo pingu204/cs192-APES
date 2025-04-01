@@ -7,6 +7,7 @@ body {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 a:hover {
@@ -190,7 +191,7 @@ hr {
 }
 
 .form-body.login h1 {
-    font-size: 24pt;
+    font-size: 2em;
 }
 
 .form-body h1 {
@@ -214,12 +215,12 @@ hr {
 }
 
 div.result-card {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: end; */
     padding-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ced4da;
 }
 
 div.result-card h5 {
@@ -250,9 +251,9 @@ h5.back-button i {
     margin-right: 5px;
 }
 
-label {
+label.form-label {
     font-weight: bold;
-    margin-top: 20px;
+    margin: 0;
 }
 
 label.form-check-label {
@@ -260,9 +261,17 @@ label.form-check-label {
     margin: 0;
 }
 
+label.sub {
+    font-weight: normal;
+}
+
 .form-check {
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+.form-font-size {
+    font-size: 9pt;
 }
 
 .submit-area {
@@ -584,7 +593,6 @@ div.two-column {
 }
 
 div.vr {
-    width: 15px;
     height: 100%;
     border-left: 1px solid black;
     margin-left: 15px;
@@ -690,7 +698,7 @@ div.sched-card div.course-header {
 div.course-card.blank {
     height: 100px;
     border: none;
-    background: rgb(0,0,0,0.1);
+    /* background: rgb(0,0,0,0.1); */
 }
 
 .padding-sm {
@@ -727,6 +735,10 @@ i.color-icon {
     margin-right: 10px;
 }
 
+i.disabled {
+    color: rgb(0,0,0,0.3);
+}
+
 .course-list-header h1 {
     font-weight: bold;
     font-size: 20pt;
@@ -740,6 +752,12 @@ button.btn-sm {
     background: none;
     padding: 2px 5px 2px 5px;
     font-size: 10pt;
+}
+
+button.btn-xs {
+    border-radius: 8px;
+    border: 2px solid black;
+    font-size: inherit;
 }
 
 button.btn-round {
@@ -800,6 +818,10 @@ span.tab-lab {
     background: #007bff;
     color: white;
     font-size: 8pt;
+}
+
+span.input-group-text {
+    font-size: 9pt;
 }
 
 div.day {
@@ -1055,6 +1077,12 @@ div#cover {
     position: fixed;
     background: white;
     transition: 0.5s linear;
+}
+
+div.custom-card {
+    border-radius: 10px;
+    background: rgba(202, 202, 202, 0.05);
+    padding: 1.5em;
 }
 
 /* Icons from Iconify */
