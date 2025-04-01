@@ -563,7 +563,7 @@ if __name__ == "__main__":
     print(course_list_with_units)
     course_list_with_units.dropna(subset='units', inplace=True)
     course_list_with_units.to_csv("csv/courses.csv", index=False) """
-    for x in couple_lec_and_lab(get_all_sections('cs 155')):
+    for x in couple_lec_and_lab(get_all_sections('physics 71')):
         print_dict(x)
     # query = "cs 10"
     # result = get_all_sections(query)

@@ -1,4 +1,5 @@
 import numpy as np
+#from schedule import Course
 
 """ Obtain list of course codes """
 def get_unique_courses(lst):
@@ -18,11 +19,20 @@ def get_start_and_end(timeslot, day):
         if day in key:
             return timeslot[key]
 
+def get_class_type_from_day(class_days, day):
+    for key, value in class_days.items():
+        if day in value:
+            print(day,  key)
+            return key
+
 """ Obtain range of intervals given `start` and `end` """
 # Example: start = 0, end = 60
 # -- [15, 30, 45]
 def get_ranges(start, end):
     return list(range(start+15, end, 15))
+
+def has_class_in_day(class_days, day):
+    return day in ''.join(list(class_days.values()))
 
 """ Check if set of courses conflict with each other """
 def is_conflicting(courses):
@@ -36,10 +46,12 @@ def is_conflicting(courses):
         # Only obtain courses in DCP that have a class in `day`
         courses_with_classes = list(
             filter(
-                lambda x: day in ''.join(list(x['timeslots'].keys())), 
+                lambda x: day in ''.join(list(x['class_days'].values())),
                 courses
             )
         )
+
+        # print(courses_with_classes)
 
         # Check if there are more than 2 classes
         # -- 0 or 1 class is trivially non-conflicting
@@ -47,10 +59,11 @@ def is_conflicting(courses):
 
             # Get intervals of all the filtered courses
             slot_ranges: list[list[int]] = [
-                get_ranges(*get_start_and_end(
-                    timeslot = c['timeslots'],
-                    day = day
-                )) for c in courses_with_classes]
+                get_ranges(*c['timeslots'].get(
+                    get_class_type_from_day(c['class_days'],day)
+                )) 
+                for c in courses_with_classes
+            ]
 
             # Loop through the ranges of each course
             for slot in slot_ranges:
@@ -120,35 +133,89 @@ if __name__ == '__main__':
         "offeringunit": "DCS",
     }
     
+    cs180 = Course(
+        course_code="CS 180",
+        section_name={"lec":"THR"},
+        capacity=30,
+        demand=30,
+        units=3.0,
+        class_days={"lec":"TH"},
+        location={"lec":"AECH"}, venue={"lec":"SOLAIR"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"ROSELYN GABUD"},
+        timeslots={"lec":(600,780)},
+        offering_unit="DCS"
+    )
 
-    dcp_courses = [
-        {
-            "course_code": "CS 145",
-            "course_title": "Computer Networks",
-            "units": 4.0,
-            "timeslot": {"TH": [540, 630]},
-            "offeringunit": "DCS",
-        }, {
-            "course_code": "CS 192",
-            "course_title": "Software Engineering II",
-            "units": 3.0,
-            "timeslot": {"H": [0, 180], "T": [60, 180]},
-            "offeringunit": "DCS",
-        }, {
-            "course_code": "CS 132",
-            "course_title": "Introduction to Data Science",
-            "units": 3.0,
-            "timeslot": {"WF": [270, 360]},
-            "offeringunit": "DCS",
-        }, {
-            "course_code": "Eng 118",
-            "course_title": "English Semantics",
-            "units": 3.0,
-            "timeslot": {"TH": [90, 180]},
-            "offeringunit": "DECL",
-        }
+    cs145 = Course(
+        course_code="CS 145",
+        section_name={"lec":"HONOR", "lab":"HONOR 2"},
+        capacity=30,
+        demand=1,
+        units=4.0,
+        class_days={"lec":"TH","lab":"M"},
+        location={"lec":"Accenture","lab":"TL2"}, venue={"lec":"Accenture", "lab":"TL2"},
+        # coords={"lec":(0,0), "lab":(0,0)},
+        instructor_name={"lec":"WILSON TAN", "lab":"GINO SAMPEDRO"},
+        timeslots={"lec":(450,540), "lab":(240,420)},
+        offering_unit="DCS"
+    )
 
-    ]
+    cs192 = Course(
+        course_code="CS 192",
+        section_name={"lec":"TDE2/HUV2", "lab":"TDE2/HUV2"},
+        capacity=30,
+        demand=1,
+        units=3.0,
+        class_days={"lec":"T", "lab":"H"},
+        location={"lec":"AECH", "lab":"AECH"}, venue={"lec":"SOLAIR"},
+        # coords={"lec":(0,0), "lab":(0,0)},
+        instructor_name={"lec":"ROWENA SOLAMO", "lab":"ROWENA SOLAMO"},
+        timeslots={"lec":(180,300), "lab":(180,360)},
+        offering_unit="DCS"
+    )
 
+    lis51 = Course(
+        course_code="LIS 51",
+        section_name={"lec":"WFU"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"WF"},
+        location={"lec":"SOLAIR"}, venue={"lec":"SOLAIR"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"DRIDGE REYES"},
+        timeslots={"lec":(90,270)},
+        offering_unit="SLIS"
+    )
+
+    cs153 = Course(
+        course_code="CS 153",
+        section_name={"lec":"THW"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"WF"},
+        location={"lec":"AECH"}, venue={"lec":"SOLAIR"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"PHILIP ZUNIGA"},
+        timeslots={"lec":(360,450)},
+        offering_unit="DCS"
+    )
+
+    cs132 = Course(
+        course_code="CS 132",
+        section_name={"lec":"WFW"},
+        capacity=30, demand=1,
+        units=3.0,
+        class_days={"lec":"WF"},
+        location={"lec":"AECH"}, venue={"lec":"SOLAIR"},
+        # coords={"lec":(0,0)},
+        instructor_name={"lec":"PAUL REGONIA"},
+        timeslots={"lec":(360,450)},
+        offering_unit="DCS"
+    )
+
+    dcp_courses = [cs180, cs145, cs153, cs132, cs192, lis51]
+    dcp_courses = [x.__dict__ for x in dcp_courses]
+    # print(dcp_courses)
     print(is_conflicting(dcp_courses))
 

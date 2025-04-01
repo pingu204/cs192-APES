@@ -2,6 +2,12 @@ from dataclasses import dataclass, field
 from datetime import datetime, time, timedelta
 from enum import StrEnum, auto
 
+""" Prints a dictionary """
+def print_dict(d):
+    print("--")
+    for key,value in d.items():
+        print(f"+ {key} : {value}")
+
 """ Class for an instance of a course section """
 @dataclass(frozen=True)
 class Course:
@@ -81,6 +87,9 @@ def get_time(offset:int, extended:bool=True) -> str:
 
 """ Find class at day and current time """
 def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus, int, int] | None:
+    for c in classes:
+        print_dict(c.__dict__)
+
     # Loop through the classes
     for i, c in enumerate(classes):
         

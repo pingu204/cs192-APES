@@ -208,13 +208,16 @@ def generate_permutation_view(request):
                 count += 1
                 continue
             """
-            print("Schedule Entry: ", dcp_section)
+            # print("Schedule Entry: ")
+            # for s in (dcp_section):
+            #     print_dict(s)
             #check not conflicting
+            # print(dcp_section)
             if not is_conflicting(list(dcp_section)):
 
                 schedule_entry = {
                     "sched_id": count,
-                    "courses": tuple(fix_timeslots(course) for course in dcp_section)
+                    "courses": dcp_section
                 }
 
                 print("SCHEDULE ENTRY:", schedule_entry)
@@ -303,7 +306,8 @@ def view_sched_view(request, sched_id: int):
     print("Unsaved Sched ID:", sched_id)
 
     # Fix timeslots
-    courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
+    #courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
+    courses = selected_schedule["courses"]
 
     if request.method == "POST" and "click_saved_sched" in request.POST:
         # Ensure user is logged in
