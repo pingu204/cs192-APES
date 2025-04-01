@@ -11,20 +11,23 @@
 {% load static %}
     <div class="body-container sessions">
         <div class="form-body login">
-            <h1>Welcome</h1>
+            <div class="d-flex align-items-end gap-3 mb-4">
+                <h1>Welcome</h1>
+            </div>
+            
             
             <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col">
                         <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
-                        <label for="id_username">{{ form.username.label | upper}}</label> 
+                        <label class="form-label" for="id_username">{{ form.username.label | upper}}</label> 
                         {{ form.username }}
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row mb-2">
                     <div class="col">
-                        <label for="id_password">{{ form.password.label | upper }}</label>
+                        <label class="form-label" for="id_password">{{ form.password.label | upper }}</label>
                         {{ form.password }}
                         <i class="bi-eye-slash eye-icon" id="toggleLoginPassword"></i>  
                     </div>
