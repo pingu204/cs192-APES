@@ -102,6 +102,10 @@ button.btn-outline:hover, button.btn-dark-filled {
     padding: 5px 10px 5px 10px;
 }
 
+.btn-outline-secondary {
+    border: 1px solid #dee2e6;
+}
+
 div.landing-buttons button {
     margin-right: 15px;
 }
@@ -735,7 +739,7 @@ i.color-icon {
     margin-right: 10px;
 }
 
-i.disabled {
+span.disabled {
     color: rgb(0,0,0,0.3);
 }
 

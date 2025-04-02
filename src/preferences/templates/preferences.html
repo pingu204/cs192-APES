@@ -20,51 +20,17 @@
             <span class="form-text mb-3">
                 These filters will be used to narrow down your search for the most convenient schedule. Try tinkering with each of the filter!
             </span>
+
+            <!-- Container for the form -->
             <div class="flex-grow-container">
                 <form method="POST" onsubmit="showLoading()">
+                    
+                    <!-- Number of Classes / Day -->
                     <div class="result-card">
+                        <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span id="i-1"><i class="bi bi-circle-fill color-icon"></i></span> NUMBER OF CLASSES PER DAY</label>
-                            </div>
-                            <div class="filler"></div>
-                            <div>
-                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
-                            </div>
-                        </div>
-                        
-                        <label for="inputPassword6" class="col-form-label sub">I only want to attend </label>
-                        <input type="number" id="inputPassword6" class="form-control" placeholder="0" style="width:50px;" min="0" max="30">
-                        <label for="inputPassword6" class="col-form-label sub">classes a day</label>
-                    </div>
-                    <div class="result-card">
-                        <div class="mb-2 d-flex">
-                            <div>
-                                <label class="form-label"><span id="i-2"><i class="bi bi-circle-fill color-icon"></i></span> CLASS DAYS</label>
-                            </div>
-                            <div class="filler"></div>
-                            <div>
-                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
-                            </div>
-                        </div>
-                        <!-- <label for="inputPassword6" class="col-form-label sub">I only want to attend </label> -->
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-m" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-m">M</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-t" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-t">T</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-w" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-w">W</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-h" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-h">Th</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-f" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-f">F</label>
-                        <input type="checkbox" class="btn-check" id="btn-check-outlined-s" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="btn-check-outlined-s">S</label>
-                    </div>
-                    <div class="result-card">
-                        <div class="mb-2 d-flex">
-                            <div>
-                                <label class="form-label"><span id="i-3"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL DISTANCE PER DAY</label>
+                                <label class="form-label"><span class="disabled" id="i-1"><i class="bi bi-circle-fill color-icon"></i></span> NUMBER OF CLASSES PER DAY</label>
                             </div>
                             <div class="filler"></div>
                             <div>
@@ -72,43 +38,123 @@
                             </div>
                         </div>
 
-                        <div class="row align-items-center">
-                            <div class="col-auto" style="padding-right:0;">
-                                <label for="inputPassword6" class="col-form-label sub">In a day, I want to travel at most</label>
+                        <!-- Field -->
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="flex-grow-1">
+                                <label for="inputNumClasses" class="col-form-label sub">I only want to attend </label>
+                            </div>  
+                            <div>
+                                <input type="number" id="inputNumClasses" class="form-control" placeholder="0" min="0" max="30">
                             </div>
-                            <div class="col-auto" style="padding-left:0;">
+                            <div class="flex-grow-1">
+                                <label for="inputNumClasses" class="col-form-label sub">classes a day</label>
+                            </div>
+                            <div class="filler">
+
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Class Days -->
+                    <div class="result-card">
+                        <!-- Header -->
+                        <div class="mb-2 d-flex">
+                            <div>
+                                <label class="form-label"><span class="disabled" id="i-2"><i class="bi bi-circle-fill color-icon"></i></span> CLASS DAYS</label>
+                            </div>
+                            <div class="filler"></div>
+                            <div>
+                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Monday -->
+                        <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-m">M</label>
+
+                        <!-- Tuesday -->
+                        <input type="checkbox" class="btn-check" id="check-t" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-t">T</label>
+
+                        <!-- Wednesday -->
+                        <input type="checkbox" class="btn-check" id="check-w" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-w">W</label>
+
+                        <!-- Thursday -->
+                        <input type="checkbox" class="btn-check" id="check-h" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-h">Th</label>
+
+                        <!-- Friday -->
+                        <input type="checkbox" class="btn-check" id="check-f" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-f">F</label>
+
+                        <!-- Saturday -->
+                        <input type="checkbox" class="btn-check" id="check-s" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-s">S</label>
+                    </div>
+
+                    <!-- Total Distance / Day -->
+                    <div class="result-card">
+                        <!-- Header -->
+                        <div class="mb-2 d-flex">
+                            <div>
+                                <label class="form-label"><span class="disabled" id="i-3"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL DISTANCE PER DAY</label>
+                            </div>
+                            <div class="filler"></div>
+                            <div>
+                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Field -->
+                        <div class="d-flex">
+                            <div class="w-100">
+                                <label for="inputDistance" class="col-form-label sub">In a day, I want to travel at most</label>
+                            </div>
+                            <div class="w-100">
                                 <div class="input-group">    
-                                    <input type="number" class="form-control margin-left-sm" style="width: 50px; flex: 0 0 auto;" placeholder="0">
+                                    <input id="inputDistance" type="number" class="form-control margin-left-sm" placeholder="0">
                                     <span class="input-group-text">km</span>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <!-- Total Probability -->
+                    <div class="result-card">
+                        <!-- Header -->
+                        <div class="mb-2 d-flex">
+                            <div>
+                                <label class="form-label"><span class="disabled" id="i-4"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL PROBABILITY</label>
+                            </div>
+                            <div class="filler"></div>
+                            <div>
+                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Field -->
+                        <div class="d-flex gap-3">
+                            <div class="w-100">
+                                <input id="inputProbabilityRange" type="range" class="form-range" id="customRange1" min="0.00" max="100.00" step="0.01" value="0.00">
+                            </div>
+                            <div class="">
+                                <div class="input-group">
+                                    <input id="inputProbability" type="number" class="form-control" value="0.00">
+                                    <span class="input-group-text">%</span>
                                 </div>
                             </div>
                             
                         </div>
-                        
                     </div>
+
+                    <!-- Class Times -->
                     <div class="result-card">
+                        <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span id="i-4"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL PROBABILITY</label>
-                            </div>
-                            <div class="filler"></div>
-                            <div>
-                                <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex">
-                            <input type="range" class="form-range" id="customRange1" min="0" max="100" step="0.01" value="0">
-                            <div class="input-group" style="width: auto;">
-                                <input type="number" class="form-control margin-left-sm" value="0.00" disabled>
-                                <span class="input-group-text">%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="result-card">
-                        <div class="mb-2 d-flex">
-                            <div>
-                                <label class="form-label"><span id="i-5"><i class="bi bi-circle-fill color-icon"></i></span> CLASS TIMES</label>
+                                <label class="form-label"><span class="disabled" id="i-5"><i class="bi bi-circle-fill color-icon"></i></span> CLASS TIMES</label>
                             </div>
                             <div class="filler"></div>
                             <div>
@@ -116,77 +162,93 @@
                             </div>
                         </div>
 
+                        <!-- Field -->
                         <div class="d-flex">
                             <div>
-                                <select class="form-select form-control" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">minutes</option>
-                                    <option value="2">hours</option>
+                                <select class="form-select form-control" id="inputEarliestTime">
+                                    <option selected value="">--</option>
+                                    <option value="1">07:00 AM</option>
+                                    <option value="2">07:15 AM</option>
+                                    <option value="2">07:30 AM</option>
+                                    <option value="2">...</option>
+                                    <option value="1">09:30 PM</option>
+                                    <option value="2">09:45 PM</option>
+                                    <option value="2">10:00 PM</option>
                                 </select>
-                                <span class="form-text">
+                                <span for="inputEarliestTime" class="form-text">
                                     As early as
                                 </span>
                             </div>
                             <div class="filler text-center" >
-                                <label for="inputPassword6" class="col-form-label sub">-</label>
+                                <label class="col-form-label sub">-</label>
                             </div>
                             <div>
-                                <select class="form-select form-control" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">minutes</option>
-                                    <option value="2">hours</option>
+                                <select class="form-select form-control" id="inputLatestTime">
+                                    <option selected value="">--</option>
+                                    <option value="1">07:00 AM</option>
+                                    <option value="2">07:15 AM</option>
+                                    <option value="2">07:30 AM</option>
+                                    <option value="2">...</option>
+                                    <option value="1">09:30 PM</option>
+                                    <option value="2">09:45 PM</option>
+                                    <option value="2">10:00 PM</option>
                                 </select>
-                                <span class="form-text">
+                                <span for="inputLatestTime" class="form-text">
                                     As late as
                                 </span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Break Duration -->
                     <div class="result-card mb-3" style="border-bottom: 0">
+                        <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span id="i-6"><i class="bi bi-circle-fill color-icon"></i></span> BREAK DURATION</label>
+                                <label class="form-label"><span class="disabled" id="i-6"><i class="bi bi-circle-fill color-icon"></i></span> BREAK DURATION</label>
                             </div>
                             <div class="filler"></div>
                             <div>
                                 <a href="" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-                        <div class="d-flex">
+                        <!-- Field -->
+                        <div class="d-flex gap-3">
                             <div>
                                 <div class="input-group">
-                                    <input type="number" id="inputPassword6" class="form-control" min="0" placeholder="0">
-                                    <select class="form-select form-control" id="inputGroupSelect01" style="flex: 0 0 fit-content;">
-                                        <option selected>Choose...</option>
+                                    <input type="number" id="inputMinBreak" class="form-control" min="0" placeholder="0">
+                                    <select class="form-select form-control" id="inputMinBreakUnit" style="flex: 0 0 fit-content;">
+                                        <option selected value="">--</option>
                                         <option value="1">minutes</option>
-                                        <option value="2">hours</option>
+                                        <option value="60">hours</option>
                                     </select>
                                 </div>
-                                <span class="form-text">
+                                <span for="inputMinBreak" class="form-text">
                                     Minimum
                                 </span>
                             </div>
-                            <div class="filler" style="width: 30%">
-                            </div>
                             <div>
                                 <div class="input-group">
-                                    <input type="number" id="inputPassword6" class="form-control" min="0" placeholder="0">
-                                    <select class="form-select form-control" id="inputGroupSelect01" style="flex: 0 0 fit-content;">
-                                        <option selected>Choose...</option>
+                                    <input type="number" id="inputMaxBreak" class="form-control" min="0" placeholder="0">
+                                    <select class="form-select form-control" id="inputMaxBreakUnit" style="flex: 0 0 fit-content;">
+                                        <option selected value="">--</option>
                                         <option value="1">minutes</option>
-                                        <option value="2">hours</option>
+                                        <option value="60">hours</option>
                                     </select>
                                 </div>
-                                <span class="form-text">
+                                <span for="inputMaxBreak" class="form-text">
                                     Maximum
                                 </span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Buttons -->
                     <div class="d-flex justify-content-center gap-2">
-                        <button class="btn btn-outline">Reset</button>
+                        <button class="btn btn-outline-primary">Reset</button>
                         <button class="btn btn-primary">Save Changes</button>
                     </div>
+
                     {% if messages %}
                         <div class="errors">
                             <ul class="errors-list">
@@ -232,5 +294,11 @@
 {% block footer %}
 
     <!-- {% include 'footer.html' %} -->
+
+{% endblock %}
+
+{% block addtl_scripts %}
+
+<script type="text/javascript" src="{% static 'js/preferences.js' %}" type="module"></script>
 
 {% endblock %}
