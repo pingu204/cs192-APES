@@ -51,70 +51,79 @@ probabilityInput.addEventListener('change', function(){
     probabilityRange.value = probabilityInput.value;
 });
 
-numClassesInput.addEventListener('change', function(){
+function checkNumClasses() {
     if (isFilled(numClassesInput, "0")) {
         document.getElementById('i-' + circleIds['numClasses'].toString()).classList.remove('disabled');
     }
     else {
         document.getElementById('i-' + circleIds['numClasses'].toString()).classList.add('disabled');
     }
-});
+}
+
+numClassesInput.addEventListener('change', checkNumClasses);
 
 var numChecked = 0;
+
+function checkClassDays() {
+    /* if (!isChecked(checkButton)) {
+        numChecked--;
+    }
+    else {
+        numChecked++;
+    }
+ */
+    if (numChecked == 0) {
+        document.getElementById('i-' + circleIds['classDays'].toString()).classList.add('disabled');
+    }
+    else {
+        document.getElementById('i-' + circleIds['classDays'].toString()).classList.remove('disabled');
+    }
+}
+
 for (let checkButton of daysCheckButtons) {
-    checkButton.addEventListener('change', function(){
+    checkButton.addEventListener('change', function() {
         if (!isChecked(checkButton)) {
             numChecked--;
         }
         else {
             numChecked++;
         }
-
-        if (numChecked == 0) {
-            document.getElementById('i-' + circleIds['classDays'].toString()).classList.add('disabled');
-        }
-        else {
-            document.getElementById('i-' + circleIds['classDays'].toString()).classList.remove('disabled');
-        }
-    })
-     
+        checkClassDays();
+    })   
 };
 
-distanceInput.addEventListener('change', function(){
+function checkDistance() {
     if (isFilled(distanceInput, "0")) {
         document.getElementById('i-' + circleIds['distance'].toString()).classList.remove('disabled');
     }
     else {
         document.getElementById('i-' + circleIds['distance'].toString()).classList.add('disabled');
     }
-});
+}
 
-probabilityInput.addEventListener('change', function(){
-    if (isFilled(probabilityInput, "0.00")) {
-        document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
-    }
-    else {
-        document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
-    }
-});
+distanceInput.addEventListener('change', checkDistance);
 
-probabilityInput.addEventListener('change', function(){
+function checkProbabilityInput() {
     if (isFilled(probabilityInput, "0", true)) {
         document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
     }
     else {
         document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
     }
-});
+}
 
-probabilityRange.addEventListener('change', function(){
+probabilityInput.addEventListener('change', checkProbabilityInput);
+
+function checkProbabilityRange() {
     if (isFilled(probabilityRange, "0", true)) {
         document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
     }
     else {
         document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
     }
-});
+}
+
+probabilityRange.addEventListener('change', checkProbabilityRange);
 
 function checkClassTime() {
     if (isFilled(earliestTimeInput) && isFilled(latestTimeInput)) {
@@ -143,6 +152,50 @@ minBreakUnitInput.addEventListener("change", checkBreakDuration);
 maxBreakInput.addEventListener("change", checkBreakDuration);
 maxBreakUnitInput.addEventListener("change", checkBreakDuration);
 
+function resetNumClasses() {
+    numClassesInput.value = 0;
+    checkNumClasses();
+}
 
+function resetClassDays() {
+    for (let checkButton of daysCheckButtons) {
+        checkButton.checked = false;
+    }
+    numChecked = 0;
+    checkClassDays();
+}
 
+function resetDistance() {
+    distanceInput.value = 0;
+    checkDistance();
+}
 
+function resetProbability() {
+    probabilityInput.value = 0;
+    probabilityRange.value = 0;
+    checkProbabilityInput();
+    checkProbabilityRange();
+}
+
+function resetClassTimes() {
+    earliestTimeInput.value = "";
+    latestTimeInput.value = "";
+    checkClassTime();
+}
+
+function resetBreakDuration() {
+    minBreakInput.value = 0;
+    minBreakUnitInput.value = "";
+    maxBreakInput.value = 0;
+    maxBreakUnitInput.value = "";
+    checkBreakDuration();
+}
+
+function resetAll() {
+    resetNumClasses();
+    resetClassDays();
+    resetDistance();
+    resetProbability();
+    resetClassTimes();
+    resetBreakDuration();
+}
