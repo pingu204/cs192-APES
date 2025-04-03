@@ -39,7 +39,7 @@ circleIds = {
 document.addEventListener("DOMContentLoaded", function() {
     circleIcons = document.getElementsByClassName("disabled");
     for (let icon of circleIcons) {
-        icon.style.color = disabledColor;
+        icon.classList.add('disabled');
     }
 })
 
@@ -53,10 +53,10 @@ probabilityInput.addEventListener('change', function(){
 
 numClassesInput.addEventListener('change', function(){
     if (isFilled(numClassesInput, "0")) {
-        document.getElementById('i-' + circleIds['numClasses'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['numClasses'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['numClasses'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['numClasses'].toString()).classList.add('disabled');
     }
 });
 
@@ -71,10 +71,10 @@ for (let checkButton of daysCheckButtons) {
         }
 
         if (numChecked == 0) {
-            document.getElementById('i-' + circleIds['classDays'].toString()).style.color = disabledColor;
+            document.getElementById('i-' + circleIds['classDays'].toString()).classList.add('disabled');
         }
         else {
-            document.getElementById('i-' + circleIds['classDays'].toString()).style.color = '';
+            document.getElementById('i-' + circleIds['classDays'].toString()).classList.remove('disabled');
         }
     })
      
@@ -82,46 +82,46 @@ for (let checkButton of daysCheckButtons) {
 
 distanceInput.addEventListener('change', function(){
     if (isFilled(distanceInput, "0")) {
-        document.getElementById('i-' + circleIds['distance'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['distance'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['distance'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['distance'].toString()).classList.add('disabled');
     }
 });
 
 probabilityInput.addEventListener('change', function(){
     if (isFilled(probabilityInput, "0.00")) {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
     }
 });
 
 probabilityInput.addEventListener('change', function(){
     if (isFilled(probabilityInput, "0", true)) {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
     }
 });
 
 probabilityRange.addEventListener('change', function(){
     if (isFilled(probabilityRange, "0", true)) {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['probability'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['probability'].toString()).classList.add('disabled');
     }
 });
 
 function checkClassTime() {
     if (isFilled(earliestTimeInput) && isFilled(latestTimeInput)) {
-        document.getElementById('i-' + circleIds['classTimes'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['classTimes'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['classTimes'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['classTimes'].toString()).classList.add('disabled');
     }
 }
 
@@ -131,10 +131,10 @@ latestTimeInput.addEventListener('change', checkClassTime);
 
 function checkBreakDuration() {
     if (isFilled(minBreakInput, "0") && isFilled(minBreakUnitInput) && isFilled(maxBreakInput, "0") && isFilled(maxBreakUnitInput)) {
-        document.getElementById('i-' + circleIds['breakDuration'].toString()).style.color = '';
+        document.getElementById('i-' + circleIds['breakDuration'].toString()).classList.remove('disabled');
     }
     else {
-        document.getElementById('i-' + circleIds['breakDuration'].toString()).style.color = disabledColor;
+        document.getElementById('i-' + circleIds['breakDuration'].toString()).classList.add('disabled');
     }
 }
 

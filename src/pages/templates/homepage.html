@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <div class="body-container homepage">
+    <div class="body-container d-flex flex-column flex-grow-1 homepage">
         <div class="user-header">
             <h2> 
                 Welcome, 
@@ -38,8 +38,9 @@
             <h6>1st Semester, A.Y. 2024-2025</h6>
         </div>
         
-        <div class="main margin-top-md">
-            <div class="course-list-container">
+        <div class="d-flex flex-grow-1 gap-4">
+            <!-- Left Section | DCP -->
+            <div class="col-3 pt-3 pr-3 course-list-container">
                 <div class="course-list-header">
                     <h1>Desired Classes</h1>
                     <div class="filler"></div>
@@ -112,9 +113,69 @@
                 </div>
                 <div></div>
             </div>
+
             <div class="vr"></div> <!-- Divider -->
-            <div class="sched-container">
-                <div class="course-list-header">
+
+            <!-- Right Section | Filters, Schedules -->
+            <div class="col-9 pt-3 sched-container">
+
+                <!-- Header for Filters Section -->
+                <div class="d-flex align-items-center gap-2">
+                    <h5 class="m-0"><span class="bold-text">Filters</span></h5>
+                    <form action="" >
+                        {% csrf_token %}    
+                        <button class="btn-sm generate load-button" name ="generate_permutation" >RESET</button>
+                    </form>
+                    <a href="./preferences/">  
+                        <button class="btn-sm generate load-button" name ="generate_permutation" >MODIFY</button>
+                    </a>
+                </div>
+
+                <!-- Subtitle -->
+                <div class="mt-2">
+                    <p>
+                        The generated schedules below will be sorted and filtered according to the enabled preferences:
+                    </p>
+                </div>
+
+                <!-- Container for Filters -->
+                <div class="tabs-container">
+                    <!-- 
+                        + Disabled: 
+                        change "tab tab-outline"   -> "tab tab-outline disabled"
+                        change "bi bi-circle-fill" -> "bi bi-circle-fill disabled"
+                        change value text          -> "Filter not set"
+                    -->
+
+                    <a href="./preferences/">
+                    <div>
+                        <span class="tab tab-outline"><i id="i-1" class="bi bi-circle-fill"></i> <span class="bold-text">MAXIMUM NUMBER OF CLASS DAYS</span><i class="bi bi-dot"></i>Sample Value</span>
+                    </div>
+
+                    <div>
+                        <span class="tab tab-outline disabled"><i id="i-2" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS DAYS</span><i class="bi bi-dot"></i>Filter not set</span>
+                    </div>
+
+                    <div>
+                        <span class="tab tab-outline disabled"><i id="i-3" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL DISTANCE PER DAY</span><i class="bi bi-dot"></i>Filter not set</span>
+                    </div>
+
+                    <div>
+                        <span class="tab tab-outline disabled"><i id="i-4" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL PROBABILITY</span><i class="bi bi-dot"></i>Filter not set</span>
+                    </div>
+
+                    <div>
+                        <span class="tab tab-outline disabled"><i id="i-5" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS TIMES</span><i class="bi bi-dot"></i>Filter not set</span>
+                    </div>
+
+                    <div>
+                        <span class="tab tab-outline"><i id="i-6" class="bi bi-circle-fill"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>Sample Value</span>
+                    </div>
+                    </a>
+                </div>
+                
+                <!-- Header for Schedule Section -->
+                <div class="course-list-header mt-4">
                     <h1>Schedules</h1>
                     <form action="{% url 'homepage_view' %}" method="POST">
                         {% csrf_token %}    
@@ -128,6 +189,8 @@
                         
                     </div>
                 </div>
+
+                <!-- Container for Generated Schedules -->
                 <div class="flex-grow-container margin-top-md">
                     <div class="sched-list-container">
                         {% for schedule in saved_schedules %}
