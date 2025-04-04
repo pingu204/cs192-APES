@@ -3,7 +3,7 @@ from .forms import PreferencesForm
 
 # Create your views here.
 def modify_preferences_view(request):
-    form = PreferencesForm(request.POST, request=request)
+    form = PreferencesForm(request.POST)
     
     context = {
         "form": form,

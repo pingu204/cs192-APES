@@ -44,7 +44,8 @@
                                 <label for="inputNumClasses" class="col-form-label sub">I only want to attend </label>
                             </div>  
                             <div>
-                                <input type="number" id="inputNumClasses" class="form-control" placeholder="0" min="0" max="30">
+                                <!-- <input type="number" id="inputNumClasses" class="form-control" placeholder="0" min="0" max="30"> -->
+                                 {{ form.number_of_classes }}
                             </div>
                             <div class="flex-grow-1">
                                 <label for="inputNumClasses" class="col-form-label sub">classes a day</label>
@@ -114,7 +115,8 @@
                             </div>
                             <div class="w-100">
                                 <div class="input-group">    
-                                    <input id="inputDistance" type="number" class="form-control margin-left-sm" placeholder="0">
+                                    <!-- <input id="inputDistance" type="number" class="form-control margin-left-sm" placeholder="0"> -->
+                                     {{ form.total_distance_per_day }}
                                     <span class="input-group-text">km</span>
                                 </div>
                             </div> 
@@ -216,7 +218,8 @@
                         <div class="d-flex gap-3">
                             <div>
                                 <div class="input-group">
-                                    <input type="number" id="inputMinBreak" class="form-control" min="0" placeholder="0">
+                                    <!-- <input type="number" id="inputMinBreak" class="form-control" min="0" placeholder="0"> -->
+                                        {{ form.min_break }}
                                     <select class="form-select form-control" id="inputMinBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
@@ -229,7 +232,8 @@
                             </div>
                             <div>
                                 <div class="input-group">
-                                    <input type="number" id="inputMaxBreak" class="form-control" min="0" placeholder="0">
+                                    <!-- <input type="number" id="inputMaxBreak" class="form-control" min="0" placeholder="0"> -->
+                                     {{ form.max_break }}
                                     <select class="form-select form-control" id="inputMaxBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
