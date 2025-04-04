@@ -15,6 +15,10 @@ a:hover {
     text-decoration: none;
 }
 
+p {
+    margin-bottom: 0;
+}
+
 .margin-top-sm {
     margin-top: 10px;
 }
@@ -78,6 +82,7 @@ button.btn-primary.btn-outline {
     border: 1px solid #007bff;
     color: #007bff;
     background: none;
+    transition: 0.2s linear;
 }
 
 button.btn-primary.btn-outline:hover {
@@ -92,6 +97,7 @@ button.btn-outline, button.btn-dark-filled:hover {
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
+    transition: 0.2s linear;
 }
 
 button.btn-outline:hover, button.btn-dark-filled {
@@ -100,6 +106,7 @@ button.btn-outline:hover, button.btn-dark-filled {
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px 10px 5px 10px;
+    transition: 0.2s linear;
 }
 
 .btn-outline-secondary {
@@ -468,12 +475,13 @@ div.landing-container {
     margin-left: auto;
     margin-right: auto;
     padding-top: 50px;
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-div.landing-container h1, div.landing-container h6 {
+div.landing-container h1 {
     text-align: center;
     font-weight: bold;
 }
@@ -482,11 +490,12 @@ div.landing-container h1 {
     margin-bottom: 50px;
 }
 
-div.landing-container h6 {
+h6.subtitle {
     letter-spacing: 10px;
     color: rgba(0,0,0,0.5);
     font-size: 8pt;
     font-weight: bold;
+    text-align: center;
 }
 
 div.landing-container span {
@@ -1108,6 +1117,21 @@ div.custom-card {
     border-radius: 10px;
     background: rgba(202, 202, 202, 0.05);
     padding: 1.5em;
+}
+
+/* .profile-icon {
+    width: 100px;
+    height: 100px;
+} */
+
+img.profile-icon {
+    height: -webkit-fill-available;
+    border-radius: 1000px;
+}
+
+div.profile {
+    background: rgb(0,0,0,0.05);
+    border-radius: 1000px;
 }
 
 /* Icons from Iconify */
