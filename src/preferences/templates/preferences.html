@@ -69,7 +69,7 @@
                                 <a href="#" onclick="resetClassDays();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-                        
+                        <!-- {{  form.class_days }} -->
                         <!-- Monday -->
                         <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">
                         <label class="btn btn-outline-secondary form-font-size" for="check-m">M</label>
@@ -143,7 +143,8 @@
                             </div>
                             <div class="">
                                 <div class="input-group">
-                                    <input id="inputProbability" type="number" class="form-control" value="0.00">
+                                    <!-- <input id="inputProbability" type="number" class="form-control" value="0.00"> -->
+                                     {{ form.total_probability }}
                                     <span class="input-group-text">%</span>
                                 </div>
                             </div>
@@ -167,7 +168,7 @@
                         <!-- Field -->
                         <div class="d-flex">
                             <div>
-                                <select class="form-select form-control" id="inputEarliestTime">
+                                <!-- <select class="form-select form-control" id="inputEarliestTime">
                                     <option selected value="">--</option>
                                     <option value="1">07:00 AM</option>
                                     <option value="2">07:15 AM</option>
@@ -176,7 +177,8 @@
                                     <option value="1">09:30 PM</option>
                                     <option value="2">09:45 PM</option>
                                     <option value="2">10:00 PM</option>
-                                </select>
+                                </select> -->
+                                {{ form.earliest_time }}
                                 <span for="inputEarliestTime" class="form-text">
                                     As early as
                                 </span>
@@ -185,7 +187,7 @@
                                 <label class="col-form-label sub">-</label>
                             </div>
                             <div>
-                                <select class="form-select form-control" id="inputLatestTime">
+                                <!-- <select class="form-select form-control" id="inputLatestTime">
                                     <option selected value="">--</option>
                                     <option value="1">07:00 AM</option>
                                     <option value="2">07:15 AM</option>
@@ -194,7 +196,8 @@
                                     <option value="1">09:30 PM</option>
                                     <option value="2">09:45 PM</option>
                                     <option value="2">10:00 PM</option>
-                                </select>
+                                </select> -->
+                                {{ form.latest_time }}
                                 <span for="inputLatestTime" class="form-text">
                                     As late as
                                 </span>
@@ -220,11 +223,12 @@
                                 <div class="input-group">
                                     <!-- <input type="number" id="inputMinBreak" class="form-control" min="0" placeholder="0"> -->
                                         {{ form.min_break }}
-                                    <select class="form-select form-control" id="inputMinBreakUnit" style="flex: 0 0 fit-content;">
+                                    <!-- <select class="form-select form-control" id="inputMinBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
                                         <option value="60">hours</option>
-                                    </select>
+                                    </select> -->
+                                        {{ form.min_break_unit }}
                                 </div>
                                 <span for="inputMinBreak" class="form-text">
                                     Minimum
@@ -234,11 +238,12 @@
                                 <div class="input-group">
                                     <!-- <input type="number" id="inputMaxBreak" class="form-control" min="0" placeholder="0"> -->
                                      {{ form.max_break }}
-                                    <select class="form-select form-control" id="inputMaxBreakUnit" style="flex: 0 0 fit-content;">
+                                    <!-- <select class="form-select form-control" id="inputMaxBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
                                         <option value="60">hours</option>
-                                    </select>
+                                    </select> -->
+                                    {{ form.max_break_unit }}
                                 </div>
                                 <span for="inputMaxBreak" class="form-text">
                                     Maximum

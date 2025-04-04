@@ -1,9 +1,29 @@
 from django import forms
+from datetime import datetime, timedelta
+
+def generate_time_choices():
+    
+    choices = [("--", "--")]
+    current_time = datetime.strptime("07:00 AM", "%I:%M %p")  # Start at midnight
+    end_time = datetime.strptime("10:00 PM", "%I:%M %p")  # Last selectable time
+
+    while current_time <= end_time:
+        formatted_time = current_time.strftime("%I:%M %p")  # 12-hour format with AM/PM
+        choices.append((formatted_time, formatted_time))  # Store and display same value
+        current_time += timedelta(minutes=15)  # Increment by 15 minutes
+    print(choices)
+    return choices
+
+    # Assisted by Microsoft Copilot
+    # Date: 04/05/2025
+    # Prompt: can i generate a list of times in increments of 15 minutes, not in military time, as choices for a Django form
+    # Changes made: changed the start time to 7:30 AM and end time to 10:00 PM
 
 class PreferencesForm(forms.Form):
     BREAK_UNITS = [
-        ('minutes', 'Minutes'),
-        ('hours', 'hours')
+        ('', '--'),
+        ('1', 'minutes'),
+        ('60', 'hours')
     ]
     DAYS = [
         ('Monday', 'M'),
@@ -26,7 +46,16 @@ class PreferencesForm(forms.Form):
         )
     )
 
-    class_days = forms.MultipleChoiceField(choices=DAYS)
+    class_days = forms.MultipleChoiceField(
+        choices=DAYS,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                "class":"btn-check",
+                "autocomplete":"off",
+            }
+        )
+
+        )
 
     total_distance_per_day = forms.IntegerField(
         widget=forms.NumberInput(
@@ -38,9 +67,34 @@ class PreferencesForm(forms.Form):
         )
     )
 
-    total_probability = forms.FloatField()
-    earliest_time = forms.ChoiceField()
-    latest_time = forms.ChoiceField()
+    total_probability = forms.FloatField(
+        widget=forms.NumberInput(
+            attrs={
+                "id" : "inputProbability", 
+                "class": "form-control",
+                "value":"0.00",
+            }
+        )
+    )
+    earliest_time = forms.ChoiceField(
+        choices=generate_time_choices(), 
+        initial="--",
+        widget=forms.Select(
+            attrs={
+                "id" : "inputEarliestTime", 
+                "class": "form-select form-control",
+            }
+        ))
+
+    latest_time = forms.ChoiceField(
+        choices=generate_time_choices(), 
+        initial="--",
+        widget=forms.Select(
+            attrs={
+                "id" : "inputLatestTime", 
+                "class": "form-select form-control",
+            }
+        ))
     min_break = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -52,7 +106,16 @@ class PreferencesForm(forms.Form):
         )
     )
 
-    min_break_unit = forms.ChoiceField(choices=BREAK_UNITS)
+    min_break_unit = forms.ChoiceField(
+        choices=BREAK_UNITS,
+        initial="--",
+        widget=forms.Select(
+            attrs={
+                "id" : "inputMinBreakUnit", 
+                "class": "form-select form-control",
+                "style": "flex: 0 0 fit-content;",
+            }
+        ))
     max_break = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
@@ -63,4 +126,13 @@ class PreferencesForm(forms.Form):
             }
         )
     )
-    max_break_unit = forms.ChoiceField(choices=BREAK_UNITS)
+    max_break_unit = forms.ChoiceField(
+        choices=BREAK_UNITS,
+        initial="--",
+        widget=forms.Select(
+            attrs={
+                "id" : "inputMaxBreakUnit", 
+                "class": "form-select form-control",
+                "style": "flex: 0 0 fit-content;",
+            }
+    ))
