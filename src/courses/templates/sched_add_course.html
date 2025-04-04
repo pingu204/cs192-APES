@@ -40,7 +40,7 @@
             <form method="GET" onsubmit="showLoading()">
                 <div class="form-row">
                     <div class="col">
-                        <label class="form-label" for="id_course_code">
+                        <label class="form-label mt-4 mb-2" for="id_course_code">
                             {{ form.course_code.label | upper }}
                         </label>
                         <div class="input-wrapper">
@@ -92,7 +92,7 @@
         
         <div class="filler result-container flex-grow-container">
             {% for section, timeslot in search_results %}
-                <div class="result-card" id="{{forloop.counter}}">
+                <div class="result-card d-flex flex-row align-items-end" id="{{forloop.counter}}">
                     <div>
                         <div class="mb-2">
                             {% if section.class_days.lec %}
@@ -133,7 +133,7 @@
                     </form>
                 </div>
                 {% empty %}
-                <div class="result-card">
+                <div class="result-card d-flex flex-row align-items-end">
                     <div>
                         <h5>No results found.</h5>
                     </div>

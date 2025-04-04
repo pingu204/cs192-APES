@@ -20,7 +20,7 @@
             <form method="GET" onsubmit="showLoading()">
                 <div class="form-row">
                     <div class="col">
-                        <label class="form-label" for="id_course_code">
+                        <label class="form-label mt-4 mb-2" for="id_course_code">
                             {{ form.course_code.label | upper }}
                         </label>
                         <div class="input-wrapper">
@@ -61,16 +61,6 @@
                     </ul>
                 </div>
                 {% endif %}
-                <!-- {% if messages %}
-                <ul class="errors-list">
-                    {% for message in messages %}
-                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                            <i class="bi bi-exclamation-circle"></i>
-                            {{ message }}
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% endif %} -->
             </form>
             
             {% if search_results|length == 1 %}
@@ -81,7 +71,7 @@
             
             <div class="filler result-container">
                 {% for result in search_results %}
-                    <div class="result-card">
+                    <div class="result-card d-flex flex-row align-items-end">
                         <div>
                             <h5>{{ result.course_title }}</h5>
                             <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
@@ -97,7 +87,7 @@
                         </form>
                     </div>
                     {% empty %}
-                    <div class="result-card">
+                    <div class="result-card d-flex flex-row align-items-end">
                         <div>
                             <h5>No results found.</h5>
                         </div>

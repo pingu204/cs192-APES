@@ -837,6 +837,7 @@ span.tab-lab {
 span.tab-outline {
     background: none;
     border: 1px solid black;
+    transition: 0.2s linear;
 }
 
 span.tab-outline:hover {
