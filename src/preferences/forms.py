@@ -48,13 +48,7 @@ class PreferencesForm(forms.Form):
 
     class_days = forms.MultipleChoiceField(
         choices=DAYS,
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                "class":"btn-check",
-                "autocomplete":"off",
-            }
-        )
-
+        widget=forms.CheckboxSelectMultiple()
         )
 
     total_distance_per_day = forms.IntegerField(

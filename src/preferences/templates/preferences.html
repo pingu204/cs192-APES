@@ -69,30 +69,35 @@
                                 <a href="#" onclick="resetClassDays();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-                        <!-- {{  form.class_days }} -->
+                        <!-- assisted by github copilot; date: 04/04/2025; prompt: how do i handle the unique ids of each checkbox into a django form -->
+                        <!-- changes made: changed id and for of input and label tags to match original html-->
+                        {% for checkbox in form.class_days %}
+                            <input type="checkbox" class="btn-check" id="check-{{ checkbox.choice_label }}" name="{{ checkbox.name }}" autocomplete="off">
+                            <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">{{ checkbox.choice_label }}</label>
+                        {% endfor %}
                         <!-- Monday -->
-                        <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-m">M</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-m">M</label> -->
 
                         <!-- Tuesday -->
-                        <input type="checkbox" class="btn-check" id="check-t" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-t">T</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-t" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-t">T</label> -->
 
                         <!-- Wednesday -->
-                        <input type="checkbox" class="btn-check" id="check-w" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-w">W</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-w" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-w">W</label> -->
 
                         <!-- Thursday -->
-                        <input type="checkbox" class="btn-check" id="check-h" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-h">Th</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-h" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-h">Th</label> -->
 
                         <!-- Friday -->
-                        <input type="checkbox" class="btn-check" id="check-f" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-f">F</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-f" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-f">F</label> -->
 
                         <!-- Saturday -->
-                        <input type="checkbox" class="btn-check" id="check-s" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-s">S</label>
+                        <!-- <input type="checkbox" class="btn-check" id="check-s" autocomplete="off">
+                        <label class="btn btn-outline-secondary form-font-size" for="check-s">S</label> -->
                     </div>
 
                     <!-- Total Distance / Day -->
