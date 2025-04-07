@@ -149,27 +149,51 @@
 
                     <a href="./preferences/">
                     <div>
-                        <span class="tab tab-outline"><i id="i-1" class="bi bi-circle-fill"></i> <span class="bold-text">MAXIMUM NUMBER OF CLASS DAYS</span><i class="bi bi-dot"></i>Sample Value</span>
+                        {% if session.preferences.number_of_classes %}
+                            <span class="tab tab-outline"><i id="i-1" class="bi bi-circle-fill"></i> <span class="bold-text">MAXIMUM NUMBER OF CLASS DAYS</span><i class="bi bi-dot"></i>{{ session.preferences.number_of_classes }}</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-1" class="bi bi-circle-fill disabled"></i> <span class="bold-text">MAXIMUM NUMBER OF CLASS DAYS</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
+                    </div>
+                        
+                    <div>
+                        {% if session.preferences.class_days %}
+                            <span class="tab tab-outline"><i id="i-2" class="bi bi-circle-fill"></i> <span class="bold-text">CLASS DAYS</span><i class="bi bi-dot"></i>{{ session.preferences.class_days|join:" " }}</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-2" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS DAYS</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
                     </div>
 
                     <div>
-                        <span class="tab tab-outline disabled"><i id="i-2" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS DAYS</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% if session.preferences.total_distance_per_day %}
+                            <span class="tab tab-outline"><i id="i-3" class="bi bi-circle-fill"></i> <span class="bold-text">TOTAL DISTANCE PER DAY</span><i class="bi bi-dot"></i>at most {{ session.preferences.total_distance_per_day }} km</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-3" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL DISTANCE PER DAY</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
                     </div>
 
                     <div>
-                        <span class="tab tab-outline disabled"><i id="i-3" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL DISTANCE PER DAY</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% if session.preferences.total_probability %}
+                            <span class="tab tab-outline"><i id="i-4" class="bi bi-circle-fill"></i> <span class="bold-text">TOTAL PROBABILITY</span><i class="bi bi-dot"></i>{{ session.preferences.total_probability }}%</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-4" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL PROBABILITY</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
                     </div>
 
                     <div>
-                        <span class="tab tab-outline disabled"><i id="i-4" class="bi bi-circle-fill disabled"></i> <span class="bold-text">TOTAL PROBABILITY</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% if session.preferences.earliest_time_display and session.preferences.latest_time_display %}
+                            <span class="tab tab-outline"><i id="i-5" class="bi bi-circle-fill"></i> <span class="bold-text">CLASS TIMES</span><i class="bi bi-dot"></i>{{ session.preferences.earliest_time_display }} - {{ session.preferences.latest_time_display }}</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-5" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS TIMES</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
                     </div>
 
                     <div>
-                        <span class="tab tab-outline disabled"><i id="i-5" class="bi bi-circle-fill disabled"></i> <span class="bold-text">CLASS TIMES</span><i class="bi bi-dot"></i>Filter not set</span>
-                    </div>
-
-                    <div>
-                        <span class="tab tab-outline"><i id="i-6" class="bi bi-circle-fill"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>Sample Value</span>
+                        {% if session.preferences.min_break_display and session.preferences.max_break_display %}
+                            <span class="tab tab-outline"><i id="i-6" class="bi bi-circle-fill"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>{{ session.preferences.min_break_display }} - {{ session.preferences.max_break_display }}</span>
+                        {% else %}
+                            <span class="tab tab-outline disabled"><i id="i-6" class="bi bi-circle-fill disabled"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>Filter not set</span>
+                        {% endif %}
                     </div>
                     </a>
                 </div>

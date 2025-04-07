@@ -88,7 +88,8 @@ def homepage_view(request, *args, **kwargs):
         "dcp" : dcp,
         "dcp_units" : sum([course['units'] for course in dcp]),
         "dcp_length" : len(dcp),
-        "saved_schedules" : SavedSchedule.objects.filter(student_id=request.user.id)
+        "saved_schedules" : SavedSchedule.objects.filter(student_id=request.user.id), 
+        "session" : request.session,
     }
 
     # DEBUGGER: print(context['user']) #prints AnonymousUser if guest

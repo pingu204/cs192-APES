@@ -75,13 +75,15 @@ def modify_preferences_view(request):
                 'latest_time': latest_time if latest_time else None,
                 'min_break': min_break if min_break else None,
                 'max_break': max_break if max_break else None,
-                'earliest_time_val': earliest_time_val if earliest_time_val else None, 
-                'latest_time_val': latest_time_val if latest_time_val else None,
+                'earliest_time_display': earliest_time_val if earliest_time_val else None, 
+                'latest_time_display': latest_time_val if latest_time_val else None,
+                'min_break_display': f"{min_break // 60} hours" if min_break % 60 == 0 else f"{min_break} minutes",
+                'max_break_display': f"{max_break // 60} hours" if min_break % 60 == 0 else f"{max_break} minutes",
             }
 
         else:
             print(form.errors)
-    
+
         print(request.session['preferences'].values())
 
     else:
