@@ -185,13 +185,13 @@ class PreferencesForm(forms.Form):
         max_break = cleaned_data.get('max_break')
         min_break_unit = cleaned_data.get('min_break_unit')
         max_break_unit = cleaned_data.get('max_break_unit')
-        
+
         # Check if the units for min_break and max_break are different
-        if min_break_unit != "--" and max_break_unit != "--" and min_break_unit == "60" and max_break_unit == "1":
+        if min_break_unit != "" and max_break_unit != "" and min_break_unit == "60" and max_break_unit == "1":
             self.add_error('min_break_unit', 'Minimum break cannot be greater than maximum break')
 
         # Check if min_break is greater than max_break (both should be in the same unit)
-        if min_break_unit != "--" and max_break_unit != "--" and min_break_unit == max_break_unit:
+        if min_break_unit != "" and max_break_unit != "" and min_break_unit == max_break_unit:
             if min_break > max_break:
                 self.add_error('min_break', 'Minimum break cannot be greater than maximum break.')
             else:
