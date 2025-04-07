@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from .forms import PreferencesForm, time_choices
 
 # Create your views here.
 def modify_preferences_view(request):
-    if request.method == 'POST':
+    if request.method == 'POST':# and 'save_changes' in request.POST:
         form = PreferencesForm(request.POST)
         if form.is_valid():
             number_of_classes = form.cleaned_data['number_of_classes']
@@ -66,6 +67,8 @@ def modify_preferences_view(request):
 
             print(request.session.keys())
 
+            request.session['raw_preferences'] = form.cleaned_data
+
             request.session['preferences'] = {
                 'number_of_classes': number_of_classes if number_of_classes else None,
                 'class_days': class_days if class_days else None,
@@ -77,8 +80,8 @@ def modify_preferences_view(request):
                 'max_break': max_break if max_break else None,
                 'earliest_time_display': earliest_time_val if earliest_time_val else None, 
                 'latest_time_display': latest_time_val if latest_time_val else None,
-                'min_break_display': f"{min_break // 60} hours" if min_break % 60 == 0 else f"{min_break} minutes",
-                'max_break_display': f"{max_break // 60} hours" if min_break % 60 == 0 else f"{max_break} minutes",
+                'min_break_display': f"{min_break // 60} hours" if (min_break % 60 == 0) else f"{min_break} minutes",
+                'max_break_display': f"{max_break // 60} hours" if (max_break % 60 == 0) else f"{max_break} minutes",
             }
 
         else:
@@ -86,10 +89,13 @@ def modify_preferences_view(request):
 
         print(request.session['preferences'].values())
 
+        #return redirect(reverse('homepage_view'))
+
     else:
-        # not just GET later on... will load the values onto HTML...
+        # FIXED! := not just GET later on... will load the values onto HTML...
         print("GET request; forms")
-        form = PreferencesForm()
+        saved_data = request.session.get('raw_preferences')
+        form = PreferencesForm(initial=saved_data) if saved_data else PreferencesForm()
 
 
     context = {
