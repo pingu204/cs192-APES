@@ -15,7 +15,7 @@ def modify_preferences_view(request):
             min_break = form.cleaned_data['min_break']
             min_break_unit = form.cleaned_data['min_break_unit']
             max_break = form.cleaned_data['max_break']
-            max_break_unit = form.cleaned_data['min_break_unit']
+            max_break_unit = form.cleaned_data['max_break_unit']
 
             print("TEST PREFORMS")
             print(number_of_classes)
