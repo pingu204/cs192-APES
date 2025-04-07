@@ -122,12 +122,12 @@
                 <!-- Header for Filters Section -->
                 <div class="d-flex align-items-center gap-2">
                     <h5 class="m-0"><span class="bold-text">Filters</span></h5>
-                    <form action="" >
+                    <form action="{% url 'homepage_view' %}" method="POST" id="resetPreferences">
                         {% csrf_token %}    
-                        <button class="btn-sm generate load-button" name ="generate_permutation" >RESET</button>
+                        <button class="btn-sm generate load-button" name="reset_preferences">RESET</button>
                     </form>
                     <a href="./preferences/">  
-                        <button class="btn-sm generate load-button" name ="generate_permutation" >MODIFY</button>
+                        <button class="btn-sm generate load-button" name ="modify_filters" >MODIFY</button>
                     </a>
                 </div>
 
@@ -189,7 +189,7 @@
                     </div>
 
                     <div>
-                        {% if session.preferences.min_break_display and session.preferences.max_break_display %}
+                        {% if session.preferences.min_break_display and session.preferences.max_break_display and session.preferences.min_break > 0 %}
                             <span class="tab tab-outline"><i id="i-6" class="bi bi-circle-fill"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>{{ session.preferences.min_break_display }} - {{ session.preferences.max_break_display }}</span>
                         {% else %}
                             <span class="tab tab-outline disabled"><i id="i-6" class="bi bi-circle-fill disabled"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>Filter not set</span>

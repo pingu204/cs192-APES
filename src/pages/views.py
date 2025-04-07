@@ -57,6 +57,15 @@ def homepage_view(request, *args, **kwargs):
 
         # request.session.get('schedule_permutations')
 
+    if request.method == "POST" and 'reset_preferences' in request.POST:
+        if 'preferences' not in request.session or not request.session['preferences']:
+            pass
+        else:
+            request.session['preferences'] = {k: None for k in request.session['preferences']}
+
+        print(request.session['preferences'].values())
+
+
     if request.user.id is None:  # Guest
         dcp = request.session.get("dcp", [])   
         print(dcp)
@@ -148,3 +157,4 @@ def clear_desired_courses(request):
             print("Guest DCP classes cleared!")
 
     return redirect(reverse("homepage_view"))
+    
