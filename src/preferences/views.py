@@ -100,7 +100,7 @@ def modify_preferences_view(request):
 
     context = {
         "form": form,
-   
+        "session": request.session
     }
 
     return render(request, "preferences.html", context)
