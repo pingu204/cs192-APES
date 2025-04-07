@@ -24,7 +24,7 @@
             <!-- Container for the form -->
             <div class="flex-grow-container">
                 <form method="POST" onsubmit="showLoading()">
-                    
+                    {% csrf_token %}
                     <!-- Number of Classes / Day -->
                     <div class="result-card">
                         <!-- Header -->
@@ -72,8 +72,12 @@
                         <!-- assisted by github copilot; date: 04/04/2025; prompt: how do i handle the unique ids of each checkbox into a django form -->
                         <!-- changes made: changed id and for of input and label tags to match original html-->
                         {% for checkbox in form.class_days %}
-                            <input type="checkbox" class="btn-check" id="check-{{ checkbox.choice_label }}" name="{{ checkbox.name }}" autocomplete="off">
-                            <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">{{ checkbox.choice_label }}</label>
+                            <input type="checkbox" class="btn-check" id="check-{{ checkbox.choice_label }}" name="class_days" value="{{ checkbox.choice_label }}" autocomplete="off">
+                            {% if checkbox.choice_label == 'H' %}
+                                <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">Th</label>
+                            {% else %}
+                                <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">{{ checkbox.choice_label }}</label>
+                            {% endif %}
                         {% endfor %}
                         <!-- Monday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">

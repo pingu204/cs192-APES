@@ -26,15 +26,16 @@ class PreferencesForm(forms.Form):
         ('60', 'hours')
     ]
     DAYS = [
-        ('Monday', 'M'),
-        ('Tuesday', 'T'),
-        ('Wednesday', 'W'),
-        ('Thursday', 'Th'),
-        ('Friday', 'F'),
-        ('Saturday', 'S')
+        ('M', 'M'),
+        ('T', 'T'),
+        ('W', 'W'),
+        ('H', 'H'),
+        ('F', 'F'),
+        ('S', 'S')
     ]
     
     number_of_classes = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "id" : "inputNumClasses", 
@@ -47,11 +48,13 @@ class PreferencesForm(forms.Form):
     )
 
     class_days = forms.MultipleChoiceField(
+        required=False,
         choices=DAYS,
         widget=forms.CheckboxSelectMultiple()
         )
 
     total_distance_per_day = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "id" : "inputDistance", 
@@ -62,6 +65,7 @@ class PreferencesForm(forms.Form):
     )
 
     total_probability = forms.FloatField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "id" : "inputProbability", 
@@ -71,6 +75,7 @@ class PreferencesForm(forms.Form):
         )
     )
     earliest_time = forms.ChoiceField(
+        required=False,
         choices=generate_time_choices(), 
         initial="--",
         widget=forms.Select(
@@ -81,6 +86,7 @@ class PreferencesForm(forms.Form):
         ))
 
     latest_time = forms.ChoiceField(
+        required=False,
         choices=generate_time_choices(), 
         initial="--",
         widget=forms.Select(
@@ -90,6 +96,7 @@ class PreferencesForm(forms.Form):
             }
         ))
     min_break = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                 "id" : "inputMinBreak", 
@@ -101,6 +108,7 @@ class PreferencesForm(forms.Form):
     )
 
     min_break_unit = forms.ChoiceField(
+        required=False,
         choices=BREAK_UNITS,
         initial="--",
         widget=forms.Select(
@@ -111,6 +119,7 @@ class PreferencesForm(forms.Form):
             }
         ))
     max_break = forms.IntegerField(
+        required=False,
         widget=forms.NumberInput(
             attrs={
                "id" : "inputMaxBreak", 
@@ -121,6 +130,7 @@ class PreferencesForm(forms.Form):
         )
     )
     max_break_unit = forms.ChoiceField(
+        required=False,
         choices=BREAK_UNITS,
         initial="--",
         widget=forms.Select(

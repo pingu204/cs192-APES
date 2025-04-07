@@ -47,7 +47,7 @@ def homepage_view(request, *args, **kwargs):
         if 'dcp_sections' not in request.session or not request.session['dcp_sections']:
             messages.error(request, "No DCP sections found.")
             generate_permutation_view(request)
-            print("Crashout")  # Debugging
+            # print("Crashout")  # Debugging
             # generate_permutation_view(request) # generate again to refresh the displayed permutations when GENERATE clicked again after CLEAR
             return redirect(reverse("homepage_view"))
 
@@ -64,6 +64,7 @@ def homepage_view(request, *args, **kwargs):
         desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
         course_codes = [dc.course_code for dc in desired_courses]
         dcp = get_course_details_from_csv(course_codes)
+        print("User dict", request.session['dcp_sections'])
 
     dcp_codes = [course["course_code"] for course in dcp]
     dcp_sections = request.session.get("dcp_sections", [])
