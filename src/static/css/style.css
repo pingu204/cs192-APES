@@ -1133,6 +1133,7 @@ img.profile-icon {
 div.profile {
     background: rgb(0,0,0,0.05);
     border-radius: 1000px;
+    height: 5.5em;
 }
 
 /* Icons from Iconify */
