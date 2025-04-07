@@ -199,3 +199,18 @@ function resetAll() {
     resetClassTimes();
     resetBreakDuration();
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    checkNumClasses();
+    
+    for (let checkButton of daysCheckButtons) {
+        if (isChecked(checkButton)) {
+            numChecked++;
+        }
+    }
+    checkClassDays();
+
+    checkDistance();
+    checkClassTime();
+    checkBreakDuration();
+})
