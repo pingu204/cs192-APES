@@ -64,7 +64,7 @@ def homepage_view(request, *args, **kwargs):
         desired_courses = DesiredCourse.objects.filter(student_id=request.user.id)
         course_codes = [dc.course_code for dc in desired_courses]
         dcp = get_course_details_from_csv(course_codes)
-        print("User dict", request.session['dcp_sections'])
+        #print("User dict", request.session['dcp_sections'])
 
     dcp_codes = [course["course_code"] for course in dcp]
     dcp_sections = request.session.get("dcp_sections", [])
