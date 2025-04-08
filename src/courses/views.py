@@ -14,6 +14,7 @@ from .schedule import Course, generate_timetable, get_time
 from apes.utils import get_course_details_from_csv
 import json
 import ast 
+from collections import defaultdict
 
 from courses.models import SavedSchedule, SavedCourse
 

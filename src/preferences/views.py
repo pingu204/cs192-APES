@@ -82,6 +82,8 @@ def modify_preferences_view(request):
                 'latest_time_display': latest_time_val if earliest_time_val and latest_time_val else None,
                 'min_break_display': f"{min_break // 60} hours" if (min_break % 60 == 0) and min_break else f"{min_break} minutes",
                 'max_break_display': f"{max_break // 60} hours" if (max_break % 60 == 0) and max_break else f"{max_break} minutes",
+                'min_break_sched_display': f"{min_break // 60}-hour" if (min_break % 60 == 0) and min_break else f"{min_break}-minute",
+                'max_break_sched_display': f"{max_break // 60}-hour" if (max_break % 60 == 0) and max_break else f"{max_break}-minute   ",
             }
 
         else:
