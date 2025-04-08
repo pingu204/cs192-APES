@@ -215,10 +215,12 @@ def generate_permutation_view(request):
                 schedule_entry = {
                     "sched_id": count,
                     "courses": dcp_section,
-                    "number_of_classes_per_day": {}
+                    "number_of_classes_per_day": {},
+                    "class_times": []
                 }
 
-                print("SCHEDULE ENTRY:", schedule_entry['courses'])
+                #print("CLASS TIMES", schedule_entry['courses'][0]['timeslots'].values())
+
                 #print("MAXIMUM NBR OF CLASS", request.session['preferences']['number_of_classes'])
 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
@@ -235,9 +237,15 @@ def generate_permutation_view(request):
                             else:
                                 schedule_entry['number_of_classes_per_day'][dayz] = 1
 
+                    for timeslot in list(course['timeslots'].values()):
+                        schedule_entry['class_times'] += timeslot
+
+                schedule_entry['class_times'].sort()
+
                 print(schedule_entry['number_of_classes_per_day'])
                 print(schedule_entry['number_of_classes_per_day'].values())
 
+                print("SCHEDULE ENTRY:", schedule_entry)
                 
 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
@@ -256,9 +264,15 @@ def generate_permutation_view(request):
                         if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
                             continue
 
-                    # otherwise, if empty/unset/falsy values set for preferences, disregard altogether 
-                    # and generate permutations of schedule without restrictions
+                    # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
+                    # continue and dont add sched to permutation
+                    if request.session['preferences']['earliest_time'] and request.session['preferences']['latest_time']:
+                        if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
+                            continue
 
+                    
+
+                    # if permuted schedule follows all set preferences, append to schedule to display in generated permutations
                     request.session['schedule_permutations'].append(schedule_entry)
 
                 count += 1
