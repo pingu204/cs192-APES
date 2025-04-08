@@ -74,20 +74,22 @@ def modify_preferences_view(request):
                 'class_days': class_days if class_days else None,
                 'total_distance_per_day': total_distance_per_day if total_distance_per_day else None,
                 'total_probability': total_probability if total_probability else None,
-                'earliest_time': earliest_time if earliest_time else None,
-                'latest_time': latest_time if latest_time else None,
-                'min_break': min_break if min_break else None,
-                'max_break': max_break if max_break else None,
-                'earliest_time_display': earliest_time_val if earliest_time_val else None, 
-                'latest_time_display': latest_time_val if latest_time_val else None,
-                'min_break_display': f"{min_break // 60} hours" if (min_break % 60 == 0) else f"{min_break} minutes",
-                'max_break_display': f"{max_break // 60} hours" if (max_break % 60 == 0) else f"{max_break} minutes",
+                'earliest_time': earliest_time if earliest_time and latest_time_val else None,
+                'latest_time': latest_time if earliest_time and latest_time else None,
+                'min_break': min_break if min_break else 0,
+                'max_break': max_break if max_break else 0,
+                'earliest_time_display': earliest_time_val if earliest_time_val and latest_time_val else None, 
+                'latest_time_display': latest_time_val if earliest_time_val and latest_time_val else None,
+                'min_break_display': f"{min_break // 60} hours" if (min_break % 60 == 0) and min_break else f"{min_break} minutes",
+                'max_break_display': f"{max_break // 60} hours" if (max_break % 60 == 0) and max_break else f"{max_break} minutes",
             }
 
         else:
             print(form.errors)
 
-        print(request.session['preferences'].values())
+        request.session['preferences']['latest_time']
+
+        print("PREFERENCE VALUES", request.session['preferences'].values())
 
         #return redirect(reverse('homepage_view'))
 

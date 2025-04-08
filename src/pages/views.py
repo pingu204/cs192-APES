@@ -62,9 +62,7 @@ def homepage_view(request, *args, **kwargs):
             pass
         else:
             request.session['preferences'] = {k: None for k in request.session['preferences']}
-
-        print(request.session['preferences'].values())
-
+            request.session['raw_preferences'] = {k: None for k in request.session['raw_preferences']}
 
     if request.user.id is None:  # Guest
         dcp = request.session.get("dcp", [])   

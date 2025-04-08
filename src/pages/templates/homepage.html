@@ -189,7 +189,7 @@
                     </div>
 
                     <div>
-                        {% if session.preferences.min_break_display and session.preferences.max_break_display and session.preferences.min_break > 0 %}
+                        {% if session.preferences.min_break_display and session.preferences.max_break_display and session.preferences.min_break > 0 or session.preferences.max_break > 0 %}
                             <span class="tab tab-outline"><i id="i-6" class="bi bi-circle-fill"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>{{ session.preferences.min_break_display }} - {{ session.preferences.max_break_display }}</span>
                         {% else %}
                             <span class="tab tab-outline disabled"><i id="i-6" class="bi bi-circle-fill disabled"></i> <span class="bold-text">BREAK DURATION</span><i class="bi bi-dot"></i>Filter not set</span>
