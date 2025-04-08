@@ -248,7 +248,6 @@ def generate_permutation_view(request):
 
                 print("SCHEDULE ENTRY:", schedule_entry)
                 
-
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
                     # if there are set preferences, ensure preferences are followed:

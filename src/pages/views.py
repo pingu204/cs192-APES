@@ -58,11 +58,12 @@ def homepage_view(request, *args, **kwargs):
         # request.session.get('schedule_permutations')
 
     if request.method == "POST" and 'reset_preferences' in request.POST:
-        if 'preferences' not in request.session or not request.session['preferences']:
+        if 'preferences' not in request.session or not request.session['preferences'] or all(x == None for x in request.session['preferences'].values()):
             pass
         else:
             request.session['preferences'] = {k: None for k in request.session['preferences']}
             request.session['raw_preferences'] = {k: None for k in request.session['raw_preferences']}
+            messages.success(request, "Filters have been successfully reset.")
 
     if request.user.id is None:  # Guest
         dcp = request.session.get("dcp", [])   

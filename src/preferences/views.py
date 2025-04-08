@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import PreferencesForm, time_choices
+from django.contrib import messages
 
 # Create your views here.
 def modify_preferences_view(request):
@@ -85,6 +86,9 @@ def modify_preferences_view(request):
                 'min_break_sched_display': f"{min_break // 60}-hour" if (min_break % 60 == 0) and min_break else f"{min_break}-minute",
                 'max_break_sched_display': f"{max_break // 60}-hour" if (max_break % 60 == 0) and max_break else f"{max_break}-minute   ",
             }
+
+            messages.success(request, "The filters have been successfully updated.")
+            return redirect(reverse('homepage_view'))
 
         else:
             print(form.errors)

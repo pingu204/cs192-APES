@@ -23,7 +23,7 @@
 
             <!-- Container for the form -->
             <div class="flex-grow-container">
-                <form method="POST" onsubmit="showLoading()">
+                <form method="POST" onsubmit="showLoading()" name="save_preference_changes">
                     {% csrf_token %}
                     <!-- Number of Classes / Day -->
                     <div class="result-card">
