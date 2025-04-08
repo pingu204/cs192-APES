@@ -208,63 +208,58 @@ def generate_permutation_view(request):
                 count += 1
                 continue
             """
-            # print("Schedule Entry: ")
-            # for s in (dcp_section):
-            #     print_dict(s)
-            #check not conflicting
-            # print(dcp_section)
             if not is_conflicting(list(dcp_section)):
+
+                print("DCP SECTION SAMPLE", dcp_section)
 
                 schedule_entry = {
                     "sched_id": count,
-                    "courses": dcp_section
+                    "courses": dcp_section,
+                    "number_of_classes_per_day": {}
                 }
 
-                print("SCHEDULE ENTRY:", schedule_entry)
+                print("SCHEDULE ENTRY:", schedule_entry['courses'])
+                #print("MAXIMUM NBR OF CLASS", request.session['preferences']['number_of_classes'])
 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 # if CLEAR -> GENERATE; must generate NO PERMUTATIONS
-                if len(schedule_entry['courses']) != 0: 
-                    request.session['schedule_permutations'].append(schedule_entry)
+
+                # loop for adding a number_of_classes_per_day key (counter) for each schedule generated
+                for course in schedule_entry['courses']:
+                    print(course)
+                    for day in list(course['class_days'].values()):
+                        days_list = list(day)
+                        for dayz in days_list:
+                            if dayz in schedule_entry['number_of_classes_per_day']:
+                                schedule_entry['number_of_classes_per_day'][dayz] += 1
+                            else:
+                                schedule_entry['number_of_classes_per_day'][dayz] = 1
+
+                print(schedule_entry['number_of_classes_per_day'])
+                print(schedule_entry['number_of_classes_per_day'].values())
+
                 
+
+                # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
+                if len(schedule_entry['courses']) != 0:
+
+                    # if there are set preferences, ensure preferences are followed:
+                    if request.session['preferences']['number_of_classes']:
+                        if all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
+                            request.session['schedule_permutations'].append(schedule_entry)
+                    
+                    # otherwise, if empty/unset/falsy values set for preferences, disregard altogether 
+                    # and generate permutations of schedule without restrictions
+                    else:
+                            request.session['schedule_permutations'].append(schedule_entry)
+
                 count += 1
                 #print(f"Schedule {count}")
                 for x in (list(dcp_section)):
                     x.pop("course_title", None)
-                    # dcp_section contains specific DICT section!
-                    # 
-                    
-                    
-                    #print_dict(x)
-                    ...
-                # print("\n")
-                ## need nalang i save sa models 
-                '''
-                if request.user.id:
-                    DesiredCourse.objects.create(
-                        student_id = request.user.id,
-                        course_code = course_code
-                    )
-                else:
-                    request.session['dcp'].append(course_sections[0])
-                    request.session.save()
 
-                # Append current course's sections to DCP sections
-                request.session['dcp_sections'].append(course_sections)
-                request.session.save()
-                print(f"Sessions's dcp_sections now has {len(request.session['dcp_sections'])} sections.")
-                print("EVERYCLASS IN THE DCP", request.session['dcp_sections'])
-                messages.success(request, "Class has been successfully added.")
-                return redirect(reverse('homepage_view'))
-
-
-            '''
             if i == 100000: 
                 break
-        
-        #print(" +++ SCHEDULE PERMUTATIONS START\n", request.session.get('schedule_permutations'), "\n +++ SCHEDULE PERMUTATIONS END")
-
-        #print(f"-- Found {count} schedules --")
 
         return redirect(reverse("homepage_view"))
 
