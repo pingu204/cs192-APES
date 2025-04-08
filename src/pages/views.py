@@ -90,6 +90,8 @@ def homepage_view(request, *args, **kwargs):
         for course in sched.courses.all():
             print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
 
+    #print(SavedSchedule.objects.filter(student_id=request.user.id)['preferences'])
+
     context = {
         "user" : request.user,
         "dcp" : dcp,

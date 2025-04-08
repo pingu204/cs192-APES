@@ -233,12 +233,24 @@
                                     </div>
                                     <div class="padding-md tabs-container">
                                         <h4>{{ schedule.schedule_name }}</h4>
-                                        <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> {{ schedule.min_classes|default:"0" }} to {{ schedule.max_classes|default:"0" }} classes/day</span></div>
-                                        <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ schedule.total_distance|default:"0" }} kilometers/day</span></div>
-                                        <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ schedule.grant_probability|default:"0" }}% chance of being granted</span></div>
-                                        <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.min_break|default:"0" }}-min. to {{ schedule.max_break|default:"0" }}-hour breaks</span></div>
-                                        <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.earliest_time|default:"00:00 AM" }}</span></div>
-                                        <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.latest_time|default:"00:00 PM" }}</span></div>
+                                        {% if schedule.preferences.number_of_classes %}
+                                            <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 1 to {{ schedule.preferences.number_of_classes }} classes/day</span></div>
+                                        {% endif %}
+                                        {% if schedule.preferences.total_distance_per_day %}
+                                            <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ schedule.preferences.total_distance_per_day }} kilometers/day</span></div>
+                                        {% endif %}
+                                        {% if schedule.preferences.total_probability %}
+                                            <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ schedule.preferences.total_probability }}% chance of being granted</span></div>
+                                        {% endif %}
+                                        {% if schedule.preferences.min_break_display and schedule.preferences.max_break_display and schedule.preferences.min_break > 0 or schedule.preferences.max_break > 0 %}
+                                            <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.preferences.min_break_sched_display }} to {{ schedule.preferences.max_break_sched_display }} breaks</span></div>
+                                        {% endif %}
+                                        {% if schedule.preferences.earliest_time and schedule.preferences.latest_time %}
+                                            <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.preferences.earliest_time_display }}</span></div>
+                                        {% endif %}
+                                        {% if schedule.preferences.earliest_time and schedule.preferences.latest_time %}
+                                            <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.preferences.latest_time_display }}</span></div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>

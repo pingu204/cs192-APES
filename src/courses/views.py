@@ -252,27 +252,26 @@ def generate_permutation_view(request):
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
                     # if there are set preferences, ensure preferences are followed:
+                    if 'preferences' in request.session:
+                        # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
+                        if request.session['preferences']['number_of_classes']:
+                            if not all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
+                                continue
+                        
+                        # if class_days preferences is set, if schedule_entry['number_of_class_per_day'].keys() is not <= request.session['preferences']['class_days']
+                        # continue and dont add sched to permutation
+                        if request.session['preferences']['class_days']:
+                            # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
+                            if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
+                                continue
 
-                    # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
-                    if request.session['preferences']['number_of_classes']:
-                        if not all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
-                            continue
+                        # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
+                        # continue and dont add sched to permutation
+                        if request.session['preferences']['earliest_time'] and request.session['preferences']['latest_time']:
+                            if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
+                                continue
+
                     
-                    # if class_days preferences is set, if schedule_entry['number_of_class_per_day'].keys() is not <= request.session['preferences']['class_days']
-                    # continue and dont add sched to permutation
-                    if request.session['preferences']['class_days']:
-                        # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
-                        if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
-                            continue
-
-                    # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
-                    # continue and dont add sched to permutation
-                    if request.session['preferences']['earliest_time'] and request.session['preferences']['latest_time']:
-                        if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
-                            continue
-
-                    
-
                     # if permuted schedule follows all set preferences, append to schedule to display in generated permutations
                     request.session['schedule_permutations'].append(schedule_entry)
 
@@ -351,6 +350,10 @@ def view_sched_view(request, sched_id: int):
             defaults={"is_saved": True},
         )
         
+        preferences = request.session.get('preferences', {})
+        saved_schedule.preferences = preferences
+        saved_schedule.save()
+
         for course in courses:
             # Check if a SavedCourse exists with the same course_details
             saved_course = SavedCourse.objects.filter(

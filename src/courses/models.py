@@ -27,6 +27,7 @@ class SavedSchedule(models.Model):
     schedule_name = models.CharField(max_length=100)
     is_saved = models.BooleanField(default=False) # gagawen true if complete yung dcp sched gagawen true
     courses = models.ManyToManyField(SavedCourse, related_name='schedules') ##complete dict of the course
+    preferences = models.JSONField(default=dict, blank=True) ##complete dict to save preferences; default to empty initially
     
     class Meta():
         unique_together = ('student_id', 'schedule_name')
