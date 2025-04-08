@@ -242,16 +242,24 @@ def generate_permutation_view(request):
 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
-
                     # if there are set preferences, ensure preferences are followed:
+
+                    # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
                     if request.session['preferences']['number_of_classes']:
-                        if all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
-                            request.session['schedule_permutations'].append(schedule_entry)
+                        if not all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
+                            continue
                     
+                    # if class_days preferences is set, if schedule_entry['number_of_class_per_day'].keys() is not <= request.session['preferences']['class_days']
+                    # continue and dont add sched to permutation
+                    if request.session['preferences']['class_days']:
+                        # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
+                        if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
+                            continue
+
                     # otherwise, if empty/unset/falsy values set for preferences, disregard altogether 
                     # and generate permutations of schedule without restrictions
-                    else:
-                            request.session['schedule_permutations'].append(schedule_entry)
+
+                    request.session['schedule_permutations'].append(schedule_entry)
 
                 count += 1
                 #print(f"Schedule {count}")
