@@ -255,7 +255,7 @@ def generate_permutation_view(request):
                         # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
                         # print(print_dict(request.session['preferences']))
                         if request.session['preferences']['number_of_classes']:
-                            if not all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
+                            if not all(x <= request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
                                 continue
                         
                         # if class_days preferences is set, if schedule_entry['number_of_class_per_day'].keys() is not <= request.session['preferences']['class_days']
