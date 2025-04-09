@@ -285,53 +285,54 @@ def generate_permutation_view(request):
                                 continue
 
                         # Filter based on min_break and max_break
-                        print ("MIN BREAK", request.session['preferences']['min_break'])
-                        print ("MAX BREAK", request.session['preferences']['max_break'])
-                        if request.session['preferences']['min_break'] > 0 or request.session['preferences']['max_break'] > 0:
-                            min_break = request.session['preferences'].get('min_break', 0) 
-                            max_break = request.session['preferences'].get('max_break', 0) 
-                            if (len(schedule_entry['courses']) == 1) and (min_break > 0):
-                                print("Invalid break found: only one course in schedule")
-                                continue
-                            elif (len(schedule_entry['courses']) == 1) and (min_break == 0):
-                                request.session['schedule_permutations'].append(schedule_entry)
-                                continue
-                            # Group class times by day
-                            class_times_by_day = defaultdict(list)
-                            for course in schedule_entry['courses']:
-                                for section, days in course['class_days'].items():
-                                    for day in days:
-                                        class_times_by_day[day].extend(course['timeslots'].get(section, []))
-
-                            # Sort class times for each day
-                            for day in class_times_by_day:
-                                class_times_by_day[day].sort()
-
-                            # Check breaks for each day
-                            invalid_break_found = False
-                            for day, times in class_times_by_day.items():
-                                if len(times) < 2:
+                        # print ("MIN BREAK", request.session['preferences']['min_break'])
+                        # print ("MAX BREAK", request.session['preferences']['max_break'])
+                        if request.session['preferences']['min_break'] is not None and request.session['preferences']['max_break'] is not None:
+                            if request.session['preferences']['min_break'] > 0 or request.session['preferences']['max_break'] > 0:
+                                min_break = request.session['preferences'].get('min_break', 0) 
+                                max_break = request.session['preferences'].get('max_break', 0) 
+                                if (len(schedule_entry['courses']) == 1) and (min_break > 0):
+                                    print("Invalid break found: only one course in schedule")
                                     continue
-                                # Calculate breaks between consecutive classes for this day
-                                if len(times) == 2 and min_break > 0:
-                                    print(f"Invalid break found on {day}: only one break")
-                                    invalid_break_found = True
-                                    break
-                                breaks = [
-                                    times[i + 1] - times[i]
-                                    for i in range(len(times) - 1)
-                                ]
-                                print(f"Day: {day}, Class times: {times}, Breaks: {breaks}")
+                                elif (len(schedule_entry['courses']) == 1) and (min_break == 0):
+                                    request.session['schedule_permutations'].append(schedule_entry)
+                                    continue
+                                # Group class times by day
+                                class_times_by_day = defaultdict(list)
+                                for course in schedule_entry['courses']:
+                                    for section, days in course['class_days'].items():
+                                        for day in days:
+                                            class_times_by_day[day].extend(course['timeslots'].get(section, []))
 
-                                # Check if any break is less than min_break or greater than max_break
-                                if any(break_time < min_break or break_time > max_break for break_time in breaks):
-                                    print(f"Invalid breaks found on {day}: {breaks}")
-                                    invalid_break_found = True
-                                    break
+                                # Sort class times for each day
+                                for day in class_times_by_day:
+                                    class_times_by_day[day].sort()
 
-                            # Skip the schedule if invalid breaks are found
-                            if invalid_break_found:
-                                continue
+                                # Check breaks for each day
+                                invalid_break_found = False
+                                for day, times in class_times_by_day.items():
+                                    if len(times) < 2:
+                                        continue
+                                    # Calculate breaks between consecutive classes for this day
+                                    if len(times) == 2 and min_break > 0:
+                                        print(f"Invalid break found on {day}: only one break")
+                                        invalid_break_found = True
+                                        break
+                                    breaks = [
+                                        times[i + 1] - times[i]
+                                        for i in range(len(times) - 1)
+                                    ]
+                                    print(f"Day: {day}, Class times: {times}, Breaks: {breaks}")
+
+                                    # Check if any break is less than min_break or greater than max_break
+                                    if any(break_time < min_break or break_time > max_break for break_time in breaks):
+                                        print(f"Invalid breaks found on {day}: {breaks}")
+                                        invalid_break_found = True
+                                        break
+
+                                # Skip the schedule if invalid breaks are found
+                                if invalid_break_found:
+                                    continue
 
                     
                     # if permuted schedule follows all set preferences, append to schedule to display in generated permutations
