@@ -52,6 +52,10 @@ def homepage_view(request, *args, **kwargs):
             return redirect(reverse("homepage_view"))
 
         dcp_sections = request.session['dcp_sections']
+            
+        if 'preferences' in request.session:
+            request.session['gen_sched_preferences'] = request.session['preferences']
+
         #print("DCP SECTIONS: ", dcp_sections)  # Debugging
         generate_permutation_view(request)
 
