@@ -42,8 +42,19 @@ initialMinBreakUnit = minBreakUnitInput.value;
 initialMaxBreak = maxBreakInput.value;
 initialMaxBreakUnit = maxBreakUnitInput.value
 
+console.log("initial values:")
+console.log(initialNumClasses);
+console.log(initialDistance);
+console.log(initialProbability);
+console.log(initialEarliestTime);
+console.log(initialLatestTime);
+console.log(initialMinBreak);
+console.log(initialMinBreakUnit);
+console.log(initialMaxBreak);
+console.log(initialMaxBreakUnit);
+
 function checkChangesInForm() {
-    /* console.log((() => {
+    console.log((() => {
         for (let checkButton of daysCheckButtons) {
             if (initialdaysCheck[checkButton.value] != checkButton.checked) {
                 return false;
@@ -59,8 +70,10 @@ function checkChangesInForm() {
     console.log(initialMinBreak == minBreakInput.value);
     console.log(initialMinBreakUnit == minBreakUnitInput.value);
     console.log(initialMaxBreak == maxBreakInput.value);
-    console.log(initialMaxBreakUnit == maxBreakUnitInput.value); */
+    console.log(initialMaxBreakUnit == maxBreakUnitInput.value);
+
     preferencesButtons = document.getElementById('preferencesButtons');
+
     if (
         initialNumClasses == numClassesInput.value &&
         (() => {
@@ -72,7 +85,7 @@ function checkChangesInForm() {
             return true;
         })() &&
         initialDistance == distanceInput.value &&
-        initialProbability == probabilityInput.value &&
+        //initialProbability == probabilityInput.value &&
         initialEarliestTime == earliestTimeInput.value &&
         initialLatestTime == latestTimeInput.value &&
         initialMinBreak == minBreakInput.value &&
@@ -136,13 +149,6 @@ numClassesInput.addEventListener('change', checkNumClasses);
 var numChecked = 0;
 
 function checkClassDays() {
-    /* if (!isChecked(checkButton)) {
-        numChecked--;
-    }
-    else {
-        numChecked++;
-    }
- */
     if (numChecked == 0) {
         document.getElementById('i-' + circleIds['classDays'].toString()).classList.add('disabled');
     }
