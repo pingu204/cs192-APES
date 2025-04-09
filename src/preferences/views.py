@@ -88,6 +88,8 @@ def modify_preferences_view(request):
                 'max_break_sched_display': f"{max_break // 60}-hour" if (max_break % 60 == 0) and max_break else f"{max_break}-minute   ",
             }
 
+            print("PREFERENCE VALUES", request.session['preferences'].values())
+
             messages.success(request, "The filters have been successfully updated.")
             return redirect(reverse('homepage_view'))
 

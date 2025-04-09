@@ -220,6 +220,14 @@
                         </div>
                     </div>
 
+                    {% if form.errors %}
+                        <script type="text/javascript">
+                            window.onload = function() {
+                                resetBreakDuration();  // Call the reset function if there are form errors
+                            };
+                        </script>
+                    {% endif %}
+
                     <!-- Break Duration -->
                     <div class="result-card mb-3" style="border-bottom: 0">
                         <!-- Header -->
