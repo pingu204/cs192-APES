@@ -13,6 +13,7 @@ function isChecked(checkbox) {
 disabledColor = "rgb(0,0,0,0.2)";
 
 // Input elements
+preferencesForm = document.getElementById('preferencesForm')
 numClassesInput = document.getElementById('inputNumClasses');
 daysCheckButtons = document.getElementsByClassName('btn-check');
 distanceInput = document.getElementById('inputDistance');
@@ -24,6 +25,76 @@ minBreakInput = document.getElementById('inputMinBreak');
 minBreakUnitInput = document.getElementById('inputMinBreakUnit');
 maxBreakInput = document.getElementById('inputMaxBreak');
 maxBreakUnitInput = document.getElementById('inputMaxBreakUnit');
+saveChangesButton = document.getElementById('saveChanges');
+
+// Obtain initial values
+initialNumClasses = numClassesInput.value;
+initialdaysCheck = {};
+for (let checkButton of daysCheckButtons) {
+    initialdaysCheck[checkButton.value] = checkButton.checked;
+}
+initialDistance = distanceInput.value;
+initialProbability = probabilityInput.value;
+initialEarliestTime = earliestTimeInput.value;
+initialLatestTime = latestTimeInput.value;
+initialMinBreak = minBreakInput.value;
+initialMinBreakUnit = minBreakUnitInput.value;
+initialMaxBreak = maxBreakInput.value;
+initialMaxBreakUnit = maxBreakUnitInput.value
+
+function checkChangesInForm() {
+    /* console.log((() => {
+        for (let checkButton of daysCheckButtons) {
+            if (initialdaysCheck[checkButton.value] != checkButton.checked) {
+                return false;
+            }
+        }
+        return true;
+    })());
+    console.log(initialNumClasses == numClassesInput.value);
+    console.log(initialDistance == distanceInput.value);
+    console.log(initialProbability == probabilityInput.value);
+    console.log(initialEarliestTime == earliestTimeInput.value);
+    console.log(initialLatestTime == latestTimeInput.value);
+    console.log(initialMinBreak == minBreakInput.value);
+    console.log(initialMinBreakUnit == minBreakUnitInput.value);
+    console.log(initialMaxBreak == maxBreakInput.value);
+    console.log(initialMaxBreakUnit == maxBreakUnitInput.value); */
+    preferencesButtons = document.getElementById('preferencesButtons');
+    if (
+        initialNumClasses == numClassesInput.value &&
+        (() => {
+            for (let checkButton of daysCheckButtons) {
+                if (initialdaysCheck[checkButton.value] != checkButton.checked) {
+                    return false;
+                }
+            }
+            return true;
+        })() &&
+        initialDistance == distanceInput.value &&
+        initialProbability == probabilityInput.value &&
+        initialEarliestTime == earliestTimeInput.value &&
+        initialLatestTime == latestTimeInput.value &&
+        initialMinBreak == minBreakInput.value &&
+        initialMinBreakUnit == minBreakUnitInput.value &&
+        initialMaxBreak == maxBreakInput.value &&
+        initialMaxBreakUnit == maxBreakUnitInput.value
+    ){
+        console.log("no changes");
+        saveChangesButton.disabled = true;
+        [].slice.call(preferencesButtons.children).pop();
+        document.getElementById("saveChangesPopover").appendChild(saveChangesButton);
+    }
+    else {
+        console.log("changed!");
+        saveChangesButton.disabled = false;
+        // console.log(document.getElementById("saveChangesPopover").children);
+        [].slice.call(document.getElementById("saveChangesPopover").children).pop();
+        preferencesButtons.appendChild(saveChangesButton);
+    }
+}
+
+preferencesForm.addEventListener('change', checkChangesInForm);
 
 //  Output circle IDs
 circleIds = {
@@ -198,6 +269,7 @@ function resetAll() {
     resetProbability();
     resetClassTimes();
     resetBreakDuration();
+    checkChangesInForm();
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -214,3 +286,5 @@ document.addEventListener("DOMContentLoaded", function(){
     checkClassTime();
     checkBreakDuration();
 })
+
+

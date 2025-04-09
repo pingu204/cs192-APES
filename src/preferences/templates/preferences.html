@@ -23,7 +23,7 @@
 
             <!-- Container for the form -->
             <div class="flex-grow-container">
-                <form method="POST" onsubmit="showLoading()" name="save_preference_changes">
+                <form method="POST" onsubmit="showLoading()" id="preferencesForm" name="save_preference_changes">
                     {% csrf_token %}
                     <!-- Number of Classes / Day -->
                     <div class="result-card">
@@ -268,9 +268,11 @@
                     </div>
 
                     <!-- Buttons -->
-                    <div class="d-flex justify-content-center gap-2">
+                    <div id="preferencesButtons" class="d-flex justify-content-center gap-2">
                         <a onclick="resetAll();"><button type="button" class="btn btn-outline-primary">Reset</button></a>
-                        <button class="btn btn-primary" name="save_changes">Save Changes</button>
+                        <span id="saveChangesPopover" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="No changes to save.">
+                            <button class="btn btn-primary" name="save_changes" id="saveChanges" disabled>Save Changes</button>
+                        </span>
                     </div>
 
                     {% if messages %}
