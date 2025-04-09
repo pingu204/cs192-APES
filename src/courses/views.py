@@ -282,11 +282,8 @@ def generate_permutation_view(request):
                         # +-- CLASS TIMES --+
                         # Check if earliest and latest class in the sched
                         # is within [`earliest_time`, `latest_time`]
-                        if request.session['preferences']['earliest_time'] is not None and request.session['preferences']['latest_time'] is not None:
-                            print(request.session['preferences']['earliest_time'])
-                            print(request.session['preferences']['latest_time'])
-                            print("Test")
-                            if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
+                        if request.session['preferences']['earliest_time'] and request.session['preferences']['latest_time'] :
+                            if not(schedule_entry['class_times'][0] >= request.session['preferences']['earliest_time']) or not(schedule_entry['class_times'][-1] <= request.session['preferences']['latest_time']):
                                 continue
                         
                         # +-- BREAK TIME DURATION --+
