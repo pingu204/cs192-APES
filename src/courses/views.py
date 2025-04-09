@@ -229,7 +229,7 @@ def generate_permutation_view(request):
 
                 # loop for adding a number_of_classes_per_day key (counter) for each schedule generated
                 for course in schedule_entry['courses']:
-                    print(course)
+                    # print(course)
                     for day in list(course['class_days'].values()):
                         days_list = list(day)
                         for dayz in days_list:
@@ -246,7 +246,7 @@ def generate_permutation_view(request):
                 # print(schedule_entry['number_of_classes_per_day'])
                 # print(schedule_entry['number_of_classes_per_day'].values())
 
-                print_dict(schedule_entry)
+                # print_dict(schedule_entry)
                 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
@@ -265,12 +265,15 @@ def generate_permutation_view(request):
                             if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
                                 continue
                         
-                        # if total_distance_per_day preferences is set, if the total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and don't add sched to permutation
+                        # if total_distance_per_day preferences is set, if any total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and don't add sched to permutation
                         if request.session['preferences']['total_distance_per_day']:
-                            # if the total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and dont add sched to permutation
-                            max_dist = get_max_distance(schedule_entry['courses'])
-                            if max_dist > request.session['preferences']['total_distance_per_day']:
+                            # max_dist = get_max_distance(schedule_entry['courses'])
+                            dists_per_day = get_distance_per_day(schedule_entry['courses'])
+                            # print(dists_per_day)
+                            if any(dist > request.session['preferences']['total_distance_per_day'] for dist in dists_per_day):
                                 continue
+                            # if max_dist > request.session['preferences']['total_distance_per_day']:
+                            #     continue
 
                         # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
                         # continue and dont add sched to permutation
@@ -295,10 +298,11 @@ def generate_permutation_view(request):
 
         return redirect(reverse("homepage_view"))
 
-def get_max_distance(courses):
-    """ Returns the maximum distance walked each day in a given schedule. """
+def get_distance_per_day(courses):
+    """ Returns a list of the distances (in km) walked each day in a given schedule. """
     # print('courses: ', courses)
-    max_distance = 0.0
+    # max_distance = 0.0
+    distances_per_day = []
     classes = [
         Course(
             course_code=course['course_code'],
@@ -319,6 +323,7 @@ def get_max_distance(courses):
     for day in ['M','T','W','H','F','S']:
         day_classes = []
         current_distance = 0.0
+        max_distance = 0.0
         for c in classes:
             for classType, d in c.class_days.items():
                 # print('type:', classType, 'day:',  d)
@@ -328,15 +333,18 @@ def get_max_distance(courses):
                     
         # print('day: ', day, day_classes)
         if len(day_classes) <= 1:
+            distances_per_day.append(0.0) # no distance to be computed.
             continue # only one class in that day, so no distance to be computed.
         # print('A,B:')
         for A, B in zip(day_classes, day_classes[1:]):
             # print(A[1], B[1])
             current_distance += get_distance(A[1], B[1])
         max_distance = max(max_distance, current_distance)
+        distances_per_day.append(max_distance/1000) # convert to km
     # print(max_distance)
-
-    return max_distance / 1000 # convert to km
+    
+    # return max_distance / 1000 # convert to km
+    return distances_per_day
 
         
 
