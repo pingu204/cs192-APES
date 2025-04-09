@@ -270,7 +270,7 @@ def generate_permutation_view(request):
                             # max_dist = get_max_distance(schedule_entry['courses'])
                             dists_per_day = get_distance_per_day(schedule_entry['courses'])
                             # print(dists_per_day)
-                            if any(dist > request.session['preferences']['total_distance_per_day'] for dist in dists_per_day):
+                            if max(dists_per_day) > request.session['preferences']['total_distance_per_day']:
                                 continue
                             # if max_dist > request.session['preferences']['total_distance_per_day']:
                             #     continue
@@ -373,7 +373,6 @@ def get_distance_per_day(courses):
     for day in ['M','T','W','H','F','S']:
         day_classes = []
         current_distance = 0.0
-        max_distance = 0.0
         for c in classes:
             for classType, d in c.class_days.items():
                 # print('type:', classType, 'day:',  d)
@@ -391,11 +390,12 @@ def get_distance_per_day(courses):
         for A, B in zip(day_classes, day_classes[1:]):
             # print(A[1], B[1])
             current_distance += get_distance(A[1], B[1])
-        max_distance = max(max_distance, current_distance)
-        distances_per_day.append(max_distance/1000) # convert to km
+        
+        distances_per_day.append(current_distance/1000) # convert to km
     # print(max_distance)
     
     # return max_distance / 1000 # convert to km
+    # print('distances_per_day:', distances_per_day)
     return distances_per_day
 
         
