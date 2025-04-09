@@ -217,12 +217,12 @@
                 <!-- Container for Generated Schedules -->
                 <div class="flex-grow-container margin-top-md">
                     <div class="sched-list-container">
-                        {% for schedule in saved_schedules %}
+                        {% for schedule, class_days in saved_schedules %}
                             <a href="{% url 'view_saved_sched_view' schedule.sched_id %}">
                                 <div class="course-card sched-card saved">
                                     <div class="course-header padding-sm">
                                         {% for day in "MTWHFS" %}
-                                            {% if day in schedule.class_days %}
+                                            {% if day in class_days %}
                                                 <div class="day day-filled margin-right-xs">{{ day }}</div>
                                             {% else %}
                                                 <div class="day margin-right-xs">{{ day }}</div>
@@ -257,16 +257,17 @@
                         {% empty %}
                             <p>No saved schedules yet.</p>
                         {% endfor %}
-                        {% for sched in request.session.schedule_permutations %}
+                        {% for sched, class_days in generated_schedules %}
                             <a href="{% url 'view_sched_view' sched.sched_id %}">
                                 <div class="course-card sched-card">
                                     <div class="course-header padding-sm">
-                                        <div class="day margin-right-xs">M</div>
-                                        <div class="day day-filled margin-right-xs">T</div>
-                                        <div class="day day-filled margin-right-xs">W</div>
-                                        <div class="day day-filled margin-right-xs">H</div>
-                                        <div class="day day-filled margin-right-xs">F</div>
-                                        <div class="day margin-right-xs">S</div>
+                                        {% for day in "MTWHFS" %}
+                                            {% if day in class_days %}
+                                                <div class="day day-filled margin-right-xs">{{ day }}</div>
+                                            {% else %}
+                                                <div class="day margin-right-xs">{{ day }}</div>
+                                            {% endif %}
+                                        {% endfor %}
                                         <div class="filler"></div>
                                         <i class="bi bi-bookmark"></i>
                                     </div>

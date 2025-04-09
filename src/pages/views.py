@@ -7,6 +7,7 @@ from apes.utils import redirect_authenticated_users, guest_or_authenticated, get
 from django.contrib import messages
 from courses.models import DesiredCourse, SavedSchedule
 from courses.views import generate_permutation_view
+from courses.schedule import get_class_days, get_class_days_from_saved
 from scraper.scrape import couple_lec_and_lab, get_all_sections
 # Create your views here.
 
@@ -95,14 +96,18 @@ def homepage_view(request, *args, **kwargs):
         for course in sched.courses.all():
             print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
 
-    #print(SavedSchedule.objects.filter(student_id=request.user.id)['preferences'])
+    saved_schedules = SavedSchedule.objects.filter(student_id=request.user.id)
+    saved_class_days = list(map(get_class_days_from_saved, saved_schedules))
+    generated_schedules = request.session.get('schedule_permutations', [])
+    generated_class_days = list(map(get_class_days, generated_schedules))
 
     context = {
         "user" : request.user,
         "dcp" : dcp,
         "dcp_units" : sum([course['units'] for course in dcp]),
         "dcp_length" : len(dcp),
-        "saved_schedules" : SavedSchedule.objects.filter(student_id=request.user.id), 
+        "saved_schedules" : list(zip(saved_schedules, saved_class_days)),
+        "generated_schedules" : list(zip(generated_schedules, generated_class_days)),
         "session" : request.session,
     }
 

@@ -77,6 +77,24 @@ class ClassStatus(StrEnum):
     STARTS_AT = auto()
     ONGOING = auto()
 
+""" Obtains list of class days of a *saved* schedule """
+def get_class_days_from_saved(sched):
+    class_days: list[str] = []
+    for course in sched.courses.all():
+        class_days.extend(list(''.join(course.course_details['class_days'].values())))
+
+    return list(set(class_days))
+
+""" Obtains list of class days of a schedule """
+def get_class_days(sched):
+    class_days: list[str] = []
+    for course in sched['courses']:
+        class_days.extend(list(''.join(course['class_days'].values())))
+
+    return list(set(class_days))
+    
+
+
 """ Return time in HH:MM AM/PM format """
 def get_time(offset:int, extended:bool=True) -> str:
     # Base Time = 7:00 AM (year, month, and day are placeholders)

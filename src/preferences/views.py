@@ -6,6 +6,7 @@ from django.contrib import messages
 # Create your views here.
 def modify_preferences_view(request):
     if request.method == 'POST':# and 'save_changes' in request.POST:
+        
         form = PreferencesForm(request.POST)
         if form.is_valid():
             number_of_classes = form.cleaned_data['number_of_classes']
