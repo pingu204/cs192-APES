@@ -555,6 +555,7 @@ def view_sched_view(request, sched_id: int):
         "courses": classes,
         "units": f"{sum([course.units for course in classes])} units",
         "show_save_button": True,
+        "session": request.session,
     }
 
     return render(request, "view_sched.html", context)
@@ -650,6 +651,7 @@ def view_saved_sched_view(request, sched_id: int):
         "courses": classes,
         "units": f"{sum([course.units for course in classes])} units",
         "show_unsave_button": True,
+        "saved_schedules" : SavedSchedule.objects.filter(student_id=request.user.id),
     }
 
     return render(request, "view_sched.html", context)
