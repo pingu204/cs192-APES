@@ -75,7 +75,7 @@ function checkChangesInForm() {
     preferencesButtons = document.getElementById('preferencesButtons');
 
     if (
-        initialNumClasses == numClassesInput.value &&
+        (initialNumClasses == numClassesInput.value || (!initialNumClasses && numClassesInput.value == 0)) &&
         (() => {
             for (let checkButton of daysCheckButtons) {
                 if (initialdaysCheck[checkButton.value] != checkButton.checked) {
@@ -84,13 +84,13 @@ function checkChangesInForm() {
             }
             return true;
         })() &&
-        initialDistance == distanceInput.value &&
+        (initialDistance == distanceInput.value || (!initialDistance && distanceInput.value == 0)) &&
         //initialProbability == probabilityInput.value &&
         initialEarliestTime == earliestTimeInput.value &&
         initialLatestTime == latestTimeInput.value &&
-        initialMinBreak == minBreakInput.value &&
+        (initialMinBreak == minBreakInput.value || (!initialMinBreak && minBreakInput.value == 0)) &&
         initialMinBreakUnit == minBreakUnitInput.value &&
-        initialMaxBreak == maxBreakInput.value &&
+        (initialMaxBreak == maxBreakInput.value || (!initialMaxBreak && maxBreakInput.value == 0)) &&
         initialMaxBreakUnit == maxBreakUnitInput.value
     ){
         console.log("no changes");
