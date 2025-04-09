@@ -250,22 +250,26 @@ def generate_permutation_view(request):
                 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
-                    # if there are set preferences, ensure preferences are followed:
+                    # Cross-check the schedule against each *enabled* preference
+                    # -- ignore if it doesn't satisfy AT LEAST ONE
+                    # -- add to valid schedules if it satisfies ALL
                     if 'preferences' in request.session:
-                        # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
-                        # print(print_dict(request.session['preferences']))
+                        
+                        # +-- MAX NUMBER OF CLASSES PER DAY --+
+                        # Check if the number of classes per day is <= `number_of_classes`
                         if request.session['preferences']['number_of_classes']:
                             if not all(x <= request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
                                 continue
                         
-                        # if class_days preferences is set, if schedule_entry['number_of_class_per_day'].keys() is not <= request.session['preferences']['class_days']
-                        # continue and dont add sched to permutation
+                        # +-- CLASS DAYS --+
+                        # Check if the schedule's class days is a subset of `class_days`
                         if request.session['preferences']['class_days']:
                             # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
                             if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
                                 continue
                         
-                        # if total_distance_per_day preferences is set, if any total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and don't add sched to permutation
+                        # +-- TOTAL DISTANCE --+
+                        # Check if total travel distance per day is <= `total_distance_per_day`
                         if request.session['preferences']['total_distance_per_day']:
                             # max_dist = get_max_distance(schedule_entry['courses'])
                             dists_per_day = get_distance_per_day(schedule_entry['courses'])
@@ -275,28 +279,35 @@ def generate_permutation_view(request):
                             # if max_dist > request.session['preferences']['total_distance_per_day']:
                             #     continue
 
-                        # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
-                        # continue and dont add sched to permutation
+                        # +-- CLASS TIMES --+
+                        # Check if earliest and latest class in the sched
+                        # is within [`earliest_time`, `latest_time`]
                         if request.session['preferences']['earliest_time'] is not None and request.session['preferences']['latest_time'] is not None:
                             print(request.session['preferences']['earliest_time'])
                             print(request.session['preferences']['latest_time'])
                             print("Test")
                             if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
                                 continue
-
-                        # Filter based on min_break and max_break
-                        # print ("MIN BREAK", request.session['preferences']['min_break'])
-                        # print ("MAX BREAK", request.session['preferences']['max_break'])
+                        
+                        # +-- BREAK TIME DURATION --+
+                        # Check if break time durations are within [`min_break`,`max_break`]
                         if request.session['preferences']['min_break'] is not None and request.session['preferences']['max_break'] is not None:
                             if request.session['preferences']['min_break'] > 0 or request.session['preferences']['max_break'] > 0:
+
+                                # Obtain user preferences
                                 min_break = request.session['preferences'].get('min_break', 0) 
                                 max_break = request.session['preferences'].get('max_break', 0) 
+
+                                # Case: only one course in the schedule
+                                # -- (a) user needs a break
                                 if (len(schedule_entry['courses']) == 1) and (min_break > 0):
                                     print("Invalid break found: only one course in schedule")
                                     continue
+                                # -- (b) user doesn't need a break
                                 elif (len(schedule_entry['courses']) == 1) and (min_break == 0):
                                     request.session['schedule_permutations'].append(schedule_entry)
                                     continue
+
                                 # Group class times by day
                                 class_times_by_day = defaultdict(list)
                                 for course in schedule_entry['courses']:
@@ -311,21 +322,28 @@ def generate_permutation_view(request):
                                 # Check breaks for each day
                                 invalid_break_found = False
                                 for day, times in class_times_by_day.items():
+
                                     if len(times) < 2:
                                         continue
-                                    # Calculate breaks between consecutive classes for this day
+
+                                    # Check if there's only one class in the day
                                     if len(times) == 2 and min_break > 0:
                                         print(f"Invalid break found on {day}: only one break")
                                         invalid_break_found = True
                                         break
-                                    breaks = [
-                                        times[i + 1] - times[i]
-                                        for i in range(len(times) - 1)
-                                    ]
+
+                                    # Compute for the break times
+                                    breaks = []
+                                    for (prev_time, next_time) in zip(times, times[1:]):
+                                        temp = next_time - prev_time
+                                        if temp != 0:
+                                            breaks.append(temp)
+                                    
                                     print(f"Day: {day}, Class times: {times}, Breaks: {breaks}")
 
-                                    # Check if any break is less than min_break or greater than max_break
-                                    if any(break_time < min_break or break_time > max_break for break_time in breaks):
+                                    # Check if minimum break time is less than user spec OR
+                                    # if maximum break time is greater than user spec
+                                    if min(breaks) < min_break or max(breaks) > max_break:
                                         print(f"Invalid breaks found on {day}: {breaks}")
                                         invalid_break_found = True
                                         break
@@ -335,15 +353,15 @@ def generate_permutation_view(request):
                                     continue
 
                     
-                    # if permuted schedule follows all set preferences, append to schedule to display in generated permutations
+                    # Append schedule to valid permutations
                     request.session['schedule_permutations'].append(schedule_entry)
 
                 count += 1
-                #print(f"Schedule {count}")
+                
                 for x in (list(dcp_section)):
                     x.pop("course_title", None)
 
-            if i == 100000: 
+            if i == 1000: 
                 break
 
         return redirect(reverse("homepage_view"))
