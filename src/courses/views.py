@@ -378,10 +378,12 @@ def get_distance_per_day(courses):
             for classType, d in c.class_days.items():
                 # print('type:', classType, 'day:',  d)
                 if day in d:
-                    day_classes.append((c, c.location[classType]))
+                    day_classes.append((c, c.location[classType], c.timeslots[classType]))
                     # print('day:', day, 'course_code:', c.course_code, 'location:', c.location[classType])
                     
         # print('day: ', day, day_classes)
+        day_classes = sorted(day_classes, key=lambda x: x[2]) # sort by timeslot of the class
+        
         if len(day_classes) <= 1:
             distances_per_day.append(0.0) # no distance to be computed.
             continue # only one class in that day, so no distance to be computed.
