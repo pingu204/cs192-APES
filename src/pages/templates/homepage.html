@@ -245,10 +245,10 @@
                                         {% if schedule.preferences.min_break_display and schedule.preferences.max_break_display and schedule.preferences.min_break > 0 or schedule.preferences.max_break > 0 %}
                                             <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.preferences.min_break_sched_display }} to {{ schedule.preferences.max_break_sched_display }} breaks</span></div>
                                         {% endif %}
-                                        {% if schedule.preferences.earliest_time and schedule.preferences.latest_time %}
+                                        {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
                                             <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.preferences.earliest_time_display }}</span></div>
                                         {% endif %}
-                                        {% if schedule.preferences.earliest_time and schedule.preferences.latest_time %}
+                                        {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
                                             <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.preferences.latest_time_display }}</span></div>
                                         {% endif %}
                                     </div>
@@ -284,10 +284,10 @@
                                         {% if session.gen_sched_preferences.min_break_display and session.gen_sched_preferences.max_break_display and session.gen_sched_preferences.min_break > 0 or session.gen_sched_preferences.max_break > 0 %}
                                             <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ session.gen_sched_preferences.min_break_sched_display }} to {{ session.gen_sched_preferences.max_break_sched_display }} breaks</span></div>
                                         {% endif %}
-                                        {% if session.gen_sched_preferences.earliest_time and session.gen_sched_preferences.latest_time %}
+                                        {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
                                             <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ session.gen_sched_preferences.earliest_time_display }}</span></div>
                                         {% endif %}
-                                        {% if session.gen_sched_preferences.earliest_time and session.gen_sched_preferences.latest_time %}
+                                        {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
                                             <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ session.gen_sched_preferences.latest_time_display }}</span></div>
                                         {% endif %}
                                     </div>
