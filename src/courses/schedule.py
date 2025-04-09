@@ -87,8 +87,8 @@ def get_time(offset:int, extended:bool=True) -> str:
 
 """ Find class at day and current time """
 def find_class(classes: list[Course], day:str, t:int) -> tuple[str, ClassStatus, int, int] | None:
-    for c in classes:
-        print_dict(c.__dict__)
+    # for c in classes:
+        # print_dict(c.__dict__)
 
     # Loop through the classes
     for i, c in enumerate(classes):

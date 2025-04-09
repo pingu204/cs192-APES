@@ -211,7 +211,7 @@ def generate_permutation_view(request):
             """
             if not is_conflicting(list(dcp_section)):
 
-                print("DCP SECTION SAMPLE", dcp_section)
+                #print("DCP SECTION SAMPLE", dcp_section)
 
                 schedule_entry = {
                     "sched_id": count,
@@ -243,16 +243,17 @@ def generate_permutation_view(request):
 
                 schedule_entry['class_times'].sort()
 
-                print(schedule_entry['number_of_classes_per_day'])
-                print(schedule_entry['number_of_classes_per_day'].values())
+                # print(schedule_entry['number_of_classes_per_day'])
+                # print(schedule_entry['number_of_classes_per_day'].values())
 
-                print("SCHEDULE ENTRY:", schedule_entry)
+                print_dict(schedule_entry)
                 
                 # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
                 if len(schedule_entry['courses']) != 0:
                     # if there are set preferences, ensure preferences are followed:
                     if 'preferences' in request.session:
                         # if number_of_classes preferences is set, if threshold not followed, continue and dont add sched to permutation
+                        # print(print_dict(request.session['preferences']))
                         if request.session['preferences']['number_of_classes']:
                             if not all(x < request.session['preferences']['number_of_classes'] for x in list(schedule_entry['number_of_classes_per_day'].values())): 
                                 continue
@@ -266,7 +267,10 @@ def generate_permutation_view(request):
 
                         # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
                         # continue and dont add sched to permutation
-                        if request.session['preferences']['earliest_time'] and request.session['preferences']['latest_time']:
+                        if request.session['preferences']['earliest_time'] is not None and request.session['preferences']['latest_time'] is not None:
+                            print(request.session['preferences']['earliest_time'])
+                            print(request.session['preferences']['latest_time'])
+                            print("Test")
                             if schedule_entry['class_times'][0] < request.session['preferences']['earliest_time'] or schedule_entry['class_times'][-1] > request.session['preferences']['latest_time']:
                                 continue
 

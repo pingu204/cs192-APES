@@ -22,7 +22,7 @@ def get_start_and_end(timeslot, day):
 def get_class_type_from_day(class_days, day):
     for key, value in class_days.items():
         if day in value:
-            print(day,  key)
+            # print(day,  key)
             return key
 
 """ Obtain range of intervals given `start` and `end` """
