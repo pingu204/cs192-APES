@@ -20,7 +20,7 @@ from courses.models import SavedSchedule, SavedCourse
 
 from itertools import product
 import numpy as np
-
+import pandas as pd
 from django.contrib import messages
 
 import copy
@@ -264,6 +264,13 @@ def generate_permutation_view(request):
                             # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
                             if not set(list(schedule_entry['number_of_classes_per_day'].keys())) <= set(request.session['preferences']['class_days']):
                                 continue
+                        
+                        # if total_distance_per_day preferences is set, if the total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and don't add sched to permutation
+                        if request.session['preferences']['total_distance_per_day']:
+                            # if the total distance per day in the generated schedule is > the user's set total_distance_per_day, continue and dont add sched to permutation
+                            max_dist = get_max_distance(schedule_entry['courses'])
+                            if max_dist > request.session['preferences']['total_distance_per_day']:
+                                continue
 
                         # if user's set earliest_time < earliest time in genereated sched perm or latest_time > latest time in generated sched perm
                         # continue and dont add sched to permutation
@@ -288,7 +295,72 @@ def generate_permutation_view(request):
 
         return redirect(reverse("homepage_view"))
 
+def get_max_distance(courses):
+    """ Returns the maximum distance walked each day in a given schedule. """
+    # print('courses: ', courses)
+    max_distance = 0.0
+    classes = [
+        Course(
+            course_code=course['course_code'],
+            section_name=course['section_name'],
+            capacity=course['capacity'],
+            demand=course['demand'],
+            units=course['units'],
+            class_days=course['class_days'],
+            location=course['location'],
+            venue=course['venue'],
+            instructor_name=course['instructor_name'],
+            timeslots=course['timeslots'],
+            offering_unit=course['offering_unit']
+        )
+        for course in courses
+    ]
+    # print('classes:')
+    for day in ['M','T','W','H','F','S']:
+        day_classes = []
+        current_distance = 0.0
+        for c in classes:
+            for classType, d in c.class_days.items():
+                # print('type:', classType, 'day:',  d)
+                if day in d:
+                    day_classes.append((c, c.location[classType]))
+                    # print('day:', day, 'course_code:', c.course_code, 'location:', c.location[classType])
+                    
+        # print('day: ', day, day_classes)
+        if len(day_classes) <= 1:
+            continue # only one class in that day, so no distance to be computed.
+        # print('A,B:')
+        for A, B in zip(day_classes, day_classes[1:]):
+            # print(A[1], B[1])
+            current_distance += get_distance(A[1], B[1])
+        max_distance = max(max_distance, current_distance)
+    # print(max_distance)
 
+    return max_distance / 1000 # convert to km
+
+        
+
+def get_distance(loc_A, loc_B):
+    """ Given two course locations, refers to distance_pairs.csv to get the distance in meters between the two courses' locations.
+        If the distance is not found, returns 0.0. """
+    file_path = os.path.join(settings.BASE_DIR, "scraper", "csv", "distance_pairs.csv") 
+    df = pd.read_csv(file_path)
+    df.columns = ['endpts', 'distance_in_m']
+
+    ref_table = dict(zip(df['endpts'], df['distance_in_m']))
+
+    lookupAB = '(\'' + loc_A + '\', \'' + loc_B + '\')'
+    lookupBA = '(\'' + loc_B + '\', \'' + loc_A + '\')'
+
+    if ref_table.get(lookupAB):
+        # print(ref_table[lookupAB])
+        return float(ref_table[lookupAB])
+    elif ref_table.get(lookupBA):
+        # print(ref_table[lookupBA])
+        return float(ref_table[lookupBA])
+    else:
+        # print("0.0")
+        return 0.0
 
 def fix_timeslots(course):
     section_keys = list(course['section_name'].keys())  # Get keys from section_name
