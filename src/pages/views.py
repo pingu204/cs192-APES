@@ -40,7 +40,7 @@ def homepage_view(request, *args, **kwargs):
 
         request.session["dcp_sections"] = [section_lst for section_lst in request.session.get("dcp_sections", []) if section_lst[0]["course_code"] != removed_course_code]
 
-        print(f"Session's `dcp_sections` now has {len(request.session["dcp_sections"])} sections.")
+        print(f"Session's `dcp_sections` now has {len(request.session['dcp_sections'])} sections.")
         
         messages.success(request, "Class has been successfully removed.")
         
