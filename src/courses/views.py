@@ -202,6 +202,7 @@ def generate_permutation_view(request):
 
         count = 0
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
+            print(f"schedule {i}")
             #check if dcp_section is not in SavedSchedules
             
             """
