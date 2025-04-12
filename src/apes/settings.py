@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'preferences',
 
     'storages',
+    'corsheaders',
 ]
 
 SESSION_COOKIE_SECURE = False
@@ -99,6 +100,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'apes.wsgi.application'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'apes.middleware.DatabaseErrorMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -108,6 +110,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
