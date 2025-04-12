@@ -18,6 +18,7 @@ decorator==5.1.1
 defusedxml==0.7.1
 dj-database-url==2.3.0
 Django==5.1.5
+django-cors-headers==4.7.0
 django-environ==0.12.0
 django-storages==1.14.6
 docopt==0.6.2
@@ -68,7 +69,7 @@ PyMySQL==1.1.1
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 pytz==2024.2
-pywin32==308;sys_platform == 'win32'
+pywin32==308
 pyzmq==26.2.1
 referencing==0.36.2
 requests==2.32.3
