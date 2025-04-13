@@ -20,12 +20,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="d-block d-xl-none mobile-view-error d-flex flex-column align-items-center justify-content-center p-4">
+        <span class="display-1"><i class="bi bi-display"></i></span>
+        <h1 class="text-center fw-bold">Please switch to<br><span class="swoosh-text">Desktop View</span></h1>
+        <p class="text-center">We noticed that you're viewing APES on a mobile phone or tablet, which are not yet supported at the moment. Kindly switch to a Desktop view to use the web app.</p>
+    </div>
+
     {% block nav %}{% endblock %}
 
     <div id="loader">
         <div class="spinner-border" id="loading" role="status">
         </div>
     </div>
+
+    
     
     {% block content %}{% endblock %}
 
