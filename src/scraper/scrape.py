@@ -321,11 +321,16 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
         room = (slot_venue.split(' ', maxsplit=1))[1]
-        # print(room)
-        # print('mapped: ', map_venues(room, course_code_csv))
+        print(room)
+        # print('mapped: ', map_venues(room, course_code_csv,cleaned_course_code))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
         # print('room: ', room, 'mapped: ', mapped_venue)
-        venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
+        if df.loc[df['code'] == mapped_venue, 'location'].values:
+            venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
+        else:
+            venue = None
+        # print(venue)
+        # venue = df.loc[df['code'] == mapped_venue, 'location'].values[0]
 
         if 'lab' in slot_venue:
             location['lab'] = venue
@@ -393,7 +398,7 @@ def get_all_sections(course_code: str, strict: bool = False):
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
             section_name = get_section(tr[1].get_text(separator='\n'), cleaned_course_code)
-
+            print(cleaned_course_code, section_name)
             # Check if scraped class must be strictly equal to the course code
             if strict and cleaned_course_code.lower() != course_code.lower():
                 continue
