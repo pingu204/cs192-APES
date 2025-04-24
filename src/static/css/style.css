@@ -1420,3 +1420,13 @@ div.profile {
     color: white;
     font-family: 'Onest';
   }
+/* 
+Reference:  https://stackoverflow.com/questions/54337652/how-can-i-change-the-color-of-bootstrap-popover-arrows
+Stack Overflow.
+Last accessed: 04/24/2025
+*/
+  .popover .popover-arrow::before, .popover .popover-arrow::after {
+    border-color: black;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+  }
