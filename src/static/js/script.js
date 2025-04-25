@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // Assisted by: GitHub Copilot
 // Date: 03/24/2025
 // prompt: how do i add a popover to a button
+// changes made: changed to tooltips
+
+// https://getbootstrap.com/docs/5.3/components/tooltips/#enable-tooltips
+// Bootstrap Documentation.
+// Last accessed: 03/25/2025
 document.addEventListener('DOMContentLoaded', function () {
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl);
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
 

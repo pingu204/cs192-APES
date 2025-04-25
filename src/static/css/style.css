@@ -1416,22 +1416,20 @@ div.profile:hover {
     left: 50%;
   }
 
-  .popover {
-    background-color: black;
-    color: white;
-  }
 
-  .popover-body {
-    color: white;
+.tooltip {
+    --bs-tooltip-bg: black;
+    --bs-tooltip-color: white;
     font-family: 'Onest';
-  }
-/* 
-Reference:  https://stackoverflow.com/questions/54337652/how-can-i-change-the-color-of-bootstrap-popover-arrows
-Stack Overflow.
-Last accessed: 04/24/2025
-*/
-  .popover .popover-arrow::before, .popover .popover-arrow::after {
-    border-color: black;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-  }
+}
+/* https://stackoverflow.com/questions/17711152/aligning-text-in-bootstrap-tooltip 
+Stack Overflow. Last accessed: 03/25/2025 */ 
+.tooltip-inner {
+    font-family: 'Onest';
+    padding: 10px;
+}
+
+.left-tooltip .tooltip-inner {
+    text-align: left;
+    padding-left: 15px;
+}
