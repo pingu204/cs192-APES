@@ -1135,6 +1135,11 @@ div.profile {
     height: 5.5em;
 }
 
+div.profile:hover {
+    background: var(--bs-blue);
+    color: white;
+}
+
 @media only screen and (max-width: 800px) {
     .w-50 {width: 80% !important;}
     .row.gap-3 {width: 100%;}
