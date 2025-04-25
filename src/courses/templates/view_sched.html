@@ -1,259 +1,291 @@
 {% extends 'base.html' %}
-
 {% block nav %}
-
     {% include 'nav_main.html' %}
-
 {% endblock %}
-
 {% block content %}
-
-{% load static %}
-<div id="cover"></div>
-
-<div class="body-container homepage sched-viewer">
-    <div class="main two-column">
-
-    <div class="sched-container">
-        <!-- Container for the timetable -->
-        <div class="timetable">
-            <table id="timetable">
-                {{ main_table | safe }}
-            </table>
-        </div>
-    </div>
-
-    <!-- Container for the right panel -->
-    <div class="course-list-container">
-        <div class="user-header">
-            <!-- Schedule Identifier -->
-            <h2 class="margin-right-sm"><span>Sched {{ sched_id|add:1 }}</span></h2>
-
-            {% if show_save_button %}
-                <form method="POST">
-                    {% csrf_token %}
-                    <button class="btn-sm margin-right-xs" name="click_saved_sched">SAVE</button>
-                </form>
-            {% elif show_unsave_button %}
-                <form method="POST">
-                    {% csrf_token %}
-                    <button class="btn-sm margin-right-xs" name="click_unsaved_sched">UNSAVE</button>
-                </form>
-            {% endif %}
-
-            <!-- Export Button -->
-            <button class="btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="export">EXPORT</button>
-            
-            <div class="filler"></div>
-
-            <!-- Redirect to Home -->
-            <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
-        </div>
-
-        <!-- Container for the details of the schedule -->
-        <div class="tabs-container margin-top-md margin-bottom-md">
-            {% if show_unsave_button %}
-                {% for schedule in saved_schedules %}
-                    {% if schedule.sched_id == sched_id %}
-                        {% if schedule.preferences.number_of_classes %}
-                            <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 1 to {{ schedule.preferences.number_of_classes }} classes/day</span></div>
-                        {% endif %}
-                        {% if schedule.preferences.total_distance_per_day %}
-                            <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ schedule.preferences.total_distance_per_day }} kilometers/day</span></div>
-                        {% endif %}
-                        {% if schedule.preferences.total_probability %}
-                            <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ schedule.preferences.total_probability }}% chance of being granted</span></div>
-                        {% endif %}
-                        {% if schedule.preferences.min_break_display and schedule.preferences.max_break_display and schedule.preferences.min_break > 0 or schedule.preferences.max_break > 0 %}
-                            <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.preferences.min_break_sched_display }} to {{ schedule.preferences.max_break_sched_display }} breaks</span></div>
-                        {% endif %}
-                        {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
-                            <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.preferences.earliest_time_display }}</span></div>
-                        {% endif %}
-                        {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
-                            <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.preferences.latest_time_display }}</span></div>
-                        {% endif %}
+    {% load static %}
+    <div id="cover"></div>
+    <div class="body-container homepage sched-viewer">
+        <div class="main two-column">
+            <div class="sched-container">
+                <!-- Container for the timetable -->
+                <div class="timetable">
+                    <table id="timetable">
+                        {{ main_table | safe }}
+                    </table>
+                </div>
+            </div>
+            <!-- Container for the right panel -->
+            <div class="course-list-container">
+                <div class="user-header">
+                    <!-- Schedule Identifier -->
+                    <h2 class="margin-right-sm">
+                        <span>Sched {{ sched_id|add:1 }}</span>
+                    </h2>
+                    {% if show_save_button %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <button class="btn-sm margin-right-xs" name="click_saved_sched">SAVE</button>
+                        </form>
+                    {% elif show_unsave_button %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <button class="btn-sm margin-right-xs" name="click_unsaved_sched">UNSAVE</button>
+                        </form>
                     {% endif %}
-                {% endfor %}
-            {% else %}
-                {% if session.gen_sched_preferences.number_of_classes %}
-                    <div><span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 1 to {{ session.gen_sched_preferences.number_of_classes }} classes/day</span></div>
-                {% endif %}
-                {% if session.gen_sched_preferences.total_distance_per_day %}
-                    <div><span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ session.gen_sched_preferences.total_distance_per_day }} kilometers/day</span></div>
-                {% endif %}
-                {% if session.gen_sched_preferences.total_probability %}
-                    <div><span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ session.gen_sched_preferences.total_probability }}% chance of being granted</span></div>
-                {% endif %}
-                {% if session.gen_sched_preferences.min_break_display and session.gen_sched_preferences.max_break_display and session.gen_sched_preferences.min_break > 0 or session.gen_sched_preferences.max_break > 0 %}
-                    <div><span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ session.gen_sched_preferences.min_break_sched_display }} to {{ session.gen_sched_preferences.max_break_sched_display }} breaks</span></div>
-                {% endif %}
-                {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
-                    <div><span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ session.gen_sched_preferences.earliest_time_display }}</span></div>
-                {% endif %}
-                {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
-                    <div><span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ session.gen_sched_preferences.latest_time_display }}</span></div>
-                {% endif %}
-            {% endif %}
-        </div>
-
-        <!-- Container for the header -->
-        <div class="course-list-header">
-            <h1 style="font-size:16pt;">Classes & Sections</h1>
-            <div class="filler"></div>
-            <h5 style="font-size:12pt; margin:0"><span class="bold-text light-text">{{ units }}</span></h5>
-            {% if show_unsave_button %} 
-                <button class="btn-sm"><a href="add/">+</a></button>
-            {% elif show_save_button %}
-                <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before adding a class!">
-                <button class="btn-sm" disabled>+</button>
-                </span>
-                <!-- <button class="btn-sm" data-bs-toggle="popover" data-bs-content="Testing">+</button> -->
-            {% endif %}
-        </div>
-
-        <!-- Container for the course cards -->
-        <div class="flex-grow-container margin-top-md">
-
-            <!-- Course cards -->
-             {% for course in courses %}
-            <div class="course-card view-card">
-                <div class="course-header">
-                    <h6><span class="bold-text"><span id="i-{{ forloop.counter }}"><i class="bi bi-circle-fill color-icon"></i></span>
-                    {{ course.course_code }} {{ course.section_name.lec }}{% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}</span></h6>
+                    <!-- Export Button -->
+                    <button class="btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                            id="export">EXPORT</button>
                     <div class="filler"></div>
-                    <span class="tab tab-sm bold-text">0% chance of being granted</span>
+                    <!-- Redirect to Home -->
+                    <span class="bold-text"><a href="../../"><i class="bi bi-caret-left-fill"></i> Back to Schedules</a></span>
                 </div>
-                <div class="details-container margin-top-md">
-                    
-                    <!-- Instructor/s -->
-                    <div class="d-flex flex-row align-items start">
-                        <i class="bi bi-person color-icon"></i>
-                        <div class="d-flex flex-column justify-content-left">
-                            <!-- Only choose either lec or disc prof -->
-                            {% if course.instructor_name.lec %}
-                                <span>{{ course.instructor_name.lec | title }}</span>
-                            {% elif course.instructor_name.disc %}
-                                <span>{{ course.instructor_name.disc | title }}</span>
-                            {% endif %}
-
-                            <!-- Additional prof for lab, if applicable -->
-                            {% if course.instructor_name.lab %} 
-                                <span>{{ course.instructor_name.lab | title }} <span class="tab tab-lab bold-text">LAB</span></span>
-                            {% endif %}
-                            
-                        </div>
-                    </div>
-                    
-                    <!-- Units -->
-                    <div class="d-flex flex-row align-items start">
-                        <i class="bi bi bi-book color-icon"></i>
-                        <div class="d-flex flex-column justify-content-left">
-                            {{ course.units }} units
-                        </div>
-                    </div>
-                    
-                    <!-- Capacity -->
-                    <div class="d-flex flex-row align-items start">
-                        <i class="bi bi bi-door-closed color-icon"></i>
-                        <div class="d-flex flex-column justify-content-left">
-                            {{ course.capacity }} students max.
-                        </div>
-                    </div>
-
-                    <!-- Offering Unit -->
-                    <div class="d-flex flex-row align-items start">
-                        <i class="bi bi bi-mortarboard color-icon"></i>
-                        <div class="d-flex flex-column justify-content-left">
-                            {{ course.offering_unit }}
-                        </div>
-                    </div>
-
-                </div>
-                <div class="d-flex margin-top-md">
-                    <div class="filler"></div>
+                <!-- Container for the details of the schedule -->
+                <div class="tabs-container margin-top-md margin-bottom-md">
                     {% if show_unsave_button %}
-                    <form method="POST" action="{% url 'view_saved_sched_view' sched_id=sched_id %}" id="removeCourseFromSched-{{course.course_code}}">
-                        {% csrf_token %}
-                        <input type="hidden" name="class_to_remove" value="{{ course }}">
-                        <button id="{{ course.course_code }}" type="button" class="removeFromSched btn-sm">REMOVE</button>
-                    </form>
-                    <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}" class="margin-left-sm"><button class="btn-sm load-button">REDRAW</button></a>
-
-                    {% elif show_save_button %}
-                    <span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Save this schedule first before removing a class!">
-                    <button class="btn-sm" disabled>REMOVE</button>
-                    </span>
-                    <a class="margin-left-sm" data-bs-toggle="popover" data-bs-content="Save this schedule first before redrawing a class!" data-bs-trigger="hover focus"><button class="btn-sm" disabled>REDRAW</button></a>
+                        {% for schedule in saved_schedules %}
+                            {% if schedule.sched_id == sched_id %}
+                                {% if schedule.preferences.number_of_classes %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 1 to {{ schedule.preferences.number_of_classes }} classes/day</span>
+                                    </div>
+                                {% endif %}
+                                {% if schedule.preferences.total_distance_per_day %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ schedule.preferences.total_distance_per_day }} kilometers/day</span>
+                                    </div>
+                                {% endif %}
+                                {% if schedule.preferences.total_probability %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ schedule.preferences.total_probability }}% chance of being granted</span>
+                                    </div>
+                                {% endif %}
+                                {% if schedule.preferences.min_break_display and schedule.preferences.max_break_display and schedule.preferences.min_break > 0 or schedule.preferences.max_break > 0 %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ schedule.preferences.min_break_sched_display }} to {{ schedule.preferences.max_break_sched_display }} breaks</span>
+                                    </div>
+                                {% endif %}
+                                {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ schedule.preferences.earliest_time_display }}</span>
+                                    </div>
+                                {% endif %}
+                                {% if schedule.preferences.earliest_time_display and schedule.preferences.latest_time_display %}
+                                    <div>
+                                        <span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ schedule.preferences.latest_time_display }}</span>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% if session.gen_sched_preferences.number_of_classes %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-calendar-week-fill color-icon"></i> 1 to {{ session.gen_sched_preferences.number_of_classes }} classes/day</span>
+                            </div>
+                        {% endif %}
+                        {% if session.gen_sched_preferences.total_distance_per_day %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-person-walking color-icon"></i> {{ session.gen_sched_preferences.total_distance_per_day }} kilometers/day</span>
+                            </div>
+                        {% endif %}
+                        {% if session.gen_sched_preferences.total_probability %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-dice-2-fill color-icon"></i> {{ session.gen_sched_preferences.total_probability }}% chance of being granted</span>
+                            </div>
+                        {% endif %}
+                        {% if session.gen_sched_preferences.min_break_display and session.gen_sched_preferences.max_break_display and session.gen_sched_preferences.min_break > 0 or session.gen_sched_preferences.max_break > 0 %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-cup-hot-fill color-icon"></i> {{ session.gen_sched_preferences.min_break_sched_display }} to {{ session.gen_sched_preferences.max_break_sched_display }} breaks</span>
+                            </div>
+                        {% endif %}
+                        {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-brightness-high-fill color-icon"></i> As early as {{ session.gen_sched_preferences.earliest_time_display }}</span>
+                            </div>
+                        {% endif %}
+                        {% if session.gen_sched_preferences.earliest_time_display and session.gen_sched_preferences.latest_time_display %}
+                            <div>
+                                <span class="tab bold-text"><i class="bi bi-moon-fill color-icon"></i> As late as {{ session.gen_sched_preferences.latest_time_display }}</span>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
-            </div>
-
-            <div class="removeCourseOverlay" id="removeFromSched-{{ course.course_code }}">
-                <div id="inner-overlay">
-                        <div>
-                            <h5>Remove this class from this schedule?</h5>
-                        
-                            <button type="submit" class="btn-sm" name="remove_course_from_sched" id="removeFromSchedYes" value="{{ course }}" data-course-code="{{ course.course_code }}">Yes</button>
-                            <button class="btn-sm" id="removeFromSchedNo">No</button>
+                <!-- Container for the header -->
+                <div class="course-list-header">
+                    <h1 style="font-size:16pt;">Classes & Sections</h1>
+                    <div class="filler"></div>
+                    <h5 style="font-size:12pt; margin:0">
+                        <span class="bold-text light-text">{{ units }}</span>
+                    </h5>
+                    {% if show_unsave_button %}
+                        <button class="btn-sm">
+                            <a href="add/">+</a>
+                        </button>
+                    {% elif show_save_button %}
+                        <span data-bs-toggle="popover"
+                              data-bs-trigger="hover focus"
+                              data-bs-content="Save this schedule first before adding a class!">
+                            <button class="btn-sm" disabled>+</button>
+                        </span>
+                        <!-- <button class="btn-sm" data-bs-toggle="popover" data-bs-content="Testing">+</button> -->
+                    {% endif %}
+                </div>
+                <!-- Container for the course cards -->
+                <div class="flex-grow-container margin-top-md">
+                    <!-- Course cards -->
+                    {% for course in courses %}
+                        <div class="course-card view-card">
+                            <div class="course-header">
+                                <h6>
+                                    <span class="bold-text"><span id="i-{{ forloop.counter }}"><i class="bi bi-circle-fill color-icon"></i></span>
+                                    {{ course.course_code }} {{ course.section_name.lec }}
+                                    {% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}
+                                </span>
+                            </h6>
+                            <div class="filler"></div>
+                            <span class="tab tab-sm bold-text">0% chance of being granted</span>
                         </div>
+                        <div class="details-container margin-top-md">
+                            <!-- Instructor/s -->
+                            <div class="d-flex flex-row align-items start">
+                                <i class="bi bi-person color-icon"></i>
+                                <div class="d-flex flex-column justify-content-left">
+                                    <!-- Only choose either lec or disc prof -->
+                                    {% if course.instructor_name.lec %}
+                                        <span>{{ course.instructor_name.lec | title }}</span>
+                                    {% elif course.instructor_name.disc %}
+                                        <span>{{ course.instructor_name.disc | title }}</span>
+                                    {% endif %}
+                                    <!-- Additional prof for lab, if applicable -->
+                                    {% if course.instructor_name.lab %}
+                                        <span>{{ course.instructor_name.lab | title }} <span class="tab tab-lab bold-text">LAB</span></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- Units -->
+                            <div class="d-flex flex-row align-items start">
+                                <i class="bi bi bi-book color-icon"></i>
+                                <div class="d-flex flex-column justify-content-left">{{ course.units }} units</div>
+                            </div>
+                            <!-- Capacity -->
+                            <div class="d-flex flex-row align-items start">
+                                <i class="bi bi bi-door-closed color-icon"></i>
+                                <div class="d-flex flex-column justify-content-left">{{ course.capacity }} students max.</div>
+                            </div>
+                            <!-- Offering Unit -->
+                            <div class="d-flex flex-row align-items start">
+                                <i class="bi bi bi-mortarboard color-icon"></i>
+                                <div class="d-flex flex-column justify-content-left">{{ course.offering_unit }}</div>
+                            </div>
+                        </div>
+                        <div class="d-flex margin-top-md">
+                            <div class="filler"></div>
+                            {% if show_unsave_button %}
+                                <form method="POST"
+                                      action="{% url 'view_saved_sched_view' sched_id=sched_id %}"
+                                      id="removeCourseFromSched-{{ course.course_code }}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="class_to_remove" value="{{ course }}">
+                                    <button id="{{ course.course_code }}"
+                                            type="button"
+                                            class="removeFromSched btn-sm">REMOVE</button>
+                                </form>
+                                <a href="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=course.course_code %}"
+                                   class="margin-left-sm">
+                                    <button class="btn-sm load-button">REDRAW</button>
+                                </a>
+                            {% elif show_save_button %}
+                                <span data-bs-toggle="popover"
+                                      data-bs-trigger="hover focus"
+                                      data-bs-content="Save this schedule first before removing a class!">
+                                    <button class="btn-sm" disabled>REMOVE</button>
+                                </span>
+                                <a class="margin-left-sm"
+                                   data-bs-toggle="popover"
+                                   data-bs-content="Save this schedule first before redrawing a class!"
+                                   data-bs-trigger="hover focus">
+                                    <button class="btn-sm" disabled>REDRAW</button>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="removeCourseOverlay"
+                         id="removeFromSched-{{ course.course_code }}">
+                        <div id="inner-overlay">
+                            <div>
+                                <h5>Remove this class from this schedule?</h5>
+                                <button type="submit"
+                                        class="btn-sm"
+                                        name="remove_course_from_sched"
+                                        id="removeFromSchedYes"
+                                        value="{{ course }}"
+                                        data-course-code="{{ course.course_code }}">Yes</button>
+                                <button class="btn-sm" id="removeFromSchedNo">No</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade"
+         id="staticBackdrop"
+         data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Container of the image -->
+                <div class="modal-body" id="export-container"></div>
+                <div class="modal-footer">
+                    <!-- Close Button -->
+                    <button type="button" class="btn-outline" data-bs-dismiss="modal">Close</button>
+                    <!-- Download Button -->
+                    <!-- "click" the hyperlink when pressed -->
+                    <button id="download-btn"
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="document.getElementById('download-btn').children[0].click();">Download</button>
                 </div>
             </div>
-
-            {% endfor %}
-        </div>
-        <div></div>
-    </div>
-    </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Container of the image -->
-            <div class="modal-body" id="export-container">
-            </div>
-            <div class="modal-footer">
-            
-            <!-- Close Button -->
-            <button type="button" class="btn-outline" data-bs-dismiss="modal">Close</button>
-
-            <!-- Download Button -->
-            <!-- "click" the hyperlink when pressed -->
-            <button id="download-btn" type="button" class="btn btn-primary" onclick="document.getElementById('download-btn').children[0].click();">Download</button>
-            </div>
-        </div>
         </div>
     </div>
-
     <!-- Where the image is initially created -->
     <div id="export-sched">
-    <div class="contents padding-md">
-        <div class="sched-container">
-            <!-- Container for the timetable -->
-            <div class="timetable export">
-                <table id="exportTimetable">
-                    {{ export_table | safe }}
-                </table>
+        <div class="contents padding-md">
+            <div class="sched-container">
+                <!-- Container for the timetable -->
+                <div class="timetable export">
+                    <table id="exportTimetable">
+                        {{ export_table | safe }}
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="padding-md padding-left-lg padding-right-lg">
-
-            <!-- Container for the header -->
-            <div class="course-list-header margin-top-lg margin-bottom-md">
-                <h1>Classes & Sections</h1>
-                <div class="filler"></div>
-                <h5><span class="bold-text light-text">{{units}}</span></h5>
-            </div>
-
-            <!-- Included classes in the schedule -->
-            {% for course in courses %}
-            <div class="course-header">
-                <h6><span class="bold-text"><span id="i-{{forloop.counter}}"><i class="bi bi-circle-fill color-icon"></i></span>{{ course.course_code }} {{ course.section_name.lec }}{% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}</span></h6>
-                <div class="filler"></div>
-                <span class="tab tab-sm bold-text">{{ course.units }} units</span>
-            </div>
+            <div class="padding-md padding-left-lg padding-right-lg">
+                <!-- Container for the header -->
+                <div class="course-list-header margin-top-lg margin-bottom-md">
+                    <h1>Classes & Sections</h1>
+                    <div class="filler"></div>
+                    <h5>
+                        <span class="bold-text light-text">{{ units }}</span>
+                    </h5>
+                </div>
+                <!-- Included classes in the schedule -->
+                {% for course in courses %}
+                    <div class="course-header">
+                        <h6>
+                            <span class="bold-text"><span id="i-{{ forloop.counter }}"><i class="bi bi-circle-fill color-icon"></i></span>{{ course.course_code }} {{ course.section_name.lec }}
+                            {% if course.section_name.lab %}/{{ course.section_name.lab }}{% endif %}
+                        </span>
+                    </h6>
+                    <div class="filler"></div>
+                    <span class="tab tab-sm bold-text">{{ course.units }} units</span>
+                </div>
             {% endfor %}
         </div>
         <div class="filler"></div>
@@ -261,35 +293,30 @@
             <span class="bold-text">Generated using </span><img class="apes-logo" src="{% static 'images/apes_logo.png' %}">
         </div> -->
     </div>
-    </div>
 </div>
-
+</div>
 <!-- Redraw Overlay if no other classes -->
- {% if messages %}
- {% for message in messages %}
- <div id="overlay" onclick="overlayOff()">
-    <div id="confirmation-inner-overlay">
-        <div id="close" onclick="overlayOff()"><i class="bi-x-circle"></i></div>
-        <div id="overlay-text">
-            <h6>{{ message }}</h6>
+{% if messages %}
+    {% for message in messages %}
+        <div id="overlay" onclick="overlayOff()">
+            <div id="confirmation-inner-overlay">
+                <div id="close" onclick="overlayOff()">
+                    <i class="bi-x-circle"></i>
+                </div>
+                <div id="overlay-text">
+                    <h6>{{ message }}</h6>
+                </div>
+            </div>
         </div>
-    </div>
-</div>   
- {% endfor %}
- {% endif %}
-
+    {% endfor %}
+{% endif %}
 {% endblock %}
-
 {% block footer %}
-
     <!-- {% include 'footer.html' %} -->
-
 {% endblock %}
-
-
 {% block addtl_scripts %}
-
-<script  type="module" type="text/javascript" src="{% static 'js/view.js' %}"></script>
-<script type="module" type="text/javascript" src="{% static 'js/html2canvas.js' %}" ></script>
-
+    <script type="module" type="text/javascript" src="{% static 'js/view.js' %}"></script>
+    <script type="module"
+            type="text/javascript"
+            src="{% static 'js/html2canvas.js' %}"></script>
 {% endblock %}

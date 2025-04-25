@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import StudentManager
 
+
 class Student(AbstractUser):
     first_name = None
     last_name = None

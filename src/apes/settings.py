@@ -26,7 +26,7 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,19 +39,17 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # User Apps
-    'pages',
-    'session',
-    'courses',
-    'preferences',
-
+    "pages",
+    "session",
+    "courses",
+    "preferences",
     #'storages',
     #'corsheaders',
 ]
@@ -61,7 +59,7 @@ CSRF_COOKIE_SECURE = False
 
 # for login authentication; default authentication backend
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend', 
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 # URL for login, internal user pages are redirected to this if user is not logged in
@@ -81,36 +79,36 @@ UNTIL the browser is ultimately closed (as in-the entire browser (all tabs!)); c
 #     "django.contrib.auth.backends.ModelBackend",  # Default authentication
 # ]
 
-ROOT_URLCONF = 'apes.urls'
+ROOT_URLCONF = "apes.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'apes.wsgi.application'
+WSGI_APPLICATION = "apes.wsgi.application"
 
 MIDDLEWARE = [
-    'apes.middleware.DatabaseErrorMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "apes.middleware.DatabaseErrorMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     #'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 """ CORS_ORIGIN_ALLOW_ALL = True
@@ -134,9 +132,7 @@ CORS_ALLOWED_ORIGINS = [
 
 import dj_database_url
 
-DATABASES = {
-    'default' : dj_database_url.parse(env('DATABASE_URL'))
-}
+DATABASES = {"default": dj_database_url.parse(env("DATABASE_URL"))}
 
 
 # orig: BASE_DIR / 'db.sqlite3'
@@ -149,16 +145,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -168,9 +164,9 @@ AUTH_USER_MODEL = "session.Student"
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -180,19 +176,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_DIR = os.path.join (BASE_DIR, "static")
-STATIC_ROOT = os.path.join (BASE_DIR,'static files')
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static files")
 
-STATIC_URL ='/static/'# path to read css with local (probably)
+STATIC_URL = "/static/"  # path to read css with local (probably)
 STATICFILES_DIRS = [
-        os.path.join (BASE_DIR, "static"),
-    ]
+    os.path.join(BASE_DIR, "static"),
+]
 # https://stackoverflow.com/questions/71873839/how-to-make-static-directory-in-django (enes islam)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # AWS configuration
 """ 
@@ -219,4 +215,3 @@ STORAGES = {
         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
     },
 } """
-

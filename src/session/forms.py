@@ -1,113 +1,99 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from session.models import Student
 import re
 
+
 class UserRegisterForm(UserCreationForm):
     error_messages = {
-        'password_mismatch': "The two password fields didn't match.",
-        'length_error': "Must contain at least 8 alphanumeric characters",
-        'capital_error': "Must contain at least one capital letter",
-        'number_error': "Must contain at least one number",
-        'no_input': "Both fields are required."
+        "password_mismatch": "The two password fields didn't match.",
+        "length_error": "Must contain at least 8 alphanumeric characters",
+        "capital_error": "Must contain at least one capital letter",
+        "number_error": "Must contain at least one number",
+        "no_input": "Both fields are required.",
     }
     username = forms.CharField(
-        max_length = 20,
-        widget = forms.TextInput(
-            attrs = {
-                "placeholder" : "Username",
-                "class" : "form-control"
-            }
-        ))
+        max_length=20,
+        widget=forms.TextInput(
+            attrs={"placeholder": "Username", "class": "form-control"}
+        ),
+    )
 
     email = forms.EmailField(
-        widget = forms.EmailInput(
-            attrs = {
-                "placeholder" : "juandelacruz@gmail.com",
-                "class" : "form-control"
-            }
+        widget=forms.EmailInput(
+            attrs={"placeholder": "juandelacruz@gmail.com", "class": "form-control"}
         )
     )
 
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(
-            attrs = {
-                "placeholder" : "Password",
-                "class" : "form-control"
-            }
-        )
+            attrs={"placeholder": "Password", "class": "form-control"}
+        ),
     )
     password2 = forms.CharField(
         label="Confirm Password",
         widget=forms.PasswordInput(
-            attrs = {
-                "placeholder" : "Re-enter Password",
-                "class" : "form-control"
-            }
-        )
+            attrs={"placeholder": "Re-enter Password", "class": "form-control"}
+        ),
     )
-    
+
     agreement = forms.BooleanField(
-        widget = forms.CheckboxInput(
-            attrs = {
-                "class" : "form-check-input",
-                "id" : "agreement"
-            }
+        widget=forms.CheckboxInput(
+            attrs={"class": "form-check-input", "id": "agreement"}
         )
     )
 
     class Meta:
         model = Student
         fields = [
-            'username',
-            'email',
-            'password1',
-            'password2',
-            'agreement',
+            "username",
+            "email",
+            "password1",
+            "password2",
+            "agreement",
         ]
-    
+
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
-        
-        if password1 == '' or password2 == '' or password1 == None or password2 == None:
+
+        if password1 == "" or password2 == "" or password1 == None or password2 == None:
             raise forms.ValidationError(
-                self.error_messages['no_input'],
-                code='no_input',
+                self.error_messages["no_input"],
+                code="no_input",
             )
         elif password1 and password2 and password1 != password2:
             raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
-                code='password_mismatch',
+                self.error_messages["password_mismatch"],
+                code="password_mismatch",
             )
-        
+
         elif len(password1) < 8:
             raise forms.ValidationError(
-                self.error_messages['length_error'],
-                code='length_error',
+                self.error_messages["length_error"],
+                code="length_error",
             )
-        elif not re.search(r'[A-Z]', password1):
+        elif not re.search(r"[A-Z]", password1):
             raise forms.ValidationError(
-                self.error_messages['capital_error'],
-                code='capital_error',
+                self.error_messages["capital_error"],
+                code="capital_error",
             )
-        elif not re.search(r'\d', password1):
+        elif not re.search(r"\d", password1):
             raise forms.ValidationError(
-                self.error_messages['number_error'],
-                code='number_error',
+                self.error_messages["number_error"],
+                code="number_error",
             )
         else:
             return password2
-        
+
     # not needed bc set email as unique
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')
     #     if email and self._meta.model.objects.filter(email__iexact=email).exists():
-    #         raise forms.ValidationError("Email already exists in database") 
+    #         raise forms.ValidationError("Email already exists in database")
     #     return email
     # # reference:
     # # Antheiz. Stack Overflow.
@@ -119,7 +105,7 @@ class UserRegisterForm(UserCreationForm):
     #     if len(password1) < 8:
     #         raise forms.ValidationError("Must contain at least 8 alphanumeric characters")
     #     return password1
-    
+
     # def clean_password2(self, *args, **kwargs):
     #     password1 = self.cleaned_data.get('password1')
     #     password2 = self.cleaned_data.get('password2')
@@ -133,23 +119,18 @@ class UserRegisterForm(UserCreationForm):
 # not just username/email alone (which is already supported by AuthenticationForm)
 class UserAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
-        max_length = 40,
-        label = "Username | Email Address",
-        widget = forms.TextInput(
-            attrs = {
-                "placeholder" : "Username or Email Address",
-                "class" : "form-control"
-            }
-        ))
+        max_length=40,
+        label="Username | Email Address",
+        widget=forms.TextInput(
+            attrs={"placeholder": "Username or Email Address", "class": "form-control"}
+        ),
+    )
 
     password = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(
-            attrs = {
-                "placeholder" : "Password",
-                "class" : "form-control"
-            }
-        )
+            attrs={"placeholder": "Password", "class": "form-control"}
+        ),
     )
 
     def clean(self):
@@ -157,20 +138,22 @@ class UserAuthenticationForm(AuthenticationForm):
         username_or_email = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
 
-        # if user either fails to fill up username/email field or password field, error is raised    
+        # if user either fails to fill up username/email field or password field, error is raised
         if not username_or_email or not password:
-            raise ValidationError("Both fields are required.") 
-            
-        # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)    
-        user = User.objects.filter(email=username_or_email).first() or User.objects.filter(username=username_or_email).first()
-        
+            raise ValidationError("Both fields are required.")
+
+        # find user by either username or email since logging in permits both as preferred by the user (given that its valid ofc)
+        user = (
+            User.objects.filter(email=username_or_email).first()
+            or User.objects.filter(username=username_or_email).first()
+        )
+
         # if invalid inputted email/username
         if not user:
             # TEST: print("The account does not exist. Please sign up.")
             raise ValidationError("The account does not exist. Please sign up.")
-        
-        # TEST: print(user, user.username)
 
+        # TEST: print(user, user.username)
 
         # authenticate using user.email since we set USERNAME_FIELD = "email" in models.py
         authenticated_user = authenticate(username=user.email, password=password)
@@ -178,11 +161,13 @@ class UserAuthenticationForm(AuthenticationForm):
         # if valid user email/username but password is wrong, raise error
         if not authenticated_user:
             # TEST: print("The password you've entered is incorrect. Please try again.")
-            raise ValidationError("The password you've entered is incorrect. Please try again.")
-                    
+            raise ValidationError(
+                "The password you've entered is incorrect. Please try again."
+            )
+
         self.cleaned_data["username"] = user.email
 
         return self.cleaned_data
-    
+
     def get_user(self):
         return self.user_cache

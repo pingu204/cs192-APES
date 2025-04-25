@@ -1,16 +1,14 @@
-# This Test is to test the Models 
-#-------------------------------------------------------------------------------
+# This Test is to test the Models
+# -------------------------------------------------------------------------------
 
 from django.test import TestCase
 from courses.models import DesiredCourse
-from courses.schedule import Course
+
 
 class DesiredCourseModelTest(TestCase):
-
     def setUp(self):
         self.desired_course = DesiredCourse.objects.create(
-            student_id=1,
-            course_code="CS101"
+            student_id=1, course_code="CS101"
         )
 
     def test_desired_course_creation(self):
@@ -19,17 +17,4 @@ class DesiredCourseModelTest(TestCase):
 
     def test_unique_together_constraint(self):
         with self.assertRaises(Exception):
-            DesiredCourse.objects.create(
-                student_id=1,
-                course_code="CS101"
-            )
-
-
-        
-        
-    
-        
-        
-
-        
- 
+            DesiredCourse.objects.create(student_id=1, course_code="CS101")

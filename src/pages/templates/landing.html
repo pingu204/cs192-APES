@@ -1,133 +1,165 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block nav %}
-
     {% include 'nav_landing.html' %}
-
 {% endblock %}
-
 {% block content %}
-
     <div class="body-container landing">
-
         <div class="row h-100">
             <div class="col col-md-6 d-flex align-items-center justify-content-center">
-                <img class="d-none d-md-block apes-tabs" src="{% static 'images/apes_tabs.png' %}">
+                <img class="d-none d-md-block apes-tabs"
+                     src="{% static 'images/apes_tabs.png' %}">
             </div>
             <div class="col col-md-6 d-flex text-center text-lg-start align-items-center justify-content-center justify-content-xl-start">
                 <div class="">
-                    <h1 class="display-1 fw-bold lh-1"><span class="swoosh-text">Stress-Free</span><br>Scheduling.</h1>
+                    <h1 class="display-1 fw-bold lh-1">
+                        <span class="swoosh-text">Stress-Free</span>
+                        <br>
+                        Scheduling.
+                    </h1>
                     <div class="description p-4 p-lg-0">
-                        <p class="lh-lg">APES is a web-based schedule planner software that allows the students of the University of the Philippines—Diliman (UPD) to curate efficient timetables that suit their needs and preferences.</p>
-
+                        <p class="lh-lg">
+                            APES is a web-based schedule planner software that allows the students of the University of the Philippines—Diliman (UPD) to curate efficient timetables that suit their needs and preferences.
+                        </p>
                         <div class="buttons">
-                            <button class="btn btn-landing-filled"><a href="login/">Login <i class="bi bi-arrow-right"></i></a></button>
-                            <button class="btn btn-landing"><a href="register/">Sign Up</a></button>
-
-                            <span>OR</span> 
+                            <button class="btn btn-landing-filled">
+                                <a href="login/">Login <i class="bi bi-arrow-right"></i></a>
+                            </button>
+                            <button class="btn btn-landing">
+                                <a href="register/">Sign Up</a>
+                            </button>
+                            <span>OR</span>
                             <!--Guest log-ins are treated as POST methods since user data is saved per session; data flushed upon session termination-->
                             <h6>
-                                <a class="guest-login" href="#" onclick="document.getElementById('guest-login-form').submit(); return false;">
+                                <a class="guest-login"
+                                   href="#"
+                                   onclick="document.getElementById('guest-login-form').submit(); return false;">
                                     Continue as Guest
                                 </a>
                             </h6>
-                            <form id="guest-login-form" action="{% url 'guest_login_view' %}" method="POST">
+                            <form id="guest-login-form"
+                                  action="{% url 'guest_login_view' %}"
+                                  method="POST">
                                 {% csrf_token %}
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="margin-lg d-flex justify-content-center" id="features">
             <div class="w-50 d-flex flex-column align-items-center">
                 <hr class="mb-4" style="width:20%;">
                 <div class="d-flex align-items-center flex-column">
                     <h6 class="subtitle">THE FEATURES</h6>
-                    <h1 class="display-5 fw-bold text-center mb-4">Plan your semester <span class="highlight">with ease</span></h1>
+                    <h1 class="display-5 fw-bold text-center mb-4">
+                        Plan your semester <span class="highlight">with ease</span>
+                    </h1>
                     <div class="row gap-3">
                         <div class="card-outline rounded-5 col-12 col-md p-4">
-                            <img class="img-fluid mb-4" src="{% static 'images/fluent-color--board-28.png' %}">
+                            <img class="img-fluid mb-4"
+                                 src="{% static 'images/fluent-color--board-28.png' %}">
                             <div>
                                 <h5 class="fw-bold">Instant Schedules</h5>
-                                <p>With your given set of needed classes for the semester, creating different schedules with no overlapping classes is now one click away!</p>
+                                <p>
+                                    With your given set of needed classes for the semester, creating different schedules with no overlapping classes is now one click away!
+                                </p>
                             </div>
                         </div>
                         <div class="card-outline rounded-5 col-12 col-md p-4">
-                            <img class="img-fluid mb-4" src="{% static 'images/fluent-color--calendar-48.png' %}">
+                            <img class="img-fluid mb-4"
+                                 src="{% static 'images/fluent-color--calendar-48.png' %}">
                             <h5 class="fw-bold">Save Scheds for Later</h5>
-                            <p>Should you wish to consider different schedules for the semester, you can save them for later and even modify them according to your liking!</p>
+                            <p>
+                                Should you wish to consider different schedules for the semester, you can save them for later and even modify them according to your liking!
+                            </p>
                         </div>
                         <div class="card-outline rounded-5 col-12 col-md p-4">
-                            <img class="img-fluid mb-4" src="{% static 'images/fluent-color--apps-32.png' %}">
+                            <img class="img-fluid mb-4"
+                                 src="{% static 'images/fluent-color--apps-32.png' %}">
                             <h5 class="fw-bold">Redraw Class</h5>
-                            <p>Like everything about a schedule but that one class? You can easily find a new time slot for it to ensure that you’re living the best college life.</p>
+                            <p>
+                                Like everything about a schedule but that one class? You can easily find a new time slot for it to ensure that you’re living the best college life.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="margin-lg d-flex justify-content-center" id="tos">
             <div class="w-50 d-flex flex-column align-items-center">
                 <hr class="mb-4" style="width:20%;">
                 <div class="d-flex align-items-center flex-column">
                     <h6 class="subtitle">TERMS OF SERVICE</h6>
-                    <h1 class="display-5 fw-bold text-center mb-4">What to <span class="highlight">expect</span> from us</h1>
+                    <h1 class="display-5 fw-bold text-center mb-4">
+                        What to <span class="highlight">expect</span> from us
+                    </h1>
                     <div class="row gap-3">
                         <div class="card-outline rounded-5 p-4">
                             <h5 class="fw-bold">Affiliations with UP Diliman and CRS</h5>
-                            <p>APES is an independent tool created to assist students at the University of the Philippines—Diliman (UPD) in efficiently organizing their schedules. While APES uses data from the Computerized Registration System (CRS) through its official API, it is not affiliated with or endorsed by UPD. APES simply integrates this data to help students build a timetable tailored to their preferences and constraints. Users should be aware that APES’s schedule recommendations are based on CRS data and do not guarantee enrollment in specific classes.</p>
+                            <p>
+                                APES is an independent tool created to assist students at the University of the Philippines—Diliman (UPD) in efficiently organizing their schedules. While APES uses data from the Computerized Registration System (CRS) through its official API, it is not affiliated with or endorsed by UPD. APES simply integrates this data to help students build a timetable tailored to their preferences and constraints. Users should be aware that APES’s schedule recommendations are based on CRS data and do not guarantee enrollment in specific classes.
+                            </p>
                         </div>
                         <div class="card-outline rounded-5 p-4">
                             <h5 class="fw-bold">Limitations of the Software</h5>
-                            <p>APES aims to generate optimized schedules based on user preferences—such as earliest start time, latest end time, and specific class exclusions—while resolving scheduling conflicts as best as possible. However, APES does not ensure successful registration in any given class, as it cannot influence the CRS system’s allocation. Users should view the generated schedules as guides and refer to CRS for official course registration and final confirmation of class assignments.</p>
+                            <p>
+                                APES aims to generate optimized schedules based on user preferences—such as earliest start time, latest end time, and specific class exclusions—while resolving scheduling conflicts as best as possible. However, APES does not ensure successful registration in any given class, as it cannot influence the CRS system’s allocation. Users should view the generated schedules as guides and refer to CRS for official course registration and final confirmation of class assignments.
+                            </p>
                         </div>
                         <div class="card-outline rounded-5 p-4">
                             <h5 class="fw-bold">Use License</h5>
-                            <p>APES is a web-based scheduling tool offered exclusively for UPD students to support their course planning. By using APES, users agree to access it solely for personal schedule management purposes. Redistribution, modification, or commercial use of APES software or data is prohibited. APES reserves the right to update its terms of use as needed, and continued use implies acceptance of these updates. The APES team may introduce new features or improvements, and users should review any changes to the terms regularly.</p>
+                            <p>
+                                APES is a web-based scheduling tool offered exclusively for UPD students to support their course planning. By using APES, users agree to access it solely for personal schedule management purposes. Redistribution, modification, or commercial use of APES software or data is prohibited. APES reserves the right to update its terms of use as needed, and continued use implies acceptance of these updates. The APES team may introduce new features or improvements, and users should review any changes to the terms regularly.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
         <div class="margin-lg d-flex justify-content-center" id="privacy">
             <div class="w-50 d-flex flex-column align-items-center">
                 <hr class="mb-4" style="width:20%;">
                 <div class="d-flex align-items-center flex-column">
                     <h6 class="subtitle">PRIVACY POLICY</h6>
-                    <h1 class="display-5 fw-bold text-center mb-4">What we do with your <span class="highlight">data</span></h1>
+                    <h1 class="display-5 fw-bold text-center mb-4">
+                        What we do with your <span class="highlight">data</span>
+                    </h1>
                     <div class="row gap-3">
                         <div class="card-outline rounded-5 p-4">
                             <h5 class="fw-bold">Personal Information</h5>
-                            <p>To provide personalized scheduling recommendations, APES may collect basic information such as your name, preferred courses, and scheduling preferences. This information is used exclusively to generate an optimal schedule for you and is not shared with third parties. Your personal information will only be retained as long as necessary for scheduling purposes and will be deleted or anonymized upon request.</p>
+                            <p>
+                                To provide personalized scheduling recommendations, APES may collect basic information such as your name, preferred courses, and scheduling preferences. This information is used exclusively to generate an optimal schedule for you and is not shared with third parties. Your personal information will only be retained as long as necessary for scheduling purposes and will be deleted or anonymized upon request.
+                            </p>
                         </div>
                         <div class="card-outline rounded-5 p-4">
                             <h5 class="fw-bold">Data Security</h5>
-                            <p>APES is committed to safeguarding the data of all UPD students. We employ secure storage and encryption protocols to protect user information and limit access to authorized personnel. The data APES retrieves from CRS is used strictly for generating schedules and is not stored beyond the user session, unless explicitly saved by the user. While we continuously update our security measures to prevent unauthorized access, please remember that no system is entirely immune to potential security risks.</p>
+                            <p>
+                                APES is committed to safeguarding the data of all UPD students. We employ secure storage and encryption protocols to protect user information and limit access to authorized personnel. The data APES retrieves from CRS is used strictly for generating schedules and is not stored beyond the user session, unless explicitly saved by the user. While we continuously update our security measures to prevent unauthorized access, please remember that no system is entirely immune to potential security risks.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="margin-lg d-flex justify-content-center" id="about-us">
             <div class="w-50 d-flex flex-column align-items-center">
                 <hr class="mb-4" style="width:20%;">
                 <div class="w-100">
                     <h6 class="subtitle">THE TEAM</h6>
-                    <h1 class="display-5 fw-bold text-center mb-4">About <span class="highlight">us</span></h1>
+                    <h1 class="display-5 fw-bold text-center mb-4">
+                        About <span class="highlight">us</span>
+                    </h1>
                     <div class="d-flex justify-content-center flex-wrap gap-3">
                         <div class="profile p-3 pe-4">
                             <div class="h-100 d-flex gap-3 mr-3">
-                                <img class="img-fluid rounded-circle" src="https://media.licdn.com/dms/image/v2/D4E03AQHGBDmTf5igJA/profile-displayphoto-shrink_800_800/B4EZZbldRTHEAg-/0/1745293270155?e=1750896000&v=beta&t=bCulNX9ljFC0AH57GFTELuDjd_Bjvi_5IsUtIZZyKvM">
+                                <img class="img-fluid rounded-circle"
+                                     src="https://media.licdn.com/dms/image/v2/D4E03AQHGBDmTf5igJA/profile-displayphoto-shrink_800_800/B4EZZbldRTHEAg-/0/1745293270155?e=1750896000&v=beta&t=bCulNX9ljFC0AH57GFTELuDjd_Bjvi_5IsUtIZZyKvM">
                                 <div>
                                     <h6 class="mb-1">Jason Alcantara</h6>
                                     <h6>
-                                        <a href="https://www.linkedin.com/in/jason-alcantara-s8/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://www.linkedin.com/in/jason-alcantara-s8/"
+                                           target="_blank"><i class="bi bi-linkedin"></i></a>
                                         <a href="https://github.com/Janossss" target="_blank"><i class="bi bi-github"></i></a>
                                     </h6>
                                 </div>
@@ -135,11 +167,13 @@
                         </div>
                         <div class="profile p-3 pe-4">
                             <div class="h-100 d-flex gap-3 mr-3">
-                                <img class="img-fluid rounded-circle" src="https://media.licdn.com/dms/image/v2/D4E03AQEYKM9qwBdE5A/profile-displayphoto-shrink_800_800/B4EZUKAykmHMAc-/0/1739629734887?e=1750896000&v=beta&t=6grUY9dT3fHWGVY9h6LgQ_vjGYMcWxiEQgaSu_UO_MY">
+                                <img class="img-fluid rounded-circle"
+                                     src="https://media.licdn.com/dms/image/v2/D4E03AQEYKM9qwBdE5A/profile-displayphoto-shrink_800_800/B4EZUKAykmHMAc-/0/1739629734887?e=1750896000&v=beta&t=6grUY9dT3fHWGVY9h6LgQ_vjGYMcWxiEQgaSu_UO_MY">
                                 <div>
                                     <h6 class="mb-1">Riana Bejarin</h6>
                                     <h6>
-                                        <a href="https://www.linkedin.com/in/riana-bejarin-191a95336/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://www.linkedin.com/in/riana-bejarin-191a95336/"
+                                           target="_blank"><i class="bi bi-linkedin"></i></a>
                                         <a href="https://github.com/rianadb" target="_blank"><i class="bi bi-github"></i></a>
                                     </h6>
                                 </div>
@@ -147,11 +181,13 @@
                         </div>
                         <div class="profile p-3 pe-4">
                             <div class="h-100 d-flex gap-3 mr-3">
-                                <img class="img-fluid rounded-circle" src="https://i.pinimg.com/736x/f3/fa/94/f3fa9404689a4cb73dedc5b0b855ad68.jpg">
+                                <img class="img-fluid rounded-circle"
+                                     src="https://i.pinimg.com/736x/f3/fa/94/f3fa9404689a4cb73dedc5b0b855ad68.jpg">
                                 <div>
                                     <h6 class="mb-1">Theodore Esguerra</h6>
                                     <h6>
-                                        <a href="https://www.linkedin.com/in/theodore-esguerra-a14968358/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://www.linkedin.com/in/theodore-esguerra-a14968358/"
+                                           target="_blank"><i class="bi bi-linkedin"></i></a>
                                         <a href="https://github.com/TheooooW" target="_blank"><i class="bi bi-github"></i></a>
                                     </h6>
                                 </div>
@@ -159,11 +195,13 @@
                         </div>
                         <div class="profile p-3 pe-4">
                             <div class="h-100 d-flex gap-3 mr-3">
-                                <img class="img-fluid rounded-circle" src="https://drive.google.com/thumbnail?id=1OeVWmLYpBl1Tdjp9N68DXoakxhtuKt10">
+                                <img class="img-fluid rounded-circle"
+                                     src="https://drive.google.com/thumbnail?id=1OeVWmLYpBl1Tdjp9N68DXoakxhtuKt10">
                                 <div>
                                     <h6 class="mb-1">Gerard Salao</h6>
                                     <h6>
-                                        <a href="https://www.linkedin.com/in/gerard-andrew-salao/" target="_blank"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://www.linkedin.com/in/gerard-andrew-salao/"
+                                           target="_blank"><i class="bi bi-linkedin"></i></a>
                                         <a href="https://github.com/gsalao" target="_blank"><i class="bi bi-github"></i></a>
                                     </h6>
                                 </div>
@@ -171,7 +209,8 @@
                         </div>
                         <div class="profile p-3 pe-4">
                             <div class="h-100 d-flex gap-3 mr-3">
-                                <img class="rounded-circle" src="https://media.licdn.com/dms/image/v2/D5603AQHBjg_BLc_1-w/profile-displayphoto-shrink_800_800/B56ZXnjHgkGcAc-/0/1743346498202?e=1750896000&v=beta&t=GPlVvoR_XFWoOioqLCUi0YZdm0vQ1s8cZAHd2DqSiNc">
+                                <img class="rounded-circle"
+                                     src="https://media.licdn.com/dms/image/v2/D5603AQHBjg_BLc_1-w/profile-displayphoto-shrink_800_800/B56ZXnjHgkGcAc-/0/1743346498202?e=1750896000&v=beta&t=GPlVvoR_XFWoOioqLCUi0YZdm0vQ1s8cZAHd2DqSiNc">
                                 <div>
                                     <h6 class="mb-1">Jopeth Seda</h6>
                                     <h6>
@@ -185,11 +224,6 @@
                 </div>
             </div>
         </div>
-        
-        
         {% include 'footer.html' %}
     </div>
-
-    
-
 {% endblock %}

@@ -9,9 +9,10 @@ admin.site.index_title = "APES Admin Portal"
 
 # Register your models here.
 
+
 # Affixed Student User view in backend, hence the decorator @admin.register(Student)
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'is_staff')
-    ordering = ('email',)
-    search_fields = ('username',)
+    list_display = ("email", "username", "is_staff")
+    ordering = ("email",)
+    search_fields = ("username",)

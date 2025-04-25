@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
-
 {% block nav %}
-
     {% include 'nav_main.html' %}
-
 {% endblock %}
-
 {% block content %}
-
-{% load static %}
-
+    {% load static %}
     <div class="body-container homepage">
         <div class="form-body login dcp">
             <div class="course-list-header">
@@ -20,49 +14,55 @@
             <span class="form-text mb-3">
                 These filters will be used to narrow down your search for the most convenient schedule. Try tinkering with each of the filter!
             </span>
-
             <!-- Container for the form -->
             <div class="flex-grow-container">
-                <form method="POST" onsubmit="showLoading()" id="preferencesForm" name="save_preference_changes">
+                <form method="POST"
+                      onsubmit="showLoading()"
+                      id="preferencesForm"
+                      name="save_preference_changes">
                     {% csrf_token %}
                     <!-- Number of Classes / Day -->
                     <div class="result-card">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-1"><i class="bi bi-circle-fill color-icon"></i></span> NUMBER OF CLASSES PER DAY</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-1"><i class="bi bi-circle-fill color-icon"></i></span> NUMBER OF CLASSES PER DAY
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
                                 <a href="#" onclick="resetNumClasses();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-
                         <!-- Field -->
                         <div class="d-flex align-items-center gap-3">
                             <div class="flex-grow-1">
-                                <label for="inputNumClasses" class="col-form-label sub">I only want to attend </label>
-                            </div>  
+                                <label for="inputNumClasses" class="col-form-label sub">I only want to attend</label>
+                            </div>
                             <div>
-                                <!-- <input type="number" id="inputNumClasses" class="form-control" placeholder="0" min="0" max="30"> -->
-                                 {{ form.number_of_classes }}
+                                <!-- <input type="number"
+        id="inputNumClasses"
+        class="form-control"
+        placeholder="0"
+        min="0"
+        max="30"> -->
+                                {{ form.number_of_classes }}
                             </div>
                             <div class="flex-grow-1">
                                 <label for="inputNumClasses" class="col-form-label sub">classes a day</label>
                             </div>
-                            <div class="filler">
-
-                            </div>
+                            <div class="filler"></div>
                         </div>
-                        
                     </div>
-
                     <!-- Class Days -->
                     <div class="result-card">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-2"><i class="bi bi-circle-fill color-icon"></i></span> CLASS DAYS</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-2"><i class="bi bi-circle-fill color-icon"></i></span> CLASS DAYS
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
@@ -73,113 +73,119 @@
                         <!-- changes made: changed id and for of input and label tags to match original html-->
                         {% for checkbox in form.class_days %}
                             <input type="checkbox"
-                            class="btn-check"
-                            id="check-{{ checkbox.choice_label }}"
-                            name="class_days"
-                            value="{{ checkbox.choice_label }}"
-                            {% if checkbox.choice_label in session.preferences.class_days %}checked{% endif %}
-                            autocomplete="off">
+                                   class="btn-check"
+                                   id="check-{{ checkbox.choice_label }}"
+                                   name="class_days"
+                                   value="{{ checkbox.choice_label }}"
+                                   {% if checkbox.choice_label in session.preferences.class_days %}checked{% endif %}
+                                   autocomplete="off">
                             {% if checkbox.choice_label == 'H' %}
-                                <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">Th</label>
+                                <label class="btn btn-outline-secondary form-font-size"
+                                       for="check-{{ checkbox.choice_label }}">Th</label>
                             {% else %}
-                                <label class="btn btn-outline-secondary form-font-size" for="check-{{ checkbox.choice_label }}">{{ checkbox.choice_label }}</label>
+                                <label class="btn btn-outline-secondary form-font-size"
+                                       for="check-{{ checkbox.choice_label }}">{{ checkbox.choice_label }}</label>
                             {% endif %}
                         {% endfor %}
                         <!-- Monday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-m" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-m">M</label> -->
-
+<label class="btn btn-outline-secondary form-font-size" for="check-m">M</label> -->
                         <!-- Tuesday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-t" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-t">T</label> -->
-
+<label class="btn btn-outline-secondary form-font-size" for="check-t">T</label> -->
                         <!-- Wednesday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-w" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-w">W</label> -->
-
+<label class="btn btn-outline-secondary form-font-size" for="check-w">W</label> -->
                         <!-- Thursday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-h" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-h">Th</label> -->
-
+<label class="btn btn-outline-secondary form-font-size" for="check-h">Th</label> -->
                         <!-- Friday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-f" autocomplete="off">
-                        <label class="btn btn-outline-secondary form-font-size" for="check-f">F</label> -->
-
+<label class="btn btn-outline-secondary form-font-size" for="check-f">F</label> -->
                         <!-- Saturday -->
                         <!-- <input type="checkbox" class="btn-check" id="check-s" autocomplete="off">
                         <label class="btn btn-outline-secondary form-font-size" for="check-s">S</label> -->
                     </div>
-
                     <!-- Total Distance / Day -->
                     <div class="result-card">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-3"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL DISTANCE PER DAY</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-3"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL DISTANCE PER DAY
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
                                 <a href="#" onclick="resetDistance();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-                        
                         <!-- Field -->
                         <div class="d-flex">
                             <div class="w-100">
                                 <label for="inputDistance" class="col-form-label sub">In a day, I want to travel at most</label>
                             </div>
                             <div class="w-100">
-                                <div class="input-group">    
-                                    <!-- <input id="inputDistance" type="number" class="form-control margin-left-sm" placeholder="0"> -->
-                                     {{ form.total_distance_per_day }}
+                                <div class="input-group">
+                                    <!-- <input id="inputDistance"
+        type="number"
+        class="form-control margin-left-sm"
+        placeholder="0"> -->
+                                    {{ form.total_distance_per_day }}
                                     <span class="input-group-text">km</span>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
-
                     <!-- Total Probability -->
                     <div class="result-card">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-4"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL PROBABILITY</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-4"><i class="bi bi-circle-fill color-icon"></i></span> TOTAL PROBABILITY
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
                                 <a href="#" onclick="resetProbability();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-                        
                         <!-- Field -->
                         <div class="d-flex gap-3">
                             <div class="w-100">
-                                <input id="inputProbabilityRange" type="range" class="form-range" id="customRange1" min="0.00" max="100.00" step="0.01" value="0.00">
+                                <input id="inputProbabilityRange"
+                                       type="range"
+                                       class="form-range"
+                                       id="customRange1"
+                                       min="0.00"
+                                       max="100.00"
+                                       step="0.01"
+                                       value="0.00">
                             </div>
                             <div class="">
                                 <div class="input-group">
                                     <!-- <input id="inputProbability" type="number" class="form-control" value="0.00"> -->
-                                     {{ form.total_probability }}
+                                    {{ form.total_probability }}
                                     <span class="input-group-text">%</span>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-
                     <!-- Class Times -->
                     <div class="result-card">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-5"><i class="bi bi-circle-fill color-icon"></i></span> CLASS TIMES</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-5"><i class="bi bi-circle-fill color-icon"></i></span> CLASS TIMES
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
                                 <a href="#" onclick="resetClassTimes();" class="ml-2"><i class="bi bi-arrow-counterclockwise"></i> Reset</a>
                             </div>
                         </div>
-
                         <!-- Field -->
                         <div class="d-flex">
                             <div>
@@ -194,11 +200,9 @@
                                     <option value="2">10:00 PM</option>
                                 </select> -->
                                 {{ form.earliest_time }}
-                                <span for="inputEarliestTime" class="form-text">
-                                    As early as
-                                </span>
+                                <span for="inputEarliestTime" class="form-text">As early as</span>
                             </div>
-                            <div class="filler text-center" >
+                            <div class="filler text-center">
                                 <label class="col-form-label sub">-</label>
                             </div>
                             <div>
@@ -213,13 +217,10 @@
                                     <option value="2">10:00 PM</option>
                                 </select> -->
                                 {{ form.latest_time }}
-                                <span for="inputLatestTime" class="form-text">
-                                    As late as
-                                </span>
+                                <span for="inputLatestTime" class="form-text">As late as</span>
                             </div>
                         </div>
                     </div>
-
                     {% if form.errors %}
                         <script type="text/javascript">
                             window.onload = function() {
@@ -227,13 +228,14 @@
                             };
                         </script>
                     {% endif %}
-
                     <!-- Break Duration -->
                     <div class="result-card mb-3" style="border-bottom: 0">
                         <!-- Header -->
                         <div class="mb-2 d-flex">
                             <div>
-                                <label class="form-label"><span class="disabled" id="i-6"><i class="bi bi-circle-fill color-icon"></i></span> BREAK DURATION</label>
+                                <label class="form-label">
+                                    <span class="disabled" id="i-6"><i class="bi bi-circle-fill color-icon"></i></span> BREAK DURATION
+                                </label>
                             </div>
                             <div class="filler"></div>
                             <div>
@@ -244,23 +246,29 @@
                         <div class="d-flex gap-3">
                             <div>
                                 <div class="input-group">
-                                    <!-- <input type="number" id="inputMinBreak" class="form-control" min="0" placeholder="0"> -->
-                                        {{ form.min_break }}
+                                    <!-- <input type="number"
+        id="inputMinBreak"
+        class="form-control"
+        min="0"
+        placeholder="0"> -->
+                                    {{ form.min_break }}
                                     <!-- <select class="form-select form-control" id="inputMinBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
                                         <option value="60">hours</option>
                                     </select> -->
-                                        {{ form.min_break_unit }}
+                                    {{ form.min_break_unit }}
                                 </div>
-                                <span for="inputMinBreak" class="form-text">
-                                    Minimum
-                                </span>
+                                <span for="inputMinBreak" class="form-text">Minimum</span>
                             </div>
                             <div>
                                 <div class="input-group">
-                                    <!-- <input type="number" id="inputMaxBreak" class="form-control" min="0" placeholder="0"> -->
-                                     {{ form.max_break }}
+                                    <!-- <input type="number"
+        id="inputMaxBreak"
+        class="form-control"
+        min="0"
+        placeholder="0"> -->
+                                    {{ form.max_break }}
                                     <!-- <select class="form-select form-control" id="inputMaxBreakUnit" style="flex: 0 0 fit-content;">
                                         <option selected value="">--</option>
                                         <option value="1">minutes</option>
@@ -268,49 +276,56 @@
                                     </select> -->
                                     {{ form.max_break_unit }}
                                 </div>
-                                <span for="inputMaxBreak" class="form-text">
-                                    Maximum
-                                </span>
+                                <span for="inputMaxBreak" class="form-text">Maximum</span>
                             </div>
                         </div>
                     </div>
-
                     <!-- Buttons -->
                     <div id="preferencesButtons" class="d-flex justify-content-center gap-2">
-                        <a onclick="resetAll();"><button type="button" class="btn btn-outline-primary">Reset</button></a>
-                        <span id="saveChangesPopover" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="No changes to save.">
+                        <a onclick="resetAll();">
+                            <button type="button" class="btn btn-outline-primary">Reset</button>
+                        </a>
+                        <span id="saveChangesPopover"
+                              data-bs-toggle="popover"
+                              data-bs-trigger="hover focus"
+                              data-bs-content="No changes to save.">
                             <button class="btn btn-primary" name="save_changes" id="saveChanges" disabled>Save Changes</button>
                         </span>
                     </div>
-
                     {% if messages %}
                         <div class="errors">
                             <ul class="errors-list">
                                 {% for message in messages %}
                                     {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                        <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                                        <li>
+                                            <i class="bi bi-exclamation-circle"></i> {{ message }}
+                                        </li>
                                     {% else %}
-                                        <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                                        <li class="success-message">
+                                            <i class="bi bi-check-circle"></i> {{ message }}
+                                        </li>
                                     {% endif %}
                                 {% endfor %}
                             </ul>
                         </div>
                     {% endif %}
                     {% if form.errors %}
-                    <div class="errors">
-                        <ul class="errors-list">
-                            {% for field, errors in form.errors.items %}
-                            {% for error in errors %}
-                                <li><i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}</li>
-                            {% endfor %}
-                            {% endfor %}
-                        </ul>
-                    </div>
+                        <div class="errors">
+                            <ul class="errors-list">
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>
+                                            <i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}
+                                        </li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
                     <!-- {% if messages %}
                     <ul class="errors-list">
                         {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>
                                 <i class="bi bi-exclamation-circle"></i>
                                 {{ message }}
                             </li>
@@ -322,17 +337,12 @@
             <div></div>
         </div>
     </div>
-
 {% endblock %}
-
 {% block footer %}
-
     <!-- {% include 'footer.html' %} -->
-
 {% endblock %}
-
 {% block addtl_scripts %}
-
-<script type="text/javascript" defer="defer" src="{% static 'js/preferences.js' %}"></script>
-
+    <script type="text/javascript"
+            defer="defer"
+            src="{% static 'js/preferences.js' %}"></script>
 {% endblock %}

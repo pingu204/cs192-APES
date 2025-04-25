@@ -4,47 +4,67 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('courses', '0001_initial'),
+        ("courses", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SavedCourse',
+            name="SavedCourse",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('student_id', models.IntegerField()),
-                ('course_code', models.TextField()),
-                ('course_details', models.JSONField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("student_id", models.IntegerField()),
+                ("course_code", models.TextField()),
+                ("course_details", models.JSONField()),
             ],
         ),
         migrations.AlterField(
-            model_name='desiredcourse',
-            name='course_code',
+            model_name="desiredcourse",
+            name="course_code",
             field=models.TextField(),
         ),
         migrations.AlterField(
-            model_name='desiredcourse',
-            name='student_id',
+            model_name="desiredcourse",
+            name="student_id",
             field=models.IntegerField(),
         ),
         migrations.AlterUniqueTogether(
-            name='desiredcourse',
-            unique_together={('student_id', 'course_code')},
+            name="desiredcourse",
+            unique_together={("student_id", "course_code")},
         ),
         migrations.CreateModel(
-            name='SavedSchedule',
+            name="SavedSchedule",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('student_id', models.IntegerField()),
-                ('sched_id', models.IntegerField()),
-                ('schedule_name', models.CharField(max_length=100)),
-                ('is_saved', models.BooleanField(default=False)),
-                ('courses', models.ManyToManyField(related_name='schedules', to='courses.savedcourse')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("student_id", models.IntegerField()),
+                ("sched_id", models.IntegerField()),
+                ("schedule_name", models.CharField(max_length=100)),
+                ("is_saved", models.BooleanField(default=False)),
+                (
+                    "courses",
+                    models.ManyToManyField(
+                        related_name="schedules", to="courses.savedcourse"
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('student_id', 'schedule_name')},
+                "unique_together": {("student_id", "schedule_name")},
             },
         ),
     ]

@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
@@ -24,7 +25,7 @@ from pages.views import (
     homepage_view,
     guest_login_view,
     logout_view,
-    clear_desired_courses
+    clear_desired_courses,
 )
 
 from session.views import (
@@ -46,19 +47,35 @@ from preferences.views import (
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name="admin_view"),
-    path('', landing_view, name="landing_view"),
-    path('home/', homepage_view, name="homepage_view"),
-    path('register/', register_view, name="register_view"),
-    path('register/success/', successful_account_creation_view, name="successful_account_creation"),
-    path('login/', login_view, name="login_view"),
-    path('guest_home/', guest_login_view, name="guest_login_view"),
-    path('logout/', logout_view, name="logout_view"),
-    path('home/add/', dcp_add_view, name="dcp_add_view"),
-    path('home/view/<int:sched_id>/', view_sched_view, name="view_sched_view"),
-    path('home/view_saved_sched/<int:sched_id>/add/', add_course_to_sched_view, name="add_course_to_sched_view"),
-    path('home/view_saved_sched/<int:sched_id>/', view_saved_sched_view, name="view_saved_sched_view"),
-    path('clear_desired_courses/', clear_desired_courses, name='clear_desired_courses'),
-    path('home/view_saved_sched/<int:sched_id>/redraw/<str:course_code>/', redraw_course_to_sched, name="redraw_course_to_sched"),
-    path('home/preferences/', modify_preferences_view, name="modify_preferences_view")
+    path("admin/", admin.site.urls, name="admin_view"),
+    path("", landing_view, name="landing_view"),
+    path("home/", homepage_view, name="homepage_view"),
+    path("register/", register_view, name="register_view"),
+    path(
+        "register/success/",
+        successful_account_creation_view,
+        name="successful_account_creation",
+    ),
+    path("login/", login_view, name="login_view"),
+    path("guest_home/", guest_login_view, name="guest_login_view"),
+    path("logout/", logout_view, name="logout_view"),
+    path("home/add/", dcp_add_view, name="dcp_add_view"),
+    path("home/view/<int:sched_id>/", view_sched_view, name="view_sched_view"),
+    path(
+        "home/view_saved_sched/<int:sched_id>/add/",
+        add_course_to_sched_view,
+        name="add_course_to_sched_view",
+    ),
+    path(
+        "home/view_saved_sched/<int:sched_id>/",
+        view_saved_sched_view,
+        name="view_saved_sched_view",
+    ),
+    path("clear_desired_courses/", clear_desired_courses, name="clear_desired_courses"),
+    path(
+        "home/view_saved_sched/<int:sched_id>/redraw/<str:course_code>/",
+        redraw_course_to_sched,
+        name="redraw_course_to_sched",
+    ),
+    path("home/preferences/", modify_preferences_view, name="modify_preferences_view"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

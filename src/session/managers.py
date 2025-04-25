@@ -6,28 +6,31 @@ from django.utils.translation import gettext_lazy as _
 Custom manager for Student
 Code (c) https://testdriven.io/blog/django-custom-user-model/
 """
-class StudentManager(BaseUserManager):
 
+
+class StudentManager(BaseUserManager):
     """
     Create a student with email as primary key
     """
+
     def create_user(self, email, username, password, **extra_fields):
         if not email:
             raise ValueError(_("The Email must be set"))
 
-        email = self.normalize_email(email) # for case insensitivity
+        email = self.normalize_email(email)  # for case insensitivity
         user = self.model(
             email=email,
             username=username,
-            **extra_fields, # exists if called by `create_superuser`
+            **extra_fields,  # exists if called by `create_superuser`
         )
         user.set_password(password)
         user.save()
         return user
-    
+
     """
     Create an admin
     """
+
     def create_superuser(self, email, username, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)

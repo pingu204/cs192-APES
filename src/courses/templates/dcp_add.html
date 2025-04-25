@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
-
 {% block nav %}
-
     {% include 'nav_main.html' %}
-
 {% endblock %}
-
 {% block content %}
-
-{% load static %}
-
+    {% load static %}
     <div class="body-container homepage">
         <div class="form-body login dcp">
             <div class="course-list-header">
@@ -20,13 +14,18 @@
             <form method="GET" onsubmit="showLoading()">
                 <div class="form-row">
                     <div class="col">
-                        <label class="form-label mt-4 mb-2" for="id_course_code">
-                            {{ form.course_code.label | upper }}
-                        </label>
+                        <label class="form-label mt-4 mb-2" for="id_course_code">{{ form.course_code.label | upper }}</label>
                         <div class="input-wrapper">
                             {{ form.course_code }}
                             <button type="submit load-button" class="search-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="20"
+                                     height="20"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="black"
+                                     stroke-width="2"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
                                     <circle cx="11" cy="11" r="8"></circle>
                                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                 </svg>
@@ -42,39 +41,45 @@
                         <ul class="errors-list">
                             {% for message in messages %}
                                 {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                    <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                                    <li>
+                                        <i class="bi bi-exclamation-circle"></i> {{ message }}
+                                    </li>
                                 {% else %}
-                                    <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                                    <li class="success-message">
+                                        <i class="bi bi-check-circle"></i> {{ message }}
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
                 {% endif %}
                 {% if form.errors %}
-                <div class="errors">
-                    <ul class="errors-list">
-                        {% for field, errors in form.errors.items %}
-                        {% for error in errors %}
-                            <li><i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}</li>
-                        {% endfor %}
-                        {% endfor %}
-                    </ul>
-                </div>
+                    <div class="errors">
+                        <ul class="errors-list">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>
+                                        <i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}
+                                    </li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endif %}
             </form>
-            
             {% if search_results|length == 1 %}
                 <h6>{{ search_results|length }} RESULT</h6>
             {% else %}
                 <h6>{{ search_results|length }} RESULTS</h6>
             {% endif %}
-            
             <div class="filler result-container">
                 {% for result in search_results %}
                     <div class="result-card d-flex flex-row align-items-end">
                         <div>
                             <h5>{{ result.course_title }}</h5>
-                            <h5><span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span></h5>
+                            <h5>
+                                <span class="bold-text">{{ result.course_code }}</span><i class="bi bi-dot"></i><span class="light-text">{{ result.units }} Units</span>
+                            </h5>
                         </div>
                         <div class="filler"></div>
                         <form method="POST">
@@ -86,7 +91,7 @@
                             </div>
                         </form>
                     </div>
-                    {% empty %}
+                {% empty %}
                     <div class="result-card d-flex flex-row align-items-end">
                         <div>
                             <h5>No results found.</h5>
@@ -96,11 +101,7 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
-
 {% block footer %}
-
     <!-- {% include 'footer.html' %} -->
-
 {% endblock %}

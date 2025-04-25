@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('courses', '0002_savedcourse_alter_desiredcourse_course_code_and_more'),
+        ("courses", "0002_savedcourse_alter_desiredcourse_course_code_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='savedschedule',
-            name='preferences',
+            model_name="savedschedule",
+            name="preferences",
             field=models.JSONField(blank=True, default=dict),
         ),
     ]

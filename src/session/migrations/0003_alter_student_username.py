@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('session', '0002_remove_student_agreement'),
+        ("session", "0002_remove_student_agreement"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='student',
-            name='username',
+            model_name="student",
+            name="username",
             field=models.CharField(max_length=20, unique=True),
         ),
     ]

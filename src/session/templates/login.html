@@ -1,85 +1,76 @@
 {% extends 'base.html' %}
-
 {% block nav %}
-
     {% include 'nav_sessions.html' %}
-
 {% endblock %}
-
 {% block content %}
-
-{% load static %}
+    {% load static %}
     <div class="body-container sessions">
         <div class="form-body login">
             <div class="d-flex align-items-end gap-3 mb-4">
                 <h1>Welcome</h1>
             </div>
-            
-            
-            <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
+            <form method="POST" id="logInForm">
+                {% csrf_token %} <!--action="/users/login"-->
                 <div class="row mb-4">
                     <div class="col">
                         <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
-                        <label class="form-label" for="id_username">{{ form.username.label | upper}}</label> 
+                        <label class="form-label" for="id_username">{{ form.username.label | upper }}</label>
                         {{ form.username }}
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col">
                         <label class="form-label" for="id_password">{{ form.password.label | upper }}</label>
                         {{ form.password }}
-                        <i class="bi-eye-slash eye-icon" id="toggleLoginPassword"></i>  
+                        <i class="bi-eye-slash eye-icon" id="toggleLoginPassword"></i>
                     </div>
                 </div>
-
                 <div class="submit-area login">
-                    <button class="btn btn-primary submit-button load-button" type="submit" id="submitButton">Sign In</button>
-                    <a class="guest-login" onclick="document.getElementById('guest-login-form').submit(); return false;">
-                        <button class="btn btn-primary btn-outline load-button">
-                                Continue as Guest
-                        </button>
+                    <button class="btn btn-primary submit-button load-button"
+                            type="submit"
+                            id="submitButton">Sign In</button>
+                    <a class="guest-login"
+                       onclick="document.getElementById('guest-login-form').submit(); return false;">
+                        <button class="btn btn-primary btn-outline load-button">Continue as Guest</button>
                     </a>
                 </div>
-
-            </form>  
-
-            <form id="guest-login-form" action="{% url 'guest_login_view' %}" method="POST">
-                {% csrf_token %}<!-- 
+            </form>
+            <form id="guest-login-form"
+                  action="{% url 'guest_login_view' %}"
+                  method="POST">
+                {% csrf_token %}<!--
                 <div class="submit-area login">
                     
                 </div> -->
             </form>
-
             <div class="center">
-                <h6>New user? <a class="load-button" href="/register/">Create a New Account.</a></h6>
+                <h6>
+                    New user? <a class="load-button" href="/register/">Create a New Account.</a>
+                </h6>
             </div>
-
             {% if messages %}
                 <div class="errors">
                     <ul class="errors-list">
                         {% for message in messages %}
                             {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                <li><i class="bi bi-exclamation-circle"></i> {{ message }}</li>
+                                <li>
+                                    <i class="bi bi-exclamation-circle"></i> {{ message }}
+                                </li>
                             {% else %}
-                                <li class="success-message"><i class="bi bi-check-circle"></i> {{ message }}</li>
+                                <li class="success-message">
+                                    <i class="bi bi-check-circle"></i> {{ message }}
+                                </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
             {% endif %}
-
             <div class="center agreement">
                 By continuing, you agree to APES' Terms of Service and acknowledge that you have read our Privacy Policy.
             </div>
-            
         </div>
     </div>
-
 {% endblock %}
-
 {% block addtl_scripts %}
-
-<script type="text/javascript" src="{% static 'js/login.js' %}" type="module"></script>
-
+    <script type="text/javascript" src="{% static 'js/login.js' %}" type="module"></script>
 {% endblock %}
