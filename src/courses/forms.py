@@ -65,11 +65,11 @@ class DesiredClassesForm(forms.Form):
         # UC3-S4
         if (
             course_code.upper() not in courselist
-            and course_code.capitalize() not in courselist
+            and course_code.title() not in courselist
         ) and (
             not any(course.startswith(course_code.upper()) for course in courselist)
             and not any(
-                course.startswith(course_code.capitalize()) for course in courselist
+                course.startswith(course_code.title()) for course in courselist
             )
         ):
             raise forms.ValidationError(
