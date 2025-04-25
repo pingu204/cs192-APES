@@ -982,18 +982,22 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
 
 def filter_course_sections(course_sections, schedule_permutations):
     # Create a set of course codes and section names that are in the schedule_permutations
+    # print(schedule_permutations)
+    # print(course_sections)
     valid_courses = set()
     for schedule in schedule_permutations:
         for course in schedule:
-            valid_courses.add((course['course_code'], course['section_name']['lec']))
+            if 'lec' in course['section_name']:
+                valid_courses.add((course['course_code'], course['section_name']['lec']))
             if 'lab' in course['section_name']:
                 valid_courses.add((course['course_code'], course['section_name']['lab']))
 
     # Filter course_sections to only include those in valid_courses
-    filtered_sections = [
-        course for course in course_sections
-        if (course['course_code'], course['section_name']['lec']) in valid_courses or
-           ('lab' in course['section_name'] and (course['course_code'], course['section_name']['lab']) in valid_courses)
-    ]
+    filtered_sections = []
+    for course in course_sections:
+        # print(course)
+        if (course['course_code'], course['section_name'].get('lec',"")) in valid_courses or\
+           ('lab' in course['section_name'] and (course['course_code'], course['section_name'].get('lab',"")) in valid_courses):
+            filtered_sections.append(course)
 
     return filtered_sections
