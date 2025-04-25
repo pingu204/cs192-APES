@@ -17,7 +17,7 @@
             
             
             <form method="POST" id="logInForm"> {% csrf_token %} <!--action="/users/login"-->
-                <div class="row mb-2">
+                <div class="row mb-4">
                     <div class="col">
                         <!--typed in "USERNAME" since Django's Auth Form only has 2 fields: username & password-->
                         <label class="form-label" for="id_username">{{ form.username.label | upper}}</label> 

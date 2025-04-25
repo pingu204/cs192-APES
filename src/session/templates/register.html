@@ -17,7 +17,7 @@
                 <h6>Already a member? <a href="../login/"><span class=bold-text">Log in.</span></a></h6>
             </div>
             <form method="POST" id="signUpForm"> {% csrf_token %}
-                <div class="row mb-2">
+                <div class="row mb-4">
                     <div class="col">
                         <label class="form-label mb-2" for="id_username">{{ form.username.label | upper }}</label>
                         {{ form.username }}
