@@ -43,7 +43,7 @@ def modify_preferences_view(request):
             # value of max_break duration in MINUTES PAST 7:00 AM
             max_break = max_break_raw * max_unit
 
-            print("TEST PREFORMS TYPES")
+            """ print("TEST PREFORMS TYPES")
             print(type(number_of_classes))
             print(type(class_days))
             print(type(total_distance_per_day))
@@ -67,7 +67,7 @@ def modify_preferences_view(request):
             #print(f"\n{latest_time_val}")
             print("END TEST PREFORMS")
 
-            print(request.session.keys())
+            print(request.session.keys()) """
 
             request.session['raw_preferences'] = form.cleaned_data
 
@@ -88,23 +88,23 @@ def modify_preferences_view(request):
                 'max_break_sched_display': f"{max_break // 60}-hour" if (max_break % 60 == 0) and max_break else f"{max_break}-minute   ",
             }
 
-            print("PREFERENCE VALUES", request.session['preferences'].values())
+            # print("PREFERENCE VALUES", request.session['preferences'].values())
 
             messages.success(request, "The filters have been successfully updated.")
             return redirect(reverse('homepage_view'))
 
-        else:
-            print(form.errors)
+        # else:
+            # print(form.errors)
 
         request.session['preferences']['latest_time']
 
-        print("PREFERENCE VALUES", request.session['preferences'].values())
+        # print("PREFERENCE VALUES", request.session['preferences'].values())
 
         #return redirect(reverse('homepage_view'))
 
     else:
         # FIXED! := not just GET later on... will load the values onto HTML...
-        print("GET request; forms")
+        # print("GET request; forms")
         saved_data = request.session.get('raw_preferences')
         form = PreferencesForm(initial=saved_data) if saved_data else PreferencesForm()
 

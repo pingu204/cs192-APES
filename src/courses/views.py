@@ -31,7 +31,7 @@ def dcp_add_view(request):
 
     if request.method == "POST":
         # Handle the POST request to save the class code
-        print(request.POST.get("course_code"))
+        # print(request.POST.get("course_code"))
 
         course_code = request.POST.get("course_code")
         
@@ -40,18 +40,18 @@ def dcp_add_view(request):
             dcp_codes = [
                 x.course_code for x in list(DesiredCourse.objects.filter(student_id = request.user.id))
             ]
-            print (dcp_codes)
+            # print (dcp_codes)
         else: # Guest user
             # Obtain DCP from `request.session`
             dcp_codes = [
                 x['course_code'] for x in request.session.get("dcp", [])
             ]
-            print(dcp_codes)
+            # print(dcp_codes)
             
         dcp = get_course_details_from_csv(dcp_codes)
         total_units = sum([course['units'] for course in dcp])
         
-        print ("TOTAL UNITSSSSS ->>: " ,total_units)
+        # print ("TOTAL UNITSSSSS ->>: " ,total_units)
         
         # Check if course is already in DCP
         if course_code in dcp_codes:
@@ -69,7 +69,7 @@ def dcp_add_view(request):
             ))
 
             timeout = False
-            print("COURSE SECTIONS: ", course_sections)  # Debugging
+            # print("COURSE SECTIONS: ", course_sections)  # Debugging
             for section in course_sections:
                 """Checks if `section`'s timeslots collides with `x`"""
                 def is_not_within_range(x) -> bool:
@@ -86,7 +86,7 @@ def dcp_add_view(request):
 
                     return True
 
-                print("before filtering: ", sum([len(x) for x in dcp_sections]))
+                # print("before filtering: ", sum([len(x) for x in dcp_sections]))
 
                 temp = []
 
@@ -99,7 +99,7 @@ def dcp_add_view(request):
                         ))
                     )
 
-                print("after filtering: ", ([len(x) for x in temp]))
+                # print("after filtering: ", ([len(x) for x in temp]))
 
                 for i, dcp_section in enumerate(list(product(*temp))):
 
@@ -145,7 +145,7 @@ def dcp_add_view(request):
         cleaned_search_query = (' '.join(raw_search_query.split())).upper()
 
         # DEBUGGING: purely for testing only; omit or comment when unneeded
-        print(f"User's cleaned query: {cleaned_search_query}")
+        # print(f"User's cleaned query: {cleaned_search_query}")
         
         csv_file_path = os.path.join(settings.BASE_DIR, "scraper", "csv", "courses.csv")
 
@@ -160,7 +160,7 @@ def dcp_add_view(request):
     else: # Normal Loading
 
         # DEBUGGING: purely for testing only; omit or comment when unneeded
-        print("Enter DEFAULT /add/ routing")
+        # print("Enter DEFAULT /add/ routing")
         ...
 
     context = {
@@ -202,7 +202,7 @@ def generate_permutation_view(request):
 
         count = 0
         for i, dcp_section in enumerate(list(product(*dcp_sections))):
-            print(f"schedule {i}")
+            # print(f"schedule {i}")
             #check if dcp_section is not in SavedSchedules
             
             """
@@ -463,7 +463,7 @@ def view_sched_view(request, sched_id: int):
     #############################
     # For testing purposes only #
     #############################
-    print("ViewSched")
+    # print("ViewSched")
     # Get the correct schedule based on sched_id
     schedule_permutations = request.session.get('schedule_permutations', [])
     selected_schedule = next((sched for sched in schedule_permutations if sched["sched_id"] == sched_id), None)
@@ -471,7 +471,7 @@ def view_sched_view(request, sched_id: int):
     #if selected_schedule is None:
         #return HttpResponse("Schedule not found", status=404)
 
-    print("Unsaved Sched ID:", sched_id)
+    # print("Unsaved Sched ID:", sched_id)
 
     # Fix timeslots
     #courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
@@ -562,7 +562,7 @@ def view_sched_view(request, sched_id: int):
 #viewing saved schedules
 def view_saved_sched_view(request, sched_id: int):
     
-    print("Saved Sched ID:", sched_id)
+    # print("Saved Sched ID:", sched_id)
 
     if request.method == "POST" and "click_unsaved_sched" in request.POST:
         if not request.user.is_authenticated:
@@ -882,8 +882,8 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
         messages.error(request, "Course not found.")
         return redirect("view_saved_sched_view", sched_id=sched_id)
 
-    print("YOU ARE IN REDRAW")
-    print("COURSE DETAILS: ", course_code)   
+    # print("YOU ARE IN REDRAW")
+    # print("COURSE DETAILS: ", course_code)   
     
     #GET FROM CACHE UNG PERMUTATION NG CLASS
     schedule_permutations = []

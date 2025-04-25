@@ -321,7 +321,7 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         temp = slot.strip().split(' ', maxsplit=2)
         slot_days, slot_time, slot_venue = temp[0].replace('Th', 'H'), temp[1], temp[2]
         room = (slot_venue.split(' ', maxsplit=1))[1]
-        print(room)
+        # print(room)
         # print('mapped: ', map_venues(room, course_code_csv,cleaned_course_code))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
         # print('room: ', room, 'mapped: ', mapped_venue)
@@ -398,7 +398,7 @@ def get_all_sections(course_code: str, strict: bool = False):
         if (tr[0].text != "No classes to display"):
             cleaned_course_code = get_course_code(tr[1].get_text(separator='\n'))
             section_name = get_section(tr[1].get_text(separator='\n'), cleaned_course_code)
-            print(cleaned_course_code, section_name)
+            # print(cleaned_course_code, section_name)
             # Check if scraped class must be strictly equal to the course code
             if strict and cleaned_course_code.lower() != course_code.lower():
                 continue
@@ -418,7 +418,7 @@ def get_all_sections(course_code: str, strict: bool = False):
             if scrape_capacity[0].strip(' \n') == "DISSOLVED":
                 continue
             demand = int(tr[6].text)
-            print(demand)
+            # print(demand)
             capacity = int(scrape_capacity[1].strip(' \n\t'))
             location = get_locations(tr[3].text, course_code_csv, cleaned_course_code)
             course_venue = get_venues(tr[3].text)
@@ -493,7 +493,7 @@ def couple_lec_and_lab(lst):
         code = course["course_code"]
         section = course["section_name"]["lab"].split('/')[0]
 
-        print(code, course["section_name"]["lab"])
+        # print(code, course["section_name"]["lab"])
 
         if code == "CS 145":
             section = "HONOR" if "HONOR" in course["section_name"]["lab"] else "EXCELLENCE"
@@ -530,7 +530,7 @@ def couple_lec_and_lab(lst):
         course["class_days"]["lec"] = lec_section["class_days"]["lec"]
         course["instructor_name"]["lec"] = lec_section["instructor_name"]["lec"]
         course_class_days = course["class_days"]["lec"]
-        print(course, lec_section)
+        # print(course, lec_section)
         course["timeslots"]["lec"] = lec_section["timeslots"]["lec"]
         course["location"]["lec"] = lec_section["location"]["lec"]
         course["venue"]["lec"] = lec_section["venue"]["lec"]

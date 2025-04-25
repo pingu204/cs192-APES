@@ -35,11 +35,11 @@
 
                 <div class="submit-area login">
                     <button class="btn btn-primary submit-button load-button" type="submit" id="submitButton">Sign In</button>
-                    <button class="btn btn-primary btn-outline">
-                        <a class="guest-login" onclick="document.getElementById('guest-login-form').submit(); return false;">
-                            Continue as Guest
-                        </a>
-                    </button>
+                    <a class="guest-login" onclick="document.getElementById('guest-login-form').submit(); return false;">
+                        <button class="btn btn-primary btn-outline load-button">
+                                Continue as Guest
+                        </button>
+                    </a>
                 </div>
 
             </form>  
@@ -52,7 +52,7 @@
             </form>
 
             <div class="center">
-                <h6>New user? <a href="/register/">Create a New Account.</a></h6>
+                <h6>New user? <a class="load-button" href="/register/">Create a New Account.</a></h6>
             </div>
 
             {% if messages %}

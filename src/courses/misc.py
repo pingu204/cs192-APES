@@ -87,7 +87,7 @@ def is_conflicting(courses):
 def is_conflicting_with_dcp(course, dcp_courses):
     courses = [course] + dcp_courses
     for day in "MTWHFS":
-        print(day)
+        # print(day)
         # Check if course has a class on `day`
         if day in ''.join(list(course['timeslots'].keys())):
             # Only get DCP classes with a class on `day`
@@ -114,8 +114,8 @@ def is_conflicting_with_dcp(course, dcp_courses):
             )))
             
             # DEBUGGING
-            print(course['course_code'], course_range)
-            print(*dcp_slot_ranges)
+            # print(course['course_code'], course_range)
+            # print(*dcp_slot_ranges)
             if True in [course_range.intersection(slot_range) != set() for slot_range in dcp_slot_ranges]:
                 return True
     
@@ -217,5 +217,5 @@ if __name__ == '__main__':
     dcp_courses = [cs180, cs145, cs153, cs132, cs192, lis51]
     dcp_courses = [x.__dict__ for x in dcp_courses]
     # print(dcp_courses)
-    print(is_conflicting(dcp_courses))
+    # print(is_conflicting(dcp_courses))
 

@@ -91,10 +91,10 @@ def homepage_view(request, *args, **kwargs):
     print('\n'.join([f"+ {code} [{len(dcp_sections[i])} sections]" for i, code in enumerate(dcp_codes)]))
 
     schedules = SavedSchedule.objects.filter(student_id=request.user.id).prefetch_related('courses')
-    for sched in schedules:
-        print(f"+++ {request.user} Saved Schedule: {sched.schedule_name}")  # Adjust based on actual field name
-        for course in sched.courses.all():
-            print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
+    # for sched in schedules:
+        # print(f"+++ {request.user} Saved Schedule: {sched.schedule_name}")  # Adjust based on actual field name
+        # for course in sched.courses.all():
+        #    print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
 
     saved_schedules = SavedSchedule.objects.filter(student_id=request.user.id)
     saved_class_days = list(map(get_class_days_from_saved, saved_schedules))

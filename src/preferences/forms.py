@@ -12,7 +12,7 @@ def generate_time_choices():
         choices.append((formatted_time, formatted_time))  # Store and display same value
         current_time += timedelta(minutes=15)  # Increment by 15 minutes
 
-    print(choices)
+    # print(choices)
     return choices
 
     # Assisted by Microsoft Copilot
