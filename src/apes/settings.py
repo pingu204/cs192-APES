@@ -17,6 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import environ
+from decouple import config
 
 env = environ.Env()
 
@@ -122,10 +123,21 @@ CORS_ALLOWED_ORIGINS = [
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3', 
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3', 
+    "default" : {
+        "ENGINE" : "django.db.backends.postgresql",
+        "NAME" : env("DB_NAME"),
+        "USER" : env("DB_USER"),
+        "HOST" : env("DB_HOST"),
+        "PORT" : env("DB_PORT"),
+        "PASSWORD" : env("DB_PASSWORD")
     }
 }
 
