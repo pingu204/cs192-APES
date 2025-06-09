@@ -16,12 +16,12 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import environ
+# import environ
 from decouple import config
 
-env = environ.config()
+# env = environ.config()
 
-environ.Env.read_config()
+# environ.Env.read_config()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
