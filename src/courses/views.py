@@ -4,7 +4,8 @@ from django.contrib import messages
 from .forms import DesiredClassesForm
 import os
 from .models import DesiredCourse
-from scraper.scrape import get_all_sections, couple_lec_and_lab, print_dict
+from scraper.scrape import get_all_sections, print_dict, Semester
+from .constants import START_YEAR, SEMESTER
 from .misc import get_unique_courses, is_conflicting, get_start_and_end
 from apes import settings
 from .schedule import Course, generate_timetable, get_time
@@ -17,7 +18,6 @@ from itertools import product
 import pandas as pd
 
 import copy
-
 
 def dcp_add_view(request):
     search_results = []
@@ -144,7 +144,7 @@ def dcp_add_view(request):
 
         if form.is_valid():
             # Obtain all sections associated with `raw_search_query` course code
-            course_sections = couple_lec_and_lab(get_all_sections(cleaned_search_query))
+            course_sections = get_all_sections(START_YEAR, SEMESTER, cleaned_search_query)
 
             request.session["course_sections"] = course_sections
             search_results = get_unique_courses(course_sections)
@@ -822,7 +822,7 @@ def add_course_to_sched_view(request, sched_id: int):
         if form.is_valid():
             # Obtain all sections associated
             course_sections = couple_lec_and_lab(
-                get_all_sections(cleaned_search_query, strict=True)
+                get_all_sections(START_YEAR, SEMESTER, cleaned_search_query, strict=True)
             )
             for c in course_sections:
                 print_dict(c)
@@ -968,7 +968,7 @@ def redraw_course_to_sched(request, sched_id: int, course_code: str):
     temp = [course for course in classes if course["course_code"] != course_code]
 
     # get all sections of the course_code
-    course_sections = couple_lec_and_lab(get_all_sections(course_code, strict=True))
+    course_sections = get_all_sections(START_YEAR, SEMESTER, course_code, strict=True)
     # print("COURSE SECTIONS: ", course_sections)
 
     for c in course_sections:

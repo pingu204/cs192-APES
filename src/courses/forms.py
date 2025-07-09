@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 import os
 import pandas as pd
 from .models import SavedSchedule
+from .constants import START_YEAR, SEMESTER
 from scraper.scrape import get_all_sections
 from apes import settings
 
@@ -77,7 +78,7 @@ class DesiredClassesForm(forms.Form):
             )
 
         # Class is not yet offered in the semester
-        if get_all_sections(get_cleaned_course_code(course_code)) == []:
+        if get_all_sections(START_YEAR, SEMESTER, get_cleaned_course_code(course_code)) == []:
             raise forms.ValidationError(
                 "No available classes yet. Try coming back later!"
             )
