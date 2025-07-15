@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import logout
+from django.forms.models import model_to_dict
 
 # from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -11,7 +12,7 @@ from apes.utils import (
 )
 from django.contrib import messages
 from courses.models import DesiredCourse, SavedSchedule
-from courses.views import generate_permutation_view
+from courses.views import generate_permutation_view, get_stats
 from courses.schedule import get_class_days, get_class_days_from_saved
 from scraper.scrape import couple_lec_and_lab, get_all_sections
 from courses.constants import START_YEAR, SEMESTER
@@ -137,6 +138,11 @@ def homepage_view(request, *args, **kwargs):
     #    print(f"  - {course.course_code}")  # Ensure SavedCourse has a proper __str__ method
 
     saved_schedules = SavedSchedule.objects.filter(student_id=request.user.id)
+    saved_stats = []
+    for saved_schedule in saved_schedules:
+        saved_courses = saved_schedule.courses.all()
+        for_stats = list(map(lambda x: model_to_dict(x)["course_details"], saved_courses))
+        saved_stats.append(get_stats({"courses" : for_stats}))
     saved_class_days = list(map(get_class_days_from_saved, saved_schedules))
     generated_schedules = request.session.get("schedule_permutations", [])
     generated_class_days = list(map(get_class_days, generated_schedules))
@@ -146,7 +152,7 @@ def homepage_view(request, *args, **kwargs):
         "dcp": dcp,
         "dcp_units": sum([course["units"] for course in dcp]),
         "dcp_length": len(dcp),
-        "saved_schedules": list(zip(saved_schedules, saved_class_days)),
+        "saved_schedules": list(zip(saved_schedules, saved_class_days, saved_stats)),
         "generated_schedules": list(zip(generated_schedules, generated_class_days)),
         "session": request.session,
     }

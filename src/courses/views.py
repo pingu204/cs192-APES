@@ -183,7 +183,7 @@ def get_max_distance_per_day(schedule):
     """
     Obtains the maximum number of classes a day in a `schedule`
     """
-    return max(get_distance_per_day(schedule["courses"]))
+    return round(max(get_distance_per_day(schedule["courses"])), 3)
 
 def get_break_durations(schedule):
     """
@@ -236,8 +236,8 @@ def get_break_durations(schedule):
 
             mat_str = (''.join(list(map(lambda x: str(int(x)),mat)))).strip('0')
             cleaned = re.sub(r'(1)\1+', r'\1', mat_str).strip('1')
-            
-            break_durations = [len(substring)*15 for substring in cleaned.split('1')]
+            # print(mat_str)
+            break_durations = [max(0, len(substring)-1)*15 for substring in cleaned.split('1')]
             temp_min, temp_max = min(break_durations), max(break_durations)
             min_break = min_break if (min_break != 0 and temp_min > min_break) else temp_min
             max_break = max_break if (temp_max < max_break) else temp_max
@@ -615,7 +615,7 @@ def view_sched_view(request, sched_id: int):
         None,
     )
 
-    print(selected_schedule)
+    # print(selected_schedule)
 
     # if selected_schedule is None:
     # return HttpResponse("Schedule not found", status=404)
@@ -705,6 +705,7 @@ def view_sched_view(request, sched_id: int):
 
     return render(request, "view_sched.html", context)
 
+from django.forms.models import model_to_dict
 
 # viewing saved schedules
 def view_saved_sched_view(request, sched_id: int):
@@ -735,7 +736,9 @@ def view_saved_sched_view(request, sched_id: int):
 
     # Retrieve all associated saved courses
     saved_courses = saved_schedule.courses.all()
-
+    for_stats = list(map(lambda x: model_to_dict(x)["course_details"], saved_courses))
+    stats = get_stats({"courses" : for_stats})
+    
     # Convert saved courses (JSONField) into Course objects
     classes = [
         Course(**course.course_details)  # Unpack the dictionary properly
@@ -803,9 +806,12 @@ def view_saved_sched_view(request, sched_id: int):
         # Redirect to view the schedule after removing the course
         return redirect("view_saved_sched_view", sched_id=sched_id)
 
+    
+
     context = {
         "sched_id": sched_id,
         "schedule" : saved_schedule,
+        "stats" : stats,
         "schedule_name": saved_schedule.schedule_name,
         "main_table": main_table,
         "export_table": export_table,

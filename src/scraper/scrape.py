@@ -399,7 +399,7 @@ def scrape_sections(year:int, sem:Semester, course_code:str, strict:bool = False
                 
             # Get course information from CSV
             course_code_csv = get_info_from_csv(cleaned_course_code)  # guaranteed to be unique!
-
+            # print(cleaned_course_code, course_code_csv)
             # Separate course information
             course_title =         course_code_csv["course_title"].values[0]
             course_weight =        course_code_csv["units"].values[0]

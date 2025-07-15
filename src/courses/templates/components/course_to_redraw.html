@@ -1,0 +1,22 @@
+<span class="result-card" id="{{ forloop.counter }}">
+<div class="flex flex-row items-end justify-between py-3 border-b-1 border-gray-400" >
+    <div class="flex flex-grow flex-col">
+        <div class="flex gap-2"> 
+            {% include 'components/details/timeslot.html' %}
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="font-bold"><i class="bi bi-book mr-2"></i> {{ section.course_code }} {{ section.section_name.lec }}{% if section.section_name.lab %}/{{ section.section_name.lab }}{% endif %}</span>
+            <span class="font-bold text-gray-400">Desired by {{ section.demand }} people</span>
+        </div>
+        {% include 'components/details/instructor.html' with course=section %}
+    </div>
+    <form method="POST"
+            action="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=section.course_code  %}">
+        {% csrf_token %}
+        <input type="hidden" name="course_data" value='{{ section }}' />
+        <div>
+            <button type="submit load-button" class="bg-[var(--blue)] text-white px-2 py-1 rounded-lg hover:opacity-50">Add</button>
+        </div>
+    </form>
+</div>
+</span>

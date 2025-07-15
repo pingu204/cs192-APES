@@ -1,0 +1,17 @@
+<div class="flex items-end justify-between py-3 border-b-1 border-gray-400">
+    <div class="flex flex-col">
+        <div class="flex items-center gap-2">
+            <span class="font-bold"><i class="bi bi-book mr-2"></i> {{ section.course_code }}</span>
+            <span class="font-bold text-gray-400">{{ section.units }} Units</span>
+        </div>
+        <span class="text-lg/6">{{ section.course_title }}</span>
+    </div>
+    <form method="POST"
+            action="{% url 'redraw_course_to_sched' sched_id=sched_id course_code=section.course_code %}">
+        {% csrf_token %}
+        <input type="hidden" name="course_data" value="{{ section }}">
+        <div>
+            <button type="submit" class="bg-[var(--blue)] text-white px-2 py-1 rounded-lg hover:opacity-50">Choose</button>
+        </div>
+    </form>
+</div>

@@ -3,5 +3,11 @@
     <i class="bi bi-cup-hot-fill"></i>
 {% endblock %}
 {% block text %}
-    {{ min }}-minute to {{ max }}-minute breaks
+    {% if max == 0 %}
+    No breaks
+    {% elif min == max %}
+    {{ min }}-minute breaks
+    {% else %}
+    {{ min }}-minute to {{ max }}-minute breaks 
+    {% endif %}
 {% endblock %}

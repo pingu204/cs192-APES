@@ -26,11 +26,11 @@
     {% endif %}
         <span class="text-xl font-medium">Schedule {{ schedule.sched_id|add:1 }}</span>
         <div>
-            {% include 'components/num_classes_tab.html' with max=schedule.stats.max_classes_per_day %}
-            {% include 'components/distance_tab.html' with max=schedule.stats.max_distance_per_day %}
-            {% include 'components/breaktime_tab.html' with min=schedule.stats.min_break_duration max=schedule.stats.max_break_duration %}
-            {% include 'components/earliest_tab.html' with min=schedule.stats.earliest_time %}
-            {% include 'components/latest_tab.html' with max=schedule.stats.latest_time %}
+            {% include 'components/num_classes_tab.html' with max=stats.max_classes_per_day %}
+            {% include 'components/distance_tab.html' with max=stats.max_distance_per_day %}
+            {% include 'components/breaktime_tab.html' with min=stats.min_break_duration max=stats.max_break_duration %}
+            {% include 'components/earliest_tab.html' with min=stats.earliest_time %}
+            {% include 'components/latest_tab.html' with max=stats.latest_time %}
         </div>
     </div>
 </div>

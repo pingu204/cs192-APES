@@ -3,5 +3,9 @@
     <i class="bi bi-person-walking"></i>
 {% endblock %}
 {% block text %}
+    {% if max == 0 %}
+    Minimum travelling
+    {% else %}
     {{ max }} kilometers/day
+    {% endif %}
 {% endblock %}

@@ -1,14 +1,9 @@
 {% extends 'base.html' %}
-{% block nav %}
-    {% include 'nav_sessions.html' %}
-{% endblock %}
+{% load static %}
 {% block content %}
-    {% load static %}
-    <div class="body-container sessions">
-        <div class="form-body login">
-            <div class="d-flex align-items-end gap-3 mb-4">
-                <h1>Welcome</h1>
-            </div>
+    <div class="bg-gray-100/50 w-screen h-screen m-0 flex flex-col items-center justify-center">
+        <div class="bg-white border-1 border-gray-400 shadow-md w-[40%] rounded-lg p-4 flex flex-col gap-4">
+            <span class="text-2xl font-bold">🌻 Welcome</span>
             <form method="POST" id="logInForm">
                 {% csrf_token %} <!--action="/users/login"-->
                 <div class="row mb-4">
@@ -38,16 +33,11 @@
             <form id="guest-login-form"
                   action="{% url 'guest_login_view' %}"
                   method="POST">
-                {% csrf_token %}<!--
-                <div class="submit-area login">
-                    
-                </div> -->
+                {% csrf_token %}
             </form>
-            <div class="center">
-                <h6>
-                    New user? <a class="load-button" href="/register/">Create a New Account.</a>
-                </h6>
-            </div>
+            <span class="text-center">
+                    New user? <a class="load-button font-bold hover:opacity-[50%]" href="/register/">Create a New Account.</a>
+            </span>
             {% if messages %}
                 <div class="errors">
                     <ul class="errors-list">
@@ -65,9 +55,9 @@
                     </ul>
                 </div>
             {% endif %}
-            <div class="center agreement">
+            <span class="place-self-center w-50 text-center text-gray-400">
                 By continuing, you agree to APES' Terms of Service and acknowledge that you have read our Privacy Policy.
-            </div>
+            </span>
         </div>
     </div>
 {% endblock %}

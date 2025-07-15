@@ -184,16 +184,16 @@ hr {
 }
 
 .form-body {
-    width: 50vw;
-    height: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    padding: 50px 50px 50px 50px;
-    border: 1px solid #ced4da;
-    border-radius: 20px;
-    font-size: 9pt;
-    position: relative;
+    /* width: 50vw; */
+    /* height: fit-content; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* margin-top: 20px; */
+    /* padding: 50px 50px 50px 50px; */
+    /* border: 1px solid #ced4da; */
+    /* border-radius: 20px; */
+    /* font-size: 9pt; */
+    /* position: relative; */
 }
 
 .form-body.login {

@@ -120,14 +120,14 @@
                 <!-- Container for Generated Schedules -->
                 <div class="flex-grow h-[1px] overflow-y-auto pt-2">
                     <div class="w-full grid grid-cols-2 gap-3">
-                    {% for schedule, class_days in saved_schedules %}
+                    {% for schedule, class_days, stats in saved_schedules %}
                         <a href="{% url 'view_saved_sched_view' schedule.sched_id %}">
                             {% include 'components/sched_card.html' with saved=True %}
                         </a>
                     {% endfor %}
                     {% for schedule, class_days in generated_schedules %}
                         <a href="{% url 'view_sched_view' schedule.sched_id %}">
-                            {% include 'components/sched_card.html' with saved=False %}
+                            {% include 'components/sched_card.html' with stats=schedule.stats saved=False %}
                         </a>
                     {% endfor %}
                     </div>
