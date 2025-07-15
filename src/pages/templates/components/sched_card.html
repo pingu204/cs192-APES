@@ -1,0 +1,36 @@
+{% if saved %}
+<div class="hover:-translate-y-1 border-1 bg-[#007bff] border-gray-400 rounded-xl shadow-md h-fit">
+{% else %}
+<div class="hover:-translate-y-1 border-1 border-gray-400 rounded-xl shadow-md">
+{% endif %}
+    <div class="flex gap-1 bg-[#007bff] px-3 py-2 rounded-tl-lg rounded-tr-lg">
+        {% for day in "MTWHFS" %}
+            {% if day in class_days %}
+                <div class="font-bold flex items-center justify-center w-[20px] h-[20px] rounded rounded-circle bg-white p-1 text-xs text-[#007bff]">
+            {% else %}
+                <div class="font-bold flex items-center justify-center w-[20px] h-[20px] rounded rounded-circle bg-none p-1 text-xs text-white">
+            {% endif %}
+                {{ day }}</div>
+        {% endfor %}
+        <div class="filler"></div>
+        {% if saved %}
+        <i class="bi bi-bookmark-fill text-white"></i>
+        {% else %}
+        <i class="bi bi-bookmark text-white"></i>
+        {% endif %}
+    </div>
+    {% if saved %}
+    <div class="p-3 tabs-container border-t-1 border-white text-white">
+    {% else %}
+    <div class="p-3 text-black flex flex-col gap-2">
+    {% endif %}
+        <span class="text-xl font-medium">Schedule {{ schedule.sched_id|add:1 }}</span>
+        <div>
+            {% include 'components/num_classes_tab.html' with max=schedule.stats.max_classes_per_day %}
+            {% include 'components/distance_tab.html' with max=schedule.stats.max_distance_per_day %}
+            {% include 'components/breaktime_tab.html' with min=schedule.stats.min_break_duration max=schedule.stats.max_break_duration %}
+            {% include 'components/earliest_tab.html' with min=schedule.stats.earliest_time %}
+            {% include 'components/latest_tab.html' with max=schedule.stats.latest_time %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="bg-white h-full rounded-lg border-1 border-gray-400 shadow-md p-4">
+    <table class="time_table" id="timetable">
+        {{ main_table | safe }}
+    </table>
+    {% for table in timetables %}
+        <table class="time_table"
+                id="table-{{ forloop.counter }}"
+                style="display:none">
+            {{ table | safe }}
+        </table>
+    {% endfor %}
+</div>

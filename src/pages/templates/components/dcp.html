@@ -1,0 +1,87 @@
+<div class="flex flex-col">
+    <div class="flex items-center gap-1">
+        <span class="font-bold text-2xl">📚 Desired Classes</span>
+        <div class="flex-grow"></div>
+        <form action="{% url 'homepage_view' %}" method="POST" id="clearDCP">
+            {% csrf_token %}
+            <button class="btn-sm" type="button" id="submitClear">CLEAR</button>
+        </form>
+        <a href="add/">
+            <button class="btn-sm">+</button>
+        </a>
+    </div>
+    <div class="mb-2">   
+        <span class="flex flex-row items-start">
+            <span class="font-medium">{{ dcp_units }} UNITS</span>
+            <i class="bi bi-dot"></i>
+            <span class="font-regular text-black/50">{{ dcp_length }} CLASS{% if dcp_length != 1 %}ES{% endif %}</span>
+        </span>
+    </div>
+    <div class="flex-grow overflow-y-auto placeholder-glow flex flex-col gap-2 h-[1px] pt-2">
+        {% if not dcp %}
+            <div class="course-card blank placeholder"></div>
+            <div class="course-card blank placeholder"></div>
+            <div class="course-card blank placeholder"></div>
+            <p class="text-center text-black/50">
+                Your desired classes will appear here! These classes will be processed by the system to create schedules where none of them would overlap with each other.
+                <br>
+                <br>
+                Click on the <i class="bi bi-plus-circle"></i> button to get started!
+            </p>
+        {% else %}
+            {% for course in dcp %}
+                <div class="w-full flex flex-col gap-1 bg-white p-3 border-1 border-gray-400 rounded-lg shadow-md hover:-translate-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold"><i class="bi bi-book mr-2"></i> {{ course.course_code }}</span>
+                        <span class="font-bold text-gray-400">{{ course.units }} Units</span>
+                        <div class="flex-grow"></div>
+                        <form method="POST" id="removeCourse">
+                            {% csrf_token %}
+                            <button id="{{ course.course_code }}"
+                                    type="button"
+                                    class="removeCourseSubmit aspect-square w-[1.5em] h-[1.5em] p-1 flex items-center justify-center rounded rounded-circle border-1 hover:bg-black hover:text-white"
+                                    name="removed_course"
+                                    value="{{ course.course_code }}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <span class="text-lg/6">{{ course.course_title }}</span>
+                </div>
+                <!-- <div class="course-card">
+                    <div class="course-header">
+                        <h6>
+                            <b>{{ course.course_code }}</b><i class="bi bi-dot"></i><span class="light-text">{{ course.units }} Units</span>
+                        </h6>
+                        <div class="filler"></div>
+                        <form method="POST" id="removeCourse">
+                            {% csrf_token %}
+                            <button id="{{ course.course_code }}"
+                                    type="button"
+                                    class="removeCourseSubmit btn-outline btn-round remove-unique-dcp-btn"
+                                    name="removed_course"
+                                    value="{{ course.course_code }}">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <h4>{{ course.course_title }}</h4>
+                </div> -->
+                <div class="removeCourseOverlay" id="remove-{{ course.course_code }}">
+                    <div id="inner-overlay">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <h6>Delete this class?</h6>
+                            <button class="btn-sm"
+                                    name="removed_course"
+                                    id="removeYes"
+                                    value="{{ course.course_code }}">Yes</button>
+                            <button class="btn-sm" id="removeNo">No</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div></div>
+</div>

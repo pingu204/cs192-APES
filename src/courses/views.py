@@ -6,7 +6,7 @@ import os
 from .models import DesiredCourse
 from scraper.scrape import get_all_sections, print_dict, Semester
 from .constants import START_YEAR, SEMESTER
-from .misc import get_unique_courses, is_conflicting, get_start_and_end
+from .misc import get_unique_courses, is_conflicting, get_start_and_end, get_ranges, get_class_type_from_day
 from apes import settings
 from .schedule import Course, generate_timetable, get_time
 from apes.utils import get_course_details_from_csv
@@ -16,8 +16,12 @@ from courses.models import SavedSchedule, SavedCourse
 
 from itertools import product
 import pandas as pd
+import numpy as np
 
 import copy
+import re
+
+from datetime import datetime, timedelta
 
 def dcp_add_view(request):
     search_results = []
@@ -161,15 +165,120 @@ def dcp_add_view(request):
 
     return render(request, "dcp_add.html", context)
 
+def get_num_classes_per_day(schedule):
+    """
+    Obtains the maximum number of classes a day in a `schedule`
+    """
 
-##------------------------------------------------------------------------------------------------------------------
-##----------------------------------------------Generating Permutation------------------------------------------------
+    classes_per_day = {day : 0 for day in "MTWHFS"}
+    for course in schedule["courses"]:
+        for days in course["class_days"].values():
+            for day in days:
+                classes_per_day[day] += 1
+    
+    classes_per_day_lst = list(classes_per_day.values())
+    return max(classes_per_day_lst)
+
+def get_max_distance_per_day(schedule):
+    """
+    Obtains the maximum number of classes a day in a `schedule`
+    """
+    return max(get_distance_per_day(schedule["courses"]))
+
+def get_break_durations(schedule):
+    """
+    Obtains the 
+    """
+
+    courses = schedule["courses"]
+    min_break, max_break = 0, 0
+
+    for day in "MTWHFS":
+        # 19 hours, 4 offsets per hour, 1 for end
+        # -- 07:00 AM to 12:00 AM
+        mat = np.zeros(19 * 4 + 1)
+
+        ##print(courses)
+
+        # Only obtain courses in DCP that have a class in `day`
+        courses_with_classes = list(
+            filter(lambda x: day in "".join(list(x["class_days"].values())), courses)
+        )
+
+        # print(courses_with_classes)
+
+        # Check if there are more than 2 classes
+        # -- 0 or 1 class is trivially non-conflicting
+        if len(courses_with_classes) > 1:
+            # Get intervals of all the filtered courses
+            slot_ranges: list[list[int]] = [
+                get_ranges(
+                    *c["timeslots"].get(get_class_type_from_day(c["class_days"], day))
+                )
+                for c in courses_with_classes
+            ]
+
+            # Loop through the ranges of each course
+            for slot in slot_ranges:
+                # Loop through each offset in the intervals
+                for offset in slot:
+                    # Get the index of the offset
+                    # -- its position in the index
+                    idx = offset // 15
+
+                    # # There's already a class that occupies the index
+                    # # -- conflicting!
+                    # if mat[idx] == 1:
+                    #     return True
+
+                    # Occupy the index
+                    mat[idx] = 1
+
+            mat_str = (''.join(list(map(lambda x: str(int(x)),mat)))).strip('0')
+            cleaned = re.sub(r'(1)\1+', r'\1', mat_str).strip('1')
+            
+            break_durations = [len(substring)*15 for substring in cleaned.split('1')]
+            temp_min, temp_max = min(break_durations), max(break_durations)
+            min_break = min_break if (min_break != 0 and temp_min > min_break) else temp_min
+            max_break = max_break if (temp_max < max_break) else temp_max
+
+    return min_break, max_break
+
+def get_schedule_start_end(schedule):
+    timeslots = []
+    for course in schedule["courses"]:
+        for _, timeslot in course["timeslots"].items():
+            start, end = timeslot
+            timeslots.append(start)
+            timeslots.append(end)
+
+    return min(timeslots), max(timeslots)
+
+def get_time_str(offset:int):
+    current_time = datetime.strptime("07:00 AM", "%I:%M %p")
+    new_time = current_time + timedelta(minutes=offset)
+    return datetime.strftime(new_time, "%I:%M %p")
+
+def get_stats(schedule):
+    """
+    Obtains the relevant statistics of a schedule
+    """
+
+    max_classes_per_day = get_num_classes_per_day(schedule)
+    max_distance_per_day = get_max_distance_per_day(schedule)
+    min_break_duration, max_break_duration = get_break_durations(schedule)
+    earliest_time, latest_time = get_schedule_start_end(schedule)
+
+    return {
+        "max_classes_per_day" : max_classes_per_day,
+        "max_distance_per_day" : max_distance_per_day,
+        "min_break_duration" : min_break_duration,
+        "max_break_duration" : max_break_duration,
+        "earliest_time" : get_time_str(earliest_time),
+        "latest_time" : get_time_str(latest_time)
+    }
+
 def generate_permutation_view(request):
-    # Obtain sections of classes in DCP
-    ##printing DCP sesections, pero note na need mo muna mag add ng class bago mo to makita, cuz di sya nagsasave
-    ##no work from fresh open i think, cuz cache to
-    ## all sections to from dcp
-
     # Obtain all sections of courses in the DCP
     # -- guaranteed to be nonempty
     # -- already filled in `homepage_view`
@@ -178,7 +287,10 @@ def generate_permutation_view(request):
     # if dcp_sections == []:
     # return redirect(reverse("homepage_view"))
 
-    print("DCP SECTIONS: ", dcp_sections)  # Debugging
+    # print("DCP SECTIONS: ")
+    # for c in dcp_sections:
+    #     for x in c:
+    #         print_dict(x)  # Debugging
     if "schedule_permutations" not in request.session:
         request.session["schedule_permutations"] = []  # Initialize if not exists
     else:
@@ -205,7 +317,6 @@ def generate_permutation_view(request):
                 continue
             """
         if not is_conflicting(list(dcp_section)):
-            # print("DCP SECTION SAMPLE", dcp_section)
 
             schedule_entry = {
                 "sched_id": count,
@@ -213,13 +324,6 @@ def generate_permutation_view(request):
                 "number_of_classes_per_day": {},
                 "class_times": [],
             }
-
-            # print("CLASS TIMES", schedule_entry['courses'][0]['timeslots'].values())
-
-            # print("MAXIMUM NBR OF CLASS", request.session['preferences']['number_of_classes'])
-
-            # only add a schedule to a permutation if it HAS ATLEAST 1 CLASS
-            # if CLEAR -> GENERATE; must generate NO PERMUTATIONS
 
             # loop for adding a number_of_classes_per_day key (counter) for each schedule generated
             for course in schedule_entry["courses"]:
@@ -247,143 +351,146 @@ def generate_permutation_view(request):
                 # Cross-check the schedule against each *enabled* preference
                 # -- ignore if it doesn't satisfy AT LEAST ONE
                 # -- add to valid schedules if it satisfies ALL
-                if "preferences" in request.session:
-                    # +-- MAX NUMBER OF CLASSES PER DAY --+
-                    # Check if the number of classes per day is <= `number_of_classes`
-                    if request.session["preferences"]["number_of_classes"]:
-                        if not all(
-                            x <= request.session["preferences"]["number_of_classes"]
-                            for x in list(
-                                schedule_entry["number_of_classes_per_day"].values()
-                            )
-                        ):
-                            continue
+                # if "preferences" in request.session:
+                #     # +-- MAX NUMBER OF CLASSES PER DAY --+
+                #     # Check if the number of classes per day is <= `number_of_classes`
+                #     if request.session["preferences"]["number_of_classes"]:
+                #         if not all(
+                #             x <= request.session["preferences"]["number_of_classes"]
+                #             for x in list(
+                #                 schedule_entry["number_of_classes_per_day"].values()
+                #             )
+                #         ):
+                #             continue
 
-                    # +-- CLASS DAYS --+
-                    # Check if the schedule's class days is a subset of `class_days`
-                    if request.session["preferences"]["class_days"]:
-                        # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
-                        if not set(
-                            list(schedule_entry["number_of_classes_per_day"].keys())
-                        ) <= set(request.session["preferences"]["class_days"]):
-                            continue
+                #     # +-- CLASS DAYS --+
+                #     # Check if the schedule's class days is a subset of `class_days`
+                #     if request.session["preferences"]["class_days"]:
+                #         # if days in generated scheds is NOT a subset of the chosen class_days by the user, then, SKIP and dont add to sched permutation
+                #         if not set(
+                #             list(schedule_entry["number_of_classes_per_day"].keys())
+                #         ) <= set(request.session["preferences"]["class_days"]):
+                #             continue
 
-                    # +-- TOTAL DISTANCE --+
-                    # Check if total travel distance per day is <= `total_distance_per_day`
-                    if request.session["preferences"]["total_distance_per_day"]:
-                        # max_dist = get_max_distance(schedule_entry['courses'])
-                        dists_per_day = get_distance_per_day(schedule_entry["courses"])
-                        # print(dists_per_day)
-                        if (
-                            max(dists_per_day)
-                            > request.session["preferences"]["total_distance_per_day"]
-                        ):
-                            continue
-                        # if max_dist > request.session['preferences']['total_distance_per_day']:
-                        #     continue
+                #     # +-- TOTAL DISTANCE --+
+                #     # Check if total travel distance per day is <= `total_distance_per_day`
+                #     if request.session["preferences"]["total_distance_per_day"]:
+                #         # max_dist = get_max_distance(schedule_entry['courses'])
+                #         dists_per_day = get_distance_per_day(schedule_entry["courses"])
+                #         # print(dists_per_day)
+                #         if (
+                #             max(dists_per_day)
+                #             > request.session["preferences"]["total_distance_per_day"]
+                #         ):
+                #             continue
+                #         # if max_dist > request.session['preferences']['total_distance_per_day']:
+                #         #     continue
 
-                    # +-- CLASS TIMES --+
-                    # Check if earliest and latest class in the sched
-                    # is within [`earliest_time`, `latest_time`]
-                    if (
-                        request.session["preferences"]["earliest_time"]
-                        and request.session["preferences"]["latest_time"]
-                    ):
-                        if not (
-                            schedule_entry["class_times"][0]
-                            >= request.session["preferences"]["earliest_time"]
-                        ) or not (
-                            schedule_entry["class_times"][-1]
-                            <= request.session["preferences"]["latest_time"]
-                        ):
-                            continue
+                #     # +-- CLASS TIMES --+
+                #     # Check if earliest and latest class in the sched
+                #     # is within [`earliest_time`, `latest_time`]
+                #     if (
+                #         request.session["preferences"]["earliest_time"]
+                #         and request.session["preferences"]["latest_time"]
+                #     ):
+                #         if not (
+                #             schedule_entry["class_times"][0]
+                #             >= request.session["preferences"]["earliest_time"]
+                #         ) or not (
+                #             schedule_entry["class_times"][-1]
+                #             <= request.session["preferences"]["latest_time"]
+                #         ):
+                #             continue
 
-                    # +-- BREAK TIME DURATION --+
-                    # Check if break time durations are within [`min_break`,`max_break`]
-                    if (
-                        request.session["preferences"]["min_break"] is not None
-                        and request.session["preferences"]["max_break"] is not None
-                    ):
-                        if (
-                            request.session["preferences"]["min_break"] > 0
-                            or request.session["preferences"]["max_break"] > 0
-                        ):
-                            # Obtain user preferences
-                            min_break = request.session["preferences"].get(
-                                "min_break", 0
-                            )
-                            max_break = request.session["preferences"].get(
-                                "max_break", 0
-                            )
+                #     # +-- BREAK TIME DURATION --+
+                #     # Check if break time durations are within [`min_break`,`max_break`]
+                #     if (
+                #         request.session["preferences"]["min_break"] is not None
+                #         and request.session["preferences"]["max_break"] is not None
+                #     ):
+                #         if (
+                #             request.session["preferences"]["min_break"] > 0
+                #             or request.session["preferences"]["max_break"] > 0
+                #         ):
+                #             # Obtain user preferences
+                #             min_break = request.session["preferences"].get(
+                #                 "min_break", 0
+                #             )
+                #             max_break = request.session["preferences"].get(
+                #                 "max_break", 0
+                #             )
 
-                            # Case: only one course in the schedule
-                            # -- (a) user needs a break
-                            if (len(schedule_entry["courses"]) == 1) and (
-                                min_break > 0
-                            ):
-                                print(
-                                    "Invalid break found: only one course in schedule"
-                                )
-                                continue
-                            # -- (b) user doesn't need a break
-                            elif (len(schedule_entry["courses"]) == 1) and (
-                                min_break == 0
-                            ):
-                                request.session["schedule_permutations"].append(
-                                    schedule_entry
-                                )
-                                continue
+                #             # Case: only one course in the schedule
+                #             # -- (a) user needs a break
+                #             if (len(schedule_entry["courses"]) == 1) and (
+                #                 min_break > 0
+                #             ):
+                #                 print(
+                #                     "Invalid break found: only one course in schedule"
+                #                 )
+                #                 continue
+                #             # -- (b) user doesn't need a break
+                #             elif (len(schedule_entry["courses"]) == 1) and (
+                #                 min_break == 0
+                #             ):
+                #                 request.session["schedule_permutations"].append(
+                #                     schedule_entry
+                #                 )
+                #                 continue
 
-                            # Group class times by day
-                            class_times_by_day = defaultdict(list)
-                            for course in schedule_entry["courses"]:
-                                for section, days in course["class_days"].items():
-                                    for day in days:
-                                        class_times_by_day[day].extend(
-                                            course["timeslots"].get(section, [])
-                                        )
+                #             # Group class times by day
+                #             class_times_by_day = defaultdict(list)
+                #             for course in schedule_entry["courses"]:
+                #                 for section, days in course["class_days"].items():
+                #                     for day in days:
+                #                         class_times_by_day[day].extend(
+                #                             course["timeslots"].get(section, [])
+                #                         )
 
-                            # Sort class times for each day
-                            for day in class_times_by_day:
-                                class_times_by_day[day].sort()
+                #             # Sort class times for each day
+                #             for day in class_times_by_day:
+                #                 class_times_by_day[day].sort()
 
-                            # Check breaks for each day
-                            invalid_break_found = False
-                            for day, times in class_times_by_day.items():
-                                if len(times) < 2:
-                                    continue
+                #             # Check breaks for each day
+                #             invalid_break_found = False
+                #             for day, times in class_times_by_day.items():
+                #                 if len(times) < 2:
+                #                     continue
 
-                                # Check if there's only one class in the day
-                                if len(times) == 2 and min_break > 0:
-                                    print(
-                                        f"Invalid break found on {day}: only one break"
-                                    )
-                                    invalid_break_found = True
-                                    break
+                #                 # Check if there's only one class in the day
+                #                 if len(times) == 2 and min_break > 0:
+                #                     print(
+                #                         f"Invalid break found on {day}: only one break"
+                #                     )
+                #                     invalid_break_found = True
+                #                     break
 
-                                # Compute for the break times
-                                breaks = []
-                                for prev_time, next_time in zip(times, times[1:]):
-                                    temp = next_time - prev_time
-                                    if temp != 0:
-                                        breaks.append(temp)
+                #                 # Compute for the break times
+                #                 breaks = []
+                #                 for prev_time, next_time in zip(times, times[1:]):
+                #                     temp = next_time - prev_time
+                #                     if temp != 0:
+                #                         breaks.append(temp)
 
-                                print(
-                                    f"Day: {day}, Class times: {times}, Breaks: {breaks}"
-                                )
+                #                 print(
+                #                     f"Day: {day}, Class times: {times}, Breaks: {breaks}"
+                #                 )
 
-                                # Check if minimum break time is less than user spec OR
-                                # if maximum break time is greater than user spec
-                                if min(breaks) < min_break or max(breaks) > max_break:
-                                    print(f"Invalid breaks found on {day}: {breaks}")
-                                    invalid_break_found = True
-                                    break
+                #                 # Check if minimum break time is less than user spec OR
+                #                 # if maximum break time is greater than user spec
+                #                 if min(breaks) < min_break or max(breaks) > max_break:
+                #                     print(f"Invalid breaks found on {day}: {breaks}")
+                #                     invalid_break_found = True
+                #                     break
 
-                            # Skip the schedule if invalid breaks are found
-                            if invalid_break_found:
-                                continue
+                #             # Skip the schedule if invalid breaks are found
+                #             if invalid_break_found:
+                #                 continue
 
                 # Append schedule to valid permutations
+                schedule_entry["stats"] = get_stats(schedule_entry)
+                
+                # print_dict(schedule_entry)
                 request.session["schedule_permutations"].append(schedule_entry)
 
             count += 1
@@ -508,6 +615,8 @@ def view_sched_view(request, sched_id: int):
         None,
     )
 
+    print(selected_schedule)
+
     # if selected_schedule is None:
     # return HttpResponse("Schedule not found", status=404)
 
@@ -516,6 +625,7 @@ def view_sched_view(request, sched_id: int):
     # Fix timeslots
     # courses = tuple(fix_timeslots(course) for course in selected_schedule["courses"])
     courses = selected_schedule["courses"]
+    stats = selected_schedule["stats"]
 
     if request.method == "POST" and "click_saved_sched" in request.POST:
         # Ensure user is logged in
@@ -587,6 +697,7 @@ def view_sched_view(request, sched_id: int):
         "main_table": main_table,
         "export_table": export_table,
         "courses": classes,
+        "stats" : stats,
         "units": f"{sum([course.units for course in classes])} units",
         "show_save_button": True,
         "session": request.session,
@@ -694,6 +805,7 @@ def view_saved_sched_view(request, sched_id: int):
 
     context = {
         "sched_id": sched_id,
+        "schedule" : saved_schedule,
         "schedule_name": saved_schedule.schedule_name,
         "main_table": main_table,
         "export_table": export_table,
@@ -821,9 +933,7 @@ def add_course_to_sched_view(request, sched_id: int):
         # saved_courses_codes = [course.course_code for course in saved_courses]
         if form.is_valid():
             # Obtain all sections associated
-            course_sections = couple_lec_and_lab(
-                get_all_sections(START_YEAR, SEMESTER, cleaned_search_query, strict=True)
-            )
+            course_sections = get_all_sections(START_YEAR, SEMESTER, cleaned_search_query, strict=True)
             for c in course_sections:
                 print_dict(c)
             temp = copy.deepcopy(course_sections)

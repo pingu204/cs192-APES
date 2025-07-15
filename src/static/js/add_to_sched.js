@@ -17,28 +17,31 @@ function adjustTableHeight(tableID) {
 
     // Set the height of each row
     for (let row of arr) {
-        row.style.height = String(rowHeight) + "%";
+        let newHeight = `calc((100%)/ ${numChildren-1})`;
+        row.style.setProperty("height", newHeight);
     }
 }
 
 const timeTables = document.querySelectorAll('.time_table');
 timeTables.forEach(t => {
     adjustTableHeight(t.id);
+    console.log("gow");
 })
 
 //adjustTableHeight("timetable");
 
 const sectionBlocks = document.querySelectorAll('.result-card');
 sectionBlocks.forEach(t => {
+    console.log(`table-${t.id}`);
     t.addEventListener("mouseover", function() {
         document.getElementById('timetable').style.display = 'none';
-        document.getElementById('table-'+t.id).style.display = 'table';
+        document.getElementById(`table-${t.id}`).style.display = 'table';
         console.log("opened " + t.id);
         //adjustTableHeight("table-"+t.id);
     });
     t.addEventListener("mouseleave", function(){
         document.getElementById('timetable').style.display = 'table';
-        document.getElementById('table-'+t.id).style.display = 'none';
+        document.getElementById(`table-${t.id}`).style.display = 'none';
         console.log("closed " + t.id);
         //adjustTableHeight('timetable');
     })

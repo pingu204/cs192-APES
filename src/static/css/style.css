@@ -1,3 +1,11 @@
+* {
+    transition: 0.3s ease;
+}
+
+:root {
+    --blue : #007bff;
+}
+
 body {
     font-family: "Onest";
     margin:0;
@@ -224,10 +232,10 @@ hr {
     color: rgb(0,0,0,0.5);
 }
 
-div.result-card {
-    /* display: flex;
+/* div.result-card {
+    display: flex;
     flex-direction: row;
-    align-items: end; */
+    align-items: end;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #ced4da;
@@ -235,7 +243,7 @@ div.result-card {
 
 div.result-card h5 {
     margin: 0;
-}
+} */
 
 div.result-container {
     overflow-y: auto;
@@ -729,11 +737,6 @@ div.course-card.blank {
     padding-right: 60px;
 }
 
-p.dcp-description {
-    text-align: center;
-    color: rgb(0,0,0,0.7);
-}
-
 div.course-header {
     display: flex;
     align-items: center;
@@ -778,11 +781,6 @@ button.btn-round {
 
 button.btn-round:hover {
     border-radius: 1000px;
-}
-
-button.remove-unique-dcp-btn {
-    font-size: 8pt;
-    padding: 2px 5px 2px 5px;
 }
 
 button.btn-sm:hover {

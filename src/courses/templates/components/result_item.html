@@ -1,0 +1,17 @@
+<div class="flex items-end justify-between py-3 border-b-1 border-gray-400">
+    <div class="flex flex-col">
+        <div class="flex items-center gap-2">
+            <span class="font-bold"><i class="bi bi-book mr-2"></i> {{ result.course_code }}</span>
+            <span class="font-bold text-gray-400">{{ result.units }} Units</span>
+        </div>
+        <span class="text-lg/6">{{ result.course_title }}</span>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="course_code" value="{{ result.course_code }}">
+        <input type="hidden" name="course_title" value="{{ result.course_title }}">
+        <div>
+            <button type="submit" class="bg-[var(--blue)] text-white px-2 py-1 rounded-lg hover:opacity-50">Add</button>
+        </div>
+    </form>
+</div>

@@ -16,14 +16,16 @@ function adjustTableHeight(tableID) {
     // Convert HTML collection into an array
     // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
     let arr = Array.from(timetableChildren);
-
+    // console.log(arr);
     // Set the height of each row
     for (let row of arr) {
-        row.style.height = String(rowHeight) + "%";
+        let newHeight = `calc((100%)/ ${numChildren-1})`;
+        row.style.setProperty("height", newHeight);
     }
 }
 
 adjustTableHeight("timetable");
+console.log("gow");
 adjustTableHeight("exportTimetable");
 
 /* Converts the `div` of id `export-sched` into a canvas */

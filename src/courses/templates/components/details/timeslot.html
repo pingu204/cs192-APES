@@ -1,0 +1,9 @@
+{% if section.class_days.lec %}
+    <span class="px-2 py-1 bg-gray-100 w-fit rounded-full"><span class="font-bold">{{ section.class_days.lec }}</span> {{ timeslot.lec }}</span>
+{% endif %}
+{% if section.class_days.lab %}
+    <span class="px-2 py-1 bg-gray-100 w-fit rounded-full"><span class="font-bold">{{ section.class_days.lab }}</span> {{ timeslot.lab }}</span>
+{% endif %}
+{% if section.class_days.disc %}
+    <span class="px-2 py-1 bg-gray-100 w-fit rounded-full"><span class="font-bold">{{ section.class_days.disc }}</span> {{ timeslot.disc }}</span>
+{% endif %}

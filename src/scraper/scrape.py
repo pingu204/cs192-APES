@@ -522,5 +522,5 @@ def print_dict(d):
 
 # *Every new sem, just update start_year and end_year for app updates (?)
 if __name__ == "__main__":
-    for x in get_all_sections(2024, Semester.MIDYEAR, "cs 195", strict=True):
+    for x in get_all_sections(2025, Semester.FIRST, "cs 10", strict=True):
         print_dict(x)

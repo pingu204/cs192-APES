@@ -14,6 +14,7 @@ from courses.models import DesiredCourse, SavedSchedule
 from courses.views import generate_permutation_view
 from courses.schedule import get_class_days, get_class_days_from_saved
 from scraper.scrape import couple_lec_and_lab, get_all_sections
+from courses.constants import START_YEAR, SEMESTER
 # Create your views here.
 
 
@@ -111,7 +112,7 @@ def homepage_view(request, *args, **kwargs):
 
     if dcp_sections == []:  # Not cached yet
         dcp_sections = [
-            couple_lec_and_lab(get_all_sections(code, strict=True))
+            couple_lec_and_lab(get_all_sections(START_YEAR, SEMESTER, code, strict=True))
             for code in dcp_codes
         ]
         request.session["dcp_sections"] = dcp_sections

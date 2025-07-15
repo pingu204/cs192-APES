@@ -4,14 +4,15 @@
 {% endblock %}
 {% block content %}
     {% load static %}
-    <div class="body-container homepage">
-        <div class="form-body login dcp">
-            <div class="course-list-header">
-                <h1>Add a Class</h1>
+    <div class="w-full h-[calc(100vh-60px)] py-6 px-16 overflow-y-hidden bg-gray-100/50">
+        <div class="place-self-center w-[40%] bg-white rounded-lg border-1 border-gray-400 shadow-md h-full overflow-y-hidden p-8 flex flex-col">
+            <!-- Form Header -->
+            <div class="flex items-center">
+                <span class="text-2xl font-bold">Add a Class</span>
                 <div class="filler"></div>
-                <span class="bold-text small"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
+                <span class="font-bold"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
             </div>
-            <form method="GET" onsubmit="showLoading()">
+            <form method="GET" onsubmit="showLoading()" class="mb-4">
                 <div class="form-row">
                     <div class="col">
                         <label class="form-label mt-4 mb-2" for="id_course_code">{{ form.course_code.label | upper }}</label>
@@ -67,14 +68,14 @@
                     </div>
                 {% endif %}
             </form>
-            {% if search_results|length == 1 %}
-                <h6>{{ search_results|length }} RESULT</h6>
-            {% else %}
-                <h6>{{ search_results|length }} RESULTS</h6>
+            <!-- Results -->
+            {% if search_results|length %}
+                <span class="font-bold text-gray-500">{{ search_results|length }} RESULT{% if search_results|length != 1 %}S{% endif %}</span>
             {% endif %}
             <div class="filler result-container">
                 {% for result in search_results %}
-                    <div class="result-card d-flex flex-row align-items-end">
+                {% include 'components/result_item.html' %}    
+                <!-- <div class="result-card d-flex flex-row align-items-end">
                         <div>
                             <h5>{{ result.course_title }}</h5>
                             <h5>
@@ -90,13 +91,7 @@
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </form>
-                    </div>
-                {% empty %}
-                    <div class="result-card d-flex flex-row align-items-end">
-                        <div>
-                            <h5>No results found.</h5>
-                        </div>
-                    </div>
+                    </div> -->
                 {% endfor %}
             </div>
         </div>

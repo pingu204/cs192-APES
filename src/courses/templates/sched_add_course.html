@@ -4,149 +4,79 @@
 {% endblock %}
 {% block content %}
     {% load static %}
-    <div class="body-container homepage sched-viewer">
-        <div class="main two-column">
-            <div class="sched-container">
-                <!-- Container for the timetable -->
-                <div class="timetable">
-                    <table class="time_table" id="timetable">
-                        {{ main_table | safe }}
-                    </table>
-                    {% for table in timetables %}
-                        <table class="time_table"
-                               id="table-{{ forloop.counter }}"
-                               style="display:none">
-                            {{ table | safe }}
-                        </table>
-                    {% endfor %}
-                </div>
+    <div class="w-full h-[calc(100vh-60px)] grid grid-cols-[auto_35%] gap-4 py-6 px-16 bg-gray-100/50">
+        {% include 'components/timetable.html' %}
+        <div class="flex flex-col">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold">Add to Schedule</span>
+                <div class="flex-grow"></div>
+                <span class="font-bold"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
             </div>
-            <div class="course-list-container">
-                <div class="form-body login dcp" style="padding: 30px">
-                    <div class="course-list-header">
-                        <h1 style="font-size: 2em;">Add to Schedule</h1>
-                        <div class="filler"></div>
-                        <span class="bold-text small"><a href="../"><i class="bi bi-caret-left-fill"></i> Go Back</a></span>
-                    </div>
-                    <!-- Search form -->
-                    <form method="GET" onsubmit="showLoading()">
-                        <div class="form-row">
-                            <div class="col">
-                                <label class="form-label mt-4 mb-2" for="id_course_code">{{ form.course_code.label | upper }}</label>
-                                <div class="input-wrapper">
-                                    {{ form.course_code }}
-                                    <button type="submit load-button" class="search-btn">
-                                        <svg width="20"
-                                             height="20"
-                                             viewBox="0 0 24 24"
-                                             fill="none"
-                                             stroke="black"
-                                             stroke-width="2"
-                                             stroke-linecap="round"
-                                             stroke-linejoin="round">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <span class="form-text">
-                                    Search for <b>specific</b> course codes (e.g. 'Eng 13' instead of just 'Eng')
-                                </span>
-                            </div>
+            <form method="GET" onsubmit="showLoading()">
+                <div class="form-row">
+                    <div class="col">
+                        <label class="form-label mt-4 mb-2" for="id_course_code">{{ form.course_code.label | upper }}</label>
+                        <div class="input-wrapper">
+                            {{ form.course_code }}
+                            <button type="submit load-button" class="search-btn">
+                                <svg width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="black"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
                         </div>
-                    </form>
-                    {% if messages %}
-                        <div class="errors">
-                            <ul class="errors-list">
-                                {% for message in messages %}
-                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                        <li>
-                                            <i class="bi bi-exclamation-circle"></i> {{ message }}
-                                        </li>
-                                    {% else %}
-                                        <li class="success-message">
-                                            <i class="bi bi-check-circle"></i> {{ message }}
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                    {% if form.errors %}
-                        <div class="errors">
-                            <ul class="errors-list">
-                                {% for field, errors in form.errors.items %}
-                                    {% for error in errors %}
-                                        <li>
-                                            <i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}
-                                        </li>
-                                    {% endfor %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                    {% if search_results|length == 1 %}
-                        <h6>{{ search_results|length }} RESULT</h6>
-                    {% else %}
-                        <h6>{{ search_results|length }} RESULTS</h6>
-                    {% endif %}
-                    <div class="filler result-container flex-grow-container">
-                        {% for section, timeslot in search_results %}
-                            <div class="result-card d-flex flex-row align-items-end"
-                                 id="{{ forloop.counter }}">
-                                <div>
-                                    <div class="mb-2">
-                                        {% if section.class_days.lec %}
-                                            <span class="tab tab-sm"><span class="bold-text">{{ section.class_days.lec }}</span> {{ timeslot.lec }}</span>
-                                        {% endif %}
-                                        {% if section.class_days.lab %}
-                                            <span class="tab tab-sm"><span class="bold-text">{{ section.class_days.lab }}</span> {{ timeslot.lab }}</span>
-                                        {% endif %}
-                                        {% if section.class_days.disc %}
-                                            <span class="tab tab-sm"><span class="bold-text">{{ section.class_days.disc }}</span> {{ timeslot.disc }}</span>
-                                        {% endif %}
-                                    </div>
-                                    <!-- <span class="tab tab-sm"><span class="bold-text">{{section.class_days.lec}}</span> 00:00</span> -->
-                                    <h5>
-                                        {{ section.course_code }} {{ section.section_name.lec }}
-                                        {% if section.section_name.lab %}/{{ section.section_name.lab }}{% endif %}
-                                        <i class="bi bi-dot"></i><span class="bold-text">Desired by {{ section.demand }} people</span>
-                                    </h5>
-                                    {% if section.instructor_name.lec %}
-                                        <h5>
-                                            <span class="light-text">{{ section.instructor_name.lec | title }}</span>
-                                        </h5>
-                                    {% endif %}
-                                    {% if section.instructor_name.lab %}
-                                        <h5>
-                                            <span class="light-text">{{ section.instructor_name.lab | title }} <i class="bi bi-gear"></i></span>
-                                        </h5>
-                                    {% endif %}
-                                    {% if section.instructor_name.disc %}
-                                        <h5>
-                                            <span class="light-text">{{ section.instructor_name.disc | title }}</span>
-                                        </h5>
-                                    {% endif %}
-                                </div>
-                                <div class="filler"></div>
-                                <form method="POST"
-                                      action="{% url 'add_course_to_sched_view' sched_id=sched_id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="course_data" value='{{ section }}' />
-                                    <div>
-                                        <button type="submit load-button" class="btn btn-primary">Add</button>
-                                    </div>
-                                </form>
-                            </div>
-                        {% empty %}
-                            <div class="result-card d-flex flex-row align-items-end">
-                                <div>
-                                    <h5>No results found.</h5>
-                                </div>
-                            </div>
-                        {% endfor %}
+                        <span class="form-text">
+                            Search for <b>specific</b> course codes (e.g. 'Eng 13' instead of just 'Eng')
+                        </span>
                     </div>
                 </div>
+            </form>
+            {% if messages %}
+                <div class="errors">
+                    <ul class="errors-list">
+                        {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                <li>
+                                    <i class="bi bi-exclamation-circle"></i> {{ message }}
+                                </li>
+                            {% else %}
+                                <li class="success-message">
+                                    <i class="bi bi-check-circle"></i> {{ message }}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if form.errors %}
+                <div class="errors">
+                    <ul class="errors-list">
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>
+                                    <i class="bi bi-exclamation-circle"></i> {{ errors.0|escape }}
+                                </li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <!-- Results -->
+            {% if search_results|length %}
+                <span class="font-bold text-gray-500">{{ search_results|length }} RESULT{% if search_results|length != 1 %}S{% endif %}</span>
+            {% endif %}
+            <div class="mt-4 filler flex flex-col h-[1px] flex-grow overflow-y-auto bg-white rounded-lg border-1 border-gray-400 shadow-md p-3 [&>p]:pt-0">
+                <span class="text-lg font-bold text-gray-400">Search Results</span>
+                {% for section, timeslot in search_results %}
+                    {% include 'components/course_to_add.html' %}
+                {% endfor %}
             </div>
         </div>
     </div>

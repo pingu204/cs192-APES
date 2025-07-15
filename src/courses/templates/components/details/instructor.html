@@ -1,0 +1,19 @@
+<div class="flex w-full">
+    <i class="bi bi-person color-icon"></i>
+    <div class="flex-grow flex flex-col text-left overflow-x-hidden">
+        <!-- Only choose either lec or disc prof -->
+        {% if course.instructor_name.lec %}
+            <span>{{ course.instructor_name.lec | title }}</span>
+        {% elif course.instructor_name.disc %}
+            <span>{{ course.instructor_name.disc | title }}</span>
+        {% endif %}
+        <!-- Additional prof for lab, if applicable -->
+        {% if course.instructor_name.lab %}
+            <span class="flex gap-2 items-center w-full overflow-x-hidden">
+                <span class="truncate">{{ course.instructor_name.lab | title }}</span>
+                <span class="font-bold bg-[#007bff] px-2 py-1 text-xs text-white rounded-md">LAB</span>
+            </span>
+            <!-- <span class="">{{ course.instructor_name.lab | title }}<</span> -->
+        {% endif %}
+    </div>
+</div>

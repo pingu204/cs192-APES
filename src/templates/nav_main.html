@@ -1,11 +1,28 @@
 {% load static %}
-<div class="flex items-center h-[60px] border-b-1 px-8 gap-2">
+<div class="flex items-center h-[60px] border-b-1 border-gray-400 px-8 gap-2">
     <!-- <img class="h-[60px]" src="{% static 'images/apes_logo.png' %}"> -->
     <!-- Placeholder Icon -->
-    <div>
-        <span class="app-title text-xl font-bold">🌻 UPD Schedule Planner</span>
-    </div>
-    <div class="filler"></div>
+    <span class="app-title text-xl font-bold">🌻 Hello,
+        {% if user.is_authenticated %}{{ user.username }}
+        {% else %}Guest
+        {% endif %}
+    </span>
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'logout_view' %}">
+            {% csrf_token %}
+            <button type="submit" class="px-2 py-1 border-1 rounded rounded-md bg-black text-white hover:opacity-50">Sign Out</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login_view' %}">
+            <button class="px-2 py-1 border-1 rounded rounded-md bg-black text-white hover:opacity-50">
+                Sign In
+            </button>
+        </a>
+    {% endif %}
+    <span class="text-gray-500 font-medium">
+        1st Semester, A.Y. 2025-2026
+    </span>
+    <div class="flex-grow"></div>
     <div>
         <span>Version 1.4.0</span>
     </div>
