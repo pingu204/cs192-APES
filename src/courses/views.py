@@ -562,6 +562,12 @@ def get_distance_per_day(courses):
 def get_distance(loc_A, loc_B):
     """Given two course locations, refers to distance_pairs.csv to get the distance in meters between the two courses' locations.
     If the distance is not found, returns 0.0."""
+
+    # Check first if either loc_A or loc_B are None
+    if loc_A is None or loc_B is None:
+        return 0.0
+    
+    # Otherwise proceed with getting the distance
     file_path = os.path.join(settings.BASE_DIR, "scraper", "csv", "distance_pairs.csv")
     df = pd.read_csv(file_path)
     df.columns = ["endpts", "distance_in_m"]
