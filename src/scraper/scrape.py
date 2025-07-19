@@ -273,7 +273,9 @@ def get_locations(raw_sched_remarks: str, course_code_csv, cleaned_course_code):
         # print('mapped: ', map_venues(room, course_code_csv,cleaned_course_code))
         mapped_venue = map_venues(room, course_code_csv, cleaned_course_code)
         # print('room: ', room, 'mapped: ', mapped_venue)
-        if df.loc[df["code"] == mapped_venue, "location"].values:
+        venue_row = df.loc[df["code"] == mapped_venue, "location"]
+        if not venue_row.empty: # if location exists in df
+        #if df.loc[df["code"] == mapped_venue, "location"].values:
             venue = df.loc[df["code"] == mapped_venue, "location"].values[0]
         else:
             venue = None
